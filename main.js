@@ -2049,7 +2049,7 @@ function runFuelSystem() {
             const totalAfterBurnerThrust = hasAfterburners ? window.geofs.aircraft.instance.engines.reduce((sum, engine) => sum + (engine.afterBurnerThrust || 0), 0) : 0;
             const currentThrust = usingAfterburners ? totalAfterBurnerThrust : Math.abs(window.geofs.animation.values.smoothThrottle) * maxThrust;
             const throttle = currentThrust / maxThrust;
-            const idleBurnRate = usingAfterburners ? totalAfterBurnerThrust / 140 : maxThrust / 140;
+            const idleBurnRate = usingAfterburners ? totalAfterBurnerThrust / 150 : maxThrust / 150;
             const fullThrottleBurnRate = idleBurnRate * 3;
 //let fuelBurnRate;
 
@@ -2070,7 +2070,7 @@ if (maxThrust == 0) {
 
             const fuelPercentage = (fuelState.fuel / fuelState.initialFuel) * 100;
             fuelBar.style.width = `${fuelPercentage}%`;
-            fuelBar.style.backgroundColor = fuelPercentage > 15 ? "green" : fuelPercentage > 7 ? "orange" : "red";
+            fuelBar.style.backgroundColor = fuelPercentage > 20 ? "green" : fuelPercentage > 10 ? "orange" : "red";
 
          if (fuelState.fuel === 0) {
     window.fuelBurnRate = 0; // Reset fuel burn rate when fuel is empty
