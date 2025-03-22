@@ -144,7 +144,9 @@
       	       Tilt up: [↑]
       	       Tilt downL: [↓]`,
 
-                   'Taxiway lights': `Creates taxiway lights that turn yellow when nearing a runway to help distinguish intersections`     
+                   'Taxiway lights': `Creates taxiway lights that turn yellow when nearing a runway to help distinguish intersections`,
+
+      'UI tweaks': `Allows you to adjust autopilot using mouse wheel and adds a popout chat`
               };
               
               const descriptionText = descriptions[name] || 'No description available.';
@@ -198,6 +200,7 @@
           addAddon('Realism pack');
           addAddon('Slew mode');
           addAddon('Taxiway lights');         
+          addAddon('UI tweaks'); 
 
           geofsPreferencesPanel.appendChild(addonListItem);
       }
@@ -2240,6 +2243,10 @@ function calculateBearing(e,t,a,n){let i=(a-e)*Math.PI/180,s=t*Math.PI/180,r=n*M
     `,n=e;try{let i=await fetch(`${t}?data=${encodeURIComponent(a.replace("{{bbox}}",n))}`),s=await i.json(),r=[],o={};return s.elements.forEach(e=>{"node"===e.type&&(o[e.id]=e)}),s.elements.forEach(e=>{if("way"===e.type){let t=e.nodes.map(e=>{let t=o[e];if(t)return[t.lon,t.lat,0]}).filter(Boolean);if(t.length>1){let a=7e-5+(Math.random()-.5)*2e-5;for(let n=0;n<t.length-1;n++){let i=interpolatePoints(t[n],t[n+1],a);r.push(...i)}}}}),r}catch(l){console.error("Error fetching taxiway data:",l)}}function checkProximityToRunway(e){if(!window.runwayThresholds)for(var t in window.runwayThresholds=[],window.window.geofs.runways.nearRunways){let a=window.window.geofs.runways.nearRunways[t],n=a.threshold1,i=a.threshold2;window.runwayThresholds.push(interpolatePoints([n[1],n[0]],[i[1],i[0]],5/111e3))}let s=(40/111e3)**2,r=e[0],o=e[1];for(var l in window.runwayThresholds)if(window.runwayThresholds[l].some(([e,t])=>{let a=e-r,n=t-o;return a**2+n**2<s}))return!0;return!1}!function(){"use strict";function afterGMenu(){let e=new window.GMenu("Taxiway Lights","twL");e.addItem("Render distance (degrees): ","RenderDist","number",0,"0.05"),e.addItem("Update Interval (seconds): ","UpdateInterval","number",0,"5"),e.addItem("Green/Yellow Light Size: ","GSize","number",0,"0.05"),e.addItem("Blue Light Size: ","BSize","number",0,"0.07"),console.log("TwL Enabled? "+localStorage.getItem("twLEnabled")),setTimeout(()=>{window.updateLights()},100*Number(localStorage.getItem("twLUpdateInterval")))}window.twLights=[],window.twPos=[],window.currLight,window.errs=0,window.gmenu&&window.GMenu||(console.log("Taxiway Lights getting GMenu"),fetch("https://raw.githubusercontent.com/tylerbmusic/GeoFS-Addon-Menu/refs/heads/main/addonMenu.js").then(e=>e.text()).then(script=>{eval(script)}).then(()=>{setTimeout(afterGMenu,100)}))}(),window.updateLights=async function(){if(!1==window.window.geofs.cautiousWithTerrain&&"true"==localStorage.getItem("twLEnabled")){var e=Number(localStorage.getItem("twLRenderDist")),t=Math.floor(window.window.geofs.aircraft.instance.llaLocation[0]/e)*e,a=Math.floor(window.window.geofs.aircraft.instance.llaLocation[1]/e)*e,n=t+", "+a+", "+(t+e)+", "+(a+e);if(!window.lastBounds||window.lastBounds!=n){for(let i=0;i<window.twLights.length;i++)window.window.geofs.api.viewer.entities.remove(window.twLights[i]);window.twLights=[],console.log("Lights removed, placing taxiway edge lights"),window.getTwD(n),console.log("Placing taxiway centerline lights"),window.getTwDE(n)}window.lastBounds=n}else if("true"!=localStorage.getItem("twLEnabled")){window.lastBounds="";for(let s=0;s<window.twLights.length;s++)window.window.geofs.api.viewer.entities.remove(window.twLights[s]);window.twLights=[]}setTimeout(()=>{window.updateLights()},1e3*Number(localStorage.getItem("twLUpdateInterval")))},window.getTwD=async function(e){getTaxiwayData(e).then(e=>{e.forEach(e=>{e.forEach(([e,t])=>{[e,t].forEach(e=>{let t=window.window.geofs.getGroundAltitude([e[1],e[0],e[2]]).location;t[2]+=.3556;let a=window.Cesium.Cartesian3.fromDegrees(t[1],t[0],t[2]);a[2]<0&&(window.errs++,a[2]=0-a[2]),window.twLights.push(window.window.geofs.api.viewer.entities.add({position:a,billboard:{image:"https://tylerbmusic.github.io/GPWS-files_geofs/bluelight.png",scale:Number(localStorage.getItem("twLBSize"))*(1/window.window.geofs.api.renderingSettings.resolutionScale),scaleByDistance:{near:1,nearValue:.5,far:1500,farValue:.15},translucencyByDistance:new window.Cesium.NearFarScalar(10,1,1e4,0)}}))})})})})},window.getTwDE=async function(e){getTaxiwayDataEdgeless(e).then(e=>{var t=0;e.forEach(e=>{t++;let a=window.window.geofs.getGroundAltitude([e[1],e[0],e[2]]).location;a[2]+=.3556;let n=window.Cesium.Cartesian3.fromDegrees(a[1],a[0],a[2]),i=checkProximityToRunway(e),s=t%2==0&&i?"https://tylerbmusic.github.io/GPWS-files_geofs/yellowlight.png":"https://tylerbmusic.github.io/GPWS-files_geofs/greenlight.png";n[2]<0&&(window.errs++,n[2]=0-n[2]),window.twPos.push([n,window.twLights.length]),window.twLights.push(window.window.geofs.api.viewer.entities.add({position:n,billboard:{image:s,scale:Number(localStorage.getItem("twLGSize"))*(1/window.window.geofs.api.renderingSettings.resolutionScale),scaleByDistance:{near:1,nearValue:1,far:2e3,farValue:.15},translucencyByDistance:new window.Cesium.NearFarScalar(10,1,1e4,0)}}))})})},window.removeCloseTwLights=function(){let e={},t=2,a=new Set,n=(e,a)=>`${Math.floor(e/t)}_${Math.floor(a/t)}`;for(let i=0;i<window.twPos.length;i++){let s=window.twPos[i][0],r=n(s.x,s.y);e[r]||(e[r]=[]),e[r].push(i)}for(let o in e){let[l,u]=o.split("_").map(Number),$=[`${l}_${u}`,`${l+1}_${u}`,`${l-1}_${u}`,`${l}_${u+1}`,`${l}_${u-1}`,`${l+1}_${u+1}`,`${l-1}_${u-1}`,`${l+1}_${u-1}`,`${l-1}_${u+1}`];for(let g of $)if(e[g])for(let h=0;h<e[o].length;h++){let c=e[o][h],f=window.twPos[c][0];for(let w of e[g]){if(c>=w||a.has(w))continue;let d=window.twPos[w][0];3>=Math.abs(f.x-d.x)&&3>=Math.abs(f.y-d.y)&&a.add(w)}}}let _=Array.from(a).sort((e,t)=>t-e);for(let p of _)window.window.geofs.api.viewer.entities.remove(window.twLights[p]),window.twPos.splice(p,1),window.twLights.splice(p,1);console.log(`${_.length} taxiway lights removed.`)};
 };
 
+function tweaks () {
+const MOUSEWHEEL_TWEAKS=!0,POPOUT_CHAT=!0;!function e(){"use strict";if(!window.jQuery)return setTimeout(e,1e3);document.querySelector("input.geofs-autopilot-speed").onwheel=e=>geofs.autopilot.setSpeed(parseInt(e.target.value)+e.deltaY/(e.shiftKey?-100:-10)),document.querySelector("input.geofs-autopilot-course").onwheel=e=>geofs.autopilot.setCourse(parseInt(e.target.value)+e.deltaY/(e.shiftKey?-100:-10)),document.querySelector("input.geofs-autopilot-altitude").onwheel=e=>geofs.autopilot.setAltitude(parseInt(e.target.value)+e.deltaY/(e.shiftKey?-10:-1)),document.querySelector("input.geofs-autopilot-verticalSpeed").onwheel=e=>geofs.autopilot.setVerticalSpeed(parseInt(e.target.value)+e.deltaY/(e.shiftKey?-10:-1));{let t=$('<button class="mdl-button mdl-js-button mdl-button--icon" tabindex="0"><i class="material-icons">text_fields</i></button>')[0];document.querySelectorAll(".geofs-button-mute").forEach(e=>e.parentNode.appendChild(t));let o,l,a;t.onclick=function(){l=(a=document.querySelector(".geofs-chat-messages")).parentNode,(o=window.open("about:blank","_blank","height=580, width=680, popup=1")).document.body.append(a),o.document.head.append($("<title>GeoFS - Chat</title>")[0]),o.document.head.append($("<style>.geofs-chat-message{opacity:1!important;font-family:sans-serif;}</style>")[0]),o.onbeforeunload=()=>l.append(a)},window.onbeforeunload=()=>o&&o.close()}}();
+}
+
 adblock();
 airspace();
 autoland();
@@ -2253,6 +2260,7 @@ realism();
 pushback();
 slew();
 twlights();
+tweaks();
 setTimeout(() => {
     info();
 }, 10000)
@@ -2260,3 +2268,5 @@ setTimeout(() => {
 
 menus();
 addonExecution();
+
+
