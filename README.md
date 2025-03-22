@@ -1,5 +1,5 @@
 # GeoFS-All-in-one-Addon
-18 addons and detailed flight procedures, compiled together
+18 addons, their instructions, and detailed flight procedures, compiled together
 
 https://github.com/avramovic/GeoFS-AI-ATC/tree/master <br/>
 https://github.com/RadioactivePotato/GeoFS-Ad-Remover/blob/main/README.md <br/>
