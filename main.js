@@ -47,15 +47,9 @@
                   VIS mode uses which planes are visible to notify you
                   When the number of players visible to you changes, the sound and notification are activated
                   While VIS mode is based on where you are, you can remotely monitor airspace using the RDR mode, which uses the input airport as the center of the airspace`,
-                  
-                  'Autoland++': `Automatic spoiler arming system
-                  Auto-disables autopilot on touchdown
-                  Automatic reverse thrust activation on landing
-                  Visual indicator for spoiler arm status (press [Shift] to arm)`,
-	     
-	      'Autothrottle': `Regulates aircraft speed while retaining pilot control`,
-          		
-                
+                  	     
+	     'Autothrottle': `Regulates aircraft speed while retaining pilot control`,
+          		                
                   'Failures': `Adds the ability for systems to fail`,
 
   	     'Flight path vector': `Shows approximately where your flight path intersects the ground. It also displays your glideslope if you are tuned into ILS. Hide the FPV by pressing [Insert]`,
@@ -84,7 +78,7 @@
 
                   'Realism pack': `Toggle button for KCAS/KTAS instruments
                     Fixed PFD/HUD sizes for all CC aircraft
-                    ILS autoland for autopilot approaches
+                    Spoiler arming - press [Shift] (auto-disable autopilot and reverse thrust activation currently not working)
                     Blackout over 9 Gs (cockpit view only)
                     Fighter condensation effects
                     SSR shaders by AriakimTaiyo (*)
@@ -186,7 +180,6 @@
           addAddon('AI ATC');
           addAddon('Adblock');
           addAddon('ATC airspace');
-          addAddon('Autoland++');
           addAddon('Autothrottle');
           addAddon('Failures');
           addAddon('Flight path vector');
@@ -560,7 +553,7 @@ Ground (Response):
 Pilot (Acknowledges):
 "Taxi to gate D5 via Alpha, Bravo, American 123."`,
 
-                  'Climb procedures': `1) Make sure to select your first waypoint and set desired cruise altitude. Set V/S to 3000 fpm and speed to 230 kts. Set Flaps to 2 for Takeoff, rotate at around 140 to 200 kts, depending on aircraft. Nose up 10-15°. Do NOT stick forward to hold the airplane down to reach faster than normal speed before rotation. This puts strain on the nose wheel and takes weight off the main gear, causing wheelbarrowing, loss of control, and nose gear damage.
+                  'Climb procedures': `1) Make sure to select your first waypoint and set desired cruise altitude. Set V/S to 3000 fpm and speed to 230 kts. Set Flaps to 2 for Takeoff
 2)Raise flaps to 0 at 1500 ft AGL. Reduce thrust to 80% and engage autopilot, hold V/S at 3000 fpm and speed at 230 kts.
 3) At 4000 ft AGL, reduce V/S to 2400 fpm.
 4) At 10000 ft, increase speed to 250 kts & reduce V/S to 2200 fpm.
@@ -584,9 +577,7 @@ Pilot (Acknowledges):
 13) At 3000 ft AGL, reduce speed to 170 kts & set flaps to 3
 14) At 2500 ft AGL, reduce speed to 160 kts & set flaps to full. Lower landing gear.
 15) Adjust V/S as necessary for approach at your discretion.
-16) Prepare to disengage AP below 1000 ft (final approach). If autolanding, disregard. Arm spoilers (Shift)
-17) Follow the lighting aids (ALS, VASI, PAPI)
-18) Flare before touchdown on main wheels, engage spoilers and reverse thrust if applicable (automatically engaged when autolanding), engage wheel brakes when weight on wheels. Do NOT stick forward to hold the airplane down. This puts strain on the nose wheel and takes weight off the main gear, causing wheelbarrowing, loss of control and braking power, and nose gear damage. Raise flaps only when clear of runway.`,
+16) Prepare to disengage AP below 1000 ft (final approach). If autolanding, disregard. Arm spoilers (Shift)`,
 
                   'Go around procedures': `1) Announce the Go-Around
 Verbalize: "Go-Around" to notify crew or ATC.
@@ -1036,10 +1027,6 @@ let radius=1,airportName="";function checkUser(t){let i=distanceInKmBetweenEarth
                          <a class="ext-numberUp" id="airport-selSub">→</a>
                          <span class="ext-airport-label">AIRPORT</span>
      `;const container2=document.getElementsByClassName("ext-autopilot-bar");container2[0].appendChild(controlElmnt),container2[0].appendChild(radiusElmnt),container2[0].appendChild(airportElmnt);let extMode=0;document.getElementById("atc-button").addEventListener("click",function(){this.classList.toggle("active"),this.classList.contains("active")?(controlElmnt.style.display="block",this.classList.add("green-pad"),this.classList.contains("red-pad")&&this.classList.remove("red-pad")):(controlElmnt.style.display="none",radiusElmnt.style.display="none",airportElmnt.style.display="none",1===extMode?(airspace.stop(),document.getElementById("radar-sel").classList.remove("green-pad")):2===extMode&&(visible.stop(),document.getElementById("vis-sel").classList.remove("green-pad")),extMode=0,this.classList.remove("green-pad"),this.classList.add("red-pad"),setTimeout(()=>{this.classList.remove("red-pad")},3e3))}),document.getElementById("radar-sel").addEventListener("click",function(){0===extMode&&(extMode=3,this.classList.add("green-pad")),2===extMode&&(extMode=3,visible.stop(),document.getElementById("vis-sel").classList.remove("green-pad"),this.classList.add("green-pad")),radiusElmnt.style.display="block",airportElmnt.style.display="block"}),document.getElementById("vis-sel").addEventListener("click",function(){0===extMode&&(extMode=2,visible.init(),this.classList.add("green-pad"),document.getElementById("radar-sel").classList.contains("green-pad")&&document.getElementById("radar-sel").classList.remove("green-pad")),1===extMode&&(extMode=2,airspace.stop(),visible.init(),document.getElementById("radar-sel").classList.remove("green-pad"),this.classList.add("green-pad")),3===extMode&&(extMode=2,visible.init(),document.getElementById("radar-sel").classList.remove("green-pad"),this.classList.add("green-pad")),radiusElmnt.style.display="none",airportElmnt.style.display="none"}),document.getElementById("radius-selUp").addEventListener("click",function(){radiusElmnt.childNodes[3].value<25&&radiusElmnt.childNodes[3].value++,radius=parseInt(radiusElmnt.childNodes[3].value)}),document.getElementById("radius-selDown").addEventListener("click",function(){radiusElmnt.childNodes[3].value>1&&radiusElmnt.childNodes[3].value--,radius=parseInt(radiusElmnt.childNodes[3].value)}),document.getElementById("airport-selSub").addEventListener("click",function(){4===airportElmnt.childNodes[1].value.length&&window.geofs.mainAirportList[airportElmnt.childNodes[1].value]?(airportName=airportElmnt.childNodes[1].value,airportElmnt.childNodes[1].classList.add("ext-highlighted"),extMode=1,airspace.init()):(airportElmnt.childNodes[1].classList.add("ext-highlighted2"),setTimeout(()=>{airportElmnt.childNodes[1].classList.remove("ext-highlighted2"),airportElmnt.childNodes[1].value=""},3e3))}),document.getElementById("airport-selInput").addEventListener("click",function(){this.value="",this.classList.contains("ext-highlighted")&&this.classList.remove("ext-highlighted"),this.classList.contains("ext-highlighted2")&&this.classList.remove("ext-highlighted2")});
-};
-
-function autoland () {
-async function waitForCondition(i){return new Promise(t=>{let n=setInterval(()=>{i()&&(clearInterval(n),t())},100)})}async function waitForUI(){return waitForCondition(()=>"undefined"!=typeof ui)}async function waitForInstance(){return waitForCondition(()=>window.geofs.aircraft&&window.geofs.aircraft.instance)}async function waitForInstruments(){return waitForCondition(()=>instruments&&window.geofs.aircraft.instance.setup.instruments)}async function autospoilers(){await waitForUI(),await waitForInstance(),window.geofs.aircraft.instance.animationValue.spoilerArming=0;let i=()=>{window.geofs.aircraft.instance.groundContact||0!==controls.airbrakes.position||(window.geofs.aircraft.instance.animationValue.spoilerArming=0===window.geofs.aircraft.instance.animationValue.spoilerArming?1:0)},t=()=>{controls.airbrakes.target=0===controls.airbrakes.target?1:0,controls.setPartAnimationDelta(controls.airbrakes),window.geofs.aircraft.instance.animationValue.spoilerArming=0};controls.setters.setSpoilerArming={label:"Spoiler Arming",set:i},controls.setters.setAirbrakes={label:"Air Brakes",set:t},await waitForInstruments(),instruments.definitions.spoilers.overlay.overlays[3]={anchor:{x:0,y:0},size:{x:50,y:50},position:{x:0,y:0},animations:[{type:"show",value:"spoilerArming",when:[1]},{type:"hide",value:"spoilerArming",when:[0]}],class:"control-pad-dyn-label green-pad",text:"SPLR<br/>ARM",drawOrder:1},instruments.init(window.geofs.aircraft.instance.setup.instruments),$(document).keydown(function(i){16===i.which&&(console.log("Toggled Arming Spoilers"),controls.setters.setSpoilerArming.set())}),setInterval(function(){1===window.geofs.aircraft.instance.animationValue.spoilerArming&&window.geofs.aircraft.instance.groundContact&&(0===controls.airbrakes.position&&controls.setters.setAirbrakes.set(),window.geofs.aircraft.instance.animationValue.spoilerArming=0,window.geofs.autopilot.setSpeed(0),setTimeout(()=>{window.geofs.autopilot.turnOff()},200),controls.setters.fullReverse.set())},100),setInterval(function(){["3292","3054"].includes(window.geofs.aircraft.instance.id)&&void 0===window.geofs.aircraft.instance.setup.instruments.spoilers&&(window.geofs.aircraft.instance.setup.instruments.spoilers="",instruments.init(window.geofs.aircraft.instance.setup.instruments))},500)}autospoilers();
 };
 
 function throttle () {
@@ -2249,7 +2236,6 @@ const MOUSEWHEEL_TWEAKS=!0,POPOUT_CHAT=!0;!function e(){"use strict";if(!window.
 
 adblock();
 airspace();
-autoland();
 throttle();
 fpv();
 failures();
