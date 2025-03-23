@@ -1,10 +1,9 @@
 # GeoFS-All-in-one-Addon
-18 addons, their instructions, and detailed flight procedures, compiled together
+17 addons, their instructions, and detailed flight procedures, compiled together
 
 https://github.com/avramovic/GeoFS-AI-ATC/tree/master <br/>
 https://github.com/RadioactivePotato/GeoFS-Ad-Remover/blob/main/README.md <br/>
 https://github.com/meatbroc/GeoFS-atc-airspace <br/>
-https://github.com/jtpotato/geofs-scripts/tree/main/Autoland%2B%2B <br/>
 https://github.com/meatbroc/geofs-autothrottle/tree/main <br/>
 https://github.com/tylerbmusic/GeoFS-Failures <br/>
 https://github.com/tylerbmusic/GeoFS-Flight-Path-Vector <br/>
