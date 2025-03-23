@@ -49,6 +49,9 @@
                   While VIS mode is based on where you are, you can remotely monitor airspace using the RDR mode, which uses the input airport as the center of the airspace`,
                   	     
 	     'Autothrottle': `Regulates aircraft speed while retaining pilot control`,
+
+	     'Autoland++': `Automatically deploys spoilers, disables autopilot, and activates reverse thrust on touchdown. Arm using [Shift]. `,
+
           		                
                   'Failures': `Adds the ability for systems to fail`,
 
@@ -78,7 +81,6 @@
 
                   'Realism pack': `Toggle button for KCAS/KTAS instruments
                     Fixed PFD/HUD sizes for all CC aircraft
-                    Spoiler arming - press [Shift] (auto-disable autopilot and reverse thrust activation currently not working)
                     Blackout over 9 Gs (cockpit view only)
                     Fighter condensation effects
                     SSR shaders by AriakimTaiyo (*)
@@ -180,6 +182,7 @@
           addAddon('AI ATC');
           addAddon('Adblock');
           addAddon('ATC airspace');
+          addAddon('Autoland++');
           addAddon('Autothrottle');
           addAddon('Failures');
           addAddon('Flight path vector');
@@ -1028,6 +1031,10 @@ let radius=1,airportName="";function checkUser(t){let i=distanceInKmBetweenEarth
                          <span class="ext-airport-label">AIRPORT</span>
      `;const container2=document.getElementsByClassName("ext-autopilot-bar");container2[0].appendChild(controlElmnt),container2[0].appendChild(radiusElmnt),container2[0].appendChild(airportElmnt);let extMode=0;document.getElementById("atc-button").addEventListener("click",function(){this.classList.toggle("active"),this.classList.contains("active")?(controlElmnt.style.display="block",this.classList.add("green-pad"),this.classList.contains("red-pad")&&this.classList.remove("red-pad")):(controlElmnt.style.display="none",radiusElmnt.style.display="none",airportElmnt.style.display="none",1===extMode?(airspace.stop(),document.getElementById("radar-sel").classList.remove("green-pad")):2===extMode&&(visible.stop(),document.getElementById("vis-sel").classList.remove("green-pad")),extMode=0,this.classList.remove("green-pad"),this.classList.add("red-pad"),setTimeout(()=>{this.classList.remove("red-pad")},3e3))}),document.getElementById("radar-sel").addEventListener("click",function(){0===extMode&&(extMode=3,this.classList.add("green-pad")),2===extMode&&(extMode=3,visible.stop(),document.getElementById("vis-sel").classList.remove("green-pad"),this.classList.add("green-pad")),radiusElmnt.style.display="block",airportElmnt.style.display="block"}),document.getElementById("vis-sel").addEventListener("click",function(){0===extMode&&(extMode=2,visible.init(),this.classList.add("green-pad"),document.getElementById("radar-sel").classList.contains("green-pad")&&document.getElementById("radar-sel").classList.remove("green-pad")),1===extMode&&(extMode=2,airspace.stop(),visible.init(),document.getElementById("radar-sel").classList.remove("green-pad"),this.classList.add("green-pad")),3===extMode&&(extMode=2,visible.init(),document.getElementById("radar-sel").classList.remove("green-pad"),this.classList.add("green-pad")),radiusElmnt.style.display="none",airportElmnt.style.display="none"}),document.getElementById("radius-selUp").addEventListener("click",function(){radiusElmnt.childNodes[3].value<25&&radiusElmnt.childNodes[3].value++,radius=parseInt(radiusElmnt.childNodes[3].value)}),document.getElementById("radius-selDown").addEventListener("click",function(){radiusElmnt.childNodes[3].value>1&&radiusElmnt.childNodes[3].value--,radius=parseInt(radiusElmnt.childNodes[3].value)}),document.getElementById("airport-selSub").addEventListener("click",function(){4===airportElmnt.childNodes[1].value.length&&window.geofs.mainAirportList[airportElmnt.childNodes[1].value]?(airportName=airportElmnt.childNodes[1].value,airportElmnt.childNodes[1].classList.add("ext-highlighted"),extMode=1,airspace.init()):(airportElmnt.childNodes[1].classList.add("ext-highlighted2"),setTimeout(()=>{airportElmnt.childNodes[1].classList.remove("ext-highlighted2"),airportElmnt.childNodes[1].value=""},3e3))}),document.getElementById("airport-selInput").addEventListener("click",function(){this.value="",this.classList.contains("ext-highlighted")&&this.classList.remove("ext-highlighted"),this.classList.contains("ext-highlighted2")&&this.classList.remove("ext-highlighted2")});
 };
+
+function autoland () {
+async function waitForCondition(i){return new Promise(t=>{let n=setInterval(()=>{i()&&(clearInterval(n),t())},100)})}async function waitForUI(){return waitForCondition(()=>"undefined"!=typeof ui)}async function waitForInstance(){return waitForCondition(()=>geofs.aircraft&&geofs.aircraft.instance)}async function waitForInstruments(){return waitForCondition(()=>instruments&&geofs.aircraft.instance.setup.instruments)}async function autospoilers(){await waitForUI(),await waitForInstance(),ui.notification.show("Note: spoiler arming key has now changed to Shift."),geofs.aircraft.instance.animationValue.spoilerArming=0;let i=()=>{geofs.aircraft.instance.groundContact||0!==controls.airbrakes.position||(geofs.aircraft.instance.animationValue.spoilerArming=0===geofs.aircraft.instance.animationValue.spoilerArming?1:0)},t=()=>{controls.airbrakes.target=0===controls.airbrakes.target?1:0,controls.setPartAnimationDelta(controls.airbrakes),geofs.aircraft.instance.animationValue.spoilerArming=0};controls.setters.setSpoilerArming={label:"Spoiler Arming",set:i},controls.setters.setAirbrakes={label:"Air Brakes",set:t},await waitForInstruments(),instruments.definitions.spoilers.overlay.overlays[3]={anchor:{x:0,y:0},size:{x:50,y:50},position:{x:0,y:0},animations:[{type:"show",value:"spoilerArming",when:[1]},{type:"hide",value:"spoilerArming",when:[0]}],class:"control-pad-dyn-label green-pad",text:"SPLR<br/>ARM",drawOrder:1},instruments.init(geofs.aircraft.instance.setup.instruments),$(document).keydown(function(i){16===i.which&&(console.log("Toggled Arming Spoilers"),controls.setters.setSpoilerArming.set())}),setInterval(function(){1===geofs.aircraft.instance.animationValue.spoilerArming&&geofs.aircraft.instance.groundContact&&(0===controls.airbrakes.position&&controls.setters.setAirbrakes.set(),geofs.aircraft.instance.animationValue.spoilerArming=0,geofs.autopilot.setSpeed(0),setTimeout(()=>{geofs.autopilot.turnOff()},200),setTimeout(()=>{controls.setters.fullReverse.set()},200))},100),setInterval(function(){["3292","3054"].includes(geofs.aircraft.instance.id)&&void 0===geofs.aircraft.instance.setup.instruments.spoilers&&(geofs.aircraft.instance.setup.instruments.spoilers="",instruments.init(geofs.aircraft.instance.setup.instruments))},500)}autospoilers();
+}
 
 function throttle () {
 window.executeOnEventDone("geofsInitialized",function t(){window.geofs.autothrottle={on:!1,init:function(){window.geofs.autothrottle.initStyles(),window.geofs.autothrottle.callbackID=window.geofs.api.addFrameCallback(window.geofs.autothrottle.tickWrapper);let t=$("<div/>").addClass("ext-autothrottle-bar").html('<div class="ext-autothrottle-control-pad ext-autothrottle-pad" id="autothrottle-button" tabindex="0" onclick="window.geofs.autothrottle.toggle()"><div class="control-pad-label transp-pad">A/THR</div>');$(".geofs-autopilot-bar").append(t);let o=$("<div/>").html('<a class="ext-autothrottle-numberDown numberDown ext-autothrottle-control">-</a><input class="ext-autothrottle-numberValue numberValue ext-autothrottle-course" min="0" smallstep="5" stepthreshold="100" step="10" data-method="setSpeed" maxlength="4" value="0"><a class="ext-autothrottle-numberUp numberUp">+</a><span>KTS</span>').addClass("ext-autothrottle-control"),e=$("<div/>").addClass("geofs-autopilot-control").html('<span class="ext-autothrottle-switch ext-autothrottle-mode"><a class="ext-autothrottle-switchLeft switchLeft green-pad" data-method="setArm" value="false" id="armOff">MNL</a><a class="ext-autothrottle-switchRight switchRight" data-method="setArm" value="true" id="armOn">LND</a></span>');$("<div/>").addClass("ext-autothrottle-controls").hide().append(o,e).appendTo($(".ext-autothrottle-bar"));let r=$("<div/>").addClass("mdl-tooltip").attr("for","autothrottle-button").text("Toggle autothrottle on/off");t.append(r),componentHandler.upgradeElement(r[0]),$(document).on("autothrottleOn",function(){window.geofs.autopilot.on&&window.geofs.autopilot.turnOff(),clearTimeout(window.geofs.autothrottle.panelTimeout),$(".ext-autothrottle-controls").show(),$(".ext-autothrottle-pad").removeClass("red-pad").addClass("green-pad"),window.geofs.autothrottle.on=!0;var t=Math.round(window.geofs.animation.values.kias);window.geofs.autopilot.setSpeed(t),$(".ext-autothrottle-numberValue").val(t)}),$(document).on("autothrottleOff",function(){$(".ext-autothrottle-pad").removeClass("green-pad").addClass("red-pad"),$(".ext-autothrottle-controls").hide(),window.geofs.autothrottle.panelTimeout=setTimeout(function(){$(".ext-autothrottle-pad").removeClass("red-pad").removeClass("green-pad")},3e3),window.geofs.autothrottle.on=!1}),$(document).on("autopilotOn",function(){window.geofs.autothrottle.on&&$(document).trigger("autothrottleOff")})},initStyles:function(){let t=document.createElement("style");t.innerHTML=`
@@ -2034,8 +2041,8 @@ function runFuelSystem() {
             const hasAfterburners = window.geofs.aircraft.instance.engines[0]?.afterBurnerThrust !== undefined;
             const usingAfterburners = hasAfterburners && Math.abs(window.geofs.animation.values.smoothThrottle) > 0.9;
             const totalAfterBurnerThrust = hasAfterburners ? window.geofs.aircraft.instance.engines.reduce((sum, engine) => sum + (engine.afterBurnerThrust || 0), 0) : 0;
-            const currentThrust = usingAfterburners ? totalAfterBurnerThrust : Math.abs(window.geofs.animation.values.smoothThrottle) * maxThrust;
-            const throttle = currentThrust / maxThrust;
+            const throttle = Math.abs(window.geofs.animation.values.smoothThrottle);
+            const currentThrust = usingAfterburners ? totalAfterBurnerThrust : throttle * maxThrust;
             const idleBurnRate = usingAfterburners ? totalAfterBurnerThrust / 150 : maxThrust / 150;
             const fullThrottleBurnRate = idleBurnRate * 3;
 //let fuelBurnRate;
@@ -2236,6 +2243,7 @@ const MOUSEWHEEL_TWEAKS=!0,POPOUT_CHAT=!0;!function e(){"use strict";if(!window.
 
 adblock();
 airspace();
+autoland();
 throttle();
 fpv();
 failures();
@@ -2254,5 +2262,3 @@ setTimeout(() => {
 
 menus();
 addonExecution();
-
-
