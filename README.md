@@ -1,5 +1,6 @@
 # GeoFS-All-in-one-Addon
-17 addons, their instructions, and detailed flight procedures, compiled together
+17 addons, their instructions, and detailed flight procedures, compiled together <br/>
+I recommend using bookmarklet.js as you will always have the latest version of the script
 
 https://github.com/avramovic/GeoFS-AI-ATC/tree/master <br/>
 https://github.com/RadioactivePotato/GeoFS-Ad-Remover/blob/main/README.md <br/>
