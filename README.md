@@ -9,7 +9,7 @@ Once GeoFS is fully loaded, press F12/Ctrl+shift+I/Ctrl+shift+J and go to the Co
 Paste in the contents of main.js and hit Enter
 ### Tampermonkey - recommended, runs automatically when GeoFS is visited
 Install [Tampermonkey](https://www.tampermonkey.net/) <br/>
-Click [here](https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/main.js)
+Click [here](https://www.tampermonkey.net/script_installation.php#url=https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/main.js)
 ## Credits
 https://github.com/avramovic/GeoFS-AI-ATC/tree/master <br/>
 https://github.com/RadioactivePotato/GeoFS-Ad-Remover/blob/main/README.md <br/>
