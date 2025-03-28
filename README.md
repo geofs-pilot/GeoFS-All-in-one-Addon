@@ -1,5 +1,5 @@
 # GeoFS-All-in-one-Addon
-17 addons, their instructions, and detailed flight procedures, compiled together <br/>
+18 addons, their instructions, and detailed flight procedures, compiled together <br/>
 I recommend using bookmarklet.js as you will always have the latest version of the script
 
 https://github.com/avramovic/GeoFS-AI-ATC/tree/master <br/>
@@ -18,4 +18,5 @@ https://github.com/TotallyRealElonMusk/GeoFS-Pushback <br/>
 https://github.com/NVB9ALT/Realism-pack. <br/>
 https://github.com/tylerbmusic/GeoFS-Slew-Mode <br/>
 https://github.com/tylerbmusic/GeoFS-Taxiway-Lights <br/>
+https://github.com/tylerbmusic/GeoFS-Taxiway-Signs/blob/main/userscript.js <br/>
 https://github.com/scitor/GeoFS/blob/master/uiTweaks/geofs-ui-tweaks.user.js
