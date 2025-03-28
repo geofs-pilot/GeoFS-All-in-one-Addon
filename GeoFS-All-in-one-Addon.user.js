@@ -22,7 +22,7 @@ const observer = new MutationObserver(() => {
 
         (() => {var addonScript = document.createElement('script'); addonScript.src="https://raw.githack.com/geofs-pilot/GeoFS-All-in-one-Addon/main/main.js";document.body.appendChild(addonScript);})() //Run the script
 
-    }, 2000);
+    }, 1000);
 });
 
 // Start observing
