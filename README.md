@@ -9,7 +9,10 @@
 -Paste in the contents of main.js and hit Enter
 ### Tampermonkey - recommended, runs automatically when GeoFS is visited
 -Install [Tampermonkey](https://www.tampermonkey.net/) <br/>
--Click [here](https://www.tampermonkey.net/script_installation.php#url=https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/userscript.user.js) to install the script
+-Click [here](hhttps://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/GeoFS-All-in-one-Addon.user.js) to install the script
+
+-[install randomJobs](https://github.com/scitor/GeoFS/raw/master/randomJobs/randomJobs.user.js) <br/>
+-[-install GeoFS-AI-ATC](https://github.com/avramovic/geofs-ai-atc/raw/master/GeoFS-AI-ATC.user.js)
 ## Credits
 https://github.com/avramovic/GeoFS-AI-ATC/tree/master <br/>
 https://github.com/RadioactivePotato/GeoFS-Ad-Remover/blob/main/README.md <br/>
