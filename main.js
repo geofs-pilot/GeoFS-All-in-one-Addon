@@ -393,8 +393,6 @@ function menus() {
 
                 Decoding METAR
                 PHNL 250953Z 05007G17KT 10SM FEW024 FEW040 27/19 A3001 RMK AO2 SLP163 T02670194 403220261
-
-
                 PHNL: Location
                 -250953Z: 25th of the month, time 09:53 GMT
                 -05007G17K: Wind heading 050, 7 kts, gusting up to 17 kts, also note: 00000=no wind, VRB=variable
