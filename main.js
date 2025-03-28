@@ -38,7 +38,7 @@ function menus() {
         function addAddon(name) {
             //ADDON DESCRIPTIONS GO HERE:
             const descriptions = {
-                'AI ATC': `***works with tampermonkey only, GeoFS AI ATC on Github***
+                'AI ATC': `***works with tampermonkey only, see the GitHub page***
 
 
                 Uses PuterJS GPT and speech-to-text to provide AI air traffic control
@@ -84,7 +84,7 @@ function menus() {
                 'Information display': `Displays Indicated Airspeed, Mach, Ground Speed, Altitude, Above Ground Level, Heading, Vertical Speed, Throttle %, AOA`,
 
 
-                'Jobs': `***works with tampermonkey only, GeoFS/randomJobs on Github***
+                'Jobs': `***works with tampermonkey only, see the GitHub page***
 
 
                 Shows flights departing from the airport you are currently at and can also load flight plans for those routes
