@@ -1,6 +1,7 @@
 # GeoFS-All-in-one-Addon
 18 addons, their instructions, and detailed flight procedures, compiled together <br/>
 ## How to use: <br/>
+Note: depending on the size of your screen, everything might not fit on the UI bar. If this happens, simply zoom out the site (ctrl-)
 ### Bookmarklet - Easy and fast, nothing to install
 -Bookmark any page, left click on it, press Edit, and replace the URL with the contents of bookmarklet.js <br/>
 -Once GeoFS is fully loaded, click on the bookmark to run the script.
