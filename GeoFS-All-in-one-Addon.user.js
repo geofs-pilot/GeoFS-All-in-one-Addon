@@ -15,7 +15,7 @@ let isTabActive = true; // Track tab visibility
 
 // Mutation Observer
 const observer = new MutationObserver(() => {
-    if (!isTabActive) return; // 🔴 Don't run if the tab is inactive
+    if (!isTabActive) return; // Don't run if the tab is inactive
 
     clearTimeout(debounceTimer);
 
