@@ -11,19 +11,28 @@
 // ==/UserScript==
 
 let debounceTimer;
+let isTabActive = true; // Track tab visibility
 
+// Mutation Observer
 const observer = new MutationObserver(() => {
-    clearTimeout(debounceTimer); // Reset the timer
+    if (!isTabActive) return; // 🔴 Don't run if the tab is inactive
+
+    clearTimeout(debounceTimer);
 
     debounceTimer = setTimeout(() => {
         console.log("No more changes detected, running script...");
-
-        observer.disconnect(); // Stop observing further changes
-
+        observer.disconnect(); // Stop further execution
         (() => {var addonScript = document.createElement('script'); addonScript.src="https://raw.githack.com/geofs-pilot/GeoFS-All-in-one-Addon/main/main.js";document.body.appendChild(addonScript);})() //Run the script
-
     }, 1000);
 });
 
-// Start observing
+// Observe mutations in the body
 observer.observe(document.body, { childList: true, subtree: true });
+
+// Detect tab visibility changes
+document.addEventListener("visibilitychange", () => {
+    isTabActive = !document.hidden;
+    if (isTabActive) {
+        console.log("Tab is active again. Resuming observer.");
+    }
+});
