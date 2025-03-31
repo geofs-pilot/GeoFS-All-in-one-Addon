@@ -2,7 +2,8 @@
 19 addons, their instructions, and detailed flight procedures, compiled together <br/>
  -Most of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
 
-![image](https://github.com/user-attachments/assets/92d9f0b2-a637-443b-80f0-2ac09a2b5093)
+![image](https://github.com/user-attachments/assets/aebbd402-dab4-4332-af9d-3d8753e2ab7e)
+
 
 ## How to use: <br/>
 Note: depending on the size of your screen, everything might not fit on the UI bar. If this happens, simply zoom out the site (ctrl-)
