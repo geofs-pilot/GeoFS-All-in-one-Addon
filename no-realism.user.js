@@ -22,7 +22,9 @@ const observer = new MutationObserver(() => {
     debounceTimer = setTimeout(() => {
         observer.disconnect(); // Stop further execution
             console.log("No more changes detected, running addons...");
-            (() => {var addonScript = document.createElement('script'); addonScript.src="https://raw.githack.com/geofs-pilot/GeoFS-All-in-one-Addon/main/no-realism.js";document.body.appendChild(addonScript);})() //Run the script
+            setTimeout(() => {
+                (() => {var addonScript = document.createElement('script'); addonScript.src="https://raw.githack.com/geofs-pilot/GeoFS-All-in-one-Addon/main/no-realism.js";document.body.appendChild(addonScript);})() //Run the script
+            }, 300);
         }, 1000);
 });
 
