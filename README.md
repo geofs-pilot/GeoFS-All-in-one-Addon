@@ -20,7 +20,7 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 ## These scripts only work with tampermonkey - install them here
 -[install randomJobs](https://github.com/scitor/GeoFS/raw/master/randomJobs/randomJobs.user.js) <br/>
 -[install GeoFS-AI-ATC](https://github.com/avramovic/geofs-ai-atc/raw/master/GeoFS-AI-ATC.user.js) <br/>
--[install AI ATC with PTT button (modified version of GeoFS-AI-ATC)](https://github.com/geofs-pilot/AI-ATC-PTT-modification/raw/main/PTT_AI_ATC.user.js)
+-[install AI ATC with PTT key (modified version of GeoFS-AI-ATC)](https://github.com/geofs-pilot/AI-ATC-PTT-modification/raw/main/PTT_AI_ATC.user.js)
 ## Credits
 https://github.com/avramovic/GeoFS-AI-ATC/tree/master <br/>
 https://github.com/RadioactivePotato/GeoFS-Ad-Remover/blob/main/README.md <br/>
