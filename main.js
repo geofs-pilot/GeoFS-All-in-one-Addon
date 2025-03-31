@@ -89,7 +89,7 @@ function menus() {
                 Toggle using [W]`,
 
 
-                'Information display': `Displays Indicated Airspeed, Mach, Ground Speed, Altitude, Above Ground Level, Heading, Vertical Speed, Throttle %, AOA, Glideslope angle (must be tuned into ILS), G force`,
+                'Information display': `Displays Indicated Airspeed, Mach, Ground Speed, Altitude, Above Ground Level, Heading, Vertical Speed, Throttle %, AOA, Glideslope angle (must be tuned into ILS), G-force`,
 
 
                 'Jobs': `***works with tampermonkey only, see the GitHub page***
