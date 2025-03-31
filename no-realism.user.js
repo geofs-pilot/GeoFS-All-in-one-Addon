@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         GeoFS-All-in-one-Addon(no realism pack)
+// @name         GeoFS-All-in-one-Addon (no realism pack)
 // @namespace    http://tampermonkey.net/
 // @version      2025-03-28
 // @description  19 addons, their instructions, and detailed flight procedures, compiled together
