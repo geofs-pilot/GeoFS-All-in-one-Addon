@@ -42,7 +42,7 @@ function menus() {
 
 
                 Uses PuterJS GPT and speech-to-text to provide AI air traffic control
-                Type a message using Ctrl+click
+                Type a message using Ctrl+click (or [W] if using PTT version)
                 You have to be within 50 nautical miles of the airport to talk to it
                 Click on the radio icon to tune in to different airport; you can tune to a particular airport ATC by using their ICAO code
                 If ATC tells you to wait for instructions, you must check in with them every 10-20 seconds
