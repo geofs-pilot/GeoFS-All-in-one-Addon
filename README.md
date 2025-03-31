@@ -24,7 +24,7 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 -[install AI ATC with PTT key (modified version of GeoFS-AI-ATC)](https://github.com/geofs-pilot/AI-ATC-PTT-modification/raw/main/PTT_AI_ATC.user.js)
 ## Credits
 https://github.com/avramovic/GeoFS-AI-ATC/tree/master <br/>
-https://github.com/RadioactivePotato/GeoFS-Ad-Remover/blob/main/README.md <br/>
+https://github.com/RadioactivePotato/GeoFS-Ad-Remover/tree/main <br/>
 https://github.com/meatbroc/GeoFS-atc-airspace <br/>
 https://github.com/jtpotato/geofs-scripts/tree/main/Autoland%2B%2B <br/>
 https://github.com/meatbroc/geofs-autothrottle/tree/main <br/>
@@ -33,13 +33,13 @@ https://github.com/tylerbmusic/GeoFS-Flight-Path-Vector <br/>
 https://github.com/geofs-pilot/GeoFS-Fuel <br/>
 https://github.com/tylerbmusic/GeoFS-GPWS-Callouts <br/>
 https://github.com/RadioactivePotato/GeoFS-Information-Display <br/>
-https://github.com/scitor/GeoFS/blob/master/randomJobs/randomJobs.user.js <br/>
+https://github.com/scitor/GeoFS/tree/master/randomJobs <br/>
 https://github.com/tylerbmusic/GeoFS-Landing-Stats <br/>
 https://github.com/geofs-pilot/geofs-overpowered-engines/tree/main <br/>
 https://github.com/TotallyRealElonMusk/GeoFS-Pushback <br/>
 https://github.com/NVB9ALT/Realism-pack. <br/>
 https://github.com/tylerbmusic/GeoFS-Slew-Mode <br/>
 https://github.com/tylerbmusic/GeoFS-Taxiway-Lights <br/>
-https://github.com/tylerbmusic/GeoFS-Taxiway-Signs/blob/main/userscript.js <br/>
-https://github.com/scitor/GeoFS/blob/master/uiTweaks/geofs-ui-tweaks.user.js <br/>
+https://github.com/tylerbmusic/GeoFS-Taxiway-Signs/tree/main <br/>
+https://github.com/scitor/GeoFS/tree/master/uiTweaks <br/>
 https://github.com/kolos26/GEOFS-LiverySelector/tree/main (for no-realism.js)
