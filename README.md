@@ -40,4 +40,5 @@ https://github.com/NVB9ALT/Realism-pack. <br/>
 https://github.com/tylerbmusic/GeoFS-Slew-Mode <br/>
 https://github.com/tylerbmusic/GeoFS-Taxiway-Lights <br/>
 https://github.com/tylerbmusic/GeoFS-Taxiway-Signs/blob/main/userscript.js <br/>
-https://github.com/scitor/GeoFS/blob/master/uiTweaks/geofs-ui-tweaks.user.js
+https://github.com/scitor/GeoFS/blob/master/uiTweaks/geofs-ui-tweaks.user.js <br/>
+https://github.com/kolos26/GEOFS-LiverySelector/tree/main (for no-realism.js)
