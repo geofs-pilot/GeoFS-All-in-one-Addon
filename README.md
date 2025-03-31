@@ -16,6 +16,7 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 ### Tampermonkey - recommended, runs automatically when GeoFS is visited
 -Install [Tampermonkey](https://www.tampermonkey.net/) <br/>
 -Click [here](https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/GeoFS-All-in-one-Addon.user.js) to install the script <br/>
+-Click [here](https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/no-realism.user.js) to install the script without the realism pack <br/>
 -No need to update, automatically runs latest version
 ## These scripts only work with tampermonkey - install them here
 -[install randomJobs](https://github.com/scitor/GeoFS/raw/master/randomJobs/randomJobs.user.js) <br/>
