@@ -25,7 +25,7 @@ const observer = new MutationObserver(() => {
         setTimeout(() => {
                 (() => {var addonScript = document.createElement('script'); addonScript.src="https://raw.githack.com/geofs-pilot/GeoFS-All-in-one-Addon/main/main.js";document.body.appendChild(addonScript);})() //Run the script
             }, 300);
-    }, 1000);
+    }, 1000); //If you're having trouble with the userscript, try adjusting this value. The faster GeoFS loads, the lower this value should be.
 });
 
 // Observe mutations in the body
