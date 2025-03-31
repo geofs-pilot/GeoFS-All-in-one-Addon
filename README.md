@@ -1,5 +1,8 @@
 # GeoFS-All-in-one-Addon
 18 addons, their instructions, and detailed flight procedures, compiled together <br/>
+Most of the addons recieved some kind of modification
+![image](https://github.com/user-attachments/assets/92d9f0b2-a637-443b-80f0-2ac09a2b5093)
+
 ## How to use: <br/>
 Note: depending on the size of your screen, everything might not fit on the UI bar. If this happens, simply zoom out the site (ctrl-)
 ### Bookmarklet - Easy and fast, nothing to install
