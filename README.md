@@ -1,6 +1,6 @@
 # GeoFS-All-in-one-Addon
 19 addons, their instructions, and detailed flight procedures, compiled together <br/>
- -Most of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
+ -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
 
 ![image](https://github.com/user-attachments/assets/aebbd402-dab4-4332-af9d-3d8753e2ab7e)
 
