@@ -35,144 +35,133 @@ function menus() {
         };
 
 
-        function addAddon(name) {
             //ADDON DESCRIPTIONS GO HERE:
-            const descriptions = {
-                'AI ATC': `***works with tampermonkey only, see the GitHub page***
+        const descriptions = {
+            'AI ATC': `***works with tampermonkey only, see the GitHub page***
 
 
-                Uses PuterJS GPT and speech-to-text to provide AI air traffic control
-                Type a message using Ctrl+click (or [W] if using PTT version)
-                You have to be within 50 nautical miles of the airport to talk to it
-                Click on the radio icon to tune in to different airport; you can tune to a particular airport ATC by using their ICAO code
-                If ATC tells you to wait for instructions, you must check in with them every 10-20 seconds
-                You must specify which runway you want to land on`,
+            Uses PuterJS GPT and speech-to-text to provide AI air traffic control
+            Type a message using Ctrl+click (or [W] if using PTT version)
+            You have to be within 50 nautical miles of the airport to talk to it
+            Click on the radio icon to tune in to different airport; you can tune to a particular airport ATC by using their ICAO code
+            If ATC tells you to wait for instructions, you must check in with them every 10-20 seconds
+            You must specify which runway you want to land on`,
 
 
-                'ATC airspace': `2 airspace monitoring modes accessible via the AIRSPACE button at the top
-                RDR mode has larger range and will set the radius of your airspace up to 25 km
-                RDR mode creates an invisible circle centered around your airport of choice that senses if a plane enters or exits it regardless of altitude
-                Set your radius and your airport to begin monitoring
-                When planes enter or exit this airspace, a sound and notification are activated
-                VIS mode uses which planes are visible to notify you
-                When the number of players visible to you changes, the sound and notification are activated
-                While VIS mode is based on where you are, you can remotely monitor airspace using the RDR mode, which uses the input airport as the center of the airspace`,
+            'Autothrottle': `Regulates aircraft speed while retaining pilot control`,
 
 
-                'Autothrottle': `Regulates aircraft speed while retaining pilot control`,
+            'Autoland++': `Automatically deploys spoilers, disables autopilot, and activates reverse thrust on touchdown. Arm using [Shift]. `,
 
 
-                'Autoland++': `Automatically deploys spoilers, disables autopilot, and activates reverse thrust on touchdown. Arm using [Shift]. `,
+            'Failures': `Adds the ability for systems to fail
+            -Landing gear
+            -Fuel leak
+            -Flight control
+            -Electrical
+            -Structural
+            -Hydraulic
+            -Pressurization
+            -Engines `,
 
 
-                'Failures': `Adds the ability for systems to fail
-                -Landing gear
-                -Fuel leak
-                -Flight control
-                -Electrical
-                -Structural
-                -Hydraulic
-                -Pressurization
-                -Engines `,
+            'Flight path vector': `Shows approximately where your flight path intersects the ground. Hidden by pressing [Insert]`,
 
 
-                'Flight path vector': `Shows approximately where your flight path intersects the ground. Hidden by pressing [Insert]`,
+            'Fuel': `Simulates fuel consumption by calculating burn rate from throttle setting and fuel capacity from aircraft mass. To refuel, you must be on the ground, stationary, and have engines off`,
 
 
-                'Fuel': `Simulates fuel consumption by calculating burn rate from throttle setting and fuel capacity from aircraft mass. To refuel, you must be on the ground, stationary, and have engines off`,
+            'GPWS': `Adds GPWS callouts
+            For the minimums to work, you need to type in the BAROMETRIC (MSL) minimum altitude/desision height (without the-½) as defined at the bottom of the IFR approach plate.
+            For the Glideslope alarm to work, you must be tuned into an ILS.
+            For some of the callouts to work, you must be descending.
+            Toggle using [W]`,
 
 
-                'GPWS': `Adds GPWS callouts
-                For the minimums to work, you need to type in the BAROMETRIC (MSL) minimum altitude/desision height (without the-½) as defined at the bottom of the IFR approach plate.
-                For the Glideslope alarm to work, you must be tuned into an ILS.
-                For some of the callouts to work, you must be descending.
-                Toggle using [W]`,
+            'Information display': `Displays Indicated Airspeed, Mach, Ground Speed, Altitude, Above Ground Level, Heading, Vertical Speed, Throttle %, AOA, Glideslope angle (must be tuned into ILS), G-force`,
 
 
-                'Information display': `Displays Indicated Airspeed, Mach, Ground Speed, Altitude, Above Ground Level, Heading, Vertical Speed, Throttle %, AOA, Glideslope angle (must be tuned into ILS), G-force`,
+            'Jobs': `***works with tampermonkey only, see the GitHub page***
 
 
-                'Jobs': `***works with tampermonkey only, see the GitHub page***
+            Shows flights departing from the airport you are currently at and can also load flight plans for those routes
+            Tracks your completed flights under “Career”`,
 
 
-                Shows flights departing from the airport you are currently at and can also load flight plans for those routes
-                Tracks your completed flights under “Career”`,
+            'Landing stats': `Upon landing, displays vertical speed, G-forces, airspeed, roll, tilt, TDZ accuracy, and more. For the TDZ to work you must be tuned into ILS `,
 
 
-                'Landing stats': `Upon landing, displays vertical speed, G-forces, airspeed, roll, tilt, TDZ accuracy, and more. For the TDZ to work you must be tuned into ILS `,
+            'Overpowered engines': `Sets the engine thrust to 900,000 and the ceiling to 300,000 feet.
+            Toggle using [Q]`,
 
 
-                'Overpowered engines': `Sets the engine thrust to 900,000 and the ceiling to 300,000 feet.
-                Toggle using [Q]`,
+            'Pushback': `Adds pushback tugs for most military and civilian aircraft which appear if you are stationary.`,
 
 
-                'Pushback': `Adds pushback tugs for most military and civilian aircraft which appear if you are stationary.`,
+            'Realism pack': `Toggle button for KCAS/KTAS instruments
+            Fixed PFD/HUD sizes for all CC aircraft
+            Blackout over 9 Gs (cockpit view only)
+            Fighter condensation effects
+            SSR shaders by AriakimTaiyo 
+            Immersion sounds for A320/A220/A350, 737/777 
+            Helicopter rotor strikes cause crashes
+            Basic propwash
+            Livery Selector by Kolos26 (use alone if Realism Pack crashes)
+            Bug fixes for F-14, XB-70
+            F-14 swing wing physics
+            8 addon aircraft: (note: these aircraft may not have full functionality and often buggy)
+            F/A-18C: Tailhook, paddle switch (G-limiter override)
+            Su-27: Cobra button (not Su-35)
+            MiG-17
+            E-7 Wedgetail AWACS
+            MiG-21: X toggles drop tank
+            Morane-Saulnier Type G
+            F-117 Nighthawk
+            F-14A Tomcat: More realistic physics than F-14B
+            Paddle switch/Cobra button: ["] (apostrophe/quotation mark)
+            Clickable cockpits:
+            Piper Cub: Mixture (toggles engine)
+            Cessna 172: Throttle, mixture (toggles engine)
+            Embraer Phenom 100: Throttle, landing gear, parking brake
+            DHC-6 Twin Otter: Flaps
+            Douglas DC-3: Flaps, throttle, mixture, magnetos (both must be on for auto-start)
+            Alisport Silent 2: Speedbrake, flaps
+            DHC-2 Beaver: Flaps, throttle, mixture (toggles engine), water rudders
+            Airbus A380: Speedbrake
+            Minor F-16 sound tweak (directional)
+            Sonic booms & high-G sounds
+            Stall buffet camera effect 
+            Lift-based wingflex for most CC airliners 
+            Realism fixes: HAL Tejas, F-15, F-22
+            Tricky Corsair startup (advance throttle slightly)
+            F-16 brake parachute
+            Turbofan spool-up delay (10%-70% RPM)
+            Advanced 2D Clouds Gen V1
+            Fighter jet ejection seats ([E] to eject, [B] to descend faster)
+            HUD machmeter
+            Lag reduction`,
 
 
-                'Realism pack': `Toggle button for KCAS/KTAS instruments
-                Fixed PFD/HUD sizes for all CC aircraft
-                Blackout over 9 Gs (cockpit view only)
-                Fighter condensation effects
-                SSR shaders by AriakimTaiyo 
-                Immersion sounds for A320/A220/A350, 737/777 
-                Helicopter rotor strikes cause crashes
-                Basic propwash
-                Livery Selector by Kolos26 (use alone if Realism Pack crashes)
-                Bug fixes for F-14, XB-70
-                F-14 swing wing physics
-                8 addon aircraft: (note: these aircraft may not have full functionality and often buggy)
-                F/A-18C: Tailhook, paddle switch (G-limiter override)
-                Su-27: Cobra button (not Su-35)
-                MiG-17
-                E-7 Wedgetail AWACS
-                MiG-21: X toggles drop tank
-                Morane-Saulnier Type G
-                F-117 Nighthawk
-                F-14A Tomcat: More realistic physics than F-14B
-                Paddle switch/Cobra button: ["] (apostrophe/quotation mark)
-                Clickable cockpits:
-                Piper Cub: Mixture (toggles engine)
-                Cessna 172: Throttle, mixture (toggles engine)
-                Embraer Phenom 100: Throttle, landing gear, parking brake
-                DHC-6 Twin Otter: Flaps
-                Douglas DC-3: Flaps, throttle, mixture, magnetos (both must be on for auto-start)
-                Alisport Silent 2: Speedbrake, flaps
-                DHC-2 Beaver: Flaps, throttle, mixture (toggles engine), water rudders
-                Airbus A380: Speedbrake
-                Minor F-16 sound tweak (directional)
-                Sonic booms & high-G sounds
-                Stall buffet camera effect 
-                Lift-based wingflex for most CC airliners 
-                Realism fixes: HAL Tejas, F-15, F-22
-                Tricky Corsair startup (advance throttle slightly)
-                F-16 brake parachute
-                Turbofan spool-up delay (10%-70% RPM)
-                Advanced 2D Clouds Gen V1
-                Fighter jet ejection seats ([E] to eject, [B] to descend faster)
-                HUD machmeter
-                Lag reduction`,
+            'Slew mode': `Mimics slew mode from FSX
+            Toggle: [Y]
+            Fwd: [I]
+            Back: [K]
+            Left: [J]
+            Right: [L]
+            Up:[U]
+            Down: [Enter]
+            Yaw right: [.]
+            Yaw left: [,]
+            Roll right: [→]
+            Roll left: [←]
+            Tilt up: [↑]
+            Tilt downL: [↓]`,
 
 
-                'Slew mode': `Mimics slew mode from FSX
-                Toggle: [Y]
-                Fwd: [I]
-                Back: [K]
-                Left: [J]
-                Right: [L]
-                Up:[U]
-                Down: [Enter]
-                Yaw right: [.]
-                Yaw left: [,]
-                Roll right: [→]
-                Roll left: [←]
-                Tilt up: [↑]
-                Tilt downL: [↓]`,
-
-
-                'UI tweaks': `Allows you to adjust autopilot using mouse wheel and adds a popout chat`
-            };
-
-
+            'UI tweaks': `Allows you to adjust autopilot using mouse wheel and adds a popout chat`
+        };
+        
+        function addAddon(name) {
             const descriptionText = descriptions[name] || 'No description available.';
             const addonItem = document.createElement('ul');
             addonItem.className = 'no-hover geofs-list-collapsible-item geofs-hideForApp';
@@ -213,10 +202,9 @@ function menus() {
             addonListItem.appendChild(addonItem);
             addonListItem.appendChild(addonContent);
         }
-        //ADDON NAMES AND runFunctions GO HERE:
+        //ADDON NAMES GO HERE:
         addAddon('AI ATC');
         addAddon('Ad remover');
-        addAddon('ATC airspace');
         addAddon('Autoland++');
         addAddon('Autothrottle');
         addAddon('Failures');
@@ -277,412 +265,413 @@ function menus() {
 
 
 
-        function addInstruction(name) {
+        
             //INSTRUCTIONS GO HERE:
-            const descriptions = {
-                'Preflight procedures': `Run FlightControl.ahk for numpad controls
-                Review procedures
-                Load/create flight plan
-                Check METAR, decide on VFR or IFR
-                Check elevations of departure and arrival airports
-                Choose suitable cruise altitude (for short flights, 10x distance eg. 150nm→15000ft)
-                Check duration, fuel range, choose suitable aircraft
-                Calculate top of descent (0.003x cruise alt minus airport elevation)
-                Load in aircraft at gate, recheck everything, check controls, pushback`,
+        const descriptions = {
+            'Preflight procedures': `Run FlightControl.ahk for numpad controls
+            Review procedures
+            Load/create flight plan
+            Check METAR, decide on VFR or IFR
+            Check elevations of departure and arrival airports
+            Choose suitable cruise altitude (for short flights, 10x distance eg. 150nm→15000ft)
+            Check duration, fuel range, choose suitable aircraft
+            Calculate top of descent (0.003x cruise alt minus airport elevation)
+            Load in aircraft at gate, recheck everything, check controls, pushback`,
 
 
-                'VFR rules': `
-                1. Weather Minimums:
-                Maintain specific visibility and cloud clearance (refer to below).
-                Visual Reference:
-                Always fly with visual reference to the ground or horizon.
-                Daytime and Nighttime:
-                VFR can be conducted during the day and night (night VFR requires additional training and equipment).
-                2. Altitude Rules (Cruising Altitudes):
-                Above 3,000 feet AGL and below 18,000 feet MSL:
-                Fly odd thousand + 500 feet (e.g., 3,500, 5,500) when heading east (0°-179°).
-                Fly even thousand + 500 feet (e.g., 4,500, 6,500) when heading west (180°-359°).
-                3. Airspace Requirements:
-                Class A: VFR not permitted.
-                Class B: Requires explicit ATC clearance and two-way radio communication.
-                Class C and D: Requires two-way radio communication before entering.
-                Class E and G: No ATC clearance required unless specified (Class E surface area airports).
-                4. Weather Minimums by Airspace:
-                Class B: 3SM vis, clear of clouds
-                Class C/D: 3SM vis, 500ft below clouds, or 1000ft above clouds, 2000ft horizontal
-                Class E: 3SM vis below 10000, 5SM vis above; cloud clearance same as C/D (below 10K), 1000 below and above and 1SM horizontal (above 10K)
-                Class G: 1SM vis (day, below 1200AGL), 3SM (night); clear of clouds below 1200 AGL, cloud clearance same as C/D above 1200AGL
-                5. Equipment Requirements:
-                Day VFR:
-                Altimeter, airspeed indicator, compass, tachometer, oil pressure gauge, temperature gauge (liquid-cooled engines), fuel gauges, and more (refer to FAR 91.205).
-                Night VFR:
-                Add navigation lights, anti-collision lights, an electrical source, and a spare set of fuses.
-                6. Minimum Safe Altitudes:
-                1,000 feet above highest obstacle in congested areas.
-                500 feet above surface in uncongested areas.
-                Do not operate closer than 500 feet to people, vessels, or structures in sparsely populated areas.
-                7. Right-of-Way Rules:
-                Yield to aircraft in distress.
-                Aircraft being overtaken has the right of way.
-                Converging aircraft: The aircraft on the right has the right of way.
-                Powered aircraft yield to balloons, gliders, and airships.
-                8. Key Limitations:
-                VFR flight not allowed above FL180 (Class A airspace).
-                Special VFR (SVFR) may be requested to operate in controlled airspace below VFR minimums (must remain clear of clouds).`,
-                
-                'IFR rules': `
-                1. Basic Requirements:
-                Purpose: IFR is used when visual navigation is not possible, such as in low visibility or poor weather conditions.
-                Flight Plan: A filed and approved IFR flight plan is mandatory before operating under IFR.
-                Clearance: Pilots must receive ATC clearance to operate under IFR.
-                2. Weather Minimums:
-                No Visual Reference Required: IFR flights can be conducted in instrument meteorological conditions (IMC), such as clouds, fog, or other conditions below VFR weather minimums.
-                Approach Minimums: Specific weather conditions for instrument approaches are based on published approach plates (e.g., decision height, visibility).
-                3. Equipment Requirements (FAR 91.205): The following equipment is required for IFR flight:
-                VFR Equipment: All instruments and equipment required for VFR flight.
-                Navigation Instruments:
-                Two-way radio communication.
-                Navigation equipment suitable for the route and approach (e.g., VOR, GPS).
-                Additional Instruments:
-                Gyroscopic pitch and bank indicator (attitude indicator).
-                Gyroscopic direction indicator (heading indicator).
-                Slip-skid indicator.
-                Sensitive altimeter adjustable for barometric pressure.
-                Clock with sweep-second hand or digital equivalent.
-                Generator or alternator.
-                Gyroscopic turn and bank indicator.
-                4. Clearance Requirements:
-                Clearance Delivery: ATC clearance is required before entering controlled airspace under IFR.
-                Route Compliance: Follow the route and altitude as specified in the clearance.
-                Amendments: Notify ATC of deviations due to weather or emergencies.
-                5. Altitude Rules:
-                Assigned Altitudes: Fly the altitude assigned by ATC.
-                Minimum Enroute Altitude (MEA): Fly no lower than the MEA on published routes.
-                Off Route: Maintain at least 1,000 feet (2,000 feet in mountainous areas) above obstacles within 4 nautical miles of course.
-                6. Instrument Approaches:
-                Types of Approaches:
-                Precision Approaches (e.g., ILS): Provides lateral and vertical guidance.
-                Non-Precision Approaches (e.g., VOR, RNAV): Provides lateral guidance only.
-                Decision Altitude (DA)/Decision Height (DH): Point at which a landing decision must be made during a precision approach.
-                Minimum Descent Altitude (MDA): The lowest altitude to descend during a non-precision approach until visual contact is made.
-                7. Lost Communication Procedures (FAR 91.185): If radio communication is lost:
-                Route: Follow the last assigned route, expected route, or as filed in your flight plan (in that order).
-                Altitude: Fly the highest of:
-                -Last assigned altitude.
-                -Minimum enroute altitude (MEA).
-                -Expected altitude.
-                8. Holding Patterns:
-                Follow standard ATC instructions or published holding patterns.
-                Standard Turns: Right-hand turns are standard unless otherwise specified.
-                9. Alternate Airport Requirements:
-                IFR flights require an alternate airport in the flight plan unless specific conditions are met:
-                Destination has at least 2,000-foot ceilings and 3 SM visibility within 1 hour of ETA.
-                10. Key Safety Practices:
-                Scan Instruments: Maintain situational awareness through regular instrument scanning.
-                ATC Communication: Maintain constant communication and promptly respond to instructions.
-                Currency: Pilots must meet instrument proficiency requirements (e.g., six instrument approaches, holding procedures, and tracking within the last six months).`,
+            'VFR rules': `
+            1. Weather Minimums:
+            Maintain specific visibility and cloud clearance (refer to below).
+            Visual Reference:
+            Always fly with visual reference to the ground or horizon.
+            Daytime and Nighttime:
+            VFR can be conducted during the day and night (night VFR requires additional training and equipment).
+            2. Altitude Rules (Cruising Altitudes):
+            Above 3,000 feet AGL and below 18,000 feet MSL:
+            Fly odd thousand + 500 feet (e.g., 3,500, 5,500) when heading east (0°-179°).
+            Fly even thousand + 500 feet (e.g., 4,500, 6,500) when heading west (180°-359°).
+            3. Airspace Requirements:
+            Class A: VFR not permitted.
+            Class B: Requires explicit ATC clearance and two-way radio communication.
+            Class C and D: Requires two-way radio communication before entering.
+            Class E and G: No ATC clearance required unless specified (Class E surface area airports).
+            4. Weather Minimums by Airspace:
+            Class B: 3SM vis, clear of clouds
+            Class C/D: 3SM vis, 500ft below clouds, or 1000ft above clouds, 2000ft horizontal
+            Class E: 3SM vis below 10000, 5SM vis above; cloud clearance same as C/D (below 10K), 1000 below and above and 1SM horizontal (above 10K)
+            Class G: 1SM vis (day, below 1200AGL), 3SM (night); clear of clouds below 1200 AGL, cloud clearance same as C/D above 1200AGL
+            5. Equipment Requirements:
+            Day VFR:
+            Altimeter, airspeed indicator, compass, tachometer, oil pressure gauge, temperature gauge (liquid-cooled engines), fuel gauges, and more (refer to FAR 91.205).
+            Night VFR:
+            Add navigation lights, anti-collision lights, an electrical source, and a spare set of fuses.
+            6. Minimum Safe Altitudes:
+            1,000 feet above highest obstacle in congested areas.
+            500 feet above surface in uncongested areas.
+            Do not operate closer than 500 feet to people, vessels, or structures in sparsely populated areas.
+            7. Right-of-Way Rules:
+            Yield to aircraft in distress.
+            Aircraft being overtaken has the right of way.
+            Converging aircraft: The aircraft on the right has the right of way.
+            Powered aircraft yield to balloons, gliders, and airships.
+            8. Key Limitations:
+            VFR flight not allowed above FL180 (Class A airspace).
+            Special VFR (SVFR) may be requested to operate in controlled airspace below VFR minimums (must remain clear of clouds).`,
+            
+            'IFR rules': `
+            1. Basic Requirements:
+            Purpose: IFR is used when visual navigation is not possible, such as in low visibility or poor weather conditions.
+            Flight Plan: A filed and approved IFR flight plan is mandatory before operating under IFR.
+            Clearance: Pilots must receive ATC clearance to operate under IFR.
+            2. Weather Minimums:
+            No Visual Reference Required: IFR flights can be conducted in instrument meteorological conditions (IMC), such as clouds, fog, or other conditions below VFR weather minimums.
+            Approach Minimums: Specific weather conditions for instrument approaches are based on published approach plates (e.g., decision height, visibility).
+            3. Equipment Requirements (FAR 91.205): The following equipment is required for IFR flight:
+            VFR Equipment: All instruments and equipment required for VFR flight.
+            Navigation Instruments:
+            Two-way radio communication.
+            Navigation equipment suitable for the route and approach (e.g., VOR, GPS).
+            Additional Instruments:
+            Gyroscopic pitch and bank indicator (attitude indicator).
+            Gyroscopic direction indicator (heading indicator).
+            Slip-skid indicator.
+            Sensitive altimeter adjustable for barometric pressure.
+            Clock with sweep-second hand or digital equivalent.
+            Generator or alternator.
+            Gyroscopic turn and bank indicator.
+            4. Clearance Requirements:
+            Clearance Delivery: ATC clearance is required before entering controlled airspace under IFR.
+            Route Compliance: Follow the route and altitude as specified in the clearance.
+            Amendments: Notify ATC of deviations due to weather or emergencies.
+            5. Altitude Rules:
+            Assigned Altitudes: Fly the altitude assigned by ATC.
+            Minimum Enroute Altitude (MEA): Fly no lower than the MEA on published routes.
+            Off Route: Maintain at least 1,000 feet (2,000 feet in mountainous areas) above obstacles within 4 nautical miles of course.
+            6. Instrument Approaches:
+            Types of Approaches:
+            Precision Approaches (e.g., ILS): Provides lateral and vertical guidance.
+            Non-Precision Approaches (e.g., VOR, RNAV): Provides lateral guidance only.
+            Decision Altitude (DA)/Decision Height (DH): Point at which a landing decision must be made during a precision approach.
+            Minimum Descent Altitude (MDA): The lowest altitude to descend during a non-precision approach until visual contact is made.
+            7. Lost Communication Procedures (FAR 91.185): If radio communication is lost:
+            Route: Follow the last assigned route, expected route, or as filed in your flight plan (in that order).
+            Altitude: Fly the highest of:
+            -Last assigned altitude.
+            -Minimum enroute altitude (MEA).
+            -Expected altitude.
+            8. Holding Patterns:
+            Follow standard ATC instructions or published holding patterns.
+            Standard Turns: Right-hand turns are standard unless otherwise specified.
+            9. Alternate Airport Requirements:
+            IFR flights require an alternate airport in the flight plan unless specific conditions are met:
+            Destination has at least 2,000-foot ceilings and 3 SM visibility within 1 hour of ETA.
+            10. Key Safety Practices:
+            Scan Instruments: Maintain situational awareness through regular instrument scanning.
+            ATC Communication: Maintain constant communication and promptly respond to instructions.
+            Currency: Pilots must meet instrument proficiency requirements (e.g., six instrument approaches, holding procedures, and tracking within the last six months).`,
 
 
-                'Other rules, METAR, sectional charts, airspace': `
-                Speed limits: 
-                250 kts below FL100
-                Mach 1 above FL100
-                No person may operate an aircraft beneath Class B airspace, or in a VFR corridor through Class B, at an indicated airspeed of more than 200 knots
-                No person may operate an aircraft at an indicated airspeed of more than 200 knots at or below 2,500 feet above the surface, within 4 nautical miles of the primary Class C or Class D airport.
-                UNLESS: the minimum safe speed of an operation exceeds the speed limit, in which case a pilot can fly at that minimum speed.
+            'Other rules, METAR, sectional charts, airspace': `
+            Speed limits: 
+            250 kts below FL100
+            Mach 1 above FL100
+            No person may operate an aircraft beneath Class B airspace, or in a VFR corridor through Class B, at an indicated airspeed of more than 200 knots
+            No person may operate an aircraft at an indicated airspeed of more than 200 knots at or below 2,500 feet above the surface, within 4 nautical miles of the primary Class C or Class D airport.
+            UNLESS: the minimum safe speed of an operation exceeds the speed limit, in which case a pilot can fly at that minimum speed.
 
 
-                Standard Rate Turns: Speed / 10 + 7 = bank angle
+            Standard Rate Turns: Speed / 10 + 7 = bank angle
 
 
-                Decoding METAR
-                PHNL 250953Z 05007G17KT 10SM FEW024 FEW040 27/19 A3001 RMK AO2 SLP163 T02670194 403220261
-                PHNL: Location
-                -250953Z: 25th of the month, time 09:53 GMT
-                -05007G17K: Wind heading 050, 7 kts, gusting up to 17 kts, also note: 00000=no wind, VRB=variable
-                -10SM: visibility 10 statute miles, can also be in meters
-                -FEW024: Few clouds, 2400 ft AGL, also SCT=scattered, BKN=broken, OVC=overcast, CB=cumulonimbus, TCU=towering CB, CAVOK=cloud and visibility OK
-                -FEW040: Few clouds, 4000 ft AGL
-                27/19: Temp 27C, Dewpoint 19C
-                -A3001: Atmospheric pressure 30.01Hg, can also be in mb, Hp
-                -RMK: Remarks
-                -A02: Automated station with precipitation sensor
-                -SLP163: Sea Level Pressure 1016.3 mb
-                -T02670194: Detailed temp: 26.7C, dewpoint 19.4C
-                -403220261: 24-hour high and low (as indicated by the 4), positive (as indicated by the 0s): 32.2C, 26.1C 
+            Decoding METAR
+            PHNL 250953Z 05007G17KT 10SM FEW024 FEW040 27/19 A3001 RMK AO2 SLP163 T02670194 403220261
+            PHNL: Location
+            -250953Z: 25th of the month, time 09:53 GMT
+            -05007G17K: Wind heading 050, 7 kts, gusting up to 17 kts, also note: 00000=no wind, VRB=variable
+            -10SM: visibility 10 statute miles, can also be in meters
+            -FEW024: Few clouds, 2400 ft AGL, also SCT=scattered, BKN=broken, OVC=overcast, CB=cumulonimbus, TCU=towering CB, CAVOK=cloud and visibility OK
+            -FEW040: Few clouds, 4000 ft AGL
+            27/19: Temp 27C, Dewpoint 19C
+            -A3001: Atmospheric pressure 30.01Hg, can also be in mb, Hp
+            -RMK: Remarks
+            -A02: Automated station with precipitation sensor
+            -SLP163: Sea Level Pressure 1016.3 mb
+            -T02670194: Detailed temp: 26.7C, dewpoint 19.4C
+            -403220261: 24-hour high and low (as indicated by the 4), positive (as indicated by the 0s): 32.2C, 26.1C 
 
 
-                -Additional cloud classification: (eg. 8/903) note: 0 = no clouds
-                First number: the numerator of a fraction /8, representing sky coverage
-                Second number: Low clouds
-                1 = cumulus humilis or fractus
-                2 = cumulus mediocris or congestus
-                3 = cumulonimbus calvus
-                4 = stratocumulus cumulogenitus
-                5 = stratocumulus other than cumulogenitus
-                6 = stratus nebulosus or fractus
-                7 = stratus fractus or cumulus fractus (bad weather type)
-                8 = cumulus and stratocumulos together
-                9 = cumulonimbus capillatus (anvil)
-                3rd number: Mid clouds 
-                1 = altostratus translucidus
-                2 = altostratus opacus or nimbostratus
-                3 = altocumulus translucidus
-                4 = patches of altocumulus, variable cover
-                5 = altocumulus in bands/layers
-                6 = altocumulus cumulogenitus
-                7 = altocumulus castellanus
-                8 = altocumulus lenticularis
-                9 = altocumulus with turrets/towers
-                4th number: High clouds
-                1 = cirrus fibratus, not increasing
-                2 = cirrus spissatus
-                3 = cirrus castellanus or floccus
-                4 = cirrus fibratus, increasing
-                5 = cirrus and cirrostratus, increasing 
-                7 = cirrostratus covering sky
-                8 = only cirrocumulus
-                9 = cirrocumulus with cirrostratus or cirrus
+            -Additional cloud classification: (eg. 8/903) note: 0 = no clouds
+            First number: the numerator of a fraction /8, representing sky coverage
+            Second number: Low clouds
+            1 = cumulus humilis or fractus
+            2 = cumulus mediocris or congestus
+            3 = cumulonimbus calvus
+            4 = stratocumulus cumulogenitus
+            5 = stratocumulus other than cumulogenitus
+            6 = stratus nebulosus or fractus
+            7 = stratus fractus or cumulus fractus (bad weather type)
+            8 = cumulus and stratocumulos together
+            9 = cumulonimbus capillatus (anvil)
+            3rd number: Mid clouds 
+            1 = altostratus translucidus
+            2 = altostratus opacus or nimbostratus
+            3 = altocumulus translucidus
+            4 = patches of altocumulus, variable cover
+            5 = altocumulus in bands/layers
+            6 = altocumulus cumulogenitus
+            7 = altocumulus castellanus
+            8 = altocumulus lenticularis
+            9 = altocumulus with turrets/towers
+            4th number: High clouds
+            1 = cirrus fibratus, not increasing
+            2 = cirrus spissatus
+            3 = cirrus castellanus or floccus
+            4 = cirrus fibratus, increasing
+            5 = cirrus and cirrostratus, increasing 
+            7 = cirrostratus covering sky
+            8 = only cirrocumulus
+            9 = cirrocumulus with cirrostratus or cirrus
 
 
-                Blue Airport Symbol – Towered airport
-                Magenta Airport Symbol – Non-towered airport
-                Runway Layout – Pictorial representation of paved runways longer than 8069 ft
-                Hollow Circle with ‘X’ – Abandoned airport
-                ‘R’ inside a Circle – Private airport (permission required)
-                ‘H’ inside a Circle – Heliport
-                ‘U’ inside a Circle – Ultralight field
-                Seaplane Base Anchor Symbol – Water landing area
-
-
-
-
-                Airspace Boundaries
-                Solid Blue Line – Class B airspace
-                Solid Magenta Line – Class C airspace
-                Dashed Blue Line – Class D airspace
-                Dashed Magenta Line – Class E airspace starting at the surface
-                Fading Magenta Line – Class E airspace starting at 700 ft AGL
-                Fading Blue Line – Class E airspace starting at 1200 ft AGL
-                Prohibited/Restricted Areas (P-XXX/R-XXX) – Special-use airspace requiring clearance
-                Warning/MOA/Alert Areas (W-XXX, MOA-XXX, A-XXX) – Military or hazardous flight activity
-                National Security Areas (NSA) – Sensitive areas requiring caution
+            Blue Airport Symbol – Towered airport
+            Magenta Airport Symbol – Non-towered airport
+            Runway Layout – Pictorial representation of paved runways longer than 8069 ft
+            Hollow Circle with ‘X’ – Abandoned airport
+            ‘R’ inside a Circle – Private airport (permission required)
+            ‘H’ inside a Circle – Heliport
+            ‘U’ inside a Circle – Ultralight field
+            Seaplane Base Anchor Symbol – Water landing area
 
 
 
 
-                Navigational Aids (NAVAIDs)
-                Blue Hexagon with Dot in Center – VOR station
-                Blue Hexagon with Box and Dashes – VOR-DME station
-                Blue Hexagon with Small Rectangle Below – VORTAC station
-                Magenta Circle with Box – NDB (Non-Directional Beacon)
-                Magenta Circle with Star – NDB with limited service
-                Radio & Communication Symbols
-                ‘C’ in a Circle – CTAF (Common Traffic Advisory Frequency)
-                ‘L’ in a Circle – Lighting available
-                *‘L’ in a Circle – Pilot-controlled lighting
-                ‘*’ Next to a Frequency – Part-time operation
+            Airspace Boundaries
+            Solid Blue Line – Class B airspace
+            Solid Magenta Line – Class C airspace
+            Dashed Blue Line – Class D airspace
+            Dashed Magenta Line – Class E airspace starting at the surface
+            Fading Magenta Line – Class E airspace starting at 700 ft AGL
+            Fading Blue Line – Class E airspace starting at 1200 ft AGL
+            Prohibited/Restricted Areas (P-XXX/R-XXX) – Special-use airspace requiring clearance
+            Warning/MOA/Alert Areas (W-XXX, MOA-XXX, A-XXX) – Military or hazardous flight activity
+            National Security Areas (NSA) – Sensitive areas requiring caution
 
 
 
 
-                Obstructions & Terrain
-                Black Dot with Tower Symbol – Obstruction below 1000 ft AGL
-                Black Dot with Tower & Number – Obstruction with height in feet MSL
-                Tower with Lightning Bolt – Obstruction with lighting
-                Two Towers with Line Between – Powerline or cable crossing
-                Brown Contour Lines – Terrain elevation
-                Large Numbers in Brown – Maximum Elevation Figure (MEF) in thousands of feet MSL
-                Landmarks & Features
-                City Name in Bold – Major populated area
-                Magenta Open Circle – VFR Waypoint
-                Railroad Line – Black line with cross-hatches
-                Major Roads – Black solid lines
-                Interstate Highways – Blue solid lines
-                Bridges, Tunnels, Dams – Small black icons
+            Navigational Aids (NAVAIDs)
+            Blue Hexagon with Dot in Center – VOR station
+            Blue Hexagon with Box and Dashes – VOR-DME station
+            Blue Hexagon with Small Rectangle Below – VORTAC station
+            Magenta Circle with Box – NDB (Non-Directional Beacon)
+            Magenta Circle with Star – NDB with limited service
+            Radio & Communication Symbols
+            ‘C’ in a Circle – CTAF (Common Traffic Advisory Frequency)
+            ‘L’ in a Circle – Lighting available
+            *‘L’ in a Circle – Pilot-controlled lighting
+            ‘*’ Next to a Frequency – Part-time operation
 
 
 
 
-                Other Important Symbols
-                ‘VR-XXX’ or ‘IR-XXX’ – Military Training Routes (Visual/Instrument)
-                ADIZ Boundary Line – Solid magenta or blue lines with notches
-                Glider Symbol – Designated glider operations
-                Parachute Symbol – Active parachute jump area
-                Hot Air Balloon Symbol – Balloon operations area
+            Obstructions & Terrain
+            Black Dot with Tower Symbol – Obstruction below 1000 ft AGL
+            Black Dot with Tower & Number – Obstruction with height in feet MSL
+            Tower with Lightning Bolt – Obstruction with lighting
+            Two Towers with Line Between – Powerline or cable crossing
+            Brown Contour Lines – Terrain elevation
+            Large Numbers in Brown – Maximum Elevation Figure (MEF) in thousands of feet MSL
+            Landmarks & Features
+            City Name in Bold – Major populated area
+            Magenta Open Circle – VFR Waypoint
+            Railroad Line – Black line with cross-hatches
+            Major Roads – Black solid lines
+            Interstate Highways – Blue solid lines
+            Bridges, Tunnels, Dams – Small black icons
 
 
-                Airspace Classes
-                1. Class A (High-level, controlled airspace)
-                Altitude: Generally from 18,000 feet MSL (Mean Sea Level) up to 60,000 feet MSL.
-                Control: Strictly controlled and requires ATC (Air Traffic Control) clearance for all aircraft operations.
-                Flight Rules: Only IFR (Instrument Flight Rules) are permitted.
-                Communication: Continuous two-way communication with ATC is mandatory.
-                Usage: Primarily for commercial airline routes and high-altitude flights.
-                2. Class B (Terminal airspace around major airports)
-                Altitude: Extends from the surface up to 10,000 feet MSL, surrounding major airports.
-                Control: Also highly controlled; ATC clearance is required to enter and operate within this airspace.
-                Flight Rules: VFR (Visual Flight Rules) and IFR are allowed, but VFR flights need to obtain ATC permission before entry.
-                Communication: Continuous two-way communication with ATC is required.
-                Usage: Primarily around busy, large airports like Los Angeles (LAX), Chicago O'Hare (ORD), etc.
-                3. Class C (Controlled airspace around airports)
-                Altitude: From the surface to 4,000 feet above the airport elevation.
-                Control: Requires ATC communication to enter; VFR pilots must establish two-way communication with ATC before entering.
-                Flight Rules: Both VFR and IFR can operate, but communication with ATC is necessary for VFR operations.
-                Communication: Two-way communication is required for VFR flights entering Class C.
-                Usage: Typically used for airports with moderate traffic, such as regional airports.
-                4. Class D (Controlled airspace around smaller airports)
-                Altitude: From the surface up to around 2,500 feet above the airport elevation.
-                Control: ATC clearance is required to enter and operate within Class D airspace, but the communication requirement is only for IFR flights.
-                Flight Rules: VFR flights are allowed without ATC clearance but must establish communication with ATC before entering.
-                Communication: Two-way communication is required before entering or operating in Class D.
-                Usage: Smaller regional airports with moderate traffic.
-                5. Class E (Controlled airspace for non-towered areas)
-                Altitude: It extends from 1,200 feet AGL (Above Ground Level) up to 18,000 feet MSL and also includes some airspace surrounding airports and along certain airways.
-                Control: Class E airspace is controlled airspace but can be used for both VFR and IFR flights.
-                Flight Rules: Both VFR and IFR are allowed, but IFR flights are given priority for ATC services.
-                Communication: Communication with ATC is only required under IFR.
-                Usage: Class E is common in areas where there are fewer commercial air traffic routes or in areas where no other controlled airspace is needed.
-                6. Class G (Uncontrolled airspace)
-                Altitude: From the surface up to 1,200 feet AGL in some areas, and in some remote locations, it can extend up to 14,500 feet AGL.
-                Control: Class G airspace is uncontrolled, meaning ATC does not provide services, although IFR flights must still follow certain rules.
-                Flight Rules: VFR is typically allowed without ATC communication, but IFR flights must remain in contact with ATC.
-                Communication: No communication with ATC is required for VFR flights.
-                Usage: This airspace is used primarily in rural and less-traveled areas.`,
 
 
-                'ATC procedures': `1. Preflight and Clearance
-                Pilot (to Clearance Delivery):
-                "JFK Clearance, American 123, IFR to Miami, ready to copy clearance."
-                ATC (Response):
-                "American 123, cleared to Miami via Kennedy Six departure, radar vectors to White intersection, then as filed. Climb and maintain 5,000 feet. Departure frequency 124.7. Squawk 4572."
-                Pilot (Acknowledges):
-                "Cleared to Miami via Kennedy Six departure, radar vectors to White, then as filed. Climb and maintain 5,000. Departure on 124.7. Squawk 4572, American 123."
+            Other Important Symbols
+            ‘VR-XXX’ or ‘IR-XXX’ – Military Training Routes (Visual/Instrument)
+            ADIZ Boundary Line – Solid magenta or blue lines with notches
+            Glider Symbol – Designated glider operations
+            Parachute Symbol – Active parachute jump area
+            Hot Air Balloon Symbol – Balloon operations area
 
 
-                2. Pushback and Taxi
-                Pilot (to Ground Control):
-                "JFK Ground, American 123, gate B12, ready for pushback and start."
-                Ground (Response):
-                "American 123, pushback and start approved. Expect taxi via Alpha to runway 31L."
-                Pilot (Acknowledges):
-                "Pushback and start approved, taxi via Alpha to runway 31L, American 123."
-                Pilot Action: Pushback from the gate, start engines, and taxi to the runway.
+            Airspace Classes
+            1. Class A (High-level, controlled airspace)
+            Altitude: Generally from 18,000 feet MSL (Mean Sea Level) up to 60,000 feet MSL.
+            Control: Strictly controlled and requires ATC (Air Traffic Control) clearance for all aircraft operations.
+            Flight Rules: Only IFR (Instrument Flight Rules) are permitted.
+            Communication: Continuous two-way communication with ATC is mandatory.
+            Usage: Primarily for commercial airline routes and high-altitude flights.
+            2. Class B (Terminal airspace around major airports)
+            Altitude: Extends from the surface up to 10,000 feet MSL, surrounding major airports.
+            Control: Also highly controlled; ATC clearance is required to enter and operate within this airspace.
+            Flight Rules: VFR (Visual Flight Rules) and IFR are allowed, but VFR flights need to obtain ATC permission before entry.
+            Communication: Continuous two-way communication with ATC is required.
+            Usage: Primarily around busy, large airports like Los Angeles (LAX), Chicago O'Hare (ORD), etc.
+            3. Class C (Controlled airspace around airports)
+            Altitude: From the surface to 4,000 feet above the airport elevation.
+            Control: Requires ATC communication to enter; VFR pilots must establish two-way communication with ATC before entering.
+            Flight Rules: Both VFR and IFR can operate, but communication with ATC is necessary for VFR operations.
+            Communication: Two-way communication is required for VFR flights entering Class C.
+            Usage: Typically used for airports with moderate traffic, such as regional airports.
+            4. Class D (Controlled airspace around smaller airports)
+            Altitude: From the surface up to around 2,500 feet above the airport elevation.
+            Control: ATC clearance is required to enter and operate within Class D airspace, but the communication requirement is only for IFR flights.
+            Flight Rules: VFR flights are allowed without ATC clearance but must establish communication with ATC before entering.
+            Communication: Two-way communication is required before entering or operating in Class D.
+            Usage: Smaller regional airports with moderate traffic.
+            5. Class E (Controlled airspace for non-towered areas)
+            Altitude: It extends from 1,200 feet AGL (Above Ground Level) up to 18,000 feet MSL and also includes some airspace surrounding airports and along certain airways.
+            Control: Class E airspace is controlled airspace but can be used for both VFR and IFR flights.
+            Flight Rules: Both VFR and IFR are allowed, but IFR flights are given priority for ATC services.
+            Communication: Communication with ATC is only required under IFR.
+            Usage: Class E is common in areas where there are fewer commercial air traffic routes or in areas where no other controlled airspace is needed.
+            6. Class G (Uncontrolled airspace)
+            Altitude: From the surface up to 1,200 feet AGL in some areas, and in some remote locations, it can extend up to 14,500 feet AGL.
+            Control: Class G airspace is uncontrolled, meaning ATC does not provide services, although IFR flights must still follow certain rules.
+            Flight Rules: VFR is typically allowed without ATC communication, but IFR flights must remain in contact with ATC.
+            Communication: No communication with ATC is required for VFR flights.
+            Usage: This airspace is used primarily in rural and less-traveled areas.`,
 
 
-                3. Takeoff
-                Pilot (to Tower):
-                "JFK Tower, American 123, holding short of runway 31L, ready for departure."
-                Tower (Response):
-                "American 123, JFK Tower, runway 31L, cleared for takeoff. Climb runway heading, maintain 5,000 feet."
-                Pilot (Acknowledges):
-                "Cleared for takeoff, runway 31L, climb runway heading, maintain 5,000, American 123."
-                Pilot Action: Line up on the runway, advance throttles, and take off.
+            'ATC procedures': `1. Preflight and Clearance
+            Pilot (to Clearance Delivery):
+            "JFK Clearance, American 123, IFR to Miami, ready to copy clearance."
+            ATC (Response):
+            "American 123, cleared to Miami via Kennedy Six departure, radar vectors to White intersection, then as filed. Climb and maintain 5,000 feet. Departure frequency 124.7. Squawk 4572."
+            Pilot (Acknowledges):
+            "Cleared to Miami via Kennedy Six departure, radar vectors to White, then as filed. Climb and maintain 5,000. Departure on 124.7. Squawk 4572, American 123."
 
 
-                4. Departure
-                Tower (Hands Off to Departure):
-                "American 123, contact New York Departure on 124.7, good day."
-                Pilot (Acknowledges):
-                "Contact New York Departure on 124.7, American 123, good day."
-                Pilot (to Departure):
-                "New York Departure, American 123, passing 2,500 for 5,000, Kennedy Six departure."
-                Departure (Response):
-                "American 123, radar contact. Climb and maintain FL230. Proceed direct White."
-                Pilot (Acknowledges):
-                "Climb and maintain FL230, direct White, American 123."
+            2. Pushback and Taxi
+            Pilot (to Ground Control):
+            "JFK Ground, American 123, gate B12, ready for pushback and start."
+            Ground (Response):
+            "American 123, pushback and start approved. Expect taxi via Alpha to runway 31L."
+            Pilot (Acknowledges):
+            "Pushback and start approved, taxi via Alpha to runway 31L, American 123."
+            Pilot Action: Pushback from the gate, start engines, and taxi to the runway.
 
 
-                5. Enroute
-                Pilot (to Center):
-                "Atlanta Center, American 123, level at FL350."
-                Center (Response):
-                "American 123, Atlanta Center, roger. Continue as filed."
-                Pilot Action: Monitor instruments, communicate as needed, and prepare for arrival.
+            3. Takeoff
+            Pilot (to Tower):
+            "JFK Tower, American 123, holding short of runway 31L, ready for departure."
+            Tower (Response):
+            "American 123, JFK Tower, runway 31L, cleared for takeoff. Climb runway heading, maintain 5,000 feet."
+            Pilot (Acknowledges):
+            "Cleared for takeoff, runway 31L, climb runway heading, maintain 5,000, American 123."
+            Pilot Action: Line up on the runway, advance throttles, and take off.
 
 
-                6. Arrival
-                Pilot (to Approach):
-                "Miami Approach, American 123, descending via the HILEY Three arrival, requesting ILS runway 8R."
-                Approach (Response):
-                "American 123, Miami Approach, cleared ILS runway 8R. Maintain 2,000 until established, contact Tower on 118.3."
-                Pilot (Acknowledges):
-                "Cleared ILS runway 8R, maintain 2,000 until established, contact Tower on 118.3, American 123."
+            4. Departure
+            Tower (Hands Off to Departure):
+            "American 123, contact New York Departure on 124.7, good day."
+            Pilot (Acknowledges):
+            "Contact New York Departure on 124.7, American 123, good day."
+            Pilot (to Departure):
+            "New York Departure, American 123, passing 2,500 for 5,000, Kennedy Six departure."
+            Departure (Response):
+            "American 123, radar contact. Climb and maintain FL230. Proceed direct White."
+            Pilot (Acknowledges):
+            "Climb and maintain FL230, direct White, American 123."
 
 
-                7. Landing and Taxi
-                Pilot (to Tower):
-                "Miami Tower, American 123, established on the ILS runway 8R."
-                Tower (Response):
-                "American 123, cleared to land, runway 8R. Wind 090 at 10 knots."
-                Pilot (Acknowledges):
-                "Cleared to land, runway 8R, American 123."
-                After Landing (to Ground Control):
-                "Miami Ground, American 123, clear of runway 8R, taxi to gate D5."
-                Ground (Response):
-                "American 123, taxi to gate D5 via Alpha, Bravo."
-                Pilot (Acknowledges):
-                "Taxi to gate D5 via Alpha, Bravo, American 123."`,
+            5. Enroute
+            Pilot (to Center):
+            "Atlanta Center, American 123, level at FL350."
+            Center (Response):
+            "American 123, Atlanta Center, roger. Continue as filed."
+            Pilot Action: Monitor instruments, communicate as needed, and prepare for arrival.
 
 
-                'Climb procedures': `1) Make sure to select your first waypoint and set desired cruise altitude. Set V/S to 3000 fpm and speed to 230 kts. Set Flaps to 2 for Takeoff
-                2)Raise flaps to 0 at 1500 ft AGL. Reduce thrust to 80% and engage autopilot, hold V/S at 3000 fpm and speed at 230 kts.
-                3) At 4000 ft AGL, reduce V/S to 2400 fpm.
-                4) At 10000 ft, increase speed to 250 kts & reduce V/S to 2200 fpm.
-                5) At 18000 ft, increase speed to 270 kts & reduce V/S to 1800 fpm.
-                6) At 25000 ft, increase speed to 280 kts & reduce V/S to 1500 fpm.
-                7) At 30000 ft, set speed to Mach 0.76 (448 kts) & reduce V/S to 1000 fpm.
-                8) At cruise altitude, set speed to desired cruise speed & set V/S to 0000 fpm if necessary`,
+            6. Arrival
+            Pilot (to Approach):
+            "Miami Approach, American 123, descending via the HILEY Three arrival, requesting ILS runway 8R."
+            Approach (Response):
+            "American 123, Miami Approach, cleared ILS runway 8R. Maintain 2,000 until established, contact Tower on 118.3."
+            Pilot (Acknowledges):
+            "Cleared ILS runway 8R, maintain 2,000 until established, contact Tower on 118.3, American 123."
 
 
-                'Descent procedures': `1) Calculate T/D in advance. This can be done by subtracting the arrival elevation from your cruise alt, then multiplying that by 0.003 (e.g: for cruise FL320 with approximately 2000 ft arrival elevation, T/D will be 90nm). 
-                2) At 5 nautical miles away from T/D, reduce speed to Mach 0.76 (448 kts) & set V/S to-2400 fpm.
-                3) At T/D, set alt to 4000 ft
-                4) At 30000 ft AGL , reduce speed to 280 kts & increase V/S to-2200 fpm
-                5) At 25000 ft AGL, reduce speed to 270 kts
-                6) At 18000 ft AGL, increase V/S to-1800 fpm
-                7) At 12000 ft, AGL reduce speed to 250 kts
-                8) At 10000 ft AGL, reduce speed to 240 kts
-                9) At 7000 ft AGL, reduce speed to 230 kts & increase V/S to-1500 fpm
-                10) At 5000 ft AGL, reduce speed to 210 kts & set flaps to 1
-                11) At 4000 ft AGL, reduce speed to 190 kts & set flaps to 2. Set V/S to-1200 fpm & hold altitude till 12 nautical miles.
-                12) At 12 nautical miles, set alt to 0 ft AGL and tune in to ILS if autolanding.
-                13) At 3000 ft AGL, reduce speed to 170 kts & set flaps to 3
-                14) At 2500 ft AGL, reduce speed to 160 kts & set flaps to full. Lower landing gear.
-                15) Adjust V/S as necessary for approach at your discretion.
-                16) Prepare to disengage AP below 1000 ft (final approach). If autolanding, disregard. Arm spoilers (Shift)`,
+            7. Landing and Taxi
+            Pilot (to Tower):
+            "Miami Tower, American 123, established on the ILS runway 8R."
+            Tower (Response):
+            "American 123, cleared to land, runway 8R. Wind 090 at 10 knots."
+            Pilot (Acknowledges):
+            "Cleared to land, runway 8R, American 123."
+            After Landing (to Ground Control):
+            "Miami Ground, American 123, clear of runway 8R, taxi to gate D5."
+            Ground (Response):
+            "American 123, taxi to gate D5 via Alpha, Bravo."
+            Pilot (Acknowledges):
+            "Taxi to gate D5 via Alpha, Bravo, American 123."`,
 
 
-                'Go around procedures': `1) Announce the Go-Around
-                Verbalize: "Go-Around" to notify crew or ATC.
-                Communicate: Inform ATC (e.g., "Going around, [call sign]") if in controlled airspace.
-                2) Apply Full Power
-                Smoothly and promptly advance the throttle to full power.
-                Ensure propeller and mixture are set appropriately (for piston engines).
-                3) Pitch for Climb Attitude
-                Establish Positive Climb: Adjust pitch to achieve the appropriate climb attitude 
-                Monitor the airspeed to avoid stalling.
-                4) Retract Flaps Gradually
-                Retract flaps incrementally as airspeed increases, following manufacturer guidelines.
-                Avoid retracting flaps all at once, which could lead to a loss of lift.
-                5) Ensure Positive Rate of Climb
-                Verify Vertical Speed: Ensure the aircraft is climbing by checking the VSI or altimeter.
-                Gear Up: If applicable, retract the landing gear after confirming a positive rate of climb.
-                6) Stabilize the Aircraft
-                Maintain a consistent climb at a safe airspeed (e.g., Vy for best climb rate).
-                Stay aligned with the runway centerline or follow ATC instructions for missed approach procedures.
-                7) Communicate with ATC (if required)
-                Inform ATC of the go-around and request further instructions. For example:
-                "Missed approach, climbing to [altitude], heading [heading], [call sign]."
-                8) Follow Missed Approach Procedure
-                If operating under IFR or at a controlled airport, execute the published missed approach procedure.
-                If VFR, reposition for another approach or leave the traffic pattern as appropriate.
-                9) Assess and Plan Next Steps
-                Analyze the reason for the go-around (e.g., unstable approach, obstruction on the runway, ATC instruction, etc.).
-                Decide whether to attempt another landing, divert to an alternate airport, or hold for further instructions.`
-            };
+            'Climb procedures': `1) Make sure to select your first waypoint and set desired cruise altitude. Set V/S to 3000 fpm and speed to 230 kts. Set Flaps to 2 for Takeoff
+            2)Raise flaps to 0 at 1500 ft AGL. Reduce thrust to 80% and engage autopilot, hold V/S at 3000 fpm and speed at 230 kts.
+            3) At 4000 ft AGL, reduce V/S to 2400 fpm.
+            4) At 10000 ft, increase speed to 250 kts & reduce V/S to 2200 fpm.
+            5) At 18000 ft, increase speed to 270 kts & reduce V/S to 1800 fpm.
+            6) At 25000 ft, increase speed to 280 kts & reduce V/S to 1500 fpm.
+            7) At 30000 ft, set speed to Mach 0.76 (448 kts) & reduce V/S to 1000 fpm.
+            8) At cruise altitude, set speed to desired cruise speed & set V/S to 0000 fpm if necessary`,
 
 
+            'Descent procedures': `1) Calculate T/D in advance. This can be done by subtracting the arrival elevation from your cruise alt, then multiplying that by 0.003 (e.g: for cruise FL320 with approximately 2000 ft arrival elevation, T/D will be 90nm). 
+            2) At 5 nautical miles away from T/D, reduce speed to Mach 0.76 (448 kts) & set V/S to-2400 fpm.
+            3) At T/D, set alt to 4000 ft
+            4) At 30000 ft AGL , reduce speed to 280 kts & increase V/S to-2200 fpm
+            5) At 25000 ft AGL, reduce speed to 270 kts
+            6) At 18000 ft AGL, increase V/S to-1800 fpm
+            7) At 12000 ft, AGL reduce speed to 250 kts
+            8) At 10000 ft AGL, reduce speed to 240 kts
+            9) At 7000 ft AGL, reduce speed to 230 kts & increase V/S to-1500 fpm
+            10) At 5000 ft AGL, reduce speed to 210 kts & set flaps to 1
+            11) At 4000 ft AGL, reduce speed to 190 kts & set flaps to 2. Set V/S to-1200 fpm & hold altitude till 12 nautical miles.
+            12) At 12 nautical miles, set alt to 0 ft AGL and tune in to ILS if autolanding.
+            13) At 3000 ft AGL, reduce speed to 170 kts & set flaps to 3
+            14) At 2500 ft AGL, reduce speed to 160 kts & set flaps to full. Lower landing gear.
+            15) Adjust V/S as necessary for approach at your discretion.
+            16) Prepare to disengage AP below 1000 ft (final approach). If autolanding, disregard. Arm spoilers (Shift)`,
+
+
+            'Go around procedures': `1) Announce the Go-Around
+            Verbalize: "Go-Around" to notify crew or ATC.
+            Communicate: Inform ATC (e.g., "Going around, [call sign]") if in controlled airspace.
+            2) Apply Full Power
+            Smoothly and promptly advance the throttle to full power.
+            Ensure propeller and mixture are set appropriately (for piston engines).
+            3) Pitch for Climb Attitude
+            Establish Positive Climb: Adjust pitch to achieve the appropriate climb attitude 
+            Monitor the airspeed to avoid stalling.
+            4) Retract Flaps Gradually
+            Retract flaps incrementally as airspeed increases, following manufacturer guidelines.
+            Avoid retracting flaps all at once, which could lead to a loss of lift.
+            5) Ensure Positive Rate of Climb
+            Verify Vertical Speed: Ensure the aircraft is climbing by checking the VSI or altimeter.
+            Gear Up: If applicable, retract the landing gear after confirming a positive rate of climb.
+            6) Stabilize the Aircraft
+            Maintain a consistent climb at a safe airspeed (e.g., Vy for best climb rate).
+            Stay aligned with the runway centerline or follow ATC instructions for missed approach procedures.
+            7) Communicate with ATC (if required)
+            Inform ATC of the go-around and request further instructions. For example:
+            "Missed approach, climbing to [altitude], heading [heading], [call sign]."
+            8) Follow Missed Approach Procedure
+            If operating under IFR or at a controlled airport, execute the published missed approach procedure.
+            If VFR, reposition for another approach or leave the traffic pattern as appropriate.
+            9) Assess and Plan Next Steps
+            Analyze the reason for the go-around (e.g., unstable approach, obstruction on the runway, ATC instruction, etc.).
+            Decide whether to attempt another landing, divert to an alternate airport, or hold for further instructions.`
+        };
+
+
+        function addInstruction(name) {
             const descriptionText = descriptions[name] || 'No description available.';
             const instructionItem = document.createElement('ul');
             instructionItem.className = 'no-hover geofs-list-collapsible-item geofs-hideForApp';
@@ -774,136 +763,136 @@ function menus() {
 
 
 
-        function addfailure(name) {
             //FAILURES GO HERE:
-            const descriptions = {
-                'Electrical': `1. Identify and manage the failure:
-                - Check circuit breakers and reset if safe to do so.
-                - Turn off non-essential electrical systems.
-                2. Switch to alternate power:
-                - Use battery power or emergency generator (if available).
-                3. Navigate and communicate:
-                - Use handheld radio or emergency frequencies (121.5 MHz) if primary radios fail.
-                4. Land ASAP:
-                - Divert to the nearest airport with visual approach capabilities.`,
+        const descriptions = {
+            'Electrical': `1. Identify and manage the failure:
+            - Check circuit breakers and reset if safe to do so.
+            - Turn off non-essential electrical systems.
+            2. Switch to alternate power:
+            - Use battery power or emergency generator (if available).
+            3. Navigate and communicate:
+            - Use handheld radio or emergency frequencies (121.5 MHz) if primary radios fail.
+            4. Land ASAP:
+            - Divert to the nearest airport with visual approach capabilities.`,
 
 
-                'Fuel leak/starvation': `Fuel Leak
-                1. Detect the leak:
-                - Look for fuel pressure loss, quantity drop, or visible/smelled leak.
-                2. Isolate the problem:
-                - Shut off fuel to affected engine or tank.
-                - Crossfeed fuel if necessary and possible.
-                3. Plan to land:
+            'Fuel leak/starvation': `Fuel Leak
+            1. Detect the leak:
+            - Look for fuel pressure loss, quantity drop, or visible/smelled leak.
+            2. Isolate the problem:
+            - Shut off fuel to affected engine or tank.
+            - Crossfeed fuel if necessary and possible.
+            3. Plan to land:
               - Declare an emergency.
-                - Divert to the nearest airport.
-                4. Evacuate if required:
-                - After landing, shut down engines and evacuate immediately to avoid fire risk.
+            - Divert to the nearest airport.
+            4. Evacuate if required:
+            - After landing, shut down engines and evacuate immediately to avoid fire risk.
 
 
-                Fuel Starvation
-                1. Maintain Aircraft Control
-                - Establish best glide speed to maximize your glide distance.
-                -Trim the aircraft for stable flight.
-                2. Assess Restart Possibility
-                -Switch fuel tanks to ensure all available fuel is used (if applicable).
-                -Turn on the auxiliary fuel pump and check mixture settings.
-                -Attempt to restart the engine by verifying ignition and throttle positions.
-                3. Declare an Emergency
-                -Notify ATC: Declare an emergency and provide your position and intentions.
-                -Squawk 7700 on your transponder.
-                -Use 121.5 MHz for distress communication if no other frequency is available.
-                4. Select a Landing Site
-                -Choose the best available landing area:
-                -Prefer an airport if within gliding distance.
-                -If no airport is reachable, look for flat, open areas such as fields or roads (away from populated areas).
-                5. Execute Forced Landing
-                -Glide to the landing site: Maintain best glide speed.
-                -Prepare for landing:
-                -Extend flaps as needed once landing is assured.
-                -Secure the aircraft:
-                -Shut off fuel, ignition, and electrical systems to reduce fire risk.
-                -Open doors slightly to prevent them from jamming after landing.
-                -Brace for impact: Ensure passengers are briefed on bracing positions.`,
+            Fuel Starvation
+            1. Maintain Aircraft Control
+            - Establish best glide speed to maximize your glide distance.
+            -Trim the aircraft for stable flight.
+            2. Assess Restart Possibility
+            -Switch fuel tanks to ensure all available fuel is used (if applicable).
+            -Turn on the auxiliary fuel pump and check mixture settings.
+            -Attempt to restart the engine by verifying ignition and throttle positions.
+            3. Declare an Emergency
+            -Notify ATC: Declare an emergency and provide your position and intentions.
+            -Squawk 7700 on your transponder.
+            -Use 121.5 MHz for distress communication if no other frequency is available.
+            4. Select a Landing Site
+            -Choose the best available landing area:
+            -Prefer an airport if within gliding distance.
+            -If no airport is reachable, look for flat, open areas such as fields or roads (away from populated areas).
+            5. Execute Forced Landing
+            -Glide to the landing site: Maintain best glide speed.
+            -Prepare for landing:
+            -Extend flaps as needed once landing is assured.
+            -Secure the aircraft:
+            -Shut off fuel, ignition, and electrical systems to reduce fire risk.
+            -Open doors slightly to prevent them from jamming after landing.
+            -Brace for impact: Ensure passengers are briefed on bracing positions.`,
 
 
-                'Gear': `1. Identify the problem:
-                - Check landing gear indicators and circuit breakers.
-                - Attempt to cycle the landing gear (up, then down).
-                2. Use backup systems:
-                - Deploy manual or emergency gear extension system if available.
-                3. Prepare for landing:
-                - Perform a low pass for visual inspection by ATC or ground personnel.
-                - Plan for a no-flap or partial-flap landing if needed.
-                4. Brace for abnormal landing:
-                - Land on the main gear (if one side is operable) or belly land.
-                - Shut down engines and fuel before touchdown.`,
+            'Gear': `1. Identify the problem:
+            - Check landing gear indicators and circuit breakers.
+            - Attempt to cycle the landing gear (up, then down).
+            2. Use backup systems:
+            - Deploy manual or emergency gear extension system if available.
+            3. Prepare for landing:
+            - Perform a low pass for visual inspection by ATC or ground personnel.
+            - Plan for a no-flap or partial-flap landing if needed.
+            4. Brace for abnormal landing:
+            - Land on the main gear (if one side is operable) or belly land.
+            - Shut down engines and fuel before touchdown.`,
 
 
-                'Hydraulic/control': `Controls Not Working (Partial/Complete Failure)
-                1. Assess the extent of failure:
-                - Identify which controls (pitch, roll, yaw) are inoperative.
-                2. Use backup systems:
-                - Engage autopilot if available to stabilize the aircraft.
-                - Use trim, rudder, or asymmetric thrust for limited control.
-                3. Plan an emergency landing:
-                - Declare an emergency.
-                - Aim for a long runway with minimal obstacles.
-                4. Brace for impact:
-                - Brief passengers and prepare for a hard or unconventional landing.
+            'Hydraulic/control': `Controls Not Working (Partial/Complete Failure)
+            1. Assess the extent of failure:
+            - Identify which controls (pitch, roll, yaw) are inoperative.
+            2. Use backup systems:
+            - Engage autopilot if available to stabilize the aircraft.
+            - Use trim, rudder, or asymmetric thrust for limited control.
+            3. Plan an emergency landing:
+            - Declare an emergency.
+            - Aim for a long runway with minimal obstacles.
+            4. Brace for impact:
+            - Brief passengers and prepare for a hard or unconventional landing.
 
 
-                 Hydraulic Failure
-                1. Identify the issue:
-                - Check hydraulic pressure and fluid levels.
-                2. Switch to alternate systems:
-                - Activate backup or manual hydraulic pumps if available.
-                3. Manage affected systems:
-                - Use manual control for flaps, brakes, and landing gear if hydraulics are nonfunctional.
-                4. Land as soon as possible:
-                - Prepare for longer landing roll and reduced braking effectiveness.`,
+             Hydraulic Failure
+            1. Identify the issue:
+            - Check hydraulic pressure and fluid levels.
+            2. Switch to alternate systems:
+            - Activate backup or manual hydraulic pumps if available.
+            3. Manage affected systems:
+            - Use manual control for flaps, brakes, and landing gear if hydraulics are nonfunctional.
+            4. Land as soon as possible:
+            - Prepare for longer landing roll and reduced braking effectiveness.`,
 
 
-                'Loss of cabin pressure': `1. Recognize the issue:
-                - Monitor cabin altitude and oxygen levels.
-                2. Don oxygen masks:
-                - Ensure all passengers and crew use oxygen masks.
-                3. Descend immediately:
-                - Initiate an emergency descent to 10,000 feet or safe altitude.
-                4. Land ASAP:
-                - Divert to the nearest suitable airport.`,
+            'Loss of cabin pressure': `1. Recognize the issue:
+            - Monitor cabin altitude and oxygen levels.
+            2. Don oxygen masks:
+            - Ensure all passengers and crew use oxygen masks.
+            3. Descend immediately:
+            - Initiate an emergency descent to 10,000 feet or safe altitude.
+            4. Land ASAP:
+            - Divert to the nearest suitable airport.`,
 
 
-                'Loss of power': `1. Establish glide:
-                - Pitch for best glide speed.
-                2. Restart attempt:
-                - Switch fuel tanks, turn on auxiliary fuel pump, adjust mixture, and check ignition.
-                3. Declare an emergency:
-                - Notify ATC and squawk 7700.
-                4. Select a Landing Site
-                -Choose the best available landing area:
-                -Prefer an airport if within gliding distance.
-                -If no airport is reachable, look for flat, open areas such as fields or roads (away from populated areas).
-                5. Execute Forced Landing
-                -Glide to the landing site: Maintain best glide speed.
-                -Prepare for landing:
-                -Extend flaps as needed once landing is assured.
-                -Secure the aircraft:
-                -Shut off fuel, ignition, and electrical systems to reduce fire risk.
-                -Open doors slightly to prevent them from jamming after landing.
-                -Brace for impact: Ensure passengers are briefed on bracing positions`,
+            'Loss of power': `1. Establish glide:
+            - Pitch for best glide speed.
+            2. Restart attempt:
+            - Switch fuel tanks, turn on auxiliary fuel pump, adjust mixture, and check ignition.
+            3. Declare an emergency:
+            - Notify ATC and squawk 7700.
+            4. Select a Landing Site
+            -Choose the best available landing area:
+            -Prefer an airport if within gliding distance.
+            -If no airport is reachable, look for flat, open areas such as fields or roads (away from populated areas).
+            5. Execute Forced Landing
+            -Glide to the landing site: Maintain best glide speed.
+            -Prepare for landing:
+            -Extend flaps as needed once landing is assured.
+            -Secure the aircraft:
+            -Shut off fuel, ignition, and electrical systems to reduce fire risk.
+            -Open doors slightly to prevent them from jamming after landing.
+            -Brace for impact: Ensure passengers are briefed on bracing positions`,
 
 
-                'Structural': `1. Assess the situation:
-                - Determine if the damage is controllable or catastrophic.
-                - Slow to maneuvering speed (Va) to prevent further stress.
-                2. Avoid further damage:
-                - Limit maneuvers and avoid turbulence.
-                3. Plan an emergency landing:
-                - Declare an emergency and head to the nearest suitable airport.`
-            };
+            'Structural': `1. Assess the situation:
+            - Determine if the damage is controllable or catastrophic.
+            - Slow to maneuvering speed (Va) to prevent further stress.
+            2. Avoid further damage:
+            - Limit maneuvers and avoid turbulence.
+            3. Plan an emergency landing:
+            - Declare an emergency and head to the nearest suitable airport.`
+        };
 
 
+        function addfailure(name) {
             const descriptionText = descriptions[name] || 'No description available.';
             const failureItem = document.createElement('ul');
             failureItem.className = 'no-hover geofs-list-collapsible-item geofs-hideForApp';
@@ -967,168 +956,6 @@ function addonExecution () {
 
     function adblock () {
         function removeElementsByClass(e){let s=document.getElementsByClassName(e);for(;s.length>0;)s[0].parentNode.removeChild(s[0])}removeElementsByClass("geofs-adbanner geofs-adsense-container");
-    };
-
-
-    function airspace () {
-        let radius=1,airportName="";function checkUser(t){let i=distanceInKmBetweenEarthCoordinates(t[0],t[1],window.geofs.mainAirportList[airportName][0],window.geofs.mainAirportList[airportName][1]);return i<radius||!(i>radius)}function distanceInKmBetweenEarthCoordinates(t,i,o,s){var n=degreesToRadians(o-t),r=degreesToRadians(s-i),l=Math.sin(n/2)*Math.sin(n/2)+Math.sin(r/2)*Math.sin(r/2)*Math.cos(t=degreesToRadians(t))*Math.cos(o=degreesToRadians(o));return 6371*(2*Math.atan2(Math.sqrt(l),Math.sqrt(1-l)))}function degreesToRadians(t){return t*Math.PI/180}function check(t){let i=[];for(let[o,s]of Object.entries(t))try{void 0!==s.lastUpdate.co&&null!==s.lastUpdate.co&&checkUser(s.lastUpdate.co)&&i.push(o)}catch(n){}return i}Array.prototype.equals&&console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code."),Array.prototype.equals=function(t){if(!t)return!1;if(t===this)return!0;if(this.length!=t.length)return!1;for(var i=0,o=this.length;i<o;i++)if(this[i]instanceof Array&&t[i]instanceof Array){if(!this[i].equals(t[i]))return!1}else if(this[i]!=t[i])return!1;return!0},Object.defineProperty(Array.prototype,"equals",{enumerable:!1}),Array.prototype.diff=function(t){return this.filter(i=>!t.includes(i)).concat(t.filter(t=>!this.includes(t)))},Object.defineProperty(Array.prototype,"diff",{enumerable:!1});let airspace={},visible={},a,b,d,e,sonarSound=new Audio("https://raw.githubusercontent.com/meatbroc/geofs-atc-airspace/main/sonar.mp3");function createHaring(t){let i=document.createElement("div");i.classList.add("geofs-haring"),i.innerHTML=`<div class="geofs-content"><p>${t}</p></div></div></div>`,document.body.appendChild(i),setTimeout(function(){i.remove()},3e3)}function action(t,i,o){(t=(t=t.map(t=>{try{if(multiplayer.users[t]&&void 0==multiplayer.users[t].isTraffic)return multiplayer.users[t].callsign}catch(i){console.error("Error reading player "+t+"'s data")}})).filter(function(t){return void 0!==t})).length>0&&(i.length<o.length?(createHaring(`${t} entered your airspace`),sonarSound.play()):i.length>o.length&&(createHaring(`${t} left your airspace`),sonarSound.play()),console.log(t))}airspace.init=function(){a=check(multiplayer.users),b=check(multiplayer.users),airspace.interval=setInterval(function t(){let i=a.diff(b);0!=i.length&&action(i,a,b),a=b,b=check(multiplayer.users)},200)},airspace.stop=function(){clearInterval(airspace.interval),a=void 0,b=void 0},visible.init=function(){d=Object.keys(multiplayer.visibleUsers),e=Object.keys(multiplayer.visibleUsers),visible.interval=setInterval(function t(){let i=d.diff(e);0!=d.diff(e).length&&action(i,d,e),d=e,e=Object.keys(multiplayer.visibleUsers)},200)},visible.stop=function(){clearInterval(visible.interval),d=void 0,e=void 0};const style=document.createElement("style");style.innerHTML=`
-             .ext-autopilot-pad {
-                 width: 90px;
-                 margin: 0px 10px;
-             }
-             .ext-autopilot-bar {
-                 white-space: nowrap;
-                 display: flex;
-                 align-items: flex-start;
-                 pointer-events: all;
-             }
-             .ext-control-pad {
-                 border: 1px solid #888;
-                 background-color: #000;
-                 box-shadow: 0px 0px 5px #000;
-                 border-radius: 15px;
-                 cursor: pointer !important;
-             }
-             .ext-autopilot-controls {
-                 vertical-align: bottom;
-                 display: none;
-                 margin-right: 10px;
-             }
-             .ext-autopilot-control {
-                 position: relative;
-                 text-align: center;
-                 margin: 0px 5px;
-                 color: white;
-                 line-height: 25px;
-                 display: inline-block;
-             }
-             .ext-airport-label {
-                 position: relative !important;
-                 left: 17.5px;
-             }
-             .ext-highlighted {
-                 color: #66ff00 !important;
-                 border-color: white !important;
-             }
-             .ext-highlighted2 {
-                 color: #FF0000 !important;
-                 border-color: white !important;
-             }
-             .ext-autopilot-control span {
-                 display: block;
-                 text-align: center;
-                 text-shadow: #000 1px 1px 3px;
-                 font-size: 12px;
-                 top: 2px;
-                 position: relative;
-             }
-             .ext-autopilot-bar .ext-autopilot-switch .ext-switchRight {
-                 border-radius: 0px 15px 15px 0px;
-                 left: 0px;
-             }
-             .ext-autopilot-bar .ext-autopilot-switch .ext-switchLeft {
-                 border-radius: 15px 0px 0px 15px;
-                 border-right: 5px;
-                 right: -3px;
-             }
-             .ext-autopilot-bar .ext-autopilot-switch a {
-                 user-select: none;
-                 -webkit-user-select: none;
-                 position: relative;
-                 display: inline-block;
-                 width: 35px;
-                 height: 17px;
-                 line-height: 19px;
-                 cursor: pointer;
-                 color: white;
-                 background: #000;
-                 margin: 2px 0px;
-                 display: inline-block;
-                 border: 1px solid white;
-                 box-shadow: 0px 0px 5px #000;
-             }
-             .ext-autopilot-bar .ext-autopilot-control {
-                 position: relative;
-                 text-align: center;
-                 margin: 0px 5px;
-                 color: white;
-                 line-height: 25px;
-                 display: inline-block;
-             }
-             .ext-autopilot-bar .ext-autopilot-course {
-                 width: 35px !important;
-             }
-             .ext-autopilot-bar .ext-autopilot-airport {
-                 width: 70px !important;
-             }
-             .ext-numberDown {
-                 border-radius: 15px 0px 0px 15px;
-                 line-height: 23px;
-                 right: -5px;
-                 position: relative !important;
-             }
-             .ext-numberUp {
-                 border-radius: 0px 15px 15px 0px;
-                 line-height: 26px;
-                 left: -5px;
-                 position: relative !important;
-             }
-             .ext-airportInput {
-                 border-radius: 15px 0px 0px 15px !important;
-             }
-             .ext-autopilot-control .ext-numberDown,.ext-autopilot-control .ext-numberUp {
-                 user-select: none;
-                 -webkit-user-select: none;
-                 vertical-align: top;
-                 cursor: pointer;
-                 text-align: center;
-                 color: white;
-                 background: #000;
-                 margin: 0px;
-                 width: 30px;
-                 display: inline-block;
-                 border: 1px solid white;
-                 height: 25px;
-                 box-shadow: 0px 0px 5px #000;
-             }
-             .ext-autopilot-control .ext-numberValue {
-                 font-family: 'LCD-Bold', monospace;
-                 font-size: 20px !important;
-                 letter-spacing: 1px;
-                 display: inline-block;
-                 vertical-align: top;
-                 padding: 0px 5px;
-                 margin: 0px;
-                 background: #000;
-                 border: 1px solid;
-                 border-radius: 0px;
-                 height: 25px;
-                 line-height: 26px;
-                 box-shadow: 0px 0px 5px #000;
-                 color: white;
-                 width: 80px;
-                 text-align: right;
-             }
-          `,document.head.appendChild(style);const controlButton=document.createElement("div");controlButton.classList.add("ext-autopilot-bar"),controlButton.innerHTML=`
-                         <div class="ext-control-pad ext-autopilot-pad" id="atc-button" tabindex="0">
-                             <div class="control-pad-label transp-pad">AIRSPACE</div>
-                             `;const container=document.getElementsByClassName("geofs-autopilot-bar");container[0].appendChild(controlButton);const controlElmnt=document.createElement("div");controlElmnt.classList.add("ext-autopilot-controls"),controlElmnt.style.display="none",controlElmnt.innerHTML=`
-                             <div class="ext-autopilot-control">
-                                 <span class="ext-autopilot-switch ext-autopilot-mode">
-                                     <a class="ext-switchLeft" data-method="setMode" value="HDG" id="radar-sel">RDR</a>
-                                     <a class="ext-switchRight" data-method="setMode" value="NAV" id="vis-sel">VIS</a>
-                                 </span>
-                             </div>
-             `;const radiusElmnt=document.createElement("div");radiusElmnt.classList.add("ext-autopilot-control"),radiusElmnt.style.display="none",radiusElmnt.innerHTML=`
-                                 <a class="ext-numberDown" id="radius-selDown">-</a>
-                                 <input class="ext-numberValue ext-autopilot-course" min="0" max="359" data-loop="true" step="1" maxlength="3" value="1">
-                                 <a class="ext-numberUp" id="radius-selUp">+</a>
-                                 <span>RDR RADIUS</span>
-             `;const airportElmnt=document.createElement("div");airportElmnt.classList.add("ext-autopilot-control"),airportElmnt.style.display="none",airportElmnt.style.width="64px",airportElmnt.innerHTML=`
-                                 <input class="ext-airportInput ext-numberValue ext-autopilot-airport geofs-stopKeyboardPropagation geofs-stopKeyupPropagation" id="airport-selInput" min="0" max="359" data-loop="true" step="1" maxlength="4" value="">
-                                 <a class="ext-numberUp" id="airport-selSub">→</a>
-                                 <span class="ext-airport-label">AIRPORT</span>
-             `;const container2=document.getElementsByClassName("ext-autopilot-bar");container2[0].appendChild(controlElmnt),container2[0].appendChild(radiusElmnt),container2[0].appendChild(airportElmnt);let extMode=0;document.getElementById("atc-button").addEventListener("click",function(){this.classList.toggle("active"),this.classList.contains("active")?(controlElmnt.style.display="block",this.classList.add("green-pad"),this.classList.contains("red-pad")&&this.classList.remove("red-pad")):(controlElmnt.style.display="none",radiusElmnt.style.display="none",airportElmnt.style.display="none",1===extMode?(airspace.stop(),document.getElementById("radar-sel").classList.remove("green-pad")):2===extMode&&(visible.stop(),document.getElementById("vis-sel").classList.remove("green-pad")),extMode=0,this.classList.remove("green-pad"),this.classList.add("red-pad"),setTimeout(()=>{this.classList.remove("red-pad")},3e3))}),document.getElementById("radar-sel").addEventListener("click",function(){0===extMode&&(extMode=3,this.classList.add("green-pad")),2===extMode&&(extMode=3,visible.stop(),document.getElementById("vis-sel").classList.remove("green-pad"),this.classList.add("green-pad")),radiusElmnt.style.display="block",airportElmnt.style.display="block"}),document.getElementById("vis-sel").addEventListener("click",function(){0===extMode&&(extMode=2,visible.init(),this.classList.add("green-pad"),document.getElementById("radar-sel").classList.contains("green-pad")&&document.getElementById("radar-sel").classList.remove("green-pad")),1===extMode&&(extMode=2,airspace.stop(),visible.init(),document.getElementById("radar-sel").classList.remove("green-pad"),this.classList.add("green-pad")),3===extMode&&(extMode=2,visible.init(),document.getElementById("radar-sel").classList.remove("green-pad"),this.classList.add("green-pad")),radiusElmnt.style.display="none",airportElmnt.style.display="none"}),document.getElementById("radius-selUp").addEventListener("click",function(){radiusElmnt.childNodes[3].value<25&&radiusElmnt.childNodes[3].value++,radius=parseInt(radiusElmnt.childNodes[3].value)}),document.getElementById("radius-selDown").addEventListener("click",function(){radiusElmnt.childNodes[3].value>1&&radiusElmnt.childNodes[3].value--,radius=parseInt(radiusElmnt.childNodes[3].value)}),document.getElementById("airport-selSub").addEventListener("click",function(){4===airportElmnt.childNodes[1].value.length&&window.geofs.mainAirportList[airportElmnt.childNodes[1].value]?(airportName=airportElmnt.childNodes[1].value,airportElmnt.childNodes[1].classList.add("ext-highlighted"),extMode=1,airspace.init()):(airportElmnt.childNodes[1].classList.add("ext-highlighted2"),setTimeout(()=>{airportElmnt.childNodes[1].classList.remove("ext-highlighted2"),airportElmnt.childNodes[1].value=""},3e3))}),document.getElementById("airport-selInput").addEventListener("click",function(){this.value="",this.classList.contains("ext-highlighted")&&this.classList.remove("ext-highlighted"),this.classList.contains("ext-highlighted2")&&this.classList.remove("ext-highlighted2")});
     };
 
 
@@ -1283,7 +1110,7 @@ function addonExecution () {
 
 
     function failuresAndFuel () {   		//Includes both fuel and failures
-        class Failure{constructor(){this.aId=window.window.geofs.aircraft.instance.id,this.enabled=!1,this.failures=[],this.fails={landingGear:{front:!1,left:!1,right:!1},fuelLeak:!1,flightCtrl:{ailerons:!1,elevators:!1,rudder:!1},electrical:!1,structural:!1,hydraulic:{flaps:!1,brakes:!1,spoilers:!1},pitotStatic:!1,pressurization:!1,engines:[]};for(var e=0;e<window.window.geofs.aircraft.instance.engines.length;e++)this.fails.engines.push({i:!1});this.chances={landingGear:{front:0,left:0,right:0},fuelLeak:0,flightCtrl:{ailerons:0,elevators:0,rudder:0},electrical:0,structural:0,hydraulic:{flaps:0,brakes:0,spoilers:0},pitotStatic:0,pressurization:0,engines:[]};for(var t=0;t<window.window.geofs.aircraft.instance.engines.length;t++)this.chances.engines.push({v:0})}fail(e){for(var t=window.window.geofs.aircraft.instance.engines.length,i=0;i<t;i++)e=="engine"+i&&(alert("Engine "+(i+1)+" failed!"),window.window.geofs.aircraft.instance.engines[i].thrust=0,new window.window.geofs.fx.ParticleEmitter({off:0,anchor:window.window.geofs.aircraft.instance.engines[0].points.contrailAnchor||{worldPosition:window.window.geofs.aircraft.instance.engines[0].object3d.worldPosition},duration:1e10,rate:.03,life:1e4,easing:"easeOutQuart",startScale:.01,endScale:.2,randomizeStartScale:.01,randomizeEndScale:.15,startOpacity:1,endOpacity:.2,startRotation:"random",texture:"whitesmoke"}),setInterval(()=>{window.window.geofs.fx.setParticlesColor(new window.Cesium.Color(.1,.1,.1,1))},20));if(!e.includes("engine"))switch(e){case"fuelLeak":this.fails.fuelLeak||(alert("Fuel leak! Less than 2 minutes of fuel remaining"),this.fails.fuelLeak=!0,globalThis.leakingFuel=!0);break;case"gearFront":if(!this.fails.landingGear.front){alert("Nose gear failure"),this.fails.landingGear.front=!0;var n=2;for(i=0;i<window.window.geofs.aircraft.instance.suspensions.length;i++)(window.window.geofs.aircraft.instance.suspensions[i].name.includes("front")||window.window.geofs.aircraft.instance.suspensions[i].name.includes("nose")||window.window.geofs.aircraft.instance.suspensions[i].name.includes("tail"))&&(n=i);this.failures.push(setInterval(()=>{window.window.geofs.aircraft.instance.suspensions[n].collisionPoints[0][2]=30}),1e3)}break;case"gearLeft":if(!this.fails.landingGear.left){alert("Left gear failure"),this.fails.landingGear.left=!0;var a=0;for(i=0;i<window.window.geofs.aircraft.instance.suspensions.length;i++)(window.window.geofs.aircraft.instance.suspensions[i].name.includes("left")||window.window.geofs.aircraft.instance.suspensions[i].name.includes("l"))&&(a=i);this.failures.push(setInterval(()=>{window.window.geofs.aircraft.instance.suspensions[a].collisionPoints[0][2]=30}),1e3)}break;case"gearRight":if(alert("Right gear failure"),!this.fails.landingGear.right){this.fails.landingGear.right=!0;var l=1;for(i=0;i<window.window.geofs.aircraft.instance.suspensions.length;i++)(window.window.geofs.aircraft.instance.suspensions[i].name.includes("right")||window.window.geofs.aircraft.instance.suspensions[i].name.includes("r_g"))&&(l=i);this.failures.push(setInterval(()=>{window.window.geofs.aircraft.instance.suspensions[l].collisionPoints[0][2]=30}),1e3)}break;case"ailerons":alert("Flight control failure (ailerons)"),this.fails.flightCtrl.ailerons||(this.fails.flightCtrl.ailerons=!0,this.failures.push(setInterval(()=>{for(var e in window.window.geofs.aircraft.instance.airfoils)window.window.geofs.aircraft.instance.airfoils[e].name.toLowerCase().includes("aileron")&&(window.window.geofs.aircraft.instance.airfoils[e].object3d._scale=[0,0,0])}),1e3));break;case"elevators":alert("Flight control failure (elevators)"),this.fails.flightCtrl.elevators||(this.fails.flightCtrl.elevators=!0,this.failures.push(setInterval(()=>{for(var e in window.window.geofs.aircraft.instance.airfoils)window.window.geofs.aircraft.instance.airfoils[e].name.toLowerCase().includes("elevator")&&(window.window.geofs.aircraft.instance.airfoils[e].object3d._scale=[0,0,0])}),1e3));break;case"rudder":alert("Flight control failure (rudder)"),this.fails.flightCtrl.rudder||(this.fails.flightCtrl.rudder=!0,this.failures.push(setInterval(()=>{for(var e in window.window.geofs.aircraft.instance.airfoils)window.window.geofs.aircraft.instance.airfoils[e].name.toLowerCase().includes("rudder")&&(window.window.geofs.aircraft.instance.airfoils[e].object3d._scale=[0,0,0])}),1e3));break;case"electrical":this.fails.electrical||(alert("Electrical failure"),this.fails.electrical=!0,this.failures.push(setInterval(()=>{for(var e=1;e<=5;e++)window.window.geofs.aircraft.instance.cockpitSetup.parts[e].object3d._scale=[0,0,0];window.window.geofs.autopilot.turnOff(),window.instruments.hide()}),1e3));break;case"structural":this.fails.structural||(alert("Significant structural damage detected"),console.log("Boeing, am I right?"),this.fails.structural=!0,this.failures.push(setInterval(()=>{window.weather.definition.turbulences=3}),1e3));break;case"flaps":this.fails.hydraulic.flaps||(alert("Hydraulic failure (flaps)"),this.fails.hydraulic.flaps=!0,this.failures.push(setInterval(()=>{window.controls.flaps.target=Math.floor(.6822525475345469*(2*window.window.geofs.animation.values.flapsSteps)),window.controls.flaps.delta=20}),1e3));break;case"brakes":this.fails.hydraulic.brakes||(alert("Hydraulic failure (brakes)"),this.fails.hydraulic.brakes=!0,this.failures.push(setInterval(()=>{window.controls.brakes=0}),500));break;case"spoilers":this.fails.hydraulic.spoilers||(alert("Hydraulic failure (spoilers)"),this.fails.hydraulic.spoilers=!0,this.failures.push(setInterval(()=>{window.controls.airbrakes.target=.2,window.controls.airbrakes.delta=20}),1e3));break;case"pressurization":this.fails.pressurization||(alert("Cabin depressurization! Get at or below 9,000 ft MSL!"),this.fails.pressurization=!0,this.failures.push(setInterval(()=>{window.window.geofs.animation.values.altitude>9e3?window.weather.definition.turbulences=(window.window.geofs.animation.values.altitude-9e3)/5200:window.weather.definition.turbulences=0}),1e3))}}tick(){if(this.enabled&&!window.flight.recorder.playing&&!window.geofs.paused){for(var e in console.log("tick"),this.chances.landingGear)Math.random()<this.chances.landingGear[e]&&this.fail("gear"+(e[0].toUpperCase()+e.substr(1,e.length)));for(var t in this.chances)if("number"==typeof this.chances[t])Math.random()<this.chances[e]&&this.fail(t);else if("landingGear"!==t)for(var i in this.chances[t])Math.random()<this.chances[t][i]&&this.fail(i);setTimeout(()=>{this.tick()},6e4)}}reset(){for(var e in this.failures)clearInterval(this.failures[e]);this.enabled=!1}}function waitForEntities(){try{if(!1==window.window.geofs.cautiousWithTerrain){window.mainFailureFunction();return}}catch(e){console.log("Error in waitForEntities:",e)}setTimeout(()=>{waitForEntities()},1e3)}function runFuelSystem(){var e,t,i;let n,a,l=(a=window.geofs.aircraft.instance.definition.mass,globalThis.initialFuel=.75*a,{fuel:initialFuel,initialFuel}),{fuelBar:s,fuelBarContainer:r}=function e(){let t=document.createElement("div");t.style.position="absolute",t.style.bottom="8px",t.style.right="108px",t.style.width="75px",t.style.height="17px",t.style.border="1px solid black",t.style.borderRadius="5px",t.style.backgroundColor="black",t.style.zIndex="1000";let i=document.createElement("div");return i.style.height="100%",i.style.width="100%",i.style.backgroundColor="green",i.style.borderRadius="5px",t.appendChild(i),document.querySelector(".geofs-ui-bottom").appendChild(t),{fuelBar:i,fuelBarContainer:t}}(),u=function e(t){let i=document.createElement("button");return i.textContent="Refuel",i.style.position="absolute",i.style.bottom="5px",i.style.right="191px",i.style.padding="4px 8px",i.style.fontSize="14px",i.style.backgroundColor="yellow",i.style.border="1px solid black",i.style.borderRadius="5px",i.style.zIndex="1000",document.querySelector(".geofs-ui-bottom").appendChild(i),i.addEventListener("click",()=>{t.fuel=t.initialFuel,console.log("Plane refueled.")}),i}(l);e=l,t=s,n=setInterval(()=>{if(window.geofs.pause||window.flight.recorder.playing)return;let i=window.geofs.aircraft.instance.engines.reduce((e,t)=>e+(t.thrust||0),0),n=window.geofs.aircraft.instance.engines[0]?.afterBurnerThrust!==void 0,a=n&&Math.abs(window.geofs.animation.values.smoothThrottle)>.9,l=n?window.geofs.aircraft.instance.engines.reduce((e,t)=>e+(t.afterBurnerThrust||0),0):0,s=Math.abs(window.geofs.animation.values.smoothThrottle),r=a?l/150:i/150;globalThis.leakingFuel?fuelBurnRate=globalThis.initialFuel/120*3600:(fuelBurnRate=window.geofs.aircraft.instance.engine.on?r+s*(3*r-r):0,0==i&&(fuelBurnRate=0)),e.fuel-=fuelBurnRate*(1/3600),e.fuel<0&&(e.fuel=0);let u=e.fuel/e.initialFuel*100;t.style.width=`${u}%`,t.style.backgroundColor=u>20?"green":u>10?"orange":"red",0===e.fuel&&(window.fuelBurnRate=0,setInterval(()=>{0===e.fuel&&(controls.throttle=0,window.geofs.aircraft.instance.stopEngine())},10),console.log("Fuel depleted! Engines have been turned off.")),console.log(`Fuel Burn Rate per Hour: ${fuelBurnRate.toFixed(6)}`),console.log(`Fuel Burned This Second: ${(fuelBurnRate/3600).toFixed(6)}`),console.log(`Fuel Remaining: ${e.fuel.toFixed(2)}`)},1e3);let o=window.geofs.aircraft.instance.aircraftRecord.id;setInterval(()=>{window.geofs.aircraft.instance.aircraftRecord.id!==o&&(r.remove(),u.remove(),o=window.geofs.aircraft.instance.aircraftRecord.id,clearInterval(n),runFuelSystem())},1e3),setInterval(()=>{let e=window.geofs.aircraft.instance.groundSpeed,t=window.geofs.aircraft.instance.groundContact,i=window.geofs.aircraft.instance.engine.on;flight.recorder.playing?(u.style.display="none",r.style.display="none"):(u.style.display=e<1&&t&&!i?"block":"none",r.style.display="block")},100)}window.openFailuresMenu=function(){if(window.failuresMenu){if(window.failuresMenu.hidden=!window.failuresMenu.hidden,window.window.geofs.aircraft.instance.id!==window.aId)for(window.failure.reset(),window.failure=new Failure,e=`
+        class Failure{constructor(){this.aId=window.window.geofs.aircraft.instance.id,this.enabled=!1,this.failures=[],this.fails={landingGear:{front:!1,left:!1,right:!1},fuelLeak:!1,flightCtrl:{ailerons:!1,elevators:!1,rudder:!1},electrical:!1,structural:!1,hydraulic:{flaps:!1,brakes:!1,spoilers:!1},pitotStatic:!1,pressurization:!1,engines:[]};for(var e=0;e<window.window.geofs.aircraft.instance.engines.length;e++)this.fails.engines.push({i:!1});this.chances={landingGear:{front:0,left:0,right:0},fuelLeak:0,flightCtrl:{ailerons:0,elevators:0,rudder:0},electrical:0,structural:0,hydraulic:{flaps:0,brakes:0,spoilers:0},pitotStatic:0,pressurization:0,engines:[]};for(var t=0;t<window.window.geofs.aircraft.instance.engines.length;t++)this.chances.engines.push({v:0})}fail(e){for(var t=window.window.geofs.aircraft.instance.engines.length,i=0;i<t;i++)e=="engine"+i&&(alert("Engine "+(i+1)+" failed!"),window.window.geofs.aircraft.instance.engines[i].thrust=0,new window.window.geofs.fx.ParticleEmitter({off:0,anchor:window.window.geofs.aircraft.instance.engines[0].points.contrailAnchor||{worldPosition:window.window.geofs.aircraft.instance.engines[0].object3d.worldPosition},duration:1e10,rate:.03,life:1e4,easing:"easeOutQuart",startScale:.01,endScale:.2,randomizeStartScale:.01,randomizeEndScale:.15,startOpacity:1,endOpacity:.2,startRotation:"random",texture:"whitesmoke"}),setInterval(()=>{window.window.geofs.fx.setParticlesColor(new window.Cesium.Color(.1,.1,.1,1))},20));if(!e.includes("engine"))switch(e){case"fuelLeak":this.fails.fuelLeak||(alert("Fuel leak! Less than 2 minutes of fuel remaining"),this.fails.fuelLeak=!0,globalThis.leakingFuel=!0);break;case"gearFront":if(!this.fails.landingGear.front){alert("Nose gear failure"),this.fails.landingGear.front=!0;var n=2;for(i=0;i<window.window.geofs.aircraft.instance.suspensions.length;i++)(window.window.geofs.aircraft.instance.suspensions[i].name.includes("front")||window.window.geofs.aircraft.instance.suspensions[i].name.includes("nose")||window.window.geofs.aircraft.instance.suspensions[i].name.includes("tail"))&&(n=i);this.failures.push(setInterval(()=>{window.window.geofs.aircraft.instance.suspensions[n].collisionPoints[0][2]=30}),1e3)}break;case"gearLeft":if(!this.fails.landingGear.left){alert("Left gear failure"),this.fails.landingGear.left=!0;var a=0;for(i=0;i<window.window.geofs.aircraft.instance.suspensions.length;i++)(window.window.geofs.aircraft.instance.suspensions[i].name.includes("left")||window.window.geofs.aircraft.instance.suspensions[i].name.includes("l"))&&(a=i);this.failures.push(setInterval(()=>{window.window.geofs.aircraft.instance.suspensions[a].collisionPoints[0][2]=30}),1e3)}break;case"gearRight":if(alert("Right gear failure"),!this.fails.landingGear.right){this.fails.landingGear.right=!0;var l=1;for(i=0;i<window.window.geofs.aircraft.instance.suspensions.length;i++)(window.window.geofs.aircraft.instance.suspensions[i].name.includes("right")||window.window.geofs.aircraft.instance.suspensions[i].name.includes("r_g"))&&(l=i);this.failures.push(setInterval(()=>{window.window.geofs.aircraft.instance.suspensions[l].collisionPoints[0][2]=30}),1e3)}break;case"ailerons":alert("Flight control failure (ailerons)"),this.fails.flightCtrl.ailerons||(this.fails.flightCtrl.ailerons=!0,this.failures.push(setInterval(()=>{for(var e in window.window.geofs.aircraft.instance.airfoils)window.window.geofs.aircraft.instance.airfoils[e].name.toLowerCase().includes("aileron")&&(window.window.geofs.aircraft.instance.airfoils[e].object3d._scale=[0,0,0])}),1e3));break;case"elevators":alert("Flight control failure (elevators)"),this.fails.flightCtrl.elevators||(this.fails.flightCtrl.elevators=!0,this.failures.push(setInterval(()=>{for(var e in window.window.geofs.aircraft.instance.airfoils)window.window.geofs.aircraft.instance.airfoils[e].name.toLowerCase().includes("elevator")&&(window.window.geofs.aircraft.instance.airfoils[e].object3d._scale=[0,0,0])}),1e3));break;case"rudder":alert("Flight control failure (rudder)"),this.fails.flightCtrl.rudder||(this.fails.flightCtrl.rudder=!0,this.failures.push(setInterval(()=>{for(var e in window.window.geofs.aircraft.instance.airfoils)window.window.geofs.aircraft.instance.airfoils[e].name.toLowerCase().includes("rudder")&&(window.window.geofs.aircraft.instance.airfoils[e].object3d._scale=[0,0,0])}),1e3));break;case"electrical":this.fails.electrical||(alert("Electrical failure"),this.fails.electrical=!0,this.failures.push(setInterval(()=>{for(var e=1;e<=5;e++)window.window.geofs.aircraft.instance.cockpitSetup.parts[e].object3d._scale=[0,0,0];window.window.geofs.autopilot.turnOff(),window.instruments.hide()}),1e3));break;case"structural":this.fails.structural||(alert("Significant structural damage detected"),console.log("Boeing, am I right?"),this.fails.structural=!0,this.failures.push(setInterval(()=>{window.weather.definition.turbulences=3}),1e3));break;case"flaps":this.fails.hydraulic.flaps||(alert("Hydraulic failure (flaps)"),this.fails.hydraulic.flaps=!0,this.failures.push(setInterval(()=>{window.controls.flaps.target=Math.floor(.6822525475345469*(2*window.window.geofs.animation.values.flapsSteps)),window.controls.flaps.delta=20}),1e3));break;case"brakes":this.fails.hydraulic.brakes||(alert("Hydraulic failure (brakes)"),this.fails.hydraulic.brakes=!0,this.failures.push(setInterval(()=>{window.controls.brakes=0}),500));break;case"spoilers":this.fails.hydraulic.spoilers||(alert("Hydraulic failure (spoilers)"),this.fails.hydraulic.spoilers=!0,this.failures.push(setInterval(()=>{window.controls.airbrakes.target=.2,window.controls.airbrakes.delta=20}),1e3));break;case"pressurization":this.fails.pressurization||(alert("Cabin depressurization! Get at or below 9,000 ft MSL!"),this.fails.pressurization=!0,this.failures.push(setInterval(()=>{window.window.geofs.animation.values.altitude>9e3?window.weather.definition.turbulences=(window.window.geofs.animation.values.altitude-9e3)/5200:window.weather.definition.turbulences=0}),1e3))}}tick(){if(this.enabled&&!window.flight.recorder.playing&&!window.geofs.paused){for(var e in console.log("tick"),this.chances.landingGear)Math.random()<this.chances.landingGear[e]&&this.fail("gear"+(e[0].toUpperCase()+e.substr(1,e.length)));for(var t in this.chances)if("number"==typeof this.chances[t])Math.random()<this.chances[e]&&this.fail(t);else if("landingGear"!==t)for(var i in this.chances[t])Math.random()<this.chances[t][i]&&this.fail(i);setTimeout(()=>{this.tick()},6e4)}}reset(){for(var e in this.failures)clearInterval(this.failures[e]);this.enabled=!1}}function waitForEntities(){try{if(!1==window.window.geofs.cautiousWithTerrain){window.mainFailureFunction();return}}catch(e){console.log("Error in waitForEntities:",e)}setTimeout(()=>{waitForEntities()},1e3)}function runFuelSystem(){var e,t,i;let n;setInterval(()=>{0===l.fuel&&(controls.throttle=0,window.geofs.aircraft.instance.stopEngine())},10),console.log("Fuel depleted! Engines have been turned off.");let a,l=(a=window.geofs.aircraft.instance.definition.mass,globalThis.initialFuel=.75*a,{fuel:initialFuel,initialFuel}),{fuelBar:s,fuelBarContainer:r}=function e(){let t=document.createElement("div");t.style.position="absolute",t.style.bottom="8px",t.style.right="108px",t.style.width="75px",t.style.height="17px",t.style.border="1px solid black",t.style.borderRadius="5px",t.style.backgroundColor="black",t.style.zIndex="1000";let i=document.createElement("div");return i.style.height="100%",i.style.width="100%",i.style.backgroundColor="green",i.style.borderRadius="5px",t.appendChild(i),document.querySelector(".geofs-ui-bottom").appendChild(t),{fuelBar:i,fuelBarContainer:t}}(),u=function e(t){let i=document.createElement("button");return i.textContent="Refuel",i.style.position="absolute",i.style.bottom="5px",i.style.right="191px",i.style.padding="4px 8px",i.style.fontSize="14px",i.style.backgroundColor="yellow",i.style.border="1px solid black",i.style.borderRadius="5px",i.style.zIndex="1000",document.querySelector(".geofs-ui-bottom").appendChild(i),i.addEventListener("click",()=>{t.fuel=t.initialFuel,console.log("Plane refueled.")}),i}(l);e=l,t=s,n=setInterval(()=>{if(window.geofs.pause||window.flight.recorder.playing)return;let i=window.geofs.aircraft.instance.engines.reduce((e,t)=>e+(t.thrust||0),0),n=window.geofs.aircraft.instance.engines[0]?.afterBurnerThrust!==void 0,a=n&&Math.abs(window.geofs.animation.values.smoothThrottle)>.9,l=n?window.geofs.aircraft.instance.engines.reduce((e,t)=>e+(t.afterBurnerThrust||0),0):0,s=Math.abs(window.geofs.animation.values.smoothThrottle),r=a?l/150:i/150;globalThis.leakingFuel?fuelBurnRate=globalThis.initialFuel/120*3600:(fuelBurnRate=window.geofs.aircraft.instance.engine.on?r+s*(3*r-r):0,0==i&&(fuelBurnRate=0)),e.fuel-=fuelBurnRate*(1/3600),e.fuel<0&&(e.fuel=0);let u=e.fuel/e.initialFuel*100;t.style.width=`${u}%`,t.style.backgroundColor=u>20?"green":u>10?"orange":"red",0===e.fuel&&(window.fuelBurnRate=0),console.log(`Fuel Burn Rate per Hour: ${fuelBurnRate.toFixed(6)}`),console.log(`Fuel Burned This Second: ${(fuelBurnRate/3600).toFixed(6)}`),console.log(`Fuel Remaining: ${e.fuel.toFixed(2)}`)},1e3);let o=window.geofs.aircraft.instance.aircraftRecord.id;setInterval(()=>{window.geofs.aircraft.instance.aircraftRecord.id!==o&&(r.remove(),u.remove(),o=window.geofs.aircraft.instance.aircraftRecord.id,clearInterval(n),runFuelSystem())},1e3),setInterval(()=>{let e=window.geofs.aircraft.instance.groundSpeed,t=window.geofs.aircraft.instance.groundContact,i=window.geofs.aircraft.instance.engine.on;flight.recorder.playing?(u.style.display="none",r.style.display="none"):(u.style.display=e<1&&t&&!i?"block":"none",r.style.display="block")},100)}window.openFailuresMenu=function(){if(window.failuresMenu){if(window.failuresMenu.hidden=!window.failuresMenu.hidden,window.window.geofs.aircraft.instance.id!==window.aId)for(window.failure.reset(),window.failure=new Failure,e=`
         <div style="position: fixed; width: 640px; height: 10px; background: lightgray; cursor: move;" id="dragPart"></div>
         <p style="cursor: pointer;right: 0px;position: absolute;background: gray;height: fit-content;" onclick="window.failuresMenu.hidden=true;">X</p>
     <p>Note: Some failures may require a manual refresh of the page.</p>
@@ -1846,7 +1673,6 @@ function addonExecution () {
 
 
     adblock();
-    airspace();
     autoland();
     athrottle();
     fpv();
