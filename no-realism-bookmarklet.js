@@ -1,1 +1,0 @@
-javascript:(() => {var addonScript = document.createElement('script'); addonScript.src="https://raw.githack.com/geofs-pilot/GeoFS-All-in-one-Addon/main/no-realism.js";document.body.appendChild(addonScript);})()
