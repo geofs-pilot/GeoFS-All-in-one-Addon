@@ -42,4 +42,3 @@ https://github.com/tylerbmusic/GeoFS-Slew-Mode <br/>
 https://github.com/tylerbmusic/GeoFS-Taxiway-Lights <br/>
 https://github.com/tylerbmusic/GeoFS-Taxiway-Signs/tree/main <br/>
 https://github.com/scitor/GeoFS/tree/master/uiTweaks <br/>
-https://github.com/kolos26/GEOFS-LiverySelector/tree/main (for no-realism.js)
