@@ -8,16 +8,15 @@
 ## How to use: <br/>
 Note: depending on the size of your screen, everything might not fit on the UI bar. If this happens, simply zoom out the site (ctrl-)
 ### Bookmarklet - Easy and fast, nothing to install
--Bookmark any page, left click on it, press Edit, and replace the URL with the contents of bookmarklet.js or no-realism-bookmarklet.js <br/>
+-Bookmark any page, left click on it, press Edit, and replace the URL with the contents of bookmarklet.js <br/>
 -Once GeoFS is fully loaded, click on the bookmark to run the script. <br/>
 -No need to update, automatically runs latest version
 ### Pasting into console - not recommended, most cumbersome
 -Once GeoFS is fully loaded, press F12/Ctrl+shift+I/Ctrl+shift+J and go to the Console tab. <br/>
--Paste in the contents of main.js or no-realism.js and hit Enter
+-Paste in the contents of main.js and hit Enter
 ### Tampermonkey - recommended, runs automatically when GeoFS is visited
 -Install [Tampermonkey](https://www.tampermonkey.net/) <br/>
 -Click [here](https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/GeoFS-All-in-one-Addon.user.js) to install the script <br/>
--Click [here](https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/no-realism.user.js) to install the script without the realism pack <br/>
 -No need to update, automatically runs latest version
 ## These scripts only work with tampermonkey - install them here
 -[install randomJobs](https://github.com/scitor/GeoFS/raw/master/randomJobs/randomJobs.user.js) <br/>
