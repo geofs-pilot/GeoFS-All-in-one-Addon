@@ -2,7 +2,7 @@
 18 addons, their instructions, and detailed flight procedures, compiled together <br/>
  -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
 
-![image](https://github.com/user-attachments/assets/aebbd402-dab4-4332-af9d-3d8753e2ab7e)
+![image](https://github.com/user-attachments/assets/4784992e-29a6-47cf-9f3b-f01e0cf95231)
 
 
 ## How to use: <br/>
