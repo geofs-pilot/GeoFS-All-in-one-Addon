@@ -158,7 +158,7 @@ function menus() {
             Tilt downL: [↓]`,
 
 
-            'UI tweaks': `Allows you to adjust autopilot using mouse wheel and adds a popout chat`
+            'UI tweaks': `Adds a popout chat. Mouse wheel functionality was added to GeoFS natively.`
         };
         
         function addAddon(name) {
@@ -623,7 +623,7 @@ function menus() {
             8) At cruise altitude, set speed to desired cruise speed & set V/S to 0000 fpm if necessary`,
 
 
-            'Descent procedures': `1) Calculate T/D in advance. This can be done by subtracting the arrival elevation from your cruise alt, then multiplying that by 0.003 (e.g: for cruise FL320 with approximately 2000 ft arrival elevation, T/D will be 90nm). 
+            'Descent procedures': `1) Calculate T/D in advance. This can be done by subtracting the arrival elevation from your cruise alt, then multiplying that by 0.003 (e.g: for cruise 32000ft with approximately 2000 ft arrival elevation, T/D will be 90nm). 
             2) At 5 nautical miles away from T/D, reduce speed to Mach 0.76 (448 kts) & set V/S to-2400 fpm.
             3) At T/D, set alt to 4000 ft
             4) At 30000 ft AGL , reduce speed to 280 kts & increase V/S to-2200 fpm
@@ -638,7 +638,7 @@ function menus() {
             13) At 3000 ft AGL, reduce speed to 170 kts & set flaps to 3
             14) At 2500 ft AGL, reduce speed to 160 kts & set flaps to full. Lower landing gear.
             15) Adjust V/S as necessary for approach at your discretion.
-            16) Prepare to disengage AP below 1000 ft (final approach). If autolanding, disregard. Arm spoilers (Shift)`,
+            16) Prepare to disengage AP below 1000 ft (final approach). If autolanding, disregard. Arm spoilers [Shift]`,
 
 
             'Go around procedures': `1) Announce the Go-Around
