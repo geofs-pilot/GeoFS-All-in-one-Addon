@@ -1543,7 +1543,7 @@ function addonExecution () {
                 <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">G ${p}</span>
 
 
-            `}},100);
+            `,flight.recorder.playing?u.style.display="none":u.style.display="inline-block"}},100);
     };
 
 
