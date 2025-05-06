@@ -1,7 +1,7 @@
 # GeoFS-All-in-one-Addon
-18 addons, their instructions, and detailed flight procedures, compiled together <br/>
+19 addons, their instructions, and detailed flight procedures, compiled together <br/>
  -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
- -note: Due to changes in GeoFS' source code in preparation of GeoFS 4.0, the slew mode, landing stats, GPWS callouts, and flight path vector addons may not work properly. I will update the code once these scripts have been updated by their original developer (tylerbmusic). <br/>
+ -note: Due to changes in GeoFS' source code in preparation of GeoFS 4.0, landing stats, GPWS callouts, and flight path vector addons may not work properly. I will update the code once these scripts have been updated by their original developer (tylerbmusic). <br/>
 ![image](https://github.com/user-attachments/assets/4784992e-29a6-47cf-9f3b-f01e0cf95231)
 
 
@@ -43,6 +43,7 @@ https://github.com/tylerbmusic/GeoFS-Landing-Stats <br/>
 https://github.com/geofs-pilot/geofs-overpowered-engines/tree/main <br/>
 https://github.com/TotallyRealElonMusk/GeoFS-Pushback <br/>
 https://github.com/NVB9ALT/Realism-pack./tree/main <br/>
+https://github.com/tylerbmusic/GeoFS-Sky-Dolly <br/>
 https://github.com/tylerbmusic/GeoFS-Slew-Mode <br/>
 https://github.com/tylerbmusic/GeoFS-Taxiway-Lights <br/>
 https://github.com/tylerbmusic/GeoFS-Taxiway-Signs/tree/main <br/>
