@@ -39,17 +39,20 @@ function menus() {
 
 
             Uses PuterJS GPT and speech-to-text to provide AI air traffic control
-            Type a message using Ctrl+click (or [W] if using PTT version)
+            Type a message using Ctrl+click (or [D] if using PTT version)
             You have to be within 50 nautical miles of the airport to talk to it
             Click on the radio icon to tune in to different airport; you can tune to a particular airport ATC by using their ICAO code
             If ATC tells you to wait for instructions, you must check in with them every 10-20 seconds
             You must specify which runway you want to land on`,
 
 
+            'Autoland++': `Automatically deploys spoilers, disables autopilot, and activates reverse thrust on touchdown. Arm using [Shift]. `,
+
+
             'Autothrottle': `Regulates aircraft speed while retaining pilot control`,
 
 
-            'Autoland++': `Automatically deploys spoilers, disables autopilot, and activates reverse thrust on touchdown. Arm using [Shift]. `,
+            'Camera cycling': `Randomly cycles through the camera angles for each airplane every 10 seconds. You can toggle this on and off by double-clicking the middle mouse button. By default, it excludes cockpit-less cam, free cam, chase cam and fixed cam.`,
 
 
             'Failures': `Adds the ability for systems to fail
@@ -140,6 +143,9 @@ function menus() {
             Lag reduction`,
 
 
+            'Sky Dolly': `Adds the functionality of the Sky Dolly MSFS addon. Specifically, the formation mode and logbook. To use it, open up the GMenu (the little GeoFS icon at the bottom) and click on "Open GUI". To start a new recording, press "Start new recording." To stop recording, press the "Stop Recording" button. Then, press "Update Window" to show the recording, enable it with the checkbox, and press "Save" to save changes. Then, rewind the time slider and press "Start Playback" to see your plane fly (or fly with it).`,
+
+
             'Slew mode': `Mimics slew mode from FSX
             Toggle: [Y]
             Fwd: [I]
@@ -205,6 +211,7 @@ function menus() {
         addAddon('Ad remover');
         addAddon('Autoland++');
         addAddon('Autothrottle');
+        addAddon('Camera cycling');
         addAddon('Failures');
         addAddon('Flight path vector');
         addAddon('Fuel');
@@ -215,6 +222,7 @@ function menus() {
         addAddon('Overpowered engines');
         addAddon('Pushback');
         addAddon('Realism pack');
+        addAddon('Sky Dolly');
         addAddon('Slew mode');
         addAddon('Taxiway lights');
         addAddon('Taxiway signs');
@@ -958,7 +966,7 @@ function addonExecution () {
 
 
     function autoland () {
-        async function waitForCondition(t){return new Promise(i=>{let n=setInterval(()=>{t()&&(clearInterval(n),i())},100)})}async function waitForUI(){return waitForCondition(()=>"undefined"!=typeof ui)}async function waitForInstance(){return waitForCondition(()=>geofs.aircraft&&geofs.aircraft.instance)}async function waitForInstruments(){return waitForCondition(()=>instruments&&geofs.aircraft.instance.setup.instruments)}async function autospoilers(){await waitForUI(),await waitForInstance(),geofs.aircraft.instance.animationValue.spoilerArming=0;let t=()=>{geofs.aircraft.instance.groundContact||0!==controls.airbrakes.position||(geofs.aircraft.instance.animationValue.spoilerArming=0===geofs.aircraft.instance.animationValue.spoilerArming?1:0)},i=()=>{controls.airbrakes.target=0===controls.airbrakes.target?1:0,controls.setPartAnimationDelta(controls.airbrakes),geofs.aircraft.instance.animationValue.spoilerArming=0};controls.setters.setSpoilerArming={label:"Spoiler Arming",set:t},controls.setters.setAirbrakes={label:"Air Brakes",set:i},await waitForInstruments(),instruments.definitions.spoilers.overlay.overlays[3]={anchor:{x:0,y:0},size:{x:50,y:50},position:{x:0,y:0},animations:[{type:"show",value:"spoilerArming",when:[1]},{type:"hide",value:"spoilerArming",when:[0]}],class:"control-pad-dyn-label green-pad",text:"SPLR<br/>ARM",drawOrder:1},instruments.init(geofs.aircraft.instance.setup.instruments),window.geofs.camera.set(0),$(document).keydown(function(t){16!==t.which||t.ctrlKey||t.altKey||t.metaKey||(console.log("Toggled Arming Spoilers"),controls.setters.setSpoilerArming.set())}),setInterval(function(){1===geofs.aircraft.instance.animationValue.spoilerArming&&geofs.aircraft.instance.groundContact&&(0===controls.airbrakes.position&&controls.setters.setAirbrakes.set(),geofs.aircraft.instance.animationValue.spoilerArming=0,geofs.autopilot.setSpeed(0),setTimeout(()=>{geofs.autopilot.turnOff(),$(document).trigger("autothrottleOff")},200),setTimeout(()=>{controls.throttle=-9},200))},100),setInterval(function(){["3292","3054"].includes(geofs.aircraft.instance.id)&&void 0===geofs.aircraft.instance.setup.instruments.spoilers&&(geofs.aircraft.instance.setup.instruments.spoilers="",instruments.init(geofs.aircraft.instance.setup.instruments))},500)}autospoilers();
+        async function waitForCondition(t){return new Promise(i=>{let a=setInterval(()=>{t()&&(clearInterval(a),i())},100)})}async function waitForUI(){return waitForCondition(()=>"undefined"!=typeof ui)}async function waitForInstance(){return waitForCondition(()=>geofs.aircraft&&geofs.aircraft.instance)}async function waitForInstruments(){return waitForCondition(()=>instruments&&geofs.aircraft.instance.setup.instruments)}async function autospoilers(){await waitForUI(),await waitForInstance(),ui.notification.show("Note: spoiler arming key has now changed to Shift."),geofs.aircraft.instance.animationValue.spoilerArming=0;let t=()=>{geofs.aircraft.instance.groundContact||0!==controls.airbrakes.position||(geofs.aircraft.instance.animationValue.spoilerArming=0===geofs.aircraft.instance.animationValue.spoilerArming?1:0)},i=()=>{controls.airbrakes.target=0===controls.airbrakes.target?1:0,controls.setPartAnimationDelta(controls.airbrakes),geofs.aircraft.instance.animationValue.spoilerArming=0};controls.setters.setSpoilerArming={label:"Spoiler Arming",set:t},controls.setters.setAirbrakes={label:"Air Brakes",set:i},await waitForInstruments(),instruments.definitions.spoilers.overlay.overlays[3]={anchor:{x:0,y:0},size:{x:50,y:50},position:{x:0,y:0},animations:[{type:"show",value:"spoilerArming",when:[1]},{type:"hide",value:"spoilerArming",when:[0]}],class:"control-pad-dyn-label green-pad",text:"SPLR<br/>ARM",drawOrder:1},instruments.init(geofs.aircraft.instance.setup.instruments);let a=geofs.camera.currentMode,n=geofs.camera.currentFOV;window.geofs.camera.set(a),window.geofs.camera.setFOV(n),$(document).keydown(function(t){16!==t.which||t.ctrlKey||t.altKey||t.metaKey||(console.log("Toggled Arming Spoilers"),controls.setters.setSpoilerArming.set())}),setInterval(function(){1===geofs.aircraft.instance.animationValue.spoilerArming&&geofs.aircraft.instance.groundContact&&(0===controls.airbrakes.position&&controls.setters.setAirbrakes.set(),geofs.aircraft.instance.animationValue.spoilerArming=0,geofs.autopilot.setSpeed(0),setTimeout(()=>{geofs.autopilot.turnOff(),$(document).trigger("autothrottleOff")},200),setTimeout(()=>{controls.throttle=-9},200))},100),setInterval(function(){["3292","3054"].includes(geofs.aircraft.instance.id)&&void 0===geofs.aircraft.instance.setup.instruments.spoilers&&(geofs.aircraft.instance.setup.instruments.spoilers="",instruments.init(geofs.aircraft.instance.setup.instruments))},500)}autospoilers();
     };
 
 
@@ -1105,6 +1113,11 @@ function addonExecution () {
                            }
                         `,document.head.appendChild(t)},toggle:function(){window.geofs.autothrottle.error||(window.geofs.autothrottle.on?$(document).trigger("autothrottleOff"):$(document).trigger("autothrottleOn"))},tick:function(t,o){var e=clamp(Math.floor(o/window.geofs.api.renderingSettings.physicsDeltaMs),1,10),r=t/e,a=window.geofs.animation.values,l=window.geofs.autopilot,i=l.values.speed,n=a.kias;"mach"==window.geofs.autopilot.speedMode&&(i=window.geofs.utils.machToKnots(l.values.speed),n=window.geofs.utils.machToKnots(a.mach)),l.PIDs.throttle.set(i,0,1),controls.throttle=l.PIDs.throttle.compute(n,r),controls.throttle=clamp(controls.throttle,0,1),window.geofs.debug.autothrottleValues=[t,o,e,r,a,l,i,n]},tickWrapper:function(t){if(window.geofs.autothrottle.on){if(window.geofs.aircraft.instance.groundContact&&window.geofs.autothrottle.armed){controls.throttle=0,$(document).trigger("autothrottleOff");return}var o=t-window.geofs.utils.now();try{window.geofs.autothrottle.tick(o/1e3,o)}catch(e){window.geofs.autothrottle.handleError(e)}}},handleError:function(t){console.error(t),ui.notification.show("An error with autothrottle occured, autothrottle is now disabled. Check console for more details."),window.geofs.debug.log("meatbroc autothrottle error"),window.geofs.api.removeFrameCallback(window.geofs.autothrottle.callbackID),$(document).trigger("autothrottleOff"),window.geofs.autothrottle.error=!0}},window.geofs.autothrottle.init(),window.geofs.autopilot.setArm=function(t){let o=JSON.parse(t);window.geofs.autothrottle.armed=o,o?($("#armOn").addClass("green-pad"),$("#armOff").removeClass("green-pad")):($("#armOff").addClass("green-pad"),$("#armOn").removeClass("green-pad"))}});
     };
+
+
+function camera () {
+    !function(){"use strict";let a=null,e=null,t=[],r=0,n=!0;function c(){if(!geofs.camera||!geofs.camera.modes)return;let a=geofs.camera.modes,c=[2,3,4,5];t=[];for(let i=0;i<a.length;i++)c.includes(i)||t.push(i);for(let l=t.length-1;l>0;l--){let o=Math.floor(Math.random()*(l+1));[t[l],t[o]]=[t[o],t[l]]}console.log("Cycling through randomized cameras (excluding 2, 3, 4, 5):",t),r=0,e&&clearInterval(e),e=setInterval(()=>{if(!geofs.pause&&!n&&t.length>0){let a=t[r];geofs.camera.set(a),console.log("Switched to camera:",a),r=(r+1)%t.length}},1e4)}setInterval(()=>{geofs.aircraft&&geofs.aircraft.instance&&geofs.aircraft.instance.id!==a&&(a=geofs.aircraft.instance.id,console.log("Aircraft changed. Restarting camera script."),c())},1e3);let i=0;document.addEventListener("mousedown",a=>{if(1===a.button){let e=Date.now();e-i<300&&(n=!n,console.log("Camera cycling manually paused:",n)),i=e}});let l=setInterval(()=>{"undefined"!=typeof geofs&&geofs.camera&&geofs.camera.modes&&geofs.aircraft&&geofs.aircraft.instance&&(clearInterval(l),a=geofs.aircraft.instance.id,c())},500)}();
+};
 
 
     function failuresAndFuel () {   		//Includes both fuel and failures
@@ -1623,13 +1636,198 @@ function addonExecution () {
     function realism () {
         (() => {var realismScript = document.createElement('script'); realismScript.src="https://raw.githack.com/geofs-pilot/realism-pack-modded/main/main.js";document.body.appendChild(realismScript);realismScript.onload = (function(){realismGo()});})()
     };
+    
+    function dolly () {
+        function waitForEntities(){try{if(!1==window.geofs.cautiousWithTerrain&&window.geofs.api&&window.geofs.api.addFrameCallback){window.DEGREES_TO_RAD=window.DEGREES_TO_RAD||.017453292519943295,window.RAD_TO_DEGREES=window.RAD_TO_DEGREES||57.29577951308232,window.METERS_TO_FEET=window.METERS_TO_FEET||3.280839895,requestAnimationFrame(window.sd.tick);return}}catch(t){console.log("Error in waitForEntities:",t)}setTimeout(()=>{waitForEntities()},1e3)}!function(){window.gmenu&&window.GMenu||fetch("https://raw.githubusercontent.com/tylerbmusic/GeoFS-Addon-Menu/refs/heads/main/addonMenu.js").then(t=>t.text()).then(script=>{eval(script)}).then(()=>{setTimeout(afterGMenu,101)});async function afterGMenu(){window.sd={};let t=new window.GMenu("Sky Dolly","sd");t.addItem("Auto-save: ","AutoSave","checkbox",0,"false"),t.addItem("Auto-save interval (minutes): ","STime","number",0,"1"),window.sd.msToTime=function(t){let e=Math.floor(t/1e3%60);e.toString().length<2&&(e="0"+e);let d=Math.floor(t/6e4)%60,a=Math.floor(t/36e5),o;return 0==a?`${d}:${e}`:`${a}:${d}:${e}`},window.sd.getDistance=function(t,e){let[d,a]=t,[o,n]=e,s=t=>t*(Math.PI/180),i=s(o-d),r=s(n-a),l=s(d),c=s(o),m=Math.sin(i/2)**2+Math.cos(l)*Math.cos(c)*Math.sin(r/2)**2,u=2*Math.atan2(Math.sqrt(m),Math.sqrt(1-m)),g=u*(180/Math.PI);return g},window.sd.loadFromDB=function(t){let e=indexedDB.open("SkyDollyDB",1);e.onupgradeneeded=function(t){let e=t.target.result;e.objectStoreNames.contains("sdData")||e.createObjectStore("sdData",{keyPath:"id"})},e.onsuccess=function(e){let d=e.target.result;if(d.objectStoreNames.contains("sdData")){let a=d.transaction("sdData","readonly"),o=a.objectStore("sdData").get("data");o.onsuccess=function(){t(o.result?o.result.value:[])},o.onerror=function(e){console.error("Error getting data from database:",e.target.error),t([])},a.onerror=function(e){console.error("Transaction error (reading):",e.target.error),t([])}}else console.warn("Object store 'sdData' not found. Returning empty data."),t([])},e.onerror=function(e){console.error("Error opening database:",e.target.error),t([])}},window.sd.saveToDB=function(t){return new Promise((e,d)=>{let a=indexedDB.open("SkyDollyDB",1);a.onupgradeneeded=function(t){let e=t.target.result;e.objectStoreNames.contains("sdData")||e.createObjectStore("sdData",{keyPath:"id",autoIncrement:!0})},a.onsuccess=function(a){let o=a.target.result.transaction("sdData","readwrite").objectStore("sdData"),n=o.put({id:"data",value:t});n.onsuccess=function(){window.sd.saved=!0,window.sd.saving=!1,e()},n.onerror=function(t){d(t.target.error)}},a.onerror=function(t){d(t.target.error)}})},window.sd.sendToLS=async function(){window.sd.saved=!0,window.sd.saving=!0,console.log("Sending to database...");let t=window.sd.data.map(t=>{let e={...t};return delete e.model,delete e.map,e});try{await window.sd.saveToDB(t),console.log("Data saved to database.")}catch(e){console.error("Error saving to database:",e)}},window.sd.init=async function(){if(console.log("Sky Dolly Initializing..."),window.sd.loadFromDB(t=>{window.sd.data=t}),window.sd.uTime=100,window.sd.tickNum=0,window.sd.maxTick=window.sd.maxTick||0,window.sd.currTime=Date.now(),window.sd.nextTime=Date.now()+window.sd.uTime,window.sd.fac=0,window.sd.paused=!0,window.sd.isRec=!1,window.sd.isPlayback=!1,window.sd.saved=!0,window.sd.lastSaved=Date.now(),window.sd.saving=!1,window.sd.data)for(let t in window.sd.data)window.sd.maxTick=Math.max(window.sd.data[t].lastTick,window.sd.maxTick);else window.sd.data=[]},window.sd.recInit=function(t){let e=new Date;var d={},a=[];for(let o in window.geofs.aircraft.instance.definition.parts){let n=window.geofs.aircraft.instance.definition.parts[o].animations,s=[];for(let i in n)if(n&&n[i]){let r={};for(let l in n[i])("rotationMethod"!==l||"string"==typeof l.rotationMethod)&&(r[l]=n[i][l]);s.push(r)}a.push([s,window.geofs.aircraft.instance.definition.parts[o].name])}window.sd.data.push({enabled:!1,model:null,map:null,modelPath:window.geofs.aircraft.instance.object3d.model._model._resource.url,firstTick:window.sd.tickNum,date:e.getUTCDate().toString()+"."+e.getUTCMonth().toString()+"."+e.getUTCFullYear(),time:e.getUTCHours()+":"+e.getUTCMinutes(),lastTick:-1,animations:d,animationParts:a}),window.sd.isRec=!0,window.sd.paused=!1,window.sd.recTick(window.sd.tickNum),console.log("recInit"),console.log(window.sd.isRec)},window.sd.playbackInit=function(t){for(let e in window.sd.data){let d=window.sd.data[e];if(d.enabled&&!d.model&&(d.model=new window.geofs.api.Model(null,{url:d.modelPath,location:d[d.firstTick].lla,rotation:d[d.firstTick].htr}),d.model.setVisibility((t||window.sd.tickNum)>=d.firstTick)),d.enabled&&!d.map&&window.geofs.map.mapActive){let a=d.modelPath.split("/"),o=a[a.length-1].split(".")[0];d.map=window.geofs.map.addPlayerMarker((Math.random()*Date.now()).toString(),"blue",`${o} Flight ${e}<br/>${d[d.firstTick].htr[0]}dg<br/>${d[d.firstTick].lla[2]*window.METERS_TO_FEET}ft`),d.map.update(d[d.firstTick].lla[0],d[d.firstTick].lla[1],d[d.firstTick].htr[0])}}window.sd.isPlayback=!0},window.sd.tick=function(){if(window.sd.saved&&window.sd.window&&window.sd.window.document.getElementById("save")?(window.sd.window.document.getElementById("save").className="saved",window.sd.window.document.getElementById("save").innerHTML=window.sd.saving?"Saving":"Saved"):window.sd.window&&!window.isRec&&(window.sd.window.document.getElementById("save")&&(window.sd.window.document.getElementById("save").className="unsaved",window.sd.window.document.getElementById("save").innerHTML="Save"),window.sd.isRec&&"true"==localStorage.getItem("sdAutoSave")&&Date.now()>=window.sd.lastSaved+6e4*Number(localStorage.getItem("sdSTime"))&&(window.sendToLS(),window.sd.lastSaved=Date.now()+6e4*Number(localStorage.getItem("sdSTime")))),window.sd.window&&window.sd.window.document.getElementById("pause")&&(window.sd.window.document.getElementById("pause").innerHTML=window.sd.paused?"Play":"Pause"),window.sd.data)for(let t in window.sd.data)window.sd.maxTick=Math.max(window.sd.data[t].lastTick,window.sd.maxTick);if(window.sd.currTime=Date.now(),window.sd.fac=1-(window.sd.nextTime-window.sd.currTime)/window.sd.uTime,window.sd.playbackTick(window.sd.tickNum,window.sd.paused||window.geofs.pause?0:window.sd.fac),window.sd.paused||window.geofs.pause?window.sd.nextTime=Date.now()+window.sd.uTime:window.sd.fac>=1&&(window.sd.tickNum++,window.sd.nextTime+=window.sd.uTime,window.sd.recTick(window.sd.tickNum),window.sd.tickNum>window.sd.maxTick&&(window.sd.maxTick=window.sd.tickNum),window.sd.fac=1-(window.sd.nextTime-window.sd.currTime)/window.sd.uTime),window.sd.window){let e=window.sd.window.document.getElementById("timeSlider");e&&(e.max=window.sd.maxTick,e.value=window.sd.tickNum);let d=window.sd.msToTime(window.sd.tickNum*window.sd.uTime),a=window.sd.msToTime(window.sd.maxTick*window.sd.uTime);window.sd.window.document.getElementById("time")&&(window.sd.window.document.getElementById("time").innerHTML=`${d} / ${a}`)}requestAnimationFrame(window.sd.tick)},window.sd.recTick=function(t){if(window.sd.isRec){let e=window.sd.data.length-1;window.sd.data[e][t||window.sd.tickNum];let d={};for(let a in window.sd.data[e].animationParts)window.geofs.aircraft.instance.object3d.model._model.getNode(window.sd.data[e].animationParts[a][1])?d[window.sd.data[e].animationParts[a][1]]=window.geofs.aircraft.instance.object3d.model._model.getNode(window.sd.data[e].animationParts[a][1]).matrix.clone():window.geofs.aircraft.instance.object3d.model._model.getNode(window.sd.data[e].animationParts[a][1].toLowerCase())&&(d[window.sd.data[e].animationParts[a][1]]=window.geofs.aircraft.instance.object3d.model._model.getNode(window.sd.data[e].animationParts[a][1].toLowerCase()).matrix.clone());window.sd.data[e][t||window.sd.tickNum]={lla:window.geofs.aircraft.instance.llaLocation,htr:window.geofs.aircraft.instance.htr,anims:d},window.sd.data[e].lastTick=t||window.sd.tickNum}},window.sd.playbackTick=function(t,e){try{if(window.sd.isPlayback)for(let d in window.sd.data){let a=window.sd.data[d];window.sd.fac=1-(window.sd.nextTime-window.sd.currTime)/window.sd.uTime;let o=a[window.sd.tickNum],n=a[window.sd.tickNum+1];if(!0==a.enabled&&o&&o.lla&&a.model){if(1>=window.sd.getDistance(window.geofs.aircraft.instance.llaLocation,o.lla)){if(n&&n.lla){let s=[o.lla[0]+(n.lla[0]-o.lla[0])*e,o.lla[1]+(n.lla[1]-o.lla[1])*e,o.lla[2]+(n.lla[2]-o.lla[2])*e,],i=[o.htr[0]+(n.htr[0]-o.htr[0])*e,o.htr[1]+(n.htr[1]-o.htr[1])*e,o.htr[2]+(n.htr[2]-o.htr[2])*e,];a.model.setPositionOrientationAndScale(s,i,null);let r=window.sd.data[d].modelPath.split("/"),l=r[r.length-1].split(".")[0];a.map?a.map.update(s[0],s[1],i[0],`${l} Flight ${d}<br/>${Math.round(i[0])}dg<br/>${Math.round(s[2]*window.METERS_TO_FEET)}ft`):window.geofs.map.mapActive&&(a.map=window.geofs.map.addPlayerMarker((Math.random()*Date.now()).toString(),"blue",`${l} Flight ${d}<br/>${Math.round(i[0])}dg<br/>${Math.round(s[2]*window.METERS_TO_FEET)}ft`),a.map.update(s[0],s[1],i[0]))}else{a.model.setPositionOrientationAndScale(o.lla,o.htr,null);let c=window.sd.data[d].modelPath.split("/"),m=c[c.length-1].split(".")[0];a.map?a.map.update(o.lla[0],o.lla[1],o.htr[0],`${m} Flight ${d}<br/>${Math.round(o.htr[0])}dg<br/>${Math.round(o.lla[2]*window.METERS_TO_FEET)}ft`):window.geofs.map.mapActive&&(a.map=window.geofs.map.addPlayerMarker((Math.random()*Date.now()).toString(),"blue",`${m} Flight ${d}<br/>${Math.round(o.htr[0])}dg<br/>${Math.round(o.lla[2]*window.METERS_TO_FEET)}ft`),a.map.update(o.lla[0],o.lla[1],o.htr[0]))}a.model.setVisibility(!0)}}else a.model&&a.map&&(a.model.setVisibility(!1),a.map.update(0,0,0));if(a.model&&a.model._model&&a.animations&&a.animationParts&&o&&o.anims)try{for(let u in o.anims)(a.model._model&&a.model._model.ready&&(a.model._model.getNode(u)||a.model._model.getNode(u.toLowerCase()))).matrix=o.anims[u]}catch(g){console.warn(g)}else a.model&&a.model.setVisibility(!1)}}catch(f){console.error(f)}},window.sd.stopPlayback=function(){if(window.sd.isPlayback){for(let t in window.sd.data){let e=window.sd.data[t];e.model&&(e.model.removeFromWorld(),e.model=null),e.map&&(e.map.destroy(),e.map=null)}window.sd.isPlayback=!1}},window.sd.addListeners=function(){window.sd.window&&window.sd.window.document?(window.sd.window.document.body.innerHTML=window.sd.html,setTimeout(()=>{for(let t in window.sd.window.document.body.innerHTML=window.sd.html,window.sd.window.document.getElementById("rec").addEventListener("click",t=>{window.sd.isRec?(window.sd.isRec=!1,window.sd.window.document.getElementById("rec").innerHTML="Start New Recording",window.sd.saved=!1):(window.sd.recInit(window.sd.tickNum),window.sd.window.document.getElementById("rec").innerHTML="Stop Recording")}),window.sd.window.document.getElementById("pause").addEventListener("click",t=>{window.sd.paused?(window.sd.paused=!1,window.sd.window.document.getElementById("pause").innerHTML="Pause"):(window.sd.paused=!0,window.sd.window.document.getElementById("pause").innerHTML="Play")}),window.sd.window.document.getElementById("playback").addEventListener("click",t=>{window.sd.isPlayback?(window.sd.stopPlayback(),window.sd.window.document.getElementById("playback").innerHTML="Start Playback"):(window.sd.playbackInit(),window.sd.window.document.getElementById("playback").innerHTML="Stop Playback")}),window.sd.window.document.getElementById("save").addEventListener("click",t=>{window.sd.isRec||window.sd.sendToLS()}),window.sd.window.document.getElementById("update").addEventListener("click",window.sd.updateHTML),window.sd.window.document.getElementById("timeSlider").addEventListener("input",t=>{window.sd.tickNum=Number(t.target.value),window.sd.nextTime=Date.now()+window.sd.uTime}),window.sd.window.document.addEventListener("close",()=>{window.sd.window=null,window.sd.html=null,window.sd.sendToLS()}),console.log("Running for loop"),window.sd.data){let e=window.sd.data[t],d=window.sd.window.document.getElementById("cb"+t),a=window.sd.window.document.getElementById("del"+t);d&&(d.checked=e.enabled,d.addEventListener("click",()=>{window.sd.data[t].enabled=d.checked,window.sd.saved=!1})),a&&a.addEventListener("click",()=>{window.sd.saved=!1,window.sd.data.splice(t,1),window.sd.updateHTML()})}console.log("Done")},500),console.log("Added listeners")):setTimeout(window.sd.addListeners,500)},window.sd.updateHTML=function(){let t="";for(let e in window.sd.data){let d=window.sd.data[e];t+=`<tr>
+            <td>${parseInt(e)+1}</td>
+            <td class="model-path">${d.modelPath}</td>
+            <td>${d.date}</td>
+            <td>${d.time}</td>
+            <td>${window.sd.msToTime(d.firstTick*window.sd.uTime)}</td>
+            <td>${window.sd.msToTime((d.lastTick-d.firstTick)*window.sd.uTime)}</td>
+            <td class="checkbox-cell"><input type="checkbox" id="cb${e}" ${d.enabled?"checked":""}></td>
+            <td class="delete-cell"><button class="delete-button" id="del${e}">Delete</button></td>
+        </tr>`}window.sd.html=`
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.9rem;
+            color: #333;
+            margin: 0;
+            padding: 15px;
+            background-color: #f7f7f7;
+        }
+
+
+        h1 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+
+        .controls-container {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+
+        .controls-container p {
+            margin-top: 0;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+
+        #timeSlider {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+
+        #time {
+            display: block;
+            margin-bottom: 15px;
+            color: #777;
+            font-size: 0.85rem;
+        }
+
+
+        .controls-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-right: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+
+        .controls-container button:hover {
+            background-color: #0056b3;
+        }
+
+
+        #dataTable {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 5px;
+            overflow: hidden; /* To contain the border-radius of header and footer if added */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+
+        #dataTable th, #dataTable td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+
+        #dataTable th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            color: #555;
+        }
+
+
+        #dataTable tr:last-child td {
+            border-bottom: none;
+        }
+
+
+        #dataTable tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+
+        .checkbox-cell {
+            text-align: center;
+        }
+
+
+        .delete-cell {
+            text-align: center;
+        }
+
+
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.3s ease;
+        }
+
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+
+        .model-path {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .controls-container .unsaved {
+            background-color: #cea11a;
+        }
+        .controls-container .saved {
+            background-color: #add5ff;
+            cursor: default;
+        }
+    </style>
+    <h1>Sky Dolly</h1>
+    <div class="controls-container">
+        <p>Record &amp; Replay</p>
+        <input id="timeSlider" type="range" min="0" max="${window.sd.maxTick}" step="1">
+        <span id="time"></span>
+        <br>
+        <button id="rec">${window.sd.isRec?"Stop Recording":"Start New Recording"}</button>
+        <button id="pause">${window.sd.paused?"Play":"Pause"}</button>
+        <button id="playback">${window.sd.isPlayback?"Stop Playback":"Start Playback"}</button>
+        <button id="update">Update Window</button>
+        <button id="save" class="saved">Saved</button>
+    </div>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Aircraft Model Path</th>
+                <th>Date</th>
+                <th>IRL Start time (UTC)</th>
+                <th>Start time (in-game)</th>
+                <th>Duration</th>
+                <th>Show aircraft in playback</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            ${t}
+        </tbody>
+    </table>
+    `,window.sd.addListeners()},window.sd.windowInit=function(){window.sd.updateHTML(),window.sd.window=window.open("about:blank","_blank","width=850,height=400"),window.sd.window.document.title="Sky Dolly"},t.addButton("Open GUI",window.sd.windowInit,"onclick='window.sd.windowInit()'"),window.sd.init(),waitForEntities()}}(),waitForEntities();
+    };
 
 
     function slew () {
-        !function(){"use strict";function afterGMenu(){let e=new window.GMenu("Slew Mode","slew");e.addItem("Horizontal Speed (in degrees/frame): ","LatSpeed","number",0,"0.0001"),e.addItem("Vertical Speed (in feet/frame): ","VertSpeed","number",0,"2"),e.addItem("Rotate Amount (in degrees): ","RotAmount","number",0,"2"),e.addItem("Speed after slew disabled (higher values are lower speeds, no flaps): ","SpeedMultiplier","number",0,"1.96"),e.addItem("Speed after slew disabled (with flaps): ","SpeedMultiplierFlaps","number",0,"2.7"),e.addHeader(2,"Keybinds"),e.addKBShortcut("Toggle Slew Mode: ","Toggle",1,"y",function(){kb("Toggle")}),e.addKBShortcut("Forwards: ","Forward",1,"i",function(){kb("Forward")}),e.addKBShortcut("Backwards: ","Backwards",1,"k",function(){kb("Backwards")}),e.addKBShortcut("Left: ","Left",1,"j",function(){kb("Left")}),e.addKBShortcut("Right: ","Right",1,"l",function(){kb("Right")}),e.addKBShortcut("Up: ","Up",1,"u",function(){kb("Up")}),e.addKBShortcut("Down: ","Down",1,"Enter",function(){kb("Down")}),e.addHeader(3,"Rotation"),e.addKBShortcut("Tilt Up: ","RotTiltUp",2,"ArrowUp",function(){kb("TiltUp")}),e.addKBShortcut("Tilt Down: ","RotTiltDown",2,"ArrowDown",function(){kb("TiltDown")}),e.addKBShortcut("Roll Left: ","RotRLeft",2,"ArrowLeft",function(){kb("RLeft")}),e.addKBShortcut("Roll Right: ","RotRRight",2,"ArrowRight",function(){kb("RRight")}),e.addKBShortcut("Yaw Left: ","RotRYLeft",2,",",function(){kb("YLeft")}),e.addKBShortcut("Yaw Right: ","RotYRight",2,".",function(){kb("YRight")})}window.gmenu&&window.GMenu||fetch("https://raw.githubusercontent.com/tylerbmusic/GeoFS-Addon-Menu/refs/heads/main/addonMenu.js").then(e=>e.text()).then(script=>{eval(script)}).then(()=>{setTimeout(afterGMenu,100)});var isSlewing=!1,tilt=0,roll=0,speedF=0,sideways=0,speedV=0,slewA=0,slewB=0,slewAlt=0,headingRad=0;window.lastCam=0,window.lastGravity=[0,0,0],window.slewDiv=document.createElement("div"),window.slewDiv.style.width="fit-content",window.slewDiv.style.height="fit-content",window.slewDiv.style.color="red",window.slewDiv.style.position="fixed",window.slewDiv.style.margin="5px",document.body.appendChild(window.slewDiv);let lastFrameNumber=window.window.geofs.frameNumber;function checkFrameNumber(){isSlewing&&(window.window.geofs.frameNumber!==lastFrameNumber&&(lastFrameNumber=window.window.geofs.frameNumber,updateSlew()),requestAnimationFrame(checkFrameNumber))}function kb(e){localStorage.getItem("slewToggle"),localStorage.getItem("slewForward"),localStorage.getItem("slewLeft"),localStorage.getItem("slewBackwards"),localStorage.getItem("slewRight"),localStorage.getItem("slewUp"),localStorage.getItem("slewRotYRight"),localStorage.getItem("slewRotYLeft"),localStorage.getItem("slewRotTiltUp"),localStorage.getItem("slewRotTiltDown"),localStorage.getItem("slewRotRLeft"),localStorage.getItem("slewRotRRight"),localStorage.getItem("slewDown");let t=document.activeElement===document.getElementById("chatInput");if(!t&&"true"==localStorage.getItem("slewEnabled")){if("Toggle"==e){if(isSlewing=!isSlewing)window.slew();else if(window.window.geofs.camera.set(window.lastCam),speedF=0,sideways=0,speedV=0,tilt=0,roll=0,window.window.geofs.aircraft.instance.rigidBody.gravityForce=window.lastGravity,window.slewDiv.innerHTML="",!window.window.geofs.animation.values.groundContact){var o,i=window.window.geofs.aircraft.instance;o=0==window.window.geofs.animation.values.flapsTarget?i.definition.minimumSpeed/Number(localStorage.getItem("slewSpeedMultiplier"))*i.definition.mass:i.definition.minimumSpeed/Number(localStorage.getItem("slewSpeedMultiplierFlaps"))*i.definition.mass,i.rigidBody.applyCentralImpulse(window.V3.scale(i.object3d.getWorldFrame()[1],o))}}else"Forward"==e?speedF+=Number(localStorage.getItem("slewLatSpeed")):"Backwards"==e?speedF-=Number(localStorage.getItem("slewLatSpeed")):"Right"==e?sideways+=Number(localStorage.getItem("slewLatSpeed")):"Left"==e?sideways-=Number(localStorage.getItem("slewLatSpeed")):"Up"==e?speedV+=Number(localStorage.getItem("slewVertSpeed")):"Down"==e?speedV-=Number(localStorage.getItem("slewVertSpeed")):"YRight"==e?headingRad+=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"YLeft"==e?headingRad-=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"TiltUp"==e?tilt+=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"TiltDown"==e?tilt-=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"RLeft"==e?roll+=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"RRight"==e&&(roll-=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD)}}async function updateSlew(){headingRad%=360*window.DEGREES_TO_RAD,window.controls.setMode(window.pControl);var e=Math.cos(headingRad)*speedF-Math.sin(headingRad)*sideways,t=Math.sin(headingRad)*speedF+Math.cos(headingRad)*sideways;slewA+=e,slewB+=t,slewAlt=window.window.geofs.animation.values.groundContact&&speedV<0?slewAlt:slewAlt+speedV,window.window.geofs.aircraft.instance.llaLocation=[slewA,slewB,slewAlt],window.window.geofs.aircraft.instance.object3d.setInitialRotation([tilt,roll,headingRad]),window.window.geofs.aircraft.instance.rigidBody.v_linearVelocity=[0,0,0],window.window.geofs.aircraft.instance.rigidBody.v_acceleration=[0,0,0],window.window.geofs.aircraft.instance.rigidBody.v_angularVelocity=[0,0,0],window.window.geofs.aircraft.instance.rigidBody.v_angularAcceleration=[0,0,0],window.window.geofs.aircraft.instance.rigidBody.gravityForce=[0,0,0],window.slewDiv.innerHTML=`
-                <p style="margin: 0px; font-weight: bold;">LAT: ${slewA.toFixed(4)} LON: ${slewB.toFixed(4)} ALT: ${(slewAlt*window.METERS_TO_FEET).toFixed(1)} FT MSL MAG ${(headingRad*window.RAD_TO_DEGREES).toFixed(0)} ${((Math.abs(speedF)+Math.abs(sideways))/Number(localStorage.getItem("slewLatSpeed"))).toFixed(0)} UNITS</p>
-                `}window.slew=async function(){speedF=0,sideways=0,speedV=0,tilt=0,roll=0,window.lastGravity=window.window.geofs.aircraft.instance.rigidBody.gravityForce,window.lastCam=window.window.geofs.camera.currentMode,headingRad=window.window.geofs.animation.values.heading360*window.DEGREES_TO_RAD,window.pControl=window.window.geofs.preferences.controlMode,slewA=window.window.geofs.aircraft.instance.llaLocation[0],slewB=window.window.geofs.aircraft.instance.llaLocation[1],slewAlt=window.window.geofs.aircraft.instance.llaLocation[2],window.window.geofs.camera.set(5),requestAnimationFrame(checkFrameNumber)}}();
-    };
+        !function(){"use strict";function afterGMenu(){let e=new window.GMenu("Slew Mode","slew");e.addItem("Horizontal Speed (in degrees/frame): ","LatSpeed","number",0,"0.0001"),e.addItem("Vertical Speed (in feet/frame): ","VertSpeed","number",0,"2"),e.addItem("Rotate Amount (in degrees): ","RotAmount","number",0,"2"),e.addItem("Speed after slew disabled (higher values are lower speeds, no flaps): ","SpeedMultiplier","number",0,"1.96"),e.addItem("Speed after slew disabled (with flaps): ","SpeedMultiplierFlaps","number",0,"2.7"),e.addHeader(2,"Keybinds"),e.addKBShortcut("Toggle Slew Mode: ","Toggle",1,"y",function(){kb("Toggle")}),e.addKBShortcut("Forwards: ","Forward",1,"i",function(){kb("Forward")}),e.addKBShortcut("Backwards: ","Backwards",1,"k",function(){kb("Backwards")}),e.addKBShortcut("Left: ","Left",1,"j",function(){kb("Left")}),e.addKBShortcut("Right: ","Right",1,"l",function(){kb("Right")}),e.addKBShortcut("Up: ","Up",1,"u",function(){kb("Up")}),e.addKBShortcut("Down: ","Down",1,"Enter",function(){kb("Down")}),e.addHeader(3,"Rotation"),e.addKBShortcut("Tilt Up: ","RotTiltUp",2,"ArrowUp",function(){kb("TiltUp")}),e.addKBShortcut("Tilt Down: ","RotTiltDown",2,"ArrowDown",function(){kb("TiltDown")}),e.addKBShortcut("Roll Left: ","RotRLeft",2,"ArrowLeft",function(){kb("RLeft")}),e.addKBShortcut("Roll Right: ","RotRRight",2,"ArrowRight",function(){kb("RRight")}),e.addKBShortcut("Yaw Left: ","RotRYLeft",2,",",function(){kb("YLeft")}),e.addKBShortcut("Yaw Right: ","RotYRight",2,".",function(){kb("YRight")})}function scale(e,t){return[e[0]*t,e[1]*t,e[2]*t]}window.gmenu&&window.GMenu||fetch("https://raw.githubusercontent.com/tylerbmusic/GeoFS-Addon-Menu/refs/heads/main/addonMenu.js").then(e=>e.text()).then(script=>{eval(script)}).then(()=>{setTimeout(afterGMenu,100)}),window.DEGREES_TO_RAD=window.DEGREES_TO_RAD||.017453292519943295,window.RAD_TO_DEGREES=window.RAD_TO_DEGREES||57.29577951308232,window.METERS_TO_FEET=window.METERS_TO_FEET||3.280839895;var isSlewing=!1,tilt=0,roll=0,speedF=0,sideways=0,speedV=0,slewA=0,slewB=0,slewAlt=0,headingRad=0;window.lastCam=0,window.lastGravity=[0,0,0],window.slewDiv=document.createElement("div"),window.slewDiv.style.width="fit-content",window.slewDiv.style.height="fit-content",window.slewDiv.style.color="red",window.slewDiv.style.position="fixed",window.slewDiv.style.margin="5px",document.body.appendChild(window.slewDiv);let lastFrameNumber=window.geofs.frameNumber;function checkFrameNumber(){isSlewing&&(window.geofs.frameNumber!==lastFrameNumber&&(lastFrameNumber=window.geofs.frameNumber,updateSlew()),requestAnimationFrame(checkFrameNumber))}function kb(e){localStorage.getItem("slewToggle"),localStorage.getItem("slewForward"),localStorage.getItem("slewLeft"),localStorage.getItem("slewBackwards"),localStorage.getItem("slewRight"),localStorage.getItem("slewUp"),localStorage.getItem("slewRotYRight"),localStorage.getItem("slewRotYLeft"),localStorage.getItem("slewRotTiltUp"),localStorage.getItem("slewRotTiltDown"),localStorage.getItem("slewRotRLeft"),localStorage.getItem("slewRotRRight"),localStorage.getItem("slewDown");let t=document.activeElement===document.getElementById("chatInput");if(!t&&"true"==localStorage.getItem("slewEnabled")){if("Toggle"==e){if(isSlewing=!isSlewing)window.slew();else if(window.geofs.camera.set(window.lastCam),speedF=0,sideways=0,speedV=0,tilt=0,roll=0,window.geofs.aircraft.instance.rigidBody.gravityForce=window.lastGravity,window.slewDiv.innerHTML="",!window.geofs.animation.values.groundContact){var o,i=window.geofs.aircraft.instance;o=0==window.geofs.animation.values.flapsTarget?i.definition.minimumSpeed/Number(localStorage.getItem("slewSpeedMultiplier"))*i.definition.mass:i.definition.minimumSpeed/Number(localStorage.getItem("slewSpeedMultiplierFlaps"))*i.definition.mass,i.rigidBody.applyCentralImpulse(scale(i.object3d.getWorldFrame()[1],o))}}else"Forward"==e?speedF+=Number(localStorage.getItem("slewLatSpeed")):"Backwards"==e?speedF-=Number(localStorage.getItem("slewLatSpeed")):"Right"==e?sideways+=Number(localStorage.getItem("slewLatSpeed")):"Left"==e?sideways-=Number(localStorage.getItem("slewLatSpeed")):"Up"==e?speedV+=Number(localStorage.getItem("slewVertSpeed")):"Down"==e?speedV-=Number(localStorage.getItem("slewVertSpeed")):"YRight"==e?headingRad+=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"YLeft"==e?headingRad-=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"TiltUp"==e?tilt+=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"TiltDown"==e?tilt-=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"RLeft"==e?roll+=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"RRight"==e&&(roll-=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD)}}async function updateSlew(){headingRad%=360*window.DEGREES_TO_RAD,window.controls.setMode(window.pControl);var e=Math.cos(headingRad)*speedF-Math.sin(headingRad)*sideways,t=Math.sin(headingRad)*speedF+Math.cos(headingRad)*sideways;slewA+=e,slewB+=t,slewAlt=window.geofs.animation.values.groundContact&&speedV<0?slewAlt:slewAlt+speedV,window.geofs.aircraft.instance.llaLocation=[slewA,slewB,slewAlt],window.geofs.aircraft.instance.object3d.setInitialRotation([tilt,roll,headingRad]),window.geofs.aircraft.instance.rigidBody.v_linearVelocity=[0,0,0],window.geofs.aircraft.instance.rigidBody.v_acceleration=[0,0,0],window.geofs.aircraft.instance.rigidBody.v_angularVelocity=[0,0,0],window.geofs.aircraft.instance.rigidBody.v_angularAcceleration=[0,0,0],window.geofs.aircraft.instance.rigidBody.gravityForce=[0,0,0],window.slewDiv.innerHTML=`
+        <p style="margin: 0px; font-weight: bold;">LAT: ${slewA.toFixed(4)} LON: ${slewB.toFixed(4)} ALT: ${(slewAlt*window.METERS_TO_FEET).toFixed(1)} FT MSL MAG ${(headingRad*window.RAD_TO_DEGREES).toFixed(0)} ${((Math.abs(speedF)+Math.abs(sideways))/Number(localStorage.getItem("slewLatSpeed"))).toFixed(0)} UNITS</p>
+        `}window.slew=async function(){speedF=0,sideways=0,speedV=0,tilt=0,roll=0,window.lastGravity=window.geofs.aircraft.instance.rigidBody.gravityForce,window.lastCam=window.geofs.camera.currentMode,headingRad=window.geofs.animation.values.heading360*window.DEGREES_TO_RAD,window.pControl=window.geofs.preferences.controlMode,slewA=window.geofs.aircraft.instance.llaLocation[0],slewB=window.geofs.aircraft.instance.llaLocation[1],slewAlt=window.geofs.aircraft.instance.llaLocation[2],window.geofs.camera.set(5),requestAnimationFrame(checkFrameNumber)}}();
+            };
 
 
     function twlights () {
@@ -1680,6 +1878,7 @@ function addonExecution () {
     opengines();
     realism();
     pushback();
+    dolly();
     slew();
     twlights();
     twsigns();
