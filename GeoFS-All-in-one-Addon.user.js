@@ -14,7 +14,9 @@ const waitForGeoFS = setInterval(() => {
     if (typeof geofs !== "undefined" && geofs.aircraft && geofs.aircraft.instance) {
         clearInterval(waitForGeoFS);
         setTimeout(() => {
-            (() => {var addonScript = document.createElement('script'); addonScript.src="https://raw.githack.com/geofs-pilot/GeoFS-All-in-one-Addon/main/main.js";document.body.appendChild(addonScript);})()
+            (() => {var addonScript = document.createElement('script'); 
+            addonScript.src="https://raw.githack.com/geofs-pilot/GeoFS-All-in-one-Addon/main/main.js";
+            document.body.appendChild(addonScript);})()
             console.log("GeoFS loaded, running addons…");
         }, 1000);
     }
