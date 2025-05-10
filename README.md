@@ -1,5 +1,5 @@
 # GeoFS-All-in-one-Addon
-19 addons, their instructions, and detailed flight procedures, compiled together <br/>
+20 addons, their instructions, and detailed flight procedures, compiled together <br/>
  -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
  -note: Due to changes in GeoFS' source code in preparation of GeoFS 4.0, landing stats, GPWS callouts, and flight path vector addons may not work properly. I will update the code once these scripts have been updated by their original developer (tylerbmusic). <br/>
 ![image](https://github.com/user-attachments/assets/4784992e-29a6-47cf-9f3b-f01e0cf95231)
@@ -33,6 +33,7 @@ https://github.com/avramovic/GeoFS-AI-ATC/tree/master <br/>
 https://github.com/RadioactivePotato/GeoFS-Ad-Remover/tree/main <br/>
 https://github.com/jtpotato/geofs-scripts/tree/main/Autoland%2B%2B <br/>
 https://github.com/meatbroc/geofs-autothrottle/tree/main <br/>
+https://github.com/geofs-pilot/GeoFS-Camera-cycling/tree/main <br/>
 https://github.com/tylerbmusic/GeoFS-Failures <br/>
 https://github.com/tylerbmusic/GeoFS-Flight-Path-Vector <br/>
 https://github.com/geofs-pilot/GeoFS-Fuel <br/>
