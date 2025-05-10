@@ -52,7 +52,7 @@ function menus() {
             'Autothrottle': `Regulates aircraft speed while retaining pilot control`,
 
 
-            'Camera cycling': `Randomly cycles through the camera angles for each airplane every 10 seconds. You can toggle this on and off by double-clicking the middle mouse button. By default, it excludes cockpit-less cam, free cam, chase cam and fixed cam.`,
+            'Camera cycling': `Randomly cycles through the camera angles for each airplane every 30 seconds. You can toggle this on and off by pressing [W]. By default, it excludes cockpit-less cam, free cam, chase cam and fixed cam.`,
 
 
             'Failures': `Adds the ability for systems to fail
@@ -1116,7 +1116,7 @@ function addonExecution () {
 
 
 function camera () {
-    !function(){"use strict";let a=null,e=null,t=[],r=0,n=!0;function c(){if(!geofs.camera||!geofs.camera.modes)return;let a=geofs.camera.modes,c=[2,3,4,5];t=[];for(let i=0;i<a.length;i++)c.includes(i)||t.push(i);for(let l=t.length-1;l>0;l--){let o=Math.floor(Math.random()*(l+1));[t[l],t[o]]=[t[o],t[l]]}console.log("Cycling through randomized cameras (excluding 2, 3, 4, 5):",t),r=0,e&&clearInterval(e),e=setInterval(()=>{if(!geofs.pause&&!n&&t.length>0){let a=t[r];geofs.camera.set(a),console.log("Switched to camera:",a),r=(r+1)%t.length}},1e4)}setInterval(()=>{geofs.aircraft&&geofs.aircraft.instance&&geofs.aircraft.instance.id!==a&&(a=geofs.aircraft.instance.id,console.log("Aircraft changed. Restarting camera script."),c())},1e3);let i=0;document.addEventListener("mousedown",a=>{if(1===a.button){let e=Date.now();e-i<300&&(n=!n,console.log("Camera cycling manually paused:",n)),i=e}});let l=setInterval(()=>{"undefined"!=typeof geofs&&geofs.camera&&geofs.camera.modes&&geofs.aircraft&&geofs.aircraft.instance&&(clearInterval(l),a=geofs.aircraft.instance.id,c())},500)}();
+    !function(){"use strict";let e=null,a=null,t=[],r=0,n;function c(i){("w"===i.key||"W"===i.key)&&(!function c(){function i(){if(!geofs.camera||!geofs.camera.modes)return;document.addEventListener("keypress",e=>{("w"===e.key||"W"===e.key)&&(n=!n,console.log("Camera cycling manually paused:",n))});let e=geofs.camera.modes,c=[2,3,4,5];t=[];for(let i=0;i<e.length;i++)c.includes(i)||t.push(i);for(let s=t.length-1;s>0;s--){let l=Math.floor(Math.random()*(s+1));[t[s],t[l]]=[t[l],t[s]]}console.log("Cycling through randomized cameras (excluding 2, 3, 4, 5):",t),r=0,a&&clearInterval(a),a=setInterval(()=>{if(!geofs.pause&&!n&&t.length>0){let e=t[r];geofs.camera.set(e),console.log("Switched to camera:",e),r=(r+1)%t.length}},3e4)}setInterval(()=>{geofs.aircraft&&geofs.aircraft.instance&&geofs.aircraft.instance.id!==e&&(e=geofs.aircraft.instance.id,console.log("Aircraft changed. Restarting camera script."),i())},1e3);let s=setInterval(()=>{"undefined"!=typeof geofs&&geofs.camera&&geofs.camera.modes&&geofs.aircraft&&geofs.aircraft.instance&&(clearInterval(s),e=geofs.aircraft.instance.id,i())},500)}(),document.removeEventListener("keypress",c))}document.addEventListener("keypress",c)}();
 };
 
 
@@ -1871,6 +1871,7 @@ function camera () {
     adblock();
     autoland();
     athrottle();
+    camera();
     fpv();
     failuresAndFuel();
     gpws();
