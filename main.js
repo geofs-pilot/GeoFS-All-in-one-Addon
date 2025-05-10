@@ -274,8 +274,7 @@ function menus() {
         
             //INSTRUCTIONS GO HERE:
         const descriptions = {
-            'Preflight procedures': `Run FlightControl.ahk for numpad controls
-            Review procedures
+            'Preflight procedures': `Review procedures
             Load/create flight plan
             Check METAR, decide on VFR or IFR
             Check elevations of departure and arrival airports
