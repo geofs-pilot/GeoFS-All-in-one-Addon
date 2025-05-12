@@ -2,7 +2,7 @@
 20 addons, their instructions, and detailed flight procedures, compiled together <br/>
  -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
  -note: Due to changes in GeoFS' source code in preparation of GeoFS 4.0, landing stats, GPWS callouts, and flight path vector addons may not work properly. I will update the code once these scripts have been updated by their original developer (tylerbmusic). <br/>
-![image](https://github.com/user-attachments/assets/c1eda595-6c8f-40c3-951b-e50186524e01)
+![image](https://github.com/user-attachments/assets/d4e3fd16-beb4-49e4-a2b0-24407261c59a)
 
 
 ## How to use: <br/>
@@ -13,7 +13,7 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 -No need to update, automatically runs latest version
 ### Pasting into console - not recommended, most cumbersome
 -Once GeoFS is fully loaded, press F12/Ctrl+shift+I/Ctrl+shift+J and go to the Console tab. <br/>
--Paste in the contents of main.js and hit Enter
+-Paste in the contents of main.js at the > symbol and hit Enter
 ### Tampermonkey - recommended, runs automatically when GeoFS is visited
 -Install [Tampermonkey](https://www.tampermonkey.net/) <br/>
 -Click [here](https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/GeoFS-All-in-one-Addon.user.js) to install the script <br/>
