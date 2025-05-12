@@ -2,7 +2,7 @@
 20 addons, their instructions, and detailed flight procedures, compiled together <br/>
  -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
  -note: Due to changes in GeoFS' source code in preparation of GeoFS 4.0, landing stats, GPWS callouts, and flight path vector addons may not work properly. I will update the code once these scripts have been updated by their original developer (tylerbmusic). <br/>
-![image](https://github.com/user-attachments/assets/4784992e-29a6-47cf-9f3b-f01e0cf95231)
+![image](https://github.com/user-attachments/assets/c1eda595-6c8f-40c3-951b-e50186524e01)
 
 
 ## How to use: <br/>
