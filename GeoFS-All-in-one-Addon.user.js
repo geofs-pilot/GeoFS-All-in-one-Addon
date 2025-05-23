@@ -2,7 +2,7 @@
 // @name         GeoFS-All-in-one-Addon
 // @namespace    http://tampermonkey.net/
 // @version      2025-03-28
-// @description  19 addons, their instructions, and detailed flight procedures, compiled together
+// @description  21 addons, their instructions, and detailed flight procedures, compiled together
 // @author       geofspilot
 // @match        https://www.geo-fs.com/geofs.php?v=*
 // @match        https://*.geo-fs.com/geofs.php*
