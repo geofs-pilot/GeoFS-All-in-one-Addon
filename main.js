@@ -441,6 +441,7 @@ function menus() {
             9 = cirrocumulus with cirrostratus or cirrus
 
 
+            
             Blue Airport Symbol – Towered airport
             Magenta Airport Symbol – Non-towered airport
             Runway Layout – Pictorial representation of paved runways longer than 8069 ft
@@ -508,6 +509,7 @@ function menus() {
             Hot Air Balloon Symbol – Balloon operations area
 
 
+            
             Airspace Classes
             1. Class A (High-level, controlled airspace)
             Altitude: Generally from 18,000 feet MSL (Mean Sea Level) up to 60,000 feet MSL.
