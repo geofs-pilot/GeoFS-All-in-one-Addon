@@ -1,5 +1,5 @@
 # GeoFS-All-in-one-Addon
-21 addons, their instructions, and detailed flight procedures, compiled together <br/>
+22 addons, their instructions, and detailed flight procedures, compiled together <br/>
  -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
  -note: Due to changes in GeoFS' source code in preparation of GeoFS 4.0, landing stats, GPWS callouts, and flight path vector addons may not work properly. I will update the code once these scripts have been updated by their original developer (tylerbmusic). <br/>
 ![image](https://github.com/user-attachments/assets/5f7a7e45-0a97-461a-8f4e-3b8a86e8dacf)
@@ -22,6 +22,7 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 -[install randomJobs](https://github.com/scitor/GeoFS/raw/master/randomJobs/randomJobs.user.js) <br/>
 -[install GeoFS-AI-ATC](https://github.com/avramovic/geofs-ai-atc/raw/master/GeoFS-AI-ATC.user.js) <br/>
 -[install AI ATC with PTT key (modified version of GeoFS-AI-ATC)](https://github.com/geofs-pilot/AI-ATC-PTT-modification/raw/main/PTT_AI_ATC.user.js) <br/>
+-[Better-GeoFS-NAV-map](https://github.com/RadioactivePotato/Better-GeoFS-NAV-Map/tree/main)
 ## Other resources to check out
 -[FMC route collection](http://sites.google.com/view/gpg-2-0/home?authuser=0) <br/>
 -https://skyvector.com/<br/>
