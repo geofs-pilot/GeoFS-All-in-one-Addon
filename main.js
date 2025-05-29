@@ -90,13 +90,6 @@ Changes the navigation map of GeoFS to another tile provider`,
             'Information display': `Displays Indicated Airspeed, Mach, Ground Speed, Altitude, Above Ground Level, Heading, Vertical Speed, Throttle %, AOA, Glideslope angle (must be tuned into ILS), G-force, and status of overpowered engines, camera cycling, and fuel`,
 
 
-            'Jobs': `***works with tampermonkey only, see the GitHub page***
-
-
-            Shows flights departing from the airport you are currently at and can also load flight plans for those routes
-            Tracks your completed flights under “Career”`,
-
-
             'Landing stats': `Upon landing, displays vertical speed, G-forces, airspeed, roll, tilt, TDZ accuracy, and more. For the TDZ to work you must be tuned into ILS `,
 
 
@@ -105,6 +98,15 @@ Changes the navigation map of GeoFS to another tile provider`,
 
 
             'Pushback': `Adds pushback tugs for most military and civilian aircraft which appear if you are stationary.`,
+
+
+            'randomJobs': `***works with tampermonkey only, see the GitHub page***
+
+
+            Shows flights departing from the airport you are currently at and can also load flight plans for those routes
+            Tracks your completed flights under “Career”`,
+
+
 
 
             'Realism pack': `Toggle button for KCAS/KTAS instruments
@@ -227,10 +229,10 @@ Changes the navigation map of GeoFS to another tile provider`,
         addAddon('Fuel');
         addAddon('GPWS');
         addAddon('Information display');
-        addAddon('Jobs')
         addAddon('Landing stats');
         addAddon('Overpowered engines');
         addAddon('Pushback');
+        addAddon('randomJobs')
         addAddon('Realism pack');
         addAddon('Sky Dolly');
         addAddon('Slew mode');
