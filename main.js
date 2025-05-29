@@ -59,6 +59,7 @@ Changes the navigation map of GeoFS to another tile provider`,
 
 
             'Camera cycling': `Randomly cycles through the camera angles for each airplane every 30 seconds. You can toggle this on and off by pressing [W]. By default, it excludes cockpit-less cam, free cam, chase cam and fixed cam.`,
+
             
             'Extra vehicles': `Extra vehicles in GeoFS presented by JXT`,
 
