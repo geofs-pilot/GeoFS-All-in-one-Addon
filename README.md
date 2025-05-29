@@ -26,27 +26,27 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 -[Better-GeoFS-NAV-map](https://github.com/RadioactivePotato/Better-GeoFS-NAV-Map/tree/main)
 ## Addons included:
 Option menu with flight procedures <br/>
-AI ATC <br/>
-Ad remover <br/>
-Autoland <br/>
-Autothrottle <br/>
-Better NAV map <br/>
-Camera cycling <br/>
-Extra Vehicles <br/>
-Failures <br/>
-Flight Path Vector <br/>
-Fuel <br/>
-GPWS Callouts <br/>
-Information display <br/>
+GeoFS-AI-ATC <br/>
+GeoFS-Ad-Remover <br/>
+Autoland++ <br/>
+geofs-autothrottle <br/>
+Better-GeoFS-NAV-Map <br/>
+GeoFS-Camera-cycling <br/>
+GeoFS-Extra-Vehicles <br/>
+GeoFS-Failures <br/>
+GeoFS-Flight-Path-Vector <br/>
+GeoFS-Fuel <br/>
+GeoFS-GPWS-Callouts <br/>
+GeoFS-Information-Display <br/>
+GeoFS-Landing-Stats <br/>
+geofs-overpowered-engines <br/>
+GeoFS-Pushback <br/>
 randomJobs <br/>
-Landing stats <br/>
-Overpowered engines <br/>
-Pushback <br/>
-Realism Pack <br/>
-Sky Dolly <br/>
-Slew Mode <br/>
-Taxiway lights <br/>
-Taxiway signs <br/>
+Realism-pack. <br/>
+GeoFS-Sky-Dolly <br/>
+GeoFS-Slew-Mode <br/>
+GeoFS-Taxiway-Lights <br/>
+GeoFS-Taxiway-Signs <br/>
 uiTweaks <br/>
 ## Other resources to check out
 -[FMC route collection](http://sites.google.com/view/gpg-2-0/home?authuser=0) <br/>
