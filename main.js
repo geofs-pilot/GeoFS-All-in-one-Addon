@@ -100,7 +100,7 @@ Changes the navigation map of GeoFS to another tile provider`,
             'Pushback': `Adds pushback tugs for most military and civilian aircraft which appear if you are stationary.`,
 
 
-            'randomJobs': `***works with tampermonkey only, see the GitHub page***
+            'Random Jobs': `***works with tampermonkey only, see the GitHub page***
 
 
             Shows flights departing from the airport you are currently at and can also load flight plans for those routes
@@ -232,7 +232,7 @@ Changes the navigation map of GeoFS to another tile provider`,
         addAddon('Landing stats');
         addAddon('Overpowered engines');
         addAddon('Pushback');
-        addAddon('randomJobs')
+        addAddon('Random Jobs')
         addAddon('Realism pack');
         addAddon('Sky Dolly');
         addAddon('Slew mode');
@@ -450,7 +450,6 @@ Changes the navigation map of GeoFS to another tile provider`,
             9 = cirrocumulus with cirrostratus or cirrus
 
 
-            
             Blue Airport Symbol – Towered airport
             Magenta Airport Symbol – Non-towered airport
             Runway Layout – Pictorial representation of paved runways longer than 8069 ft
@@ -459,8 +458,6 @@ Changes the navigation map of GeoFS to another tile provider`,
             ‘H’ inside a Circle – Heliport
             ‘U’ inside a Circle – Ultralight field
             Seaplane Base Anchor Symbol – Water landing area
-
-
 
 
             Airspace Boundaries
@@ -475,8 +472,6 @@ Changes the navigation map of GeoFS to another tile provider`,
             National Security Areas (NSA) – Sensitive areas requiring caution
 
 
-
-
             Navigational Aids (NAVAIDs)
             Blue Hexagon with Dot in Center – VOR station
             Blue Hexagon with Box and Dashes – VOR-DME station
@@ -488,8 +483,6 @@ Changes the navigation map of GeoFS to another tile provider`,
             ‘L’ in a Circle – Lighting available
             *‘L’ in a Circle – Pilot-controlled lighting
             ‘*’ Next to a Frequency – Part-time operation
-
-
 
 
             Obstructions & Terrain
@@ -508,8 +501,6 @@ Changes the navigation map of GeoFS to another tile provider`,
             Bridges, Tunnels, Dams – Small black icons
 
 
-
-
             Other Important Symbols
             ‘VR-XXX’ or ‘IR-XXX’ – Military Training Routes (Visual/Instrument)
             ADIZ Boundary Line – Solid magenta or blue lines with notches
@@ -518,7 +509,6 @@ Changes the navigation map of GeoFS to another tile provider`,
             Hot Air Balloon Symbol – Balloon operations area
 
 
-            
             Airspace Classes
             1. Class A (High-level, controlled airspace)
             Altitude: Generally from 18,000 feet MSL (Mean Sea Level) up to 60,000 feet MSL.
