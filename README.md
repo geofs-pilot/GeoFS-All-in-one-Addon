@@ -24,6 +24,7 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 -[install AI ATC with PTT key (modified version of GeoFS-AI-ATC)](https://github.com/geofs-pilot/AI-ATC-PTT-modification/raw/main/PTT_AI_ATC.user.js) <br/>
 -[Better-GeoFS-NAV-map](https://github.com/RadioactivePotato/Better-GeoFS-NAV-Map/tree/main)
 ## Addons:
+Option menu with flight procedures <br/>
 AI ATC <br/>
 Ad remover <br/>
 Autoland <br/>
