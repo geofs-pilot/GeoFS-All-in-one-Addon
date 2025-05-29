@@ -52,6 +52,12 @@ function menus() {
             'Autothrottle': `Regulates aircraft speed while retaining pilot control`,
 
 
+            'Better NAV Map': `***works with tampermonkey only, see the GitHub page***
+
+
+Changes the navigation map of GeoFS to another tile provider`,
+
+
             'Camera cycling': `Randomly cycles through the camera angles for each airplane every 30 seconds. You can toggle this on and off by pressing [W]. By default, it excludes cockpit-less cam, free cam, chase cam and fixed cam.`,
             
             'Extra vehicles': `Extra vehicles in GeoFS presented by JXT`,
@@ -213,6 +219,7 @@ function menus() {
         addAddon('Ad remover');
         addAddon('Autoland++');
         addAddon('Autothrottle');
+        addAddon('Better NAV Map');
         addAddon('Camera cycling');
         addAddon('Extra vehicles');
         addAddon('Failures');
