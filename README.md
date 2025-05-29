@@ -41,7 +41,7 @@ GeoFS-Information-Display <br/>
 GeoFS-Landing-Stats <br/>
 geofs-overpowered-engines <br/>
 GeoFS-Pushback <br/>
-randomJobs <br/>
+Random Jobs <br/>
 Realism-pack. <br/>
 GeoFS-Sky-Dolly <br/>
 GeoFS-Slew-Mode <br/>
