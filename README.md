@@ -27,6 +27,29 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 -[FMC route collection](http://sites.google.com/view/gpg-2-0/home?authuser=0) <br/>
 -https://skyvector.com/<br/>
 -[Simbrief](https://dispatch.simbrief.com/home) <br/>
+## Addons:
+AI ATC <br/>
+Ad remover <br/>
+Autoland <br/>
+Autothrottle <br/>
+Better NAV map <br/>
+Camera cycling <br/>
+Extra Vehicles <br/>
+Failures <br/>
+Flight Path Vector <br/>
+Fuel <br/>
+GPWS Callouts <br/>
+Information display <br/>
+randomJobs <br/>
+Landing stats <br/>
+Overpowered engines <br/>
+Pushback <br/>
+Realism Pack <br/>
+Sky Dolly <br/>
+Slew Mode <br/>
+Taxiway lights <br/>
+Taxiway signs <br/>
+uiTweaks <br/>
 ## Credits
 (some procedures were written with the help of chatgpt) <br/>
 https://sites.google.com/view/geofs-flights-channel/flight-procedures <br/>
@@ -34,6 +57,7 @@ https://github.com/avramovic/GeoFS-AI-ATC/tree/master <br/>
 https://github.com/RadioactivePotato/GeoFS-Ad-Remover/tree/main <br/>
 https://github.com/jtpotato/geofs-scripts/tree/main/Autoland%2B%2B <br/>
 https://github.com/meatbroc/geofs-autothrottle/tree/main <br/>
+https://github.com/RadioactivePotato/Better-GeoFS-NAV-Map/tree/main <br/>
 https://github.com/geofs-pilot/GeoFS-Camera-cycling/tree/main <br/>
 https://github.com/af267/GeoFS-Extra-Vehicles/tree/main <br/>
 https://github.com/tylerbmusic/GeoFS-Failures <br/>
