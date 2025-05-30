@@ -59,7 +59,6 @@ Changes the navigation map of GeoFS to another tile provider`,
 
 
             'Camera cycling': `Randomly cycles through the camera angles for each airplane every 30 seconds. You can toggle this on and off by pressing [W]. By default, it excludes cockpit-less cam, free cam, chase cam and fixed cam.`,
-
             
             'Extra vehicles': `Extra vehicles in GeoFS presented by JXT`,
 
@@ -965,7 +964,7 @@ function addonExecution () {
 
 
     function adblock () {
-        function removeElementsByClass(e){let s=document.getElementsByClassName(e);for(;s.length>0;)s[0].parentNode.removeChild(s[0])}removeElementsByClass("geofs-adbanner geofs-adsense-container");
+        (() => {var adblockScript = document.createElement('script'); adblockScript.src="https://raw.githack.com/RadioactivePotato/GeoFS-Ad-Remover/main/GeoFS%20Ad%20Remover-0.1.user.js";document.body.appendChild(adblockScript);})()
     };
 
 
@@ -975,147 +974,7 @@ function addonExecution () {
 
 
     function athrottle () {
-        window.executeOnEventDone("geofsInitialized",function t(){window.geofs.autothrottle={on:!1,init:function(){window.geofs.autothrottle.initStyles(),window.geofs.autothrottle.callbackID=window.geofs.api.addFrameCallback(window.geofs.autothrottle.tickWrapper);let t=$("<div/>").addClass("ext-autothrottle-bar").html('<div class="ext-autothrottle-control-pad ext-autothrottle-pad" id="autothrottle-button" tabindex="0" onclick="window.geofs.autothrottle.toggle()"><div class="control-pad-label transp-pad">A/THR</div>');$(".geofs-autopilot-bar").append(t);let o=$("<div/>").html('<a class="ext-autothrottle-numberDown numberDown ext-autothrottle-control">-</a><input class="ext-autothrottle-numberValue numberValue ext-autothrottle-course" min="0" smallstep="5" stepthreshold="100" step="10" data-method="setSpeed" maxlength="4" value="0"><a class="ext-autothrottle-numberUp numberUp">+</a><span>KTS</span>').addClass("ext-autothrottle-control"),e=$("<div/>").addClass("geofs-autopilot-control").html('<span class="ext-autothrottle-switch ext-autothrottle-mode"><a class="ext-autothrottle-switchLeft switchLeft green-pad" data-method="setArm" value="false" id="armOff">MNL</a><a class="ext-autothrottle-switchRight switchRight" data-method="setArm" value="true" id="armOn">LND</a></span>');$("<div/>").addClass("ext-autothrottle-controls").hide().append(o,e).appendTo($(".ext-autothrottle-bar"));let r=$("<div/>").addClass("mdl-tooltip").attr("for","autothrottle-button").text("Toggle autothrottle on/off");t.append(r),componentHandler.upgradeElement(r[0]),$(document).on("autothrottleOn",function(){window.geofs.autopilot.on&&window.geofs.autopilot.turnOff(),clearTimeout(window.geofs.autothrottle.panelTimeout),$(".ext-autothrottle-controls").show(),$(".ext-autothrottle-pad").removeClass("red-pad").addClass("green-pad"),window.geofs.autothrottle.on=!0;var t=Math.round(window.geofs.animation.values.kias);window.geofs.autopilot.setSpeed(t),$(".ext-autothrottle-numberValue").val(t)}),$(document).on("autothrottleOff",function(){$(".ext-autothrottle-pad").removeClass("green-pad").addClass("red-pad"),$(".ext-autothrottle-controls").hide(),window.geofs.autothrottle.panelTimeout=setTimeout(function(){$(".ext-autothrottle-pad").removeClass("red-pad").removeClass("green-pad")},3e3),window.geofs.autothrottle.on=!1}),$(document).on("autopilotOn",function(){window.geofs.autothrottle.on&&$(document).trigger("autothrottleOff")})},initStyles:function(){let t=document.createElement("style");t.innerHTML=`
-                           .ext-autothrottle-pad {
-                               width: 60px;
-                               margin: 0px 10px;
-                           }
-                           .ext-autothrottle-bar {
-                               white-space: nowrap;
-                               display: flex;
-                               align-items: flex-start;
-                               pointer-events: all;
-                           }
-                           .ext-autothrottle-control-pad {
-                               border: 1px solid #888;
-                               background-color: #000;
-                               box-shadow: 0px 0px 5px #000;
-                               border-radius: 15px;
-                               cursor: pointer !important;
-                           }
-                           .ext-autothrottle-controls {
-                               vertical-align: bottom;
-                               display: none;
-                               margin-right: 10px;
-                           }
-                           .ext-autothrottle-control {
-                               position: relative;
-                               text-align: center;
-                               margin: 0px 5px;
-                               color: white;
-                               line-height: 25px;
-                               display: inline-block;
-                           }
-                           .ext-autothrottle-airport-label {
-                               position: relative !important;
-                               left: 17.5px;
-                           }
-                           .ext-autothrottle-highlighted {
-                               color: #66ff00 !important;
-                               border-color: white !important;
-                           }
-                           .ext-autothrottle-highlighted2 {
-                               color: #FF0000 !important;
-                               border-color: white !important;
-                           }
-                           .ext-autothrottle-control span {
-                               display: block;
-                               text-align: center;
-                               text-shadow: #000 1px 1px 3px;
-                               font-size: 12px;
-                               top: 2px;
-                               position: relative;
-                           }
-                           .ext-autothrottle-bar .ext-autothrottle-switch .ext-autothrottle-switchRight {
-                               top: -25px !important;
-                               border-radius: 0px 15px 15px 0px;
-                               left: 0px;
-                           }
-                           .ext-autothrottle-bar .ext-autothrottle-switch .ext-autothrottle-switchLeft {
-                               top: -25px !important;
-                               border-radius: 15px 0px 0px 15px;
-                               border-right: 5px;
-                               right: -3px;
-                           }
-                           .ext-autothrottle-bar .ext-autothrottle-switch a {
-                               user-select: none;
-                               -webkit-user-select: none;
-                               position: relative;
-                               display: inline-block;
-                               width: 35px;
-                               height: 17px;
-                               line-height: 19px;
-                               cursor: pointer;
-                               color: white;
-                               background: #000;
-                               margin: 2px 0px;
-                               display: inline-block;
-                               border: 1px solid white;
-                               box-shadow: 0px 0px 5px #000;
-                           }
-                           .ext-autothrottle-bar .ext-autothrottle-control {
-                               position: relative;
-                               text-align: center;
-                               margin: 0px 5px;
-                               color: white;
-                               line-height: 25px;
-                               display: inline-block;
-                           }
-                           .ext-autothrottle-bar .ext-autothrottle-course {
-                               width: 35px !important;
-                           }
-                           .ext-autothrottle-bar .ext-autothrottle-airport {
-                               width: 70px !important;
-                           }
-                           .ext-autothrottle-numberDown {
-                               border-radius: 15px 0px 0px 15px;
-                               line-height: 23px;
-                               right: -5px;
-                               position: relative !important;
-                           }
-                           .ext-autothrottle-numberUp {
-                               border-radius: 0px 15px 15px 0px;
-                               line-height: 26px;
-                               left: -5px;
-                               position: relative !important;
-                           }
-                           .ext-autothrottle-airportInput {
-                               border-radius: 15px 0px 0px 15px !important;
-                           }
-                           .ext-autothrottle-control .ext-autothrottle-numberDown,.ext-autothrottle-control .ext-autothrottle-numberUp {
-                               user-select: none;
-                               -webkit-user-select: none;
-                               vertical-align: top;
-                               cursor: pointer;
-                               text-align: center;
-                               color: white;
-                               background: #000;
-                               margin: 0px;
-                               width: 30px;
-                               display: inline-block;
-                               border: 1px solid white;
-                               height: 25px;
-                               box-shadow: 0px 0px 5px #000;
-                           }
-                           .ext-autothrottle-control .ext-autothrottle-numberValue {
-                               font-family: 'LCD-Bold', monospace;
-                               font-size: 20px !important;
-                               letter-spacing: 1px;
-                               display: inline-block;
-                               vertical-align: top;
-                               padding: 0px 5px;
-                               margin: 0px;
-                               background: #000;
-                               border: 1px solid;
-                               border-radius: 0px;
-                               height: 25px;
-                               line-height: 26px;
-                               box-shadow: 0px 0px 5px #000;
-                               color: white;
-                               width: 80px;
-                               text-align: right;
-                           }
-                        `,document.head.appendChild(t)},toggle:function(){window.geofs.autothrottle.error||(window.geofs.autothrottle.on?$(document).trigger("autothrottleOff"):$(document).trigger("autothrottleOn"))},tick:function(t,o){var e=clamp(Math.floor(o/window.geofs.api.renderingSettings.physicsDeltaMs),1,10),r=t/e,a=window.geofs.animation.values,l=window.geofs.autopilot,i=l.values.speed,n=a.kias;"mach"==window.geofs.autopilot.speedMode&&(i=window.geofs.utils.machToKnots(l.values.speed),n=window.geofs.utils.machToKnots(a.mach)),l.PIDs.throttle.set(i,0,1),controls.throttle=l.PIDs.throttle.compute(n,r),controls.throttle=clamp(controls.throttle,0,1),window.geofs.debug.autothrottleValues=[t,o,e,r,a,l,i,n]},tickWrapper:function(t){if(window.geofs.autothrottle.on){if(window.geofs.aircraft.instance.groundContact&&window.geofs.autothrottle.armed){controls.throttle=0,$(document).trigger("autothrottleOff");return}var o=t-window.geofs.utils.now();try{window.geofs.autothrottle.tick(o/1e3,o)}catch(e){window.geofs.autothrottle.handleError(e)}}},handleError:function(t){console.error(t),ui.notification.show("An error with autothrottle occured, autothrottle is now disabled. Check console for more details."),window.geofs.debug.log("meatbroc autothrottle error"),window.geofs.api.removeFrameCallback(window.geofs.autothrottle.callbackID),$(document).trigger("autothrottleOff"),window.geofs.autothrottle.error=!0}},window.geofs.autothrottle.init(),window.geofs.autopilot.setArm=function(t){let o=JSON.parse(t);window.geofs.autothrottle.armed=o,o?($("#armOn").addClass("green-pad"),$("#armOff").removeClass("green-pad")):($("#armOff").addClass("green-pad"),$("#armOn").removeClass("green-pad"))}});
+        (() => {var athrScript = document.createElement('script'); athrScript.src="https://raw.githack.com/meatbroc/geofs-autothrottle/main/userscript.js";document.body.appendChild(athrScript);})()
     };
 
 
@@ -1125,72 +984,7 @@ function addonExecution () {
 
 
     function vehicles () {
-        !function(){"use strict";console.log("Extras script running...");let t=document.querySelector('button[data-toggle-panel=".geofs-aircraft-list"]');if(!t){console.warn("Aircraft button not found.");return}let a=t.cloneNode(!0);a.textContent="Extras",a.removeAttribute("data-toggle-panel"),a.setAttribute("data-toggle-panel",".geofs-extras-list"),a.id="extras-button",t.parentNode.insertBefore(a,t);let e=document.createElement("ul");e.className="geofs-list geofs-extras-list geofs-toggle-panel",e.innerHTML=`
-        <div style="display: flex; align-items: center; gap: 10px; padding-left: 20px;">
-            <img src="https://raw.githubusercontent.com/af267/GeoFS-Extra-Vehicles/refs/heads/main/JXT%20Logo.png" style="width: 100px; height: auto;" />
-            <h4 style="margin: 0;">GeoFS Extra Vehicles</h4>
-        </div>
-    `;let i=document.querySelector(".geofs-aircraft-list");function r(t,a){let e=document.createElement("li");e.className="geofs-list-collapsible-item",e.textContent=t;let i=document.createElement("ul");return i.className="geofs-collapsible",a.forEach(t=>{let a=document.createElement("li");a.textContent=t.name,a.setAttribute("data-url",t.url),a.setAttribute("data-mpid",t.id),i.appendChild(a)}),e.appendChild(i),e}i&&i.parentNode&&i.parentNode.insertBefore(e,i.nextSibling),e.addEventListener("click",function(t){let a=t.target.closest("li[data-url]");if(a){var e,i;let r=a.getAttribute("data-url"),o=a.getAttribute("data-mpid");e=r,i=o,$.ajax(e+"aircraft.json",{dataType:"text",success:function(t){var a={id:"custom_"+Date.now(),name:"Custom Aircraft",fullPath:e,isPremium:!1,isCommunity:!1,definition:btoa(t),multiplayerFiles:[e+"multiplayer.glb",e+"multiplayer-low.glb"]},r=geofs.aircraft.instance.parseRecord(JSON.stringify(a));r?(geofs.aircraft.instance.unloadAircraft(),a.id=i,geofs.aircraft.instance.id=i,geofs.aircraft.instance.fullPath=a.fullPath,geofs.aircraft.instance.aircraftRecord=a,geofs.aircraft.instance.init(r,geofs.aircraft.instance.getCurrentCoordinates())):ui.notification.show("Failed to parse aircraft.json")},error:function(){ui.notification.show("Could not load aircraft.json")}})}}),fetch("https://raw.githubusercontent.com/af267/GeoFS-Extra-Vehicles/refs/heads/main/vehicles.json").then(t=>t.json()).then(t=>{for(let[a,i]of Object.entries(t)){let o=r(a,i);e.appendChild(o)}!function t(){let a=document.createElement("li");a.className="geofs-list-collapsible-item",a.textContent="About";let i=document.createElement("ul");i.className="geofs-collapsible",i.innerHTML=`
-            <a href="https://github.com/af267/GeoFS-Extra-Vehicles" target="_blank" rel="nofollow"><h4>Current Version: 1.1</h4></a>
-            <p>GeoFS Extra Vehicles is a privately maintained addon not associated with GeoFS.</p>
-            <p>GeoFS Extra Vehicles is an addon developed by AF267 that adds external vehicles from JAaMDG's JXT Group as well as unreleased projects into the simulator. Multiplayer models are supported with some aircraft.</p>
-            <p>If you have any questions or if you have an aircraft (must have a working aircraft.json) you would like to add, visit the JAaMDG Discord</p>
-            <a href="https://discord.gg/fcFQH6Qhb7" target="_blank" rel="nofollow"><img src="https://www.geo-fs.com/images/discord.png" style="margin: 10px 10px 10px 0px;"/></a>
-            <p>Copyright \xa9 AF267 - 2025</p>
-        `,a.appendChild(i),e.appendChild(a)}()}).catch(t=>{console.error("Error loading vehicle data:",t),e.innerHTML+=`
-                <div style="display: flex; align-items: center; gap: 10px; padding-left: 20px;">
-                    <img src="https://raw.githubusercontent.com/af267/GeoFS-Extra-Vehicles/refs/heads/main/JXT%20Logo.png" style="width: 100px; height: auto;" />
-                    <h4 style="margin: 0;">GeoFS Extra Vehicles</h4>
-                    <p>Error: Too many requests to GitHub. Could not load latest JSON data. Last updated vehicles:
-                </div>
-                <li class="geofs-list-collapsible-item">
-                    Aircraft
-                    <ul class="geofs-collapsible">
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/md11_380019_5369/" data-mpid="1023">McDonnell Douglas MD-11 (ADSB)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/c25a_380019_5367/" data-mpid="1021">Cessna Citation CJ2 (ADSB)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/heli_380019_5371/" data-mpid="1025">Eurocopter AS365 Dauphin (ADSB)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/e190_380019_5372/" data-mpid="1018">Embraer E190 (ADSB)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/A160_267286_3007/" data-mpid="50">Paramotor (by AF267)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/P180Y_267286_3557/" data-mpid="2000">Starship SN5 (by AF267)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/Piper%20XCub_380019_3226/" data-mpid="1">Piper PA-18 Super Cub (GeoFS)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/Cessna%20Skymaster%20(Nightheart/Kitten-cat)_380019_4792/" data-mpID="2">Cessna 337 Super Skymaster (by Nightheart)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/Hang%20Glider%20Belgium_380019_3111/" data-mpid="50">Hang Glider Belgium (by Johani)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/Sikorsky UH-60 Black Hawk_380019_3068/" data-mpid="2806">Sikorsky UH-60 Black Hawk (by Spice_9)</li>
-                    </ul>
-                </li>
-                <li class="geofs-list-collapsible-item">
-                    Ground Vehicles
-                    <ul class="geofs-collapsible">
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/truck_380019_5368/" data-mpid="1027">Food Service Truck (ADSB)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/NeoAD XTerra_267286_4894/" data-mpid="1027">XTerra SUV (2024 APRIL FOOLS) (by AF267)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/Steelbird Sagittarius Pulsar_267286_5155/" data-mpid="102">Sagittarius Hypercar (2025 APRIL FOOLS) (by AF267)</li>
-                    </ul>
-                </li>
-                <li class="geofs-list-collapsible-item">
-                    Miscellaneous
-                    <ul class="geofs-collapsible">
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/CMV Probability_267286_5009/" data-mpid="2000">CMV Probability Megayacht (2025 APRIL FOOLS) (by AF267)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/X2000BWB_267286_2329/" data-mpid="2000">Northtech RADIO (2025 APRIL FOOLS) (by AF267)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/Northtech UTOPIA_267286_4136/" data-mpid="2000">Northtech UTOPIA (by AF267)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/ARCHANGEL_267286_3974/" data-mpid="2000">Northtech ARCHANGEL (2023 APRIL FOOLS) (by AF267)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/Proximus Hovercraft_267286_4644/" data-mpid="2000">Proximus Hovercraft (by AF267)</li>
-                        <li data-url="https://www.geo-fs.com/backend/aircraft/repository/WK2 testbed_267286_2783/" data-mpid="5193">Boeing 747x (2025 APRIL FOOLS) (by AF267)</li>
-                    </ul>
-                </li>
-                <li class="geofs-list-collapsible-item">
-                    About
-                    <ul class="geofs-collapsible">
-                        <a href="https://github.com/af267/GeoFS-Extra-Vehicles" target="_blank" rel="nofollow"><h4>Current Version: 1.1</h4></a>
-                        <p>GeoFS Extra Vehicles is a privately maintained addon not associated with GeoFS.</p>
-                        <p>GeoFS Extra Vehicles is an addon developed by AF267 that adds external vehicles from JAaMDG's JXT Group as well as unreleased projects into the simulator. Multiplayer models are supported with some aircraft.</p>
-                        <p>If you have any questions or if you have an aircraft (must have a working aircraft.json) you would like to add, visit the JAaMDG Discord</p>
-                        <a href="https://discord.gg/fcFQH6Qhb7" target="_blank" rel="nofollow"><img src="https://www.geo-fs.com/images/discord.png" style="margin: 10px 10px 10px 0px;"/></a>
-                        <br/>
-                        <p/>
-                        <p>Copyright \xa9 AF267 - 2025</p>
-                    </ul>
-                </li>
-            `})}();
+        (() => {var vehicleScript = document.createElement('script'); vehicleScript.src="https://raw.githack.com/af267/GeoFS-Extra-Vehicles/main/main.js";document.body.appendChild(vehicleScript);})()
     };
 
 
@@ -1699,7 +1493,7 @@ function addonExecution () {
 
 
     function opengines () {
-        function toggleAircraftProperties(){globalThis.isOverpowered=!1;let t={thrust:{},zeroThrustAltitude:null,zeroRPMAltitude:null},r=geofs?.aircraft?.instance?.aircraftRecord?.id||null,e=geofs.aircraft.instance.definition.mass;document.addEventListener("keydown",function(r){"q"!==r.key.toLowerCase()||r.ctrlKey||r.altKey||r.metaKey||(globalThis.isOverpowered?(function r(){if(geofs?.aircraft?.instance){let e=geofs.aircraft.instance;if(e.definition&&(null!==t.zeroThrustAltitude&&(e.definition.zeroThrustAltitude=t.zeroThrustAltitude),null!==t.zeroRPMAltitude&&(e.definition.zeroRPMAltitude=t.zeroRPMAltitude)),e.parts)for(let i in t.thrust){let u=e.parts[i];u?.thrust!==void 0&&(u.thrust=t.thrust[i].thrust,void 0!==u.afterBurnerThrust&&null!==t.thrust[i].afterBurnerThrust&&(u.afterBurnerThrust=t.thrust[i].afterBurnerThrust))}}}(),globalThis.isOverpowered=!1,console.log("Aircraft properties set to normal.")):(function r(){if(geofs?.aircraft?.instance){let i=geofs.aircraft.instance;if(e=i.definition.mass,null===t.zeroThrustAltitude&&i.definition?.zeroThrustAltitude!==void 0&&(t.zeroThrustAltitude=i.definition.zeroThrustAltitude),null===t.zeroRPMAltitude&&i.definition?.zeroRPMAltitude!==void 0&&(t.zeroRPMAltitude=i.definition.zeroRPMAltitude),i.definition&&(i.definition.zeroThrustAltitude=3e5,i.definition.zeroRPMAltitude=3e5),i.parts)for(let u in i.parts){let o=i.parts[u];if(o?.thrust!==void 0){t.thrust[u]||(t.thrust[u]={thrust:o.thrust,afterBurnerThrust:o.afterBurnerThrust||null});let n,s;s=n=5*Number(t.thrust[u].thrust),console.log(t.thrust),console.log(n),o.thrust=n,void 0!==o.afterBurnerThrust&&(o.afterBurnerThrust=s)}}}}(),globalThis.isOverpowered=!0,console.log("Aircraft properties set to overpowered mode.")))}),console.log("Press 'Q' to toggle aircraft properties between normal and overpowered."),setInterval(()=>{let e=geofs?.aircraft?.instance?.aircraftRecord?.id||null;e!==r&&(console.log("Aircraft changed, resetting toggle."),t={thrust:{},zeroThrustAltitude:null,zeroRPMAltitude:null},globalThis.isOverpowered=!1,r=e)},500)}toggleAircraftProperties();
+        function toggleAircraftProperties(){globalThis.isOverpowered=!1;let t={thrust:{},zeroThrustAltitude:null,zeroRPMAltitude:null},r=geofs?.aircraft?.instance?.aircraftRecord?.id||null,e=geofs.aircraft.instance.definition.mass;document.addEventListener("keydown",function(r){"q"!==r.key.toLowerCase()||r.ctrlKey||r.altKey||r.metaKey||(globalThis.isOverpowered?(function r(){if(geofs?.aircraft?.instance){let e=geofs.aircraft.instance;if(e.definition&&(null!==t.zeroThrustAltitude&&(e.definition.zeroThrustAltitude=t.zeroThrustAltitude),null!==t.zeroRPMAltitude&&(e.definition.zeroRPMAltitude=t.zeroRPMAltitude)),e.parts)for(let i in t.thrust){let u=e.parts[i];u?.thrust!==void 0&&(u.thrust=t.thrust[i].thrust,void 0!==u.afterBurnerThrust&&null!==t.thrust[i].afterBurnerThrust&&(u.afterBurnerThrust=t.thrust[i].afterBurnerThrust))}}}(),globalThis.isOverpowered=!1,console.log("Aircraft properties set to normal.")):(function r(){if(geofs?.aircraft?.instance){let i=geofs.aircraft.instance;if(e=i.definition.mass,null===t.zeroThrustAltitude&&i.definition?.zeroThrustAltitude!==void 0&&(t.zeroThrustAltitude=i.definition.zeroThrustAltitude),null===t.zeroRPMAltitude&&i.definition?.zeroRPMAltitude!==void 0&&(t.zeroRPMAltitude=i.definition.zeroRPMAltitude),i.definition&&(i.definition.zeroThrustAltitude=3e5,i.definition.zeroRPMAltitude=3e5),i.parts)for(let u in i.parts){let n=i.parts[u];if(n?.thrust!==void 0){t.thrust[u]||(t.thrust[u]={thrust:n.thrust,afterBurnerThrust:n.afterBurnerThrust||null});let o,s;o=5*Number(t.thrust[u].thrust),s=null!==t.thrust[u].afterBurnerThrust?5*t.thrust[u].afterBurnerThrust:o,console.log(t.thrust),console.log(o),n.thrust=o,void 0!==n.afterBurnerThrust&&(n.afterBurnerThrust=s)}}}}(),globalThis.isOverpowered=!0,console.log("Aircraft properties set to overpowered mode.")))}),console.log("Press 'Q' to toggle aircraft properties between normal and overpowered."),setInterval(()=>{let e=geofs?.aircraft?.instance?.aircraftRecord?.id||null;e!==r&&(console.log("Aircraft changed, resetting toggle."),t={thrust:{},zeroThrustAltitude:null,zeroRPMAltitude:null},globalThis.isOverpowered=!1,r=e)},500)}toggleAircraftProperties();
     };
 
 
@@ -1713,228 +1507,22 @@ function addonExecution () {
     };
     
     function dolly () {
-        function waitForEntities(){try{if(!1==window.geofs.cautiousWithTerrain&&window.geofs.api&&window.geofs.api.addFrameCallback){window.DEGREES_TO_RAD=window.DEGREES_TO_RAD||.017453292519943295,window.RAD_TO_DEGREES=window.RAD_TO_DEGREES||57.29577951308232,window.METERS_TO_FEET=window.METERS_TO_FEET||3.280839895,requestAnimationFrame(window.sd.tick);return}}catch(t){console.log("Error in waitForEntities:",t)}setTimeout(()=>{waitForEntities()},1e3)}!function(){window.gmenu&&window.GMenu||fetch("https://raw.githubusercontent.com/tylerbmusic/GeoFS-Addon-Menu/refs/heads/main/addonMenu.js").then(t=>t.text()).then(script=>{eval(script)}).then(()=>{setTimeout(afterGMenu,101)});async function afterGMenu(){window.sd={};let t=new window.GMenu("Sky Dolly","sd");t.addItem("Auto-save: ","AutoSave","checkbox",0,"false"),t.addItem("Auto-save interval (minutes): ","STime","number",0,"1"),window.sd.msToTime=function(t){let e=Math.floor(t/1e3%60);e.toString().length<2&&(e="0"+e);let d=Math.floor(t/6e4)%60,a=Math.floor(t/36e5),o;return 0==a?`${d}:${e}`:`${a}:${d}:${e}`},window.sd.getDistance=function(t,e){let[d,a]=t,[o,n]=e,s=t=>t*(Math.PI/180),i=s(o-d),r=s(n-a),l=s(d),c=s(o),m=Math.sin(i/2)**2+Math.cos(l)*Math.cos(c)*Math.sin(r/2)**2,u=2*Math.atan2(Math.sqrt(m),Math.sqrt(1-m)),g=u*(180/Math.PI);return g},window.sd.loadFromDB=function(t){let e=indexedDB.open("SkyDollyDB",1);e.onupgradeneeded=function(t){let e=t.target.result;e.objectStoreNames.contains("sdData")||e.createObjectStore("sdData",{keyPath:"id"})},e.onsuccess=function(e){let d=e.target.result;if(d.objectStoreNames.contains("sdData")){let a=d.transaction("sdData","readonly"),o=a.objectStore("sdData").get("data");o.onsuccess=function(){t(o.result?o.result.value:[])},o.onerror=function(e){console.error("Error getting data from database:",e.target.error),t([])},a.onerror=function(e){console.error("Transaction error (reading):",e.target.error),t([])}}else console.warn("Object store 'sdData' not found. Returning empty data."),t([])},e.onerror=function(e){console.error("Error opening database:",e.target.error),t([])}},window.sd.saveToDB=function(t){return new Promise((e,d)=>{let a=indexedDB.open("SkyDollyDB",1);a.onupgradeneeded=function(t){let e=t.target.result;e.objectStoreNames.contains("sdData")||e.createObjectStore("sdData",{keyPath:"id",autoIncrement:!0})},a.onsuccess=function(a){let o=a.target.result.transaction("sdData","readwrite").objectStore("sdData"),n=o.put({id:"data",value:t});n.onsuccess=function(){window.sd.saved=!0,window.sd.saving=!1,e()},n.onerror=function(t){d(t.target.error)}},a.onerror=function(t){d(t.target.error)}})},window.sd.sendToLS=async function(){window.sd.saved=!0,window.sd.saving=!0,console.log("Sending to database...");let t=window.sd.data.map(t=>{let e={...t};return delete e.model,delete e.map,e});try{await window.sd.saveToDB(t),console.log("Data saved to database.")}catch(e){console.error("Error saving to database:",e)}},window.sd.init=async function(){if(console.log("Sky Dolly Initializing..."),window.sd.loadFromDB(t=>{window.sd.data=t}),window.sd.uTime=100,window.sd.tickNum=0,window.sd.maxTick=window.sd.maxTick||0,window.sd.currTime=Date.now(),window.sd.nextTime=Date.now()+window.sd.uTime,window.sd.fac=0,window.sd.paused=!0,window.sd.isRec=!1,window.sd.isPlayback=!1,window.sd.saved=!0,window.sd.lastSaved=Date.now(),window.sd.saving=!1,window.sd.data)for(let t in window.sd.data)window.sd.maxTick=Math.max(window.sd.data[t].lastTick,window.sd.maxTick);else window.sd.data=[]},window.sd.recInit=function(t){let e=new Date;var d={},a=[];for(let o in window.geofs.aircraft.instance.definition.parts){let n=window.geofs.aircraft.instance.definition.parts[o].animations,s=[];for(let i in n)if(n&&n[i]){let r={};for(let l in n[i])("rotationMethod"!==l||"string"==typeof l.rotationMethod)&&(r[l]=n[i][l]);s.push(r)}a.push([s,window.geofs.aircraft.instance.definition.parts[o].name])}window.sd.data.push({enabled:!1,model:null,map:null,modelPath:window.geofs.aircraft.instance.object3d.model._model._resource.url,firstTick:window.sd.tickNum,date:e.getUTCDate().toString()+"."+e.getUTCMonth().toString()+"."+e.getUTCFullYear(),time:e.getUTCHours()+":"+e.getUTCMinutes(),lastTick:-1,animations:d,animationParts:a}),window.sd.isRec=!0,window.sd.paused=!1,window.sd.recTick(window.sd.tickNum),console.log("recInit"),console.log(window.sd.isRec)},window.sd.playbackInit=function(t){for(let e in window.sd.data){let d=window.sd.data[e];if(d.enabled&&!d.model&&(d.model=new window.geofs.api.Model(null,{url:d.modelPath,location:d[d.firstTick].lla,rotation:d[d.firstTick].htr}),d.model.setVisibility((t||window.sd.tickNum)>=d.firstTick)),d.enabled&&!d.map&&window.geofs.map.mapActive){let a=d.modelPath.split("/"),o=a[a.length-1].split(".")[0];d.map=window.geofs.map.addPlayerMarker((Math.random()*Date.now()).toString(),"blue",`${o} Flight ${e}<br/>${d[d.firstTick].htr[0]}dg<br/>${d[d.firstTick].lla[2]*window.METERS_TO_FEET}ft`),d.map.update(d[d.firstTick].lla[0],d[d.firstTick].lla[1],d[d.firstTick].htr[0])}}window.sd.isPlayback=!0},window.sd.tick=function(){if(window.sd.saved&&window.sd.window&&window.sd.window.document.getElementById("save")?(window.sd.window.document.getElementById("save").className="saved",window.sd.window.document.getElementById("save").innerHTML=window.sd.saving?"Saving":"Saved"):window.sd.window&&!window.isRec&&(window.sd.window.document.getElementById("save")&&(window.sd.window.document.getElementById("save").className="unsaved",window.sd.window.document.getElementById("save").innerHTML="Save"),window.sd.isRec&&"true"==localStorage.getItem("sdAutoSave")&&Date.now()>=window.sd.lastSaved+6e4*Number(localStorage.getItem("sdSTime"))&&(window.sendToLS(),window.sd.lastSaved=Date.now()+6e4*Number(localStorage.getItem("sdSTime")))),window.sd.window&&window.sd.window.document.getElementById("pause")&&(window.sd.window.document.getElementById("pause").innerHTML=window.sd.paused?"Play":"Pause"),window.sd.data)for(let t in window.sd.data)window.sd.maxTick=Math.max(window.sd.data[t].lastTick,window.sd.maxTick);if(window.sd.currTime=Date.now(),window.sd.fac=1-(window.sd.nextTime-window.sd.currTime)/window.sd.uTime,window.sd.playbackTick(window.sd.tickNum,window.sd.paused||window.geofs.pause?0:window.sd.fac),window.sd.paused||window.geofs.pause?window.sd.nextTime=Date.now()+window.sd.uTime:window.sd.fac>=1&&(window.sd.tickNum++,window.sd.nextTime+=window.sd.uTime,window.sd.recTick(window.sd.tickNum),window.sd.tickNum>window.sd.maxTick&&(window.sd.maxTick=window.sd.tickNum),window.sd.fac=1-(window.sd.nextTime-window.sd.currTime)/window.sd.uTime),window.sd.window){let e=window.sd.window.document.getElementById("timeSlider");e&&(e.max=window.sd.maxTick,e.value=window.sd.tickNum);let d=window.sd.msToTime(window.sd.tickNum*window.sd.uTime),a=window.sd.msToTime(window.sd.maxTick*window.sd.uTime);window.sd.window.document.getElementById("time")&&(window.sd.window.document.getElementById("time").innerHTML=`${d} / ${a}`)}requestAnimationFrame(window.sd.tick)},window.sd.recTick=function(t){if(window.sd.isRec){let e=window.sd.data.length-1;window.sd.data[e][t||window.sd.tickNum];let d={};for(let a in window.sd.data[e].animationParts)window.geofs.aircraft.instance.object3d.model._model.getNode(window.sd.data[e].animationParts[a][1])?d[window.sd.data[e].animationParts[a][1]]=window.geofs.aircraft.instance.object3d.model._model.getNode(window.sd.data[e].animationParts[a][1]).matrix.clone():window.geofs.aircraft.instance.object3d.model._model.getNode(window.sd.data[e].animationParts[a][1].toLowerCase())&&(d[window.sd.data[e].animationParts[a][1]]=window.geofs.aircraft.instance.object3d.model._model.getNode(window.sd.data[e].animationParts[a][1].toLowerCase()).matrix.clone());window.sd.data[e][t||window.sd.tickNum]={lla:window.geofs.aircraft.instance.llaLocation,htr:window.geofs.aircraft.instance.htr,anims:d},window.sd.data[e].lastTick=t||window.sd.tickNum}},window.sd.playbackTick=function(t,e){try{if(window.sd.isPlayback)for(let d in window.sd.data){let a=window.sd.data[d];window.sd.fac=1-(window.sd.nextTime-window.sd.currTime)/window.sd.uTime;let o=a[window.sd.tickNum],n=a[window.sd.tickNum+1];if(!0==a.enabled&&o&&o.lla&&a.model){if(1>=window.sd.getDistance(window.geofs.aircraft.instance.llaLocation,o.lla)){if(n&&n.lla){let s=[o.lla[0]+(n.lla[0]-o.lla[0])*e,o.lla[1]+(n.lla[1]-o.lla[1])*e,o.lla[2]+(n.lla[2]-o.lla[2])*e,],i=[o.htr[0]+(n.htr[0]-o.htr[0])*e,o.htr[1]+(n.htr[1]-o.htr[1])*e,o.htr[2]+(n.htr[2]-o.htr[2])*e,];a.model.setPositionOrientationAndScale(s,i,null);let r=window.sd.data[d].modelPath.split("/"),l=r[r.length-1].split(".")[0];a.map?a.map.update(s[0],s[1],i[0],`${l} Flight ${d}<br/>${Math.round(i[0])}dg<br/>${Math.round(s[2]*window.METERS_TO_FEET)}ft`):window.geofs.map.mapActive&&(a.map=window.geofs.map.addPlayerMarker((Math.random()*Date.now()).toString(),"blue",`${l} Flight ${d}<br/>${Math.round(i[0])}dg<br/>${Math.round(s[2]*window.METERS_TO_FEET)}ft`),a.map.update(s[0],s[1],i[0]))}else{a.model.setPositionOrientationAndScale(o.lla,o.htr,null);let c=window.sd.data[d].modelPath.split("/"),m=c[c.length-1].split(".")[0];a.map?a.map.update(o.lla[0],o.lla[1],o.htr[0],`${m} Flight ${d}<br/>${Math.round(o.htr[0])}dg<br/>${Math.round(o.lla[2]*window.METERS_TO_FEET)}ft`):window.geofs.map.mapActive&&(a.map=window.geofs.map.addPlayerMarker((Math.random()*Date.now()).toString(),"blue",`${m} Flight ${d}<br/>${Math.round(o.htr[0])}dg<br/>${Math.round(o.lla[2]*window.METERS_TO_FEET)}ft`),a.map.update(o.lla[0],o.lla[1],o.htr[0]))}a.model.setVisibility(!0)}}else a.model&&a.map&&(a.model.setVisibility(!1),a.map.update(0,0,0));if(a.model&&a.model._model&&a.animations&&a.animationParts&&o&&o.anims)try{for(let u in o.anims)(a.model._model&&a.model._model.ready&&(a.model._model.getNode(u)||a.model._model.getNode(u.toLowerCase()))).matrix=o.anims[u]}catch(g){console.warn(g)}else a.model&&a.model.setVisibility(!1)}}catch(f){console.error(f)}},window.sd.stopPlayback=function(){if(window.sd.isPlayback){for(let t in window.sd.data){let e=window.sd.data[t];e.model&&(e.model.removeFromWorld(),e.model=null),e.map&&(e.map.destroy(),e.map=null)}window.sd.isPlayback=!1}},window.sd.addListeners=function(){window.sd.window&&window.sd.window.document?(window.sd.window.document.body.innerHTML=window.sd.html,setTimeout(()=>{for(let t in window.sd.window.document.body.innerHTML=window.sd.html,window.sd.window.document.getElementById("rec").addEventListener("click",t=>{window.sd.isRec?(window.sd.isRec=!1,window.sd.window.document.getElementById("rec").innerHTML="Start New Recording",window.sd.saved=!1):(window.sd.recInit(window.sd.tickNum),window.sd.window.document.getElementById("rec").innerHTML="Stop Recording")}),window.sd.window.document.getElementById("pause").addEventListener("click",t=>{window.sd.paused?(window.sd.paused=!1,window.sd.window.document.getElementById("pause").innerHTML="Pause"):(window.sd.paused=!0,window.sd.window.document.getElementById("pause").innerHTML="Play")}),window.sd.window.document.getElementById("playback").addEventListener("click",t=>{window.sd.isPlayback?(window.sd.stopPlayback(),window.sd.window.document.getElementById("playback").innerHTML="Start Playback"):(window.sd.playbackInit(),window.sd.window.document.getElementById("playback").innerHTML="Stop Playback")}),window.sd.window.document.getElementById("save").addEventListener("click",t=>{window.sd.isRec||window.sd.sendToLS()}),window.sd.window.document.getElementById("update").addEventListener("click",window.sd.updateHTML),window.sd.window.document.getElementById("timeSlider").addEventListener("input",t=>{window.sd.tickNum=Number(t.target.value),window.sd.nextTime=Date.now()+window.sd.uTime}),window.sd.window.document.addEventListener("close",()=>{window.sd.window=null,window.sd.html=null,window.sd.sendToLS()}),console.log("Running for loop"),window.sd.data){let e=window.sd.data[t],d=window.sd.window.document.getElementById("cb"+t),a=window.sd.window.document.getElementById("del"+t);d&&(d.checked=e.enabled,d.addEventListener("click",()=>{window.sd.data[t].enabled=d.checked,window.sd.saved=!1})),a&&a.addEventListener("click",()=>{window.sd.saved=!1,window.sd.data.splice(t,1),window.sd.updateHTML()})}console.log("Done")},500),console.log("Added listeners")):setTimeout(window.sd.addListeners,500)},window.sd.updateHTML=function(){let t="";for(let e in window.sd.data){let d=window.sd.data[e];t+=`<tr>
-            <td>${parseInt(e)+1}</td>
-            <td class="model-path">${d.modelPath}</td>
-            <td>${d.date}</td>
-            <td>${d.time}</td>
-            <td>${window.sd.msToTime(d.firstTick*window.sd.uTime)}</td>
-            <td>${window.sd.msToTime((d.lastTick-d.firstTick)*window.sd.uTime)}</td>
-            <td class="checkbox-cell"><input type="checkbox" id="cb${e}" ${d.enabled?"checked":""}></td>
-            <td class="delete-cell"><button class="delete-button" id="del${e}">Delete</button></td>
-        </tr>`}window.sd.html=`
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 0.9rem;
-            color: #333;
-            margin: 0;
-            padding: 15px;
-            background-color: #f7f7f7;
-        }
-
-
-        h1 {
-            font-size: 1.5rem;
-            color: #2c3e50;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-
-
-        .controls-container {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 15px;
-            background-color: #fff;
-            border-radius: 5px;
-        }
-
-
-        .controls-container p {
-            margin-top: 0;
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 10px;
-        }
-
-
-        #timeSlider {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-
-        #time {
-            display: block;
-            margin-bottom: 15px;
-            color: #777;
-            font-size: 0.85rem;
-        }
-
-
-        .controls-container button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            margin-right: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: background-color 0.3s ease;
-        }
-
-
-        .controls-container button:hover {
-            background-color: #0056b3;
-        }
-
-
-        #dataTable {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-            border-radius: 5px;
-            overflow: hidden; /* To contain the border-radius of header and footer if added */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-
-        #dataTable th, #dataTable td {
-            padding: 10px 12px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
-
-        #dataTable th {
-            background-color: #f0f0f0;
-            font-weight: bold;
-            color: #555;
-        }
-
-
-        #dataTable tr:last-child td {
-            border-bottom: none;
-        }
-
-
-        #dataTable tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-
-        .checkbox-cell {
-            text-align: center;
-        }
-
-
-        .delete-cell {
-            text-align: center;
-        }
-
-
-        .delete-button {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 6px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: background-color 0.3s ease;
-        }
-
-
-        .delete-button:hover {
-            background-color: #c82333;
-        }
-
-
-        .model-path {
-            font-family: monospace;
-            font-size: 0.8rem;
-            color: #666;
-        }
-        .controls-container .unsaved {
-            background-color: #cea11a;
-        }
-        .controls-container .saved {
-            background-color: #add5ff;
-            cursor: default;
-        }
-    </style>
-    <h1>Sky Dolly</h1>
-    <div class="controls-container">
-        <p>Record &amp; Replay</p>
-        <input id="timeSlider" type="range" min="0" max="${window.sd.maxTick}" step="1">
-        <span id="time"></span>
-        <br>
-        <button id="rec">${window.sd.isRec?"Stop Recording":"Start New Recording"}</button>
-        <button id="pause">${window.sd.paused?"Play":"Pause"}</button>
-        <button id="playback">${window.sd.isPlayback?"Stop Playback":"Start Playback"}</button>
-        <button id="update">Update Window</button>
-        <button id="save" class="saved">Saved</button>
-    </div>
-    <table id="dataTable">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Aircraft Model Path</th>
-                <th>Date</th>
-                <th>IRL Start time (UTC)</th>
-                <th>Start time (in-game)</th>
-                <th>Duration</th>
-                <th>Show aircraft in playback</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            ${t}
-        </tbody>
-    </table>
-    `,window.sd.addListeners()},window.sd.windowInit=function(){window.sd.updateHTML(),window.sd.window=window.open("about:blank","_blank","width=850,height=400"),window.sd.window.document.title="Sky Dolly"},t.addButton("Open GUI",window.sd.windowInit,"onclick='window.sd.windowInit()'"),window.sd.init(),waitForEntities()}}(),waitForEntities();
-    };
+        (() => {var dollyScript = document.createElement('script'); dollyScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Sky-Dolly/main/userscript.js";document.body.appendChild(dollyScript);})()
+            };
 
 
     function slew () {
-        !function(){"use strict";function afterGMenu(){let e=new window.GMenu("Slew Mode","slew");e.addItem("Horizontal Speed (in degrees/frame): ","LatSpeed","number",0,"0.0001"),e.addItem("Vertical Speed (in feet/frame): ","VertSpeed","number",0,"2"),e.addItem("Rotate Amount (in degrees): ","RotAmount","number",0,"2"),e.addItem("Speed after slew disabled (higher values are lower speeds, no flaps): ","SpeedMultiplier","number",0,"1.96"),e.addItem("Speed after slew disabled (with flaps): ","SpeedMultiplierFlaps","number",0,"2.7"),e.addHeader(2,"Keybinds"),e.addKBShortcut("Toggle Slew Mode: ","Toggle",1,"y",function(){kb("Toggle")}),e.addKBShortcut("Forwards: ","Forward",1,"i",function(){kb("Forward")}),e.addKBShortcut("Backwards: ","Backwards",1,"k",function(){kb("Backwards")}),e.addKBShortcut("Left: ","Left",1,"j",function(){kb("Left")}),e.addKBShortcut("Right: ","Right",1,"l",function(){kb("Right")}),e.addKBShortcut("Up: ","Up",1,"u",function(){kb("Up")}),e.addKBShortcut("Down: ","Down",1,"Enter",function(){kb("Down")}),e.addHeader(3,"Rotation"),e.addKBShortcut("Tilt Up: ","RotTiltUp",2,"ArrowUp",function(){kb("TiltUp")}),e.addKBShortcut("Tilt Down: ","RotTiltDown",2,"ArrowDown",function(){kb("TiltDown")}),e.addKBShortcut("Roll Left: ","RotRLeft",2,"ArrowLeft",function(){kb("RLeft")}),e.addKBShortcut("Roll Right: ","RotRRight",2,"ArrowRight",function(){kb("RRight")}),e.addKBShortcut("Yaw Left: ","RotRYLeft",2,",",function(){kb("YLeft")}),e.addKBShortcut("Yaw Right: ","RotYRight",2,".",function(){kb("YRight")})}function scale(e,t){return[e[0]*t,e[1]*t,e[2]*t]}window.gmenu&&window.GMenu||fetch("https://raw.githubusercontent.com/tylerbmusic/GeoFS-Addon-Menu/refs/heads/main/addonMenu.js").then(e=>e.text()).then(script=>{eval(script)}).then(()=>{setTimeout(afterGMenu,100)}),window.DEGREES_TO_RAD=window.DEGREES_TO_RAD||.017453292519943295,window.RAD_TO_DEGREES=window.RAD_TO_DEGREES||57.29577951308232,window.METERS_TO_FEET=window.METERS_TO_FEET||3.280839895;var isSlewing=!1,tilt=0,roll=0,speedF=0,sideways=0,speedV=0,slewA=0,slewB=0,slewAlt=0,headingRad=0;window.lastCam=0,window.lastGravity=[0,0,0],window.slewDiv=document.createElement("div"),window.slewDiv.style.width="fit-content",window.slewDiv.style.height="fit-content",window.slewDiv.style.color="red",window.slewDiv.style.position="fixed",window.slewDiv.style.margin="5px",document.body.appendChild(window.slewDiv);let lastFrameNumber=window.geofs.frameNumber;function checkFrameNumber(){isSlewing&&(window.geofs.frameNumber!==lastFrameNumber&&(lastFrameNumber=window.geofs.frameNumber,updateSlew()),requestAnimationFrame(checkFrameNumber))}function kb(e){localStorage.getItem("slewToggle"),localStorage.getItem("slewForward"),localStorage.getItem("slewLeft"),localStorage.getItem("slewBackwards"),localStorage.getItem("slewRight"),localStorage.getItem("slewUp"),localStorage.getItem("slewRotYRight"),localStorage.getItem("slewRotYLeft"),localStorage.getItem("slewRotTiltUp"),localStorage.getItem("slewRotTiltDown"),localStorage.getItem("slewRotRLeft"),localStorage.getItem("slewRotRRight"),localStorage.getItem("slewDown");let t=document.activeElement===document.getElementById("chatInput");if(!t&&"true"==localStorage.getItem("slewEnabled")){if("Toggle"==e){if(isSlewing=!isSlewing)window.slew();else if(window.geofs.camera.set(window.lastCam),speedF=0,sideways=0,speedV=0,tilt=0,roll=0,window.geofs.aircraft.instance.rigidBody.gravityForce=window.lastGravity,window.slewDiv.innerHTML="",!window.geofs.animation.values.groundContact){var o,i=window.geofs.aircraft.instance;o=0==window.geofs.animation.values.flapsTarget?i.definition.minimumSpeed/Number(localStorage.getItem("slewSpeedMultiplier"))*i.definition.mass:i.definition.minimumSpeed/Number(localStorage.getItem("slewSpeedMultiplierFlaps"))*i.definition.mass,i.rigidBody.applyCentralImpulse(scale(i.object3d.getWorldFrame()[1],o))}}else"Forward"==e?speedF+=Number(localStorage.getItem("slewLatSpeed")):"Backwards"==e?speedF-=Number(localStorage.getItem("slewLatSpeed")):"Right"==e?sideways+=Number(localStorage.getItem("slewLatSpeed")):"Left"==e?sideways-=Number(localStorage.getItem("slewLatSpeed")):"Up"==e?speedV+=Number(localStorage.getItem("slewVertSpeed")):"Down"==e?speedV-=Number(localStorage.getItem("slewVertSpeed")):"YRight"==e?headingRad+=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"YLeft"==e?headingRad-=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"TiltUp"==e?tilt+=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"TiltDown"==e?tilt-=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"RLeft"==e?roll+=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD:"RRight"==e&&(roll-=Number(localStorage.getItem("slewRotAmount"))*window.DEGREES_TO_RAD)}}async function updateSlew(){headingRad%=360*window.DEGREES_TO_RAD,window.controls.setMode(window.pControl);var e=Math.cos(headingRad)*speedF-Math.sin(headingRad)*sideways,t=Math.sin(headingRad)*speedF+Math.cos(headingRad)*sideways;slewA+=e,slewB+=t,slewAlt=window.geofs.animation.values.groundContact&&speedV<0?slewAlt:slewAlt+speedV,window.geofs.aircraft.instance.llaLocation=[slewA,slewB,slewAlt],window.geofs.aircraft.instance.object3d.setInitialRotation([tilt,roll,headingRad]),window.geofs.aircraft.instance.rigidBody.v_linearVelocity=[0,0,0],window.geofs.aircraft.instance.rigidBody.v_acceleration=[0,0,0],window.geofs.aircraft.instance.rigidBody.v_angularVelocity=[0,0,0],window.geofs.aircraft.instance.rigidBody.v_angularAcceleration=[0,0,0],window.geofs.aircraft.instance.rigidBody.gravityForce=[0,0,0],window.slewDiv.innerHTML=`
-        <p style="margin: 0px; font-weight: bold;">LAT: ${slewA.toFixed(4)} LON: ${slewB.toFixed(4)} ALT: ${(slewAlt*window.METERS_TO_FEET).toFixed(1)} FT MSL MAG ${(headingRad*window.RAD_TO_DEGREES).toFixed(0)} ${((Math.abs(speedF)+Math.abs(sideways))/Number(localStorage.getItem("slewLatSpeed"))).toFixed(0)} UNITS</p>
-        `}window.slew=async function(){speedF=0,sideways=0,speedV=0,tilt=0,roll=0,window.lastGravity=window.geofs.aircraft.instance.rigidBody.gravityForce,window.lastCam=window.geofs.camera.currentMode,headingRad=window.geofs.animation.values.heading360*window.DEGREES_TO_RAD,window.pControl=window.geofs.preferences.controlMode,slewA=window.geofs.aircraft.instance.llaLocation[0],slewB=window.geofs.aircraft.instance.llaLocation[1],slewAlt=window.geofs.aircraft.instance.llaLocation[2],window.geofs.camera.set(5),requestAnimationFrame(checkFrameNumber)}}();
+        (() => {var slewScript = document.createElement('script'); slewScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Slew-Mode/main/userscript.js";document.body.appendChild(slewScript);})()
             };
 
 
     function twlights () {
-        function calculateBearing(e,t,a,n){let i=(a-e)*Math.PI/180,s=t*Math.PI/180,r=n*Math.PI/180,o=Math.sin(i)*Math.cos(r),l=Math.cos(s)*Math.sin(r)-Math.sin(s)*Math.cos(r)*Math.cos(i),u=180*Math.atan2(o,l)/Math.PI;return(u+360)%360}function calculateOffsetPoint(e,t,a,n){let i=6378137,s=(a+90)*Math.PI/180,r=n*Math.cos(s)/i,o=n*Math.sin(s)/(i*Math.cos(Math.PI*t/180));return{lonPlus:e+180*o/Math.PI,latPlus:t+180*r/Math.PI,lonMinus:e-180*o/Math.PI,latMinus:t-180*r/Math.PI}}function interpolatePoints(e,t,a){let[n,i]=e,[s,r]=t,o=Math.sqrt(Math.pow(s-n,2)+Math.pow(r-i,2)),l=Math.max(Math.floor(o/a),1),u=[];for(let $=0;$<=l;$++){let g=$/l,h=n+(s-n)*g,c=i+(r-i)*g;u.push([h,c,0])}return u}async function getTaxiwayData(e){let t="https://overpass-api.de/api/interpreter",a=`
-                [out:json];
-                (
-                    way["aeroway"="taxiway"]({{bbox}});
-                );
-                out body;
-                >;
-                out skel qt;
-            `,n=e;try{let i=await fetch(`${t}?data=${encodeURIComponent(a.replace("{{bbox}}",n))}`),s=await i.json(),r=[],o={};return s.elements.forEach(e=>{"node"===e.type&&(o[e.id]=e)}),s.elements.forEach(e=>{if("way"===e.type){let t=e.nodes.map(e=>{let t=o[e];if(t)return[t.lon,t.lat,0]}).filter(Boolean);if(t.length>1){let a=[],n=2e-4+(Math.random()-.5)*5e-5;for(let i=0;i<t.length-1;i++){let s=interpolatePoints(t[i],t[i+1],n),l=calculateBearing(t[i][0],t[i][1],t[i+1][0],t[i+1][1]),u=10,$=s.map(([e,t,a])=>{let n=calculateOffsetPoint(e,t,l,u);return[[n.lonPlus,n.latPlus,a],[n.lonMinus,n.latMinus,a]]});a.push(...$)}r.push(a)}}}),r}catch(l){console.error("Error fetching taxiway data:",l)}}async function getTaxiwayDataEdgeless(e){let t="https://overpass-api.de/api/interpreter",a=`
-                [out:json];
-                (
-                    way["aeroway"="taxiway"]({{bbox}});
-                );
-                out body;
-                >;
-                out skel qt;
-            `,n=e;try{let i=await fetch(`${t}?data=${encodeURIComponent(a.replace("{{bbox}}",n))}`),s=await i.json(),r=[],o={};return s.elements.forEach(e=>{"node"===e.type&&(o[e.id]=e)}),s.elements.forEach(e=>{if("way"===e.type){let t=e.nodes.map(e=>{let t=o[e];if(t)return[t.lon,t.lat,0]}).filter(Boolean);if(t.length>1){let a=7e-5+(Math.random()-.5)*2e-5;for(let n=0;n<t.length-1;n++){let i=interpolatePoints(t[n],t[n+1],a);r.push(...i)}}}}),r}catch(l){console.error("Error fetching taxiway data:",l)}}function checkProximityToRunway(e){if(!window.runwayThresholds)for(var t in window.runwayThresholds=[],window.window.geofs.runways.nearRunways){let a=window.window.geofs.runways.nearRunways[t],n=a.threshold1,i=a.threshold2;window.runwayThresholds.push(interpolatePoints([n[1],n[0]],[i[1],i[0]],5/111e3))}let s=(40/111e3)**2,r=e[0],o=e[1];for(var l in window.runwayThresholds)if(window.runwayThresholds[l].some(([e,t])=>{let a=e-r,n=t-o;return a**2+n**2<s}))return!0;return!1}!function(){"use strict";function afterGMenu(){let e=new window.GMenu("Taxiway Lights","twL");e.addItem("Render distance (degrees): ","RenderDist","number",0,"0.05"),e.addItem("Update Interval (seconds): ","UpdateInterval","number",0,"5"),e.addItem("Green/Yellow Light Size: ","GSize","number",0,"0.05"),e.addItem("Blue Light Size: ","BSize","number",0,"0.07"),console.log("TwL Enabled? "+localStorage.getItem("twLEnabled")),setTimeout(()=>{window.updateLights()},100*Number(localStorage.getItem("twLUpdateInterval")))}window.twLights=[],window.twPos=[],window.currLight,window.errs=0,window.gmenu&&window.GMenu||(console.log("Taxiway Lights getting GMenu"),fetch("https://raw.githubusercontent.com/tylerbmusic/GeoFS-Addon-Menu/refs/heads/main/addonMenu.js").then(e=>e.text()).then(script=>{eval(script)}).then(()=>{setTimeout(afterGMenu,100)}))}(),window.updateLights=async function(){if(!1==window.window.geofs.cautiousWithTerrain&&"true"==localStorage.getItem("twLEnabled")){var e=Number(localStorage.getItem("twLRenderDist")),t=Math.floor(window.window.geofs.aircraft.instance.llaLocation[0]/e)*e,a=Math.floor(window.window.geofs.aircraft.instance.llaLocation[1]/e)*e,n=t+", "+a+", "+(t+e)+", "+(a+e);if(!window.lastBounds||window.lastBounds!=n){for(let i=0;i<window.twLights.length;i++)window.window.geofs.api.viewer.entities.remove(window.twLights[i]);window.twLights=[],console.log("Lights removed, placing taxiway edge lights"),window.getTwD(n),console.log("Placing taxiway centerline lights"),window.getTwDE(n)}window.lastBounds=n}else if("true"!=localStorage.getItem("twLEnabled")){window.lastBounds="";for(let s=0;s<window.twLights.length;s++)window.window.geofs.api.viewer.entities.remove(window.twLights[s]);window.twLights=[]}setTimeout(()=>{window.updateLights()},1e3*Number(localStorage.getItem("twLUpdateInterval")))},window.getTwD=async function(e){getTaxiwayData(e).then(e=>{e.forEach(e=>{e.forEach(([e,t])=>{[e,t].forEach(e=>{let t=window.window.geofs.getGroundAltitude([e[1],e[0],e[2]]).location;t[2]+=.3556;let a=window.Cesium.Cartesian3.fromDegrees(t[1],t[0],t[2]);a[2]<0&&(window.errs++,a[2]=0-a[2]),window.twLights.push(window.window.geofs.api.viewer.entities.add({position:a,billboard:{image:"https://tylerbmusic.github.io/GPWS-files_geofs/bluelight.png",scale:Number(localStorage.getItem("twLBSize"))*(1/window.window.geofs.api.renderingSettings.resolutionScale),scaleByDistance:{near:1,nearValue:.5,far:1500,farValue:.15},translucencyByDistance:new window.Cesium.NearFarScalar(10,1,1e4,0)}}))})})})})},window.getTwDE=async function(e){getTaxiwayDataEdgeless(e).then(e=>{var t=0;e.forEach(e=>{t++;let a=window.window.geofs.getGroundAltitude([e[1],e[0],e[2]]).location;a[2]+=.3556;let n=window.Cesium.Cartesian3.fromDegrees(a[1],a[0],a[2]),i=checkProximityToRunway(e),s=t%2==0&&i?"https://tylerbmusic.github.io/GPWS-files_geofs/yellowlight.png":"https://tylerbmusic.github.io/GPWS-files_geofs/greenlight.png";n[2]<0&&(window.errs++,n[2]=0-n[2]),window.twPos.push([n,window.twLights.length]),window.twLights.push(window.window.geofs.api.viewer.entities.add({position:n,billboard:{image:s,scale:Number(localStorage.getItem("twLGSize"))*(1/window.window.geofs.api.renderingSettings.resolutionScale),scaleByDistance:{near:1,nearValue:1,far:2e3,farValue:.15},translucencyByDistance:new window.Cesium.NearFarScalar(10,1,1e4,0)}}))})})},window.removeCloseTwLights=function(){let e={},t=2,a=new Set,n=(e,a)=>`${Math.floor(e/t)}_${Math.floor(a/t)}`;for(let i=0;i<window.twPos.length;i++){let s=window.twPos[i][0],r=n(s.x,s.y);e[r]||(e[r]=[]),e[r].push(i)}for(let o in e){let[l,u]=o.split("_").map(Number),$=[`${l}_${u}`,`${l+1}_${u}`,`${l-1}_${u}`,`${l}_${u+1}`,`${l}_${u-1}`,`${l+1}_${u+1}`,`${l-1}_${u-1}`,`${l+1}_${u-1}`,`${l-1}_${u+1}`];for(let g of $)if(e[g])for(let h=0;h<e[o].length;h++){let c=e[o][h],f=window.twPos[c][0];for(let w of e[g]){if(c>=w||a.has(w))continue;let d=window.twPos[w][0];3>=Math.abs(f.x-d.x)&&3>=Math.abs(f.y-d.y)&&a.add(w)}}}let _=Array.from(a).sort((e,t)=>t-e);for(let p of _)window.window.geofs.api.viewer.entities.remove(window.twLights[p]),window.twPos.splice(p,1),window.twLights.splice(p,1);console.log(`${_.length} taxiway lights removed.`)};
+        (() => {var twlScript = document.createElement('script'); twlScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Taxiway-Lights/main/userscript.js";document.body.appendChild(twlScript);})()
     };
 
 
     function twsigns() {
-        const workerScript=()=>{function e(e,t,a){if(e&&t&&a){let i=t[1]-e[1],n=t[0]-e[0],s=a[1]-t[1],r=a[0]-t[0],o=Math.sqrt(i*i+n*n),l=Math.sqrt(s*s+r*r);if(0===o||0===l)return null;let d=(i*s+n*r)/(o*l);d=Math.min(1,Math.max(-1,d));let m=Math.acos(d);return m*(180/Math.PI)}return null}async function t(e){let t="https://overpass-api.de/api/interpreter",a=`[out:json];(
-                    way["aeroway"="taxiway"]({{bbox}});
-                    way["aeroway"="runway"]({{bbox}});
-                );
-                out body;
-                >;
-                out skel qt;
-            `,i=e;try{let n=await fetch(`${t}?data=${encodeURIComponent(a.replaceAll("{{bbox}}",i))}`),s=await n.json();return console.log(s),s}catch(r){console.log(r)}}async function a(a,i){var n,s={};t(a).then(t=>{let a={},r=[],o=[];for(let l in t.elements.forEach(e=>{"node"==e.type&&(o[e.id]=[e.lat,e.lon])}),n=o,t.elements.forEach(e=>{if("way"===e.type&&e.tags&&e.tags.ref){let t=e.tags.ref;console.log([e.tags.ref,e.nodes]),s[e.tags.ref]=e.nodes,e.nodes.forEach(e=>{a[e]||(a[e]=new Set),a[e].add(t)})}}),s){let d=[];for(let m=s[l].length-2;m>0;m--){let g=e(n[s[l][m-1]],n[s[l][m]],n[s[l][m+1]]);g>Number(i)&&g<40?d.push(m):console.log(`Skipped node ${m} with angle: ${g}`)}for(let f=d.length-1;f>=0;f--){let h=d[f];console.log(`Removing node ${h} with angle: ${e(n[s[l][h-1]],n[s[l][h]],n[s[l][h+1]])}`),s[l].splice(h,1)}}t.elements.forEach(e=>{if("node"===e.type&&a[e.id]&&a[e.id].size>1){let t=Array.from(a[e.id]).join(" ");r.push([e.lat,e.lon,t,e.id])}});var u=0;for(var w in t.elements)"way"==t.elements[w].type&&"runway"==t.elements[w].tags.aeroway&&t.elements[w].tags.width&&Number(t.elements[w].tags.width)>u&&(u=Number(t.elements[w].tags.width));0==u&&(console.log("twSize == 0"),u=45);let c={data:r,theNodes:n,theWays:s,twSize:u};self.postMessage({type:"getTwM",data:c})})}self.addEventListener("message",function(e){"getTwM"==e.data.type&&a(e.data.data[0],e.data.data[1])})};function offsetCoordinate(e,t,a){let[i,n,s,r]=e,o=6371e3,l=i+a/o*(180/Math.PI)*Math.cos(t),d=n+a/o*(180/Math.PI)*Math.sin(t)/Math.cos(i*Math.PI/180);return[l,d]}!function(){"use strict";function afterGMenu(){let e=new window.GMenu("Taxiway Signs","twS");e.addItem("Render distance (degrees): ","RenderDist","number",0,.05),e.addItem("Update Interval (seconds): ","UpdateInterval","number",0,4),e.addItem("Filter Angle (Filters taxiway points greater than the specified angle): ","Angle","number",0,1),setInterval(()=>{window.updateMarkers()},1e3*Number(localStorage.getItem("twSUpdateInterval")))}window.twM=[],window.theWays=[],window.theNodes=[],window.twSignWorker=new Worker(URL.createObjectURL(new Blob([`(${workerScript})()`],{type:"application/javascript"}))),window.twSignWorker.addEventListener("message",function(e){if("getTwM"==e.data.type&&"true"==localStorage.getItem("twSEnabled"))window.theWays=e.data.data.theWays,window.theNodes=e.data.data.theNodes,window.twSize=e.data.data.twSize/3,window.setTwM(e.data.data.data);else if("testLabel"==e.data.type){var t=e.data.data.pos;window.geofs.api.viewer.entities.add({position:window.Cesium.Cartesian3.fromDegrees(t[0],t[1],window.geofs.api.viewer.scene.globe.getHeight(window.Cesium.Cartographic.fromDegrees(t[0],t[1]))),label:{text:e.data.data.text}})}}),window.gmenu&&window.GMenu||fetch("https://raw.githubusercontent.com/tylerbmusic/GeoFS-Addon-Menu/refs/heads/main/addonMenu.js").then(e=>e.text()).then(script=>{eval(script)}).then(()=>{setTimeout(afterGMenu,100)})}(),window.updateMarkers=async function(){if(!1==window.geofs.cautiousWithTerrain){var e=Number(localStorage.getItem("twSRenderDist")),t=Math.floor(window.geofs.aircraft.instance.llaLocation[0]/e)*e,a=Math.floor(window.geofs.aircraft.instance.llaLocation[1]/e)*e,i=t+", "+a+", "+(t+e)+", "+(a+e);if(!window.MLastBounds||window.MLastBounds!=i){for(var n=0;n<window.twM.length;n++)window.geofs.api.viewer.entities.remove(window.twM[n]);window.twM=[],window.theWays=[],window.theNodes=[],console.log("Markers removed, placing new ones"),window.twSignWorker.postMessage({type:"getTwM",data:[i,localStorage.getItem("twSAngle")]})}window.MLastBounds=i}},window.setTwM=async function(e){var t=0;console.log(e),e.forEach(e=>{let a=e[2].split(" ");for(var i=0;i<=1;i++)for(var n=0;n<a.length;n++){let s=window.theWays[a[n]];var r,o=a,l=o.splice(n,1)[0];o.unshift(l);for(var d=o.join(" "),m=!0,g=!0,f=0;f<s.length;f++){if(s[f]<e[3]){r=window.theNodes[s[f]],m=!1;break}if(s[f]>e[3]){r=window.theNodes[s[f]];break}}for(var h=0;h<s.length;h++)s[h]==e[3]&&(h==s.length-1||0==h)&&(g=!1);r||2!=s.length||(r=window.theNodes[s[0]]),r&&(t=m?Math.atan2(e[1]-r[1],e[0]-r[0]):Math.atan2(e[1]-r[1],e[0]-r[0])-Math.PI),i&&(t-=Math.PI);let u=offsetCoordinate(e,t+45-Math.PI/2,window.twSize),w=[u[1],u[0],window.geofs.api.viewer.scene.globe.getHeight(window.Cesium.Cartographic.fromDegrees(u[1],u[0]))],c=window.Cesium.Cartesian3.fromDegrees(w[0],w[1],w[2]),$=new window.Cesium.HeadingPitchRoll(t,0,0),p=window.Cesium.Transforms.headingPitchRollQuaternion(c,$),y=document.createElement("canvas");y.width=300,y.height=100;let _=y.getContext("2d"),M=d.split(" "),x=M[0];var C=M.slice(1).join(" "),v=!1,S=!1;if(C.includes("/")?v=!0:x.includes("/")&&(S=!0),g?C+="↔":C+=i?"←":"→",_.fillStyle=v?"red":"yellow",_.fillRect(0,0,y.width,y.height),_.font=v?"600 60px sans-serif":"600 40px sans-serif",_.textAlign="center",_.textBaseline="middle",v||S)v?(_.fillStyle="white",y.height,_.fillText(C,y.width/2,y.height/2)):(_.fillStyle="black",_.fillText(C,y.width/2,y.height/2));else{let b=y.height/2,T=10,I=_.measureText(x).width,R=_.measureText(C).width,k=I+T+R;_.fillStyle="black",_.fillRect((y.width-k)/2,b-30,I+T,60),_.fillStyle="yellow",_.fillText(x,(y.width-k)/2+I/2,b),_.fillStyle="black",_.fillText(C,(y.width+I)/2+T,b)}let P=y.toDataURL();window.twM.push(window.geofs.api.viewer.entities.add({position:c,orientation:p,model:{uri:"https://raw.githubusercontent.com/tylerbmusic/GPWS-files_geofs/refs/heads/main/tw_sign.glb",minimumPixelSize:32,maximumScale:1}}));let E=window.Cesium.Matrix4.fromTranslation(new window.Cesium.Cartesian3(0,.17,.8)),W=window.Cesium.Matrix4.fromRotationTranslation(window.Cesium.Matrix3.fromRotationX(window.Cesium.Math.toRadians(90)),window.Cesium.Cartesian3.ZERO),L=window.Cesium.Matrix4.fromScale(new window.Cesium.Cartesian3(-1.9,.9,1)),j=new window.Cesium.Matrix4;window.Cesium.Matrix4.multiplyTransformation(E,W,j),window.Cesium.Matrix4.multiplyTransformation(j,L,j);let D=window.Cesium.Transforms.headingPitchRollToFixedFrame(c,$);window.Cesium.Matrix4.multiplyTransformation(D,j,D);let N=new window.Cesium.Primitive({geometryInstances:new window.Cesium.GeometryInstance({geometry:new window.Cesium.PlaneGeometry({vertexFormat:window.Cesium.VertexFormat.TEXTURED,width:5,height:2}),modelMatrix:D}),appearance:new window.Cesium.MaterialAppearance({material:window.Cesium.Material.fromType("Image",{image:P})})});window.geofs.api.viewer.scene.primitives.add(N),window.twM.push(N)}})};
+        (() => {var twsScript = document.createElement('script'); twsScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Taxiway-Signs/main/userscript.js";document.body.appendChild(twsScript);})()
     }
 
 
