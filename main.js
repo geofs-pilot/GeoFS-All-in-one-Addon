@@ -63,7 +63,7 @@ Changes the navigation map of GeoFS to another tile provider`,
             'Extra vehicles': `Extra vehicles in GeoFS presented by JXT`,
 
 
-            'Failures': `Adds the ability for systems to fail
+            'Failures': `Adds the ability for systems to fail (you have to enable it first)
             -Landing gear
             -Fuel leak
             -Flight control
