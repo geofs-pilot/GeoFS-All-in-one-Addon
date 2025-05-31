@@ -49,7 +49,7 @@ GeoFS-Taxiway-Lights <br/>
 GeoFS-Taxiway-Signs <br/>
 uiTweaks <br/>
 ## Other things to check out
--[Extra Maritime Structures](https://github.com/TotallyRealElonMusk/GeoFS-Extra-Maritime-Structures/blob/main/main.js)
+-[Extra Maritime Structures](https://github.com/TotallyRealElonMusk/GeoFS-Extra-Maritime-Structures/blob/main/main.js) <br/>
 -[FMC route collection](http://sites.google.com/view/gpg-2-0/home?authuser=0) <br/>
 -https://skyvector.com/<br/>
 -[Simbrief](https://dispatch.simbrief.com/home) <br/>
