@@ -93,7 +93,7 @@ function menus() {
             'Landing stats': `Upon landing, displays vertical speed, G-forces, airspeed, roll, tilt, TDZ accuracy, and more. For the TDZ to work you must be tuned into ILS `,
 
 
-            'Overpowered engines': `Sets the engine thrust to 5x the normal thrust, and the ceiling to 300,000 feet.
+            'Overpowered engines': `Sets the engine thrust to 6x the normal thrust, and the ceiling to 300,000 feet.
             Toggle using [Q]`,
 
 
@@ -105,8 +105,6 @@ function menus() {
 
             Shows flights departing from the airport you are currently at and can also load flight plans for those routes
             Tracks your completed flights under “Career”`,
-
-
 
 
             'Realism pack': `Toggle button for KCAS/KTAS instruments
