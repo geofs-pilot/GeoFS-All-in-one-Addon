@@ -48,7 +48,8 @@ GeoFS-Slew-Mode <br/>
 GeoFS-Taxiway-Lights <br/>
 GeoFS-Taxiway-Signs <br/>
 uiTweaks <br/>
-## Other resources to check out
+## Other things to check out
+-[Extra Maritime Structures](https://github.com/TotallyRealElonMusk/GeoFS-Extra-Maritime-Structures/blob/main/main.js)
 -[FMC route collection](http://sites.google.com/view/gpg-2-0/home?authuser=0) <br/>
 -https://skyvector.com/<br/>
 -[Simbrief](https://dispatch.simbrief.com/home) <br/>
