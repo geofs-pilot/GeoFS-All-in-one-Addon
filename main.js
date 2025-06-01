@@ -170,7 +170,10 @@ function menus() {
             Tilt downL: [↓]`,
 
 
-            'UI tweaks': `Adds a popout chat. Mouse wheel functionality was added to GeoFS natively.`
+            'UI tweaks': `Adds a popout chat. Mouse wheel functionality was added to GeoFS natively.
+
+
+`
         };
         
         function addAddon(name) {
@@ -674,7 +677,10 @@ function menus() {
             If VFR, reposition for another approach or leave the traffic pattern as appropriate.
             9) Assess and Plan Next Steps
             Analyze the reason for the go-around (e.g., unstable approach, obstruction on the runway, ATC instruction, etc.).
-            Decide whether to attempt another landing, divert to an alternate airport, or hold for further instructions.`
+            Decide whether to attempt another landing, divert to an alternate airport, or hold for further instructions.
+
+
+`
         };
 
 
@@ -895,7 +901,10 @@ function menus() {
             2. Avoid further damage:
             - Limit maneuvers and avoid turbulence.
             3. Plan an emergency landing:
-            - Declare an emergency and head to the nearest suitable airport.`
+            - Declare an emergency and head to the nearest suitable airport.
+
+
+`
         };
 
 
