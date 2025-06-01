@@ -53,6 +53,7 @@ uiTweaks <br/>
 -[FMC route collection](http://sites.google.com/view/gpg-2-0/home?authuser=0) <br/>
 -https://skyvector.com/<br/>
 -[Simbrief](https://dispatch.simbrief.com/home) <br/>
+-https://opennav.com/ <br/>
 ## Credits
 (some procedures were written with the help of chatgpt) <br/>
 https://sites.google.com/view/geofs-flights-channel/flight-procedures <br/>
