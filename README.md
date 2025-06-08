@@ -1,5 +1,5 @@
 # GeoFS-All-in-one-Addon
-Born out of my cumpulsion to have all the addons I could ever need in a single script, this addon contains 23 addons, their instructions, and detailed flight procedures, compiled together. <br/>
+Born out of my cumpulsion to have all the addons I could ever need in one place, this addon contains 23 addons, their instructions, and detailed flight procedures, compiled together. <br/>
  -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
  
 ![image](https://github.com/user-attachments/assets/98bc312e-4aa1-4990-b7ab-90e8ab41db80)
@@ -60,9 +60,10 @@ uiTweaks <br/>
 -https://skyvector.com/<br/>
 -[Simbrief](https://dispatch.simbrief.com/home) <br/>
 -https://opennav.com/ <br/>
-https://www.openaip.net/ <br/>
+-https://www.openaip.net/ <br/>
+-https://www.helisimmer.com/how-to-fly-helicopters
 ## Credits
-(some procedures were written with the help of chatgpt) <br/>
+Some procedures were written with the help of ChatGPT. <br/>
 https://sites.google.com/view/geofs-flights-channel/flight-procedures <br/>
 https://github.com/avramovic/GeoFS-AI-ATC/tree/master <br/>
 https://github.com/RadioactivePotato/GeoFS-Ad-Remover/tree/main <br/>
