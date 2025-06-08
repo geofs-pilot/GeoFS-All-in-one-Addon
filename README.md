@@ -11,8 +11,8 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 ### Bookmarklet - Easy and fast, nothing to install
 -Bookmark any page, left click on it, press Edit, and replace the URL with the contents of bookmarklet.js <br/>
 -Once GeoFS is fully loaded, click on the bookmark to run the script. <br/>
--No need to update, automatically runs latest version
--For scripts that only run in tampermonkey, you will need to install it.
+-No need to update, automatically runs latest version <br/>
+-For scripts that only run in tampermonkey, you will need to install it. <br/>
 ### Pasting into console - not recommended, most cumbersome
 -Once GeoFS is fully loaded, press F12/Ctrl+shift+I/Ctrl+shift+J and go to the Console tab. <br/>
 -Paste in the contents of main.js at the > symbol and hit Enter
