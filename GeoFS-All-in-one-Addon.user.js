@@ -19,7 +19,6 @@
 // @require      https://raw.githubusercontent.com/scitor/GeoFS/master/randomJobs/career.page.js?0.8.6.1171
 // @require      https://raw.githubusercontent.com/scitor/GeoFS/master/randomJobs/airport.page.js?0.8.6.1171
 // @require      https://raw.githubusercontent.com/scitor/GeoFS/master/randomJobs/flightplan.page.js?0.8.6.1171
-// @downloadURL  https://raw.githubusercontent.com/scitor/GeoFS/master/randomJobs/randomJobs.user.js
 // @grant        GM.getResourceText
 // @grant        GM.getResourceUrl
 // @grant        GM_xmlhttpRequest
