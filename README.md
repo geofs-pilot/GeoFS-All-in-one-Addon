@@ -19,10 +19,10 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 ### Tampermonkey - recommended, runs automatically when GeoFS is visited
 -Install [Tampermonkey](https://www.tampermonkey.net/) <br/>
 -Click [here](https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/GeoFS-All-in-one-Addon.user.js) to install the script <br/>
--No need to update, automatically runs latest version
+-No need to update, automatically runs latest version <br/>
 -No need to install Tampermonkey scripts seperately
 ## These scripts only work with tampermonkey - install them here if not using GeoFS-All-in-one-Addon.user.js
--If you're using the userscript, you don't need to install these separately.
+-If you're using the userscript, you don't need to install these separately. <br/>
 -[install randomJobs](https://github.com/scitor/GeoFS/raw/master/randomJobs/randomJobs.user.js) <br/>
 -[install GeoFS-AI-ATC](https://github.com/avramovic/geofs-ai-atc/raw/master/GeoFS-AI-ATC.user.js) <br/>
 -[install AI ATC with PTT key (modified version of GeoFS-AI-ATC)](https://github.com/geofs-pilot/AI-ATC-PTT-modification/raw/main/PTT_AI_ATC.user.js) <br/>
