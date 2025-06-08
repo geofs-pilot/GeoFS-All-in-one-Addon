@@ -7,25 +7,27 @@ Born out of my cumpulsion to have all the addons I could ever need in a single s
 ![image](https://github.com/user-attachments/assets/9526f33f-a9ed-40cd-ba9a-2aa2738812a7)
 
 ## How to use: <br/>
-Note: depending on the size of your screen, everything might not fit on the UI bar. If this happens, simply zoom out the site (ctrl-)
-### Bookmarklet - Easy and fast, nothing to install
+Note: depending on the size of your screen, everything might not fit on the UI bar. If this happens, simply zoom out the site (ctrl-). Some of the scripts included need Tampermonkey, so I recommend using that method, but if you really don't want to, you can inject the script into the console. 
+### Console
+#### Bookmarklet
 -Bookmark any page, left click on it, press Edit, and replace the URL with the contents of bookmarklet.js <br/>
--Once GeoFS is fully loaded, click on the bookmark to run the script. <br/>
+-Once GeoFS is fully loaded, click on the bookmark to run the script. You will have to do this every time you open GeoFS. <br/>
 -No need to update, automatically runs latest version <br/>
--For scripts that only run in tampermonkey, you will need to install it. <br/>
-### Pasting into console - not recommended, most cumbersome
+-Missing some functionality for tampermonkey-only addons. <br/>
+#### Pasting into console
 -Once GeoFS is fully loaded, press F12/Ctrl+shift+I/Ctrl+shift+J and go to the Console tab. <br/>
--Paste in the contents of main.js at the > symbol and hit Enter
-### Tampermonkey - recommended, runs automatically when GeoFS is visited
+-Paste in the contents of main.js at the > symbol and hit Enter <br/>
+-You will have to do this every time you go to GeoFS. <br/>
+-Missing some functionality for tampermonkey-only addons. <br/>
+### Tampermonkey - recommended
+-If you use this method, you don't have to install anything other than the userscript, and you get full functionality with all the addons. Also, it runs on its own whenever you go to GeoFS. <br/>
 -Install [Tampermonkey](https://www.tampermonkey.net/) <br/>
 -Click [here](https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/GeoFS-All-in-one-Addon.user.js) to install the script <br/>
 -No need to update, automatically runs latest version <br/>
--No need to install Tampermonkey scripts seperately
-## These scripts only work with tampermonkey - install them here if not using GeoFS-All-in-one-Addon.user.js
--If you're using the userscript, you don't need to install these separately. <br/>
--[install randomJobs](https://github.com/scitor/GeoFS/raw/master/randomJobs/randomJobs.user.js) <br/>
--[install GeoFS-AI-ATC](https://github.com/avramovic/geofs-ai-atc/raw/master/GeoFS-AI-ATC.user.js) <br/>
--[install AI ATC with PTT key (modified version of GeoFS-AI-ATC)](https://github.com/geofs-pilot/AI-ATC-PTT-modification/raw/main/PTT_AI_ATC.user.js) <br/>
+### Addons that need tampermonkey to work :
+-[randomJobs](https://github.com/scitor/GeoFS/raw/master/randomJobs/randomJobs.user.js) <br/>
+-[GeoFS-AI-ATC](https://github.com/avramovic/geofs-ai-atc/raw/master/GeoFS-AI-ATC.user.js) <br/>
+-[AI ATC with PTT key (modified version of GeoFS-AI-ATC)](https://github.com/geofs-pilot/AI-ATC-PTT-modification/raw/main/PTT_AI_ATC.user.js) <br/>
 -[Better-GeoFS-NAV-map](https://github.com/RadioactivePotato/Better-GeoFS-NAV-Map/tree/main)
 ## Addons included:
 Option menu with flight procedures <br/>
@@ -58,6 +60,7 @@ uiTweaks <br/>
 -https://skyvector.com/<br/>
 -[Simbrief](https://dispatch.simbrief.com/home) <br/>
 -https://opennav.com/ <br/>
+https://www.openaip.net/ <br/>
 ## Credits
 (some procedures were written with the help of chatgpt) <br/>
 https://sites.google.com/view/geofs-flights-channel/flight-procedures <br/>
