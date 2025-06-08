@@ -1,10 +1,10 @@
 # GeoFS-All-in-one-Addon
-23 addons, their instructions, and detailed flight procedures, compiled together <br/>
+Born out of my cumpulsion to have all the addons I could ever need in a single script, this addon contains 23 addons, their instructions, and detailed flight procedures, compiled together. <br/>
  -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
  
-![image](https://github.com/user-attachments/assets/5f7a7e45-0a97-461a-8f4e-3b8a86e8dacf)
-![image](https://github.com/user-attachments/assets/dad6b312-b172-43ad-9155-7594b8c3e681)
-
+![image](https://github.com/user-attachments/assets/98bc312e-4aa1-4990-b7ab-90e8ab41db80)
+![image](https://github.com/user-attachments/assets/1ffed9b0-0ba7-4a56-aa59-70d4bf040720)
+![image](https://github.com/user-attachments/assets/9526f33f-a9ed-40cd-ba9a-2aa2738812a7)
 
 ## How to use: <br/>
 Note: depending on the size of your screen, everything might not fit on the UI bar. If this happens, simply zoom out the site (ctrl-)
@@ -35,6 +35,7 @@ Autoland++ <br/>
 geofs-autothrottle <br/>
 Better-GeoFS-NAV-Map <br/>
 GeoFS-Camera-cycling <br/>
+geofs-charts <br/>
 GeoFS-Extra-Vehicles <br/>
 GeoFS-Failures <br/>
 GeoFS-Flight-Path-Vector <br/>
@@ -66,6 +67,7 @@ https://github.com/jtpotato/geofs-scripts/tree/main/Autoland%2B%2B <br/>
 https://github.com/meatbroc/geofs-autothrottle/tree/main <br/>
 https://github.com/RadioactivePotato/Better-GeoFS-NAV-Map/tree/main <br/>
 https://github.com/geofs-pilot/GeoFS-Camera-cycling/tree/main <br/>
+https://github.com/mansoorbarri/geofs-charts/tree/main
 https://github.com/af267/GeoFS-Extra-Vehicles/tree/main <br/>
 https://github.com/tylerbmusic/GeoFS-Failures <br/>
 https://github.com/tylerbmusic/GeoFS-Flight-Path-Vector <br/>
