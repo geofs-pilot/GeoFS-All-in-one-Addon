@@ -35,7 +35,7 @@ function menus() {
 
             //ADDON DESCRIPTIONS GO HERE:
         const descriptions = {
-            'AI ATC': `***works with tampermonkey only, see the GitHub page***
+            'AI ATC': `***Works with Tampermonkey only, see the GitHub page***
 
 
             Uses PuterJS GPT and speech-to-text to provide AI air traffic control
@@ -52,15 +52,15 @@ function menus() {
             'Autothrottle': `Regulates aircraft speed while retaining pilot control`,
 
 
-            'Better NAV Map': `***works with tampermonkey only, see the GitHub page***
+            'Better NAV Map': `***Works with Tampermonkey only, see the GitHub page***
 
 
             Changes the navigation map of GeoFS to another tile provider`,
 
 
             'Camera cycling': `Randomly cycles through the camera angles for each airplane every 30 seconds. You can toggle this on and off by pressing [W]. By default, it excludes cockpit-less cam, free cam, chase cam and fixed cam.`,
-            
-            'Charts': `***works with tampermonkey only, see the GitHub page***
+          
+            'Charts': `***Works with Tampermonkey only, see the GitHub page***
 
 
             Display airport taxi charts in GeoFS, with a search feature for ICAO codes, fetching data from GitHub.`,
@@ -107,7 +107,7 @@ function menus() {
             'Pushback': `Adds pushback tugs for most military and civilian aircraft which appear if you are stationary.`,
 
 
-            'Random Jobs': `***works with tampermonkey only, see the GitHub page***
+            'Random Jobs': `***Works with Tampermonkey only, see the GitHub page***
 
 
             Shows flights departing from the airport you are currently at and can also load flight plans for those routes
