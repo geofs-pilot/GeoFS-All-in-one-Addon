@@ -6,7 +6,7 @@ Born out of my obsession with having all the addons I could ever need in one pla
 ![image](https://github.com/user-attachments/assets/1ffed9b0-0ba7-4a56-aa59-70d4bf040720)
 ![image](https://github.com/user-attachments/assets/9526f33f-a9ed-40cd-ba9a-2aa2738812a7)
 
-## How to use: <br/>
+## How to use:
 Note: depending on the size of your screen, everything might not fit on the UI bar. If this happens, simply zoom out the site (ctrl-). Some of the scripts included need Tampermonkey, so I recommend using that method, but if you really don't want to, you can inject the script into the console. 
 ### Console
 #### Bookmarklet
