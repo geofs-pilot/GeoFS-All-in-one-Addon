@@ -24,7 +24,7 @@
 // @grant        GM_xmlhttpRequest
 // @grant        GM_addStyle
 // ==/UserScript==
-let pushToTalk = true; //Use this to set whether you want the PTT version or the normal version of the AI ATC.
+let pushToTalk = true; //Use this to set whether you want the PTT version or the normal version of the AI ATC addon.
 
 function ai () {
 
