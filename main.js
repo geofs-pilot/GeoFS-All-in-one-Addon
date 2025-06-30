@@ -60,10 +60,14 @@ function menus() {
 
             'Camera cycling': `Randomly cycles through the camera angles for each airplane every 30 seconds. You can toggle this on and off by pressing [W]. By default, it excludes cockpit-less cam, free cam, chase cam and fixed cam.`,
           
+
             'Charts': `***Works with Tampermonkey only, see the GitHub page***
 
 
             Display airport taxi charts in GeoFS, with a search feature for ICAO codes, fetching data from GitHub.`,
+
+
+            'Cockpit volume': `Lowers the volume when in cockpit view in aircraft without dedicated cockpit sounds`,
 
 
             'Extra vehicles': `Extra vehicles in GeoFS presented by JXT`,
@@ -95,6 +99,9 @@ function menus() {
 
 
             'Information display': `Displays Indicated Airspeed, Mach, Ground Speed, Altitude, Above Ground Level, Heading, Vertical Speed, Throttle %, AOA, Glideslope angle (must be tuned into ILS), G-force, and status of overpowered engines, camera cycling, and fuel`,
+
+
+            'Jetbridge': `An addon that loads a jetbridge which you can adjust the position of since the positions on most aircrafts varies.The addon is still under development and will receive more updates soon`,
 
 
             'Landing stats': `Upon landing, displays vertical speed, G-forces, airspeed, roll, tilt, TDZ accuracy, and more. For the TDZ to work you must be tuned into ILS `,
@@ -232,12 +239,14 @@ function menus() {
         addAddon('Better NAV Map');
         addAddon('Camera cycling');
         addAddon('Charts');
+        addAddon('Cockpit volume');
         addAddon('Extra vehicles');
         addAddon('Failures');
         addAddon('Flight path vector');
         addAddon('Fuel');
         addAddon('GPWS');
         addAddon('Information display');
+        addAddon('Jetbridge');
         addAddon('Landing stats');
         addAddon('Overpowered engines');
         addAddon('Pushback');
@@ -997,6 +1006,9 @@ function addonExecution () {
         !function(){"use strict";let e=[],t=0,a=null,n=null;function c(){cycling=!1,a&&clearInterval(a)}globalThis.cycling=!1,!function r(){let i=setInterval(()=>{geofs?.camera?.modes&&geofs?.aircraft?.instance&&(clearInterval(i),n=geofs.aircraft.instance.id,setInterval(()=>{if(geofs.aircraft&&geofs.aircraft.instance){let e=geofs.aircraft.instance.id;e!==n&&(n=e,console.log("Stopped cycling due to aircraft change"),c())}},1e3),document.addEventListener("keydown",function(n){"w"!==n.key.toLowerCase()||n.ctrlKey||n.altKey||n.metaKey||((cycling=!cycling)?(console.log("Camera cycling started."),!geofs.camera||!geofs.camera.modes||(a&&clearInterval(a),function a(){let n=[2,3,4,5];e=geofs.camera.modes.map((e,t)=>t).filter(e=>!n.includes(e));for(let c=e.length-1;c>0;c--){let r=Math.floor(Math.random()*(c+1));[e[c],e[r]]=[e[r],e[c]]}t=0}(),a=setInterval(()=>{!geofs.pause&&cycling&&e.length>0&&(geofs.camera.set(e[t]),console.log("Switched to camera:",e[t]),t=(t+1)%e.length)},3e4))):(c(),console.log("Camera cycling stopped.")))}),console.log("Script running. Press 'W' to toggle."))},500)}()}();    
     };
 
+    function volume () {
+        (() => {var volumeScript = document.createElement('script'); volumeScript.src="https://raw.githack.com/geofs-pilot/geofs-cockpit-volume/main/userscript.js";document.body.appendChild(volumeScript);})()
+    };
 
     function vehicles () {
         (() => {var vehicleScript = document.createElement('script'); vehicleScript.src="https://raw.githack.com/af267/GeoFS-Extra-Vehicles/main/main.js";document.body.appendChild(vehicleScript);})()
@@ -1465,6 +1477,9 @@ function addonExecution () {
             `,flight.recorder.playing?y.style.display="none":y.style.display="inline-block"}},100);
     };
 
+    function jetbridge () {
+        (() => {var jetScript = document.createElement('script'); jetScript.src="https://raw.githack.com/Spice9/Geofs-Jetbridge/main/jetbridge-main.js";document.body.appendChild(jetScript);})()
+    };
 
     function stats () {
         setTimeout(function(){"use strict";window.DEGREES_TO_RAD=window.DEGREES_TO_RAD||.017453292519943295,window.RAD_TO_DEGREES=window.RAD_TO_DEGREES||57.29577951308232,window.closeTimer=!0,window.closeSeconds=10,window.refreshRate=20,window.counter=0,window.isLoaded=!1,window.justLanded=!1,window.vertSpeed=0,window.oldAGL=0,window.newAGL=0,window.calVertS=0,window.groundSpeed=0,window.ktias=0,window.kTrue=0,window.bounces=0,window.statsOpen=!1,window.isGrounded=!0,window.isInTDZ=!1,window.softLanding=new Audio("https://tylerbmusic.github.io/GPWS-files_geofs/soft_landing.wav"),window.hardLanding=new Audio("https://tylerbmusic.github.io/GPWS-files_geofs/hard_landing.wav"),window.crashLanding=new Audio("https://tylerbmusic.github.io/GPWS-files_geofs/crash_landing.wav"),window.statsDiv=document.createElement("div"),window.statsDiv.style.width="fit-content",window.statsDiv.style.height="fit-content",window.statsDiv.style.background="linear-gradient(to bottom right, rgb(29, 52, 87), rgb(20, 40, 70))",window.statsDiv.style.zIndex="100000",window.statsDiv.style.margin="30px",window.statsDiv.style.padding="15px",window.statsDiv.style.fontFamily="Arial, sans-serif",window.statsDiv.style.boxShadow="0 8px 24px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.2)",window.statsDiv.style.color="white",window.statsDiv.style.position="fixed",window.statsDiv.style.borderRadius="12px",window.statsDiv.style.left="-50%",window.statsDiv.style.transition="0.4s ease",window.statsDiv.style.border="1px solid rgba(255,255,255,0.1)",document.body.appendChild(window.statsDiv),setInterval(function e(){if(!1==geofs.cautiousWithTerrain&&!geofs.isPaused()&&!(window.sd&&window.sd.cam.data)){if((void 0!==geofs.animation.values.altitude&&void 0!==geofs.animation.values.groundElevationFeet?geofs.animation.values.altitude-geofs.animation.values.groundElevationFeet+3.2808399*geofs.aircraft.instance.collisionPoints[geofs.aircraft.instance.collisionPoints.length-2].worldPosition[2]:"N/A")<500){if(window.justLanded=geofs.animation.values.groundContact&&!window.isGrounded,window.justLanded&&!window.statsOpen){window.closeTimer&&setTimeout(window.closeLndgStats,1e3*window.closeSeconds);let a=window.clamp((window.lVS-50)/70,0,5),t=window.clamp(2*Math.abs(window.geofs.animation.values.accZ/9.80665-1),0,2),i=Math.min(2*window.bounces,6),n=window.clamp(window.lRoll/10,0,1.5),s=!0==window.isInTDZ?0:1;if(window.landingScore=window.clamp(10-a-t-i-n-s,0,10),console.log("Landing score: "+window.landingScore),window.statsOpen=!0,window.statsDiv.innerHTML=`
@@ -1577,18 +1592,17 @@ out skel qt;
         const POPOUT_CHAT=!0;!function e(){"use strict";if(!window.jQuery)return setTimeout(e,1e3);{let t=$('<button class="mdl-button mdl-js-button mdl-button--icon" tabindex="0"><i class="material-icons">text_fields</i></button>')[0];document.querySelectorAll(".geofs-button-mute").forEach(e=>e.parentNode.appendChild(t));let o,n,a;t.onclick=function(){n=(a=document.querySelector(".geofs-chat-messages")).parentNode,(o=window.open("about:blank","_blank","height=580, width=680, popup=1")).document.body.append(a),o.document.head.append($("<title>GeoFS - Chat</title>")[0]),o.document.head.append($("<style>.geofs-chat-message{opacity:1!important;font-family:sans-serif;}</style>")[0]),o.onbeforeunload=()=>n.append(a)},window.onbeforeunload=()=>o&&o.close()}}();
     }
 
-
+    realism();
     adblock();
     autoland();
     athrottle();
     camera();
-    vehicles();
+    volume();
     fpv();
     failuresAndFuel();
     gpws();
     stats();
     opengines();
-    realism();
     pushback();
     dolly();
     slew();
@@ -1596,6 +1610,11 @@ out skel qt;
     twsigns();
     tweaks();
     info();
+    setTimeout(() => {
+        vehicles();
+        jetbridge();
+    }, 1000);
+
 }
 
 
