@@ -38,6 +38,7 @@ Autoland++ <br/>
 geofs-autothrottle <br/>
 Better-GeoFS-NAV-Map <br/>
 GeoFS-Camera-cycling <br/>
+geofs-cockpit-volume <br/>
 geofs-charts <br/>
 GeoFS-Extra-Vehicles <br/>
 GeoFS-Failures <br/>
@@ -45,6 +46,7 @@ GeoFS-Flight-Path-Vector <br/>
 GeoFS-Fuel <br/>
 GeoFS-GPWS-Callouts <br/>
 GeoFS-Information-Display <br/>
+Geofs-Jetbridge <br/>
 GeoFS-Landing-Stats <br/>
 geofs-overpowered-engines <br/>
 GeoFS-Pushback <br/>
@@ -72,13 +74,15 @@ https://github.com/jtpotato/geofs-scripts/tree/main/Autoland%2B%2B <br/>
 https://github.com/meatbroc/geofs-autothrottle/tree/main <br/>
 https://github.com/RadioactivePotato/Better-GeoFS-NAV-Map/tree/main <br/>
 https://github.com/geofs-pilot/GeoFS-Camera-cycling/tree/main <br/>
-https://github.com/mansoorbarri/geofs-charts/tree/main
+https://github.com/mansoorbarri/geofs-charts/tree/main <br/>
+https://github.com/geofs-pilot/geofs-cockpit-volume/tree/main <br/>
 https://github.com/af267/GeoFS-Extra-Vehicles/tree/main <br/>
 https://github.com/tylerbmusic/GeoFS-Failures <br/>
 https://github.com/tylerbmusic/GeoFS-Flight-Path-Vector <br/>
 https://github.com/geofs-pilot/GeoFS-Fuel <br/>
 https://github.com/tylerbmusic/GeoFS-GPWS-Callouts <br/>
 https://github.com/RadioactivePotato/GeoFS-Information-Display <br/>
+https://github.com/Spice9/Geofs-Jetbridge/tree/main <br/>
 https://github.com/scitor/GeoFS/tree/master/randomJobs <br/>
 https://github.com/tylerbmusic/GeoFS-Landing-Stats <br/>
 https://github.com/geofs-pilot/geofs-overpowered-engines/tree/main <br/>
