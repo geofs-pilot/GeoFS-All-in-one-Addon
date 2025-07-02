@@ -1618,7 +1618,6 @@ out skel qt;
         jetbridge();
         scriptsRun = true;
     }
-
     const observer = new MutationObserver(() => {
         const LSBtn = document.getElementById("liverybutton");
         if (LSBtn && !scriptsRun) {
@@ -1628,8 +1627,23 @@ out skel qt;
             observer.disconnect();
         }
     });
-
     observer.observe(document.body, { childList: true, subtree: true });
+    //wait for gmenu button to appear, then cycle the display so that it doesn't open and close along with the option panel
+    let cycled = false;
+    const GmenuBtn = document.getElementById("gamenu");
+    if (GmenuBtn && !cycled) {
+            window.gmenu.menuDiv.style.display = "none";
+        cycled = true;
+    }
+    const gmenuObserver = new MutationObserver(() => {
+        const GmenuBtn = document.getElementById("gamenu");
+        if (GmenuBtn && !cycled) {
+                window.gmenu.menuDiv.style.display = "none";
+            cycled = true;
+            gmenuObserver.disconnect();
+        }
+    });
+    gmenuObserver.observe(document.body, { childList: true, subtree: true });
 }
 
 
