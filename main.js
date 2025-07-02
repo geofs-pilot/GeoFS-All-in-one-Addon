@@ -1592,7 +1592,6 @@ out skel qt;
         const POPOUT_CHAT=!0;!function e(){"use strict";if(!window.jQuery)return setTimeout(e,1e3);{let t=$('<button class="mdl-button mdl-js-button mdl-button--icon" tabindex="0"><i class="material-icons">text_fields</i></button>')[0];document.querySelectorAll(".geofs-button-mute").forEach(e=>e.parentNode.appendChild(t));let o,n,a;t.onclick=function(){n=(a=document.querySelector(".geofs-chat-messages")).parentNode,(o=window.open("about:blank","_blank","height=580, width=680, popup=1")).document.body.append(a),o.document.head.append($("<title>GeoFS - Chat</title>")[0]),o.document.head.append($("<style>.geofs-chat-message{opacity:1!important;font-family:sans-serif;}</style>")[0]),o.onbeforeunload=()=>n.append(a)},window.onbeforeunload=()=>o&&o.close()}}();
     }
 
-    realism();
     adblock();
     autoland();
     athrottle();
@@ -1604,17 +1603,33 @@ out skel qt;
     stats();
     opengines();
     pushback();
+    realism();
     dolly();
     slew();
     twlights();
     twsigns();
     tweaks();
     info();
-    setTimeout(() => {
+    //wait for liveryselector button to appear
+    let scriptsRun = false;
+    const LSBtn = document.getElementById("liverybutton");
+    if (LSBtn && !scriptsRun) {
         vehicles();
         jetbridge();
-    }, 1000);
+        scriptsRun = true;
+    }
 
+    const observer = new MutationObserver(() => {
+        const LSBtn = document.getElementById("liverybutton");
+        if (LSBtn && !scriptsRun) {
+            vehicles();
+            jetbridge();
+            scriptsRun = true;
+            observer.disconnect();
+        }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
 }
 
 
