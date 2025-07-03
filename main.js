@@ -184,10 +184,7 @@ function menus() {
             Tilt downL: [↓]`,
 
 
-            'UI tweaks': `Adds a popout chat. Mouse wheel functionality was added to GeoFS natively.
-
-
-`
+            'UI tweaks': `Adds a popout chat. Mouse wheel functionality was added to GeoFS natively.`
         };
         
         function addAddon(name) {
