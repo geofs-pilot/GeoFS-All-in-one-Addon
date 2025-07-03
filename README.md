@@ -2,9 +2,12 @@
 Born out of my obsession with having all the addons I could ever need in one place, this addon contains 25 addons, their instructions, and detailed flight procedures, compiled together. <br/>
  -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
 
- 
-![image](https://github.com/user-attachments/assets/1ffed9b0-0ba7-4a56-aa59-70d4bf040720)
-![image](https://github.com/user-attachments/assets/9526f33f-a9ed-40cd-ba9a-2aa2738812a7)
+
+![image](https://github.com/user-attachments/assets/e4aa8b4d-49cf-4909-b1b6-401c707fde65)
+
+![image](https://github.com/user-attachments/assets/87f5e24a-64f7-48ae-a5cb-aaa0a3bc5efc)
+
+![image](https://github.com/user-attachments/assets/0ad4a80d-df0e-414d-a7a2-68b45339de31)
 
 ## How to use:
 Note: depending on the size of your screen, everything might not fit on the UI bar. If this happens, simply zoom out the site (ctrl-). Some of the scripts included need Tampermonkey, so I recommend using that method, but if you really don't want to, you can inject the script into the console. 
