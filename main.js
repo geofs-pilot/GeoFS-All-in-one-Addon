@@ -1576,7 +1576,7 @@ out skel qt;
     autoland();
     athrottle();
     camera();
-    volume();
+    //volume();
     fpv();
     failuresAndFuel();
     gpws();
