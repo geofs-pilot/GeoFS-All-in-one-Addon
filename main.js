@@ -67,7 +67,7 @@ function menus() {
             Display airport taxi charts in GeoFS, with a search feature for ICAO codes, fetching data from GitHub.`,
 
 
-            'Cockpit volume': `Lowers the volume when in cockpit view in aircraft without dedicated cockpit sounds`,
+            'Cockpit volume': `Lowers the volume when in interior views in aircraft without dedicated cockpit sounds`,
 
 
             'Extra vehicles': `Extra vehicles in GeoFS presented by JXT`,
@@ -1576,7 +1576,7 @@ out skel qt;
     autoland();
     athrottle();
     camera();
-    //volume();
+    volume();
     fpv();
     failuresAndFuel();
     gpws();
