@@ -160,7 +160,7 @@ function menus() {
             F-16 brake parachute
             Turbofan spool-up delay (10%-70% RPM)
             Advanced 2D Clouds Gen V1
-            Fighter jet ejection seats ([E] to eject, [B] to descend faster)
+            Fighter jet ejection seats ([E] to eject, spoilers key to descend faster)
             HUD machmeter
             Lag reduction`,
 
