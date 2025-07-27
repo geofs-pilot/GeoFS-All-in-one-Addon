@@ -46,10 +46,10 @@ function menus() {
             You must specify which runway you want to land on`,
 
 
-            'Autoland++': `Automatically deploys spoilers, disables autopilot, and activates reverse thrust on touchdown. Arm using [Shift]. `,
+            'Autoland++': `Automatically deploys spoilers, disables autopilot and autothrottle, and activates reverse thrust on touchdown. Arm using [Shift]. `,
 
 
-            'Autothrottle': `Regulates aircraft speed while retaining pilot control`,
+            'Autothrottle': `Regulates aircraft speed while retaining pilot control. To arm it to auto-disable on touchdown, turn on LND MODE or arm Autoland++ `,
 
 
             'Better NAV Map': `***Works with Tampermonkey only, see the GitHub page***
