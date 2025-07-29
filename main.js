@@ -165,7 +165,8 @@ function menus() {
             Lag reduction`,
 
 
-            'Sky Dolly': `Adds the functionality of the Sky Dolly MSFS addon. Specifically, the formation mode and logbook. Also adds a camera animator for getting cinematic shots.`,
+            'Sky Dolly': `Adds the functionality of the Sky Dolly MSFS addon. Specifically, the formation mode and logbook.
+            To use it, open up the GMenu (the little GeoFS icon at the bottom) and click on "Open GUI". To start a new recording, press "Start new recording." To stop recording, press the "Stop Recording" button. Then, press "Update Window" to show the recording, enable it with the checkbox, and press "Save" to save changes. Then, rewind the time slider and press "Start Playback" to see your plane fly (or fly with it).`,
 
 
             'Slew mode': `Mimics slew mode from FSX
