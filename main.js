@@ -126,7 +126,6 @@ function menus() {
             Blackout over 9 Gs (cockpit view only)
             Fighter condensation effects
             SSR shaders by AriakimTaiyo 
-            Immersion sounds for A320/A220/A350, 737/777 
             Helicopter rotor strikes cause crashes
             Basic propwash
             Livery Selector by Kolos26 (use alone if Realism Pack crashes)
