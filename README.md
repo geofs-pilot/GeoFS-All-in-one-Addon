@@ -27,7 +27,11 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 -Install [Tampermonkey](https://www.tampermonkey.net/) <br/>
 -Click [here](https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/GeoFS-All-in-one-Addon.user.js) to install the script <br/>
 -No need to update, automatically runs latest version <br/>
--IMPORTANT: When you visit GeoFS for the first time after installing the userscript, you will be directed to a page requesting permission to access a cross-origin resource. This is simply because the charts addon needs an external resource to work. Click "Always allow" and you're all set! Also, you will be prompted to log in to Puter the first time you use AI ATC. Just click 'Create New Account' and create an account.
+#### IMPORTANT NOTES: 
+1. For Tampermonkey to work, you will have to enable developer mode on the "Manage extensions" page. Also, enable User Scripts in the tampermonkey extension settings. For more info, take a look at Tampermonkey's [FAQ](https://www.tampermonkey.net/faq.php?version=5.3.3). <br/>
+2. When you visit GeoFS for the first time after installing the userscript, you will be directed to a page requesting permission to access a cross-origin resource. This is simply because the charts addon needs an external resource to work. Click "Always allow" and you're all set. <br/>
+3. You will be prompted to log in to Puter the first time you use AI ATC. Just click 'Create New Account' and create an account. <br/>
+4. You may also have to relaunch the window if Tampermonkey doesn't work immediately. <br/>
 ### Addons that need tampermonkey to work :
 -[randomJobs](https://github.com/scitor/GeoFS/raw/master/randomJobs/randomJobs.user.js) <br/>
 -[GeoFS-AI-ATC](https://github.com/avramovic/geofs-ai-atc/raw/master/GeoFS-AI-ATC.user.js) <br/>
