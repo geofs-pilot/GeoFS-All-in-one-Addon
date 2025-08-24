@@ -30,6 +30,7 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 #### IMPORTANT NOTES: 
 1. For Tampermonkey to work, you will have to enable developer mode on the "Manage extensions" page. Also, enable User Scripts in the tampermonkey extension settings. For more info, take a look at Tampermonkey's [FAQ](https://www.tampermonkey.net/faq.php?version=5.3.3). <br/>
 2. When you visit GeoFS for the first time after installing the userscript, you will be directed to a page requesting permission to access a cross-origin resource. This is simply because the charts addon needs an external resource to work. Click "Always allow" and you're all set. <br/>
+3. When setting up the userscript, you can choose between 3 different versions of AI ATC. On the first line of code, after `let pushToTalk = `, you can set it to `'none'` (default version), `'text'` (pressing D opens the text ATC box), or `'voice'` (pressing D allows you to transmit a voice messasge). 
 3. You will be prompted to log in to Puter the first time you use AI ATC. Just click 'Create New Account' and create an account. <br/>
 4. You may also have to relaunch the window if Tampermonkey doesn't work immediately. <br/>
 ### Addons that need tampermonkey to work :
