@@ -1,3 +1,137 @@
+let pushToTalk = 'text'; //Use this to set which version of the AI ATC addon you want. 'text' opens the text ATC box when the PTT key or headset icon is pressed, and 'voice' allows you to transmit a voice message when the PTT key or headset icon is pressed.
+
+//set up gm functions so that the scripts can work without tampermonkey
+if (typeof unsafeWindow === "undefined") {
+  window.unsafeWindow = window;
+}
+(function () {
+    const GM_resources = {
+        airports:   "https://raw.githack.com/avramovic/geofs-ai-atc/master/airports.json",
+        radiostatic:"https://raw.githack.com/avramovic/geofs-ai-atc/master/radio-static.mp3"
+    };
+
+    function blobToDataURL(blob) {
+        return new Promise((resolve, reject) => {
+            const r = new FileReader();
+            r.onload = () => resolve(r.result);
+            r.onerror = reject;
+            r.readAsDataURL(blob);
+        });
+    }
+
+    if (typeof window.GM === "undefined") window.GM = {};
+
+    if (typeof GM.getResourceText === "undefined") {
+        GM.getResourceText = async function(name) {
+            const url = GM_resources[name];
+            if (!url) throw new Error("Unknown resource: " + name);
+
+            const res = await fetch(url, { mode: "cors" });
+            if (!res.ok) throw new Error(`Fetch failed ${res.status} ${res.statusText}`);
+
+            if (/\.(json|txt)(\?|$)/i.test(url)) {
+                return res.text();
+            }
+
+            const blob = await res.blob();
+            const dataUrl = await blobToDataURL(blob); 
+            const semi = dataUrl.indexOf(";");         
+            return dataUrl.slice(semi + 1);         
+  };
+}
+  if (typeof GM.getResourceUrl === "undefined") {
+    GM.getResourceUrl = async function (name) {
+      const url = GM_resources[name];
+      if (!url) throw new Error("Unknown resource: " + name);
+      return url;
+    };
+  }
+
+  if (typeof GM_xmlhttpRequest === "undefined") {
+    window.GM_xmlhttpRequest = function (details) {
+      fetch(details.url, {
+        method: details.method || "GET",
+        headers: details.headers || {},
+        body: details.data || null,
+      })
+        .then(async res => {
+          const text = await res.text();
+          details.onload && details.onload({
+            responseText: text,
+            status: res.status,
+            statusText: res.statusText,
+            responseHeaders: Array.from(res.headers.entries())
+              .map(([k, v]) => `${k}: ${v}`).join("\n"),
+            finalUrl: res.url
+          });
+        })
+        .catch(err => {
+          details.onerror && details.onerror({ status: 0, statusText: err.message });
+        });
+    };
+  }
+
+  if (typeof GM_addStyle === "undefined") {
+    window.GM_addStyle = function (css) {
+      const style = document.createElement("style");
+      style.textContent = css;
+      document.head.appendChild(style);
+      return style;
+    };
+  }
+})();
+
+function nav () { //betternav must run before geofs loads in
+    (() => {var navScript = document.createElement('script'); navScript.src="https://raw.githack.com/RadioactivePotato/Better-GeoFS-NAV-Map/refs/heads/main/userscript.js";document.body.appendChild(navScript);})()
+};
+nav();
+
+function jobs() {
+    function loadScript(src) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = () => reject(new Error(`Failed to load: ${src}`));
+            document.body.appendChild(script);
+        });
+    }
+
+    (async function () {
+        const base = "https://raw.githack.com/scitor/GeoFS/master/";
+
+        const scripts = [
+            "geofs.lib.js?0.8.6.1171",
+            "randomJobs/patch.js?0.8.6.1171",
+            "randomJobs/manager.js?0.8.6.1171",
+            "randomJobs/airport.handler.js?0.8.6.1171",
+            "randomJobs/flight.handler.js?0.8.6.1171",
+            "randomJobs/generator.js?0.8.6.1171",
+            "randomJobs/window.js?0.8.6.1171",
+            "randomJobs/career.page.js?0.8.6.1171",
+            "randomJobs/airport.page.js?0.8.6.1171",
+            "randomJobs/flightplan.page.js?0.8.6.1171"
+        ];
+
+        for (const file of scripts) {
+            await loadScript(base + file);
+        }
+
+        // Once all are loaded
+        window.githubRepo = "https://raw.githubusercontent.com/scitor/GeoFS/master";
+
+        let wait = 1;
+        (function init() {
+            if (!Object.keys(aList[0]).length && wait < 5) {
+                return setTimeout(init, 1000 * wait++);
+            }
+            geofs.randomJobs = new RandomJobsMod(aList, aIndex, "0.8.6.1171");
+            geofs.randomJobs.init(() => new MainWindow(geofs.randomJobs).init());
+        })();
+    })();
+};
+jobs();
+
 function menus() {
     function createAddonManager() {
         const geofsPreferencesPanel = document.querySelector('.geofs-list.geofs-toggle-panel.geofs-preference-list');
@@ -35,36 +169,30 @@ function menus() {
 
             //ADDON DESCRIPTIONS GO HERE:
         const descriptions = {
-            'AI ATC': `***Works with Tampermonkey only, see the GitHub page***
-
-
-            Uses PuterJS GPT and speech-to-text to provide AI air traffic control
-            Type a message using Ctrl+click (or [D] if using PTT version)
+            'AI ATC': `Uses PuterJS GPT and speech-to-text to provide AI air traffic control
+            Send a voice message by clicking the headset icon or type a message using Ctrl+click. Pressing [D] acts as a push-to-talk key. By right-clicking the headset icon, you can configure whether it sends a voice or a text transmission.
             You have to be within 50 nautical miles of the airport to talk to it
             Click on the radio icon to tune in to different airport; you can tune to a particular airport ATC by using their ICAO code
             If ATC tells you to wait for instructions, you must check in with them every 10-20 seconds
             You must specify which runway you want to land on`,
 
 
-            'Autoland++': `Automatically deploys spoilers, disables autopilot and autothrottle, and activates reverse thrust on touchdown. Arm using [Shift]. `,
+            'Autoland++': `Automatically deploys spoilers, disables autopilot and autothrottle, and activates reverse thrust on touchdown. Arm using [Shift]. Joystick support has been added. Movement of the throttle axis after reverse thrust has been deployed will return throttle control to the pilot, and movement of the spoiler axis after spoilers have been deployed will return spoiler control to the pilot. `,
 
 
-            'Autothrottle': `Regulates aircraft speed while retaining pilot control. To arm it to auto-disable on touchdown, turn on LND MODE or arm Autoland++ `,
+            'Autothrottle': `Regulates aircraft speed while retaining pilot control. Press [/] to turn it on and off. To arm it to auto-disable on touchdown, turn on LND MODE or arm Autoland++ `,
 
 
-            'Better NAV Map': `***Works with Tampermonkey only, see the GitHub page***
-
-
-            Changes the navigation map of GeoFS to another tile provider`,
+            'Better NAV Map': `Changes the navigation map of GeoFS to another tile provider`,
 
 
             'Camera cycling': `Randomly cycles through the camera angles for each airplane every 30 seconds. You can toggle this on and off by pressing [W]. By default, it excludes cockpit-less cam, free cam, chase cam and fixed cam.`,
           
 
-            'Charts': `***Works with Tampermonkey only, see the GitHub page***
+            'Charts': `Display airport taxi charts in GeoFS, with a search feature for ICAO codes, fetching data from GitHub.`,
 
-
-            Display airport taxi charts in GeoFS, with a search feature for ICAO codes, fetching data from GitHub.`,
+            
+            'Chat fix': `Fixes the removal of the t keybind for opening the chat window in GeoFS.`,
 
 
             'Cockpit volume': `Lowers the volume when in interior views in aircraft without dedicated cockpit sounds`,
@@ -114,10 +242,7 @@ function menus() {
             'Pushback': `Adds pushback tugs for most military and civilian aircraft which appear if you are stationary.`,
 
 
-            'Random Jobs': `***Works with Tampermonkey only, see the GitHub page***
-
-
-            Shows flights departing from the airport you are currently at and can also load flight plans for those routes
+            'Random Jobs': `Shows flights departing from the airport you are currently at and can also load flight plans for those routes
             Tracks your completed flights under “Career”`,
 
 
@@ -236,6 +361,7 @@ function menus() {
         addAddon('Better NAV Map');
         addAddon('Camera cycling');
         addAddon('Charts');
+        addAddon('Chat fix');
         addAddon('Cockpit volume');
         addAddon('Extra vehicles');
         addAddon('Failures');
@@ -983,21 +1109,582 @@ function menus() {
 
 function addonExecution () {
 
+    function ai () {
+        (function() {
+            'use strict';
+
+            const head = document.querySelector('head');
+            if (head) {
+                const puterJS = document.createElement('script');
+                puterJS.src = 'https://js.puter.com/v2/';
+                head.appendChild(puterJS);
+
+                const growlJS = document.createElement('script');
+                growlJS.src = 'https://cdn.jsdelivr.net/gh/avramovic/geofs-ai-atc@master/vanilla-notify.min.js';
+                head.appendChild(growlJS);
+
+                const growlCSS = document.createElement('link');
+                growlCSS.href = 'https://cdn.jsdelivr.net/gh/avramovic/geofs-ai-atc@master/vanilla-notify.css';
+                growlCSS.rel = 'stylesheet';
+                head.appendChild(growlCSS);
+            }
+
+            let airports;
+            GM.getResourceText("airports").then((data) => {
+                airports = JSON.parse(data);
+            });
+
+            let radiostatic;
+            GM.getResourceText("radiostatic").then((data) => {
+                radiostatic = new Audio('data:audio/mp3;'+data);
+                radiostatic.loop = false;
+            });
+
+            let tunedInAtc;
+            let controllers = {};
+            let context = {};
+            let oldNearest = null;
+
+            const observer = new MutationObserver(() => {
+                const menuList = document.querySelector('div.geofs-ui-bottom');
+
+                if (menuList && !menuList.querySelector('.geofs-atc-icon')) {
+                    const micIcon = document.createElement('i');
+                    micIcon.className = 'material-icons';
+                    micIcon.innerText = 'headset_mic';
+
+                    const knobIcon = document.createElement('i');
+                    knobIcon.className = 'material-icons';
+                    knobIcon.innerText = 'radio';
+
+                    const tuneInButton = document.createElement('button');
+                    tuneInButton.className = 'mdl-button mdl-js-button mdl-button--icon geofs-f-standard-ui geofs-tunein-icon';
+                    tuneInButton.title = "Click to set ATC frequency.";
+
+                    tuneInButton.addEventListener('click', (e) => {
+                        let nearestAp = findNearestAirport();
+                        let apCode = prompt('Enter airport ICAO code', nearestAp.code);
+                        if (apCode == null || apCode === '') {
+                            error('You cancelled the dialog.')
+                        } else {
+                            apCode = apCode.toUpperCase();
+                            if (typeof unsafeWindow.geofs.mainAirportList[apCode] === 'undefined') {
+                                error('Airport with code '+ apCode + ' can not be found!');
+                            } else {
+                                tunedInAtc = apCode;
+                                initController(apCode);
+                                info('Your radio is now tuned to '+apCode+' frequency. You will now talk to them.');
+                            }
+                        }
+                    });
+
+                    const atcButton = document.createElement('button');
+                    atcButton.className = 'mdl-button mdl-js-button mdl-button--icon geofs-f-standard-ui geofs-atc-icon';
+                    atcButton.title = "Click to talk to the ATC. Ctrl+click (Cmd+click on Mac) to input text instead of talking. Right click to toggle PTT text and voice.";
+
+                    const toggleContainer = document.createElement('div')
+                    toggleContainer.style.width = "200px"
+                    toggleContainer.style.position = "fixed"
+                    //toggleContainer.style.right = "700px" //temporary positioning. needs to stay above the atc button
+                    toggleContainer.style.bottom = "40px"
+                    toggleContainer.style.backgroundColor = "white"
+                    toggleContainer.style.justifyContent = "space-between"; // spread items evenly
+                    toggleContainer.style.display = "none"
+                    toggleContainer.style.padding = "10px 10px";            // add side padding
+                    toggleContainer.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
+                    toggleContainer.style.borderRadius = "8px";
+                    toggleContainer.style.fontFamily = "sans-serif";
+                    toggleContainer.style.fontSize = "14px";
+                    toggleContainer.style.zIndex = "9999"
+                    document.body.appendChild(toggleContainer);
+                    
+                    //create 2 divs to act as text boxes here 
+                    const textContainer = document.createElement('div')
+                    textContainer.innerText = "Transmit Text"
+
+                    const voiceContainer = document.createElement('div')
+                    voiceContainer.innerText = "Transmit Voice"
+
+                    //create container to hold text boxes
+                    const labelContainer = document.createElement('div')
+                    labelContainer.style.display = "flex"
+                    labelContainer.style.justifyContent = "space-between"
+                    labelContainer.style.marginTop = "5px"
+
+                    //create title container
+                    const titleContainer = document.createElement('div')
+                    titleContainer.style.display = "flex"
+                    titleContainer.style.justifyContent = "space-between"
+                    titleContainer.style.marginBottom = "5px"
+                    titleContainer.innerText = "AI ATC PTT key function"
+                    titleContainer.style.fontWeight = "bold";
+
+                    const toggle = document.createElement("div");
+                    toggle.style.width = "60px";
+                    toggle.style.height = "30px";
+                    toggle.style.borderRadius = "10%";
+                    toggle.style.background = "#ccc";
+                    toggle.style.position = "relative";
+                    toggle.style.margin = "0 auto"
+            
+                    toggle.style.cursor = "pointer";
+
+                    const knob = document.createElement("div");
+                    knob.style.width = "26px";
+                    knob.style.height = "26px";
+                    knob.style.borderRadius = "10%";
+                    knob.style.background = "#000000ff";
+                    knob.style.position = "absolute";
+                    knob.style.top = "2px";
+                    knob.style.left = "2px";
+                    knob.style.transition = "0.3s";
+
+                    toggle.appendChild(knob);
+
+                    labelContainer.appendChild(voiceContainer);
+                    labelContainer.appendChild(textContainer);
+
+            
+                    toggleContainer.appendChild(titleContainer)
+                    toggleContainer.appendChild(toggle);
+                    toggleContainer.appendChild(labelContainer)
+
+                    let pushToTalk = false;
+                    toggle.addEventListener("click", () => {
+                        pushToTalk = !pushToTalk;
+                        knob.style.left = pushToTalk ? "32px" : "2px";
+                    });
+
+                    
+
+                    function handleBtnClick (e) {
+                        if (typeof tunedInAtc === 'undefined') {
+                            error("No frequency set. Click the radio icon to set the frequency!");
+                        } else if (e.ctrlKey || e.metaKey || pushToTalk === true && dpress === true) { //add if/else handler for pushToTalk here
+                            let pilotMsg = prompt("Please enter your message to the ATC:");
+                            if (pilotMsg != null && pilotMsg != "") {
+                                callAtc(pilotMsg);
+                            } else {
+                                error("You cancelled the dialog");
+                            }
+                            dpress = false;
+                        } else {
+                            navigator.mediaDevices.getUserMedia({ audio: true });
+                            let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                            let recognition = new SpeechRecognition();
+                            recognition.continuous = false;
+                            recognition.lang = 'en-US';
+                            recognition.interimResults = false;
+                            recognition.maxAlternatives = 1;
+                            recognition.start();
+                            recognition.onresult = (event) => {
+                                let pilotMsg = event.results[event.results.length - 1][0].transcript;
+                                if (pilotMsg != null && pilotMsg != "") {
+                                    callAtc(pilotMsg);
+                                } else {
+                                    error("No speech recognized. Speak up?");
+                                }
+                                recognition.stop();
+                            };
+                            recognition.onerror = (event) => {
+                                error('Speech recognition error: ' + event.error);
+                            };
+                            dpress = false;
+                        }
+                    }; //end of handle click function
+
+                    function handleRightClick () {
+                        
+                        // get button's position
+                        const rect = atcButton.getBoundingClientRect();
+
+                        // position container above the button
+                        toggleContainer.style.position = "absolute";
+                        toggleContainer.style.left = (rect.left - 100) + "px";
+
+                        toggleContainer.style.display = 
+                            toggleContainer.style.display === "none"? "block": "none"
+                    };
+
+                    atcButton.addEventListener('click', handleBtnClick);
+                    atcButton.addEventListener("contextmenu", (e) => {
+                        e.preventDefault(); // stops the default browser menu
+                        //console.log("Right click detected on button");
+                        handleRightClick();
+                    });
+
+                    //hide container when a click is detected outside it
+                    document.addEventListener('click', (e) => {
+                        if (!toggleContainer.contains(e.target)) {
+                            toggleContainer.style.display = "none"
+                        }
+                    });
+
+                    // Also trigger on "d" press
+                    let dpress = false;
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key.toLowerCase() === 'd' && !window.flight.recorder.playing) {
+                            dpress = true;
+                            handleBtnClick(e); // same behavior as clicking
+                        }
+                    });
+
+                    atcButton.appendChild(micIcon);
+                    tuneInButton.appendChild(knobIcon);
+
+                    menuList.appendChild(tuneInButton);
+                    menuList.appendChild(atcButton);
+                }
+            });
+
+            observer.observe(document.body, {childList: true, subtree: true});
+
+            function haversine(lat1, lon1, lat2, lon2) {
+                const R = 6371; // Radius of the Earth in kilometers
+                const toRad = (deg) => deg * (Math.PI / 180);
+
+                const dLat = toRad(lat2 - lat1);
+                const dLon = toRad(lon2 - lon1);
+
+                const a =
+                    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                return (R * c) / 1.852; // Distance in nautical miles
+            }
+
+            function findNearestAirport() {
+                let nearestAirport = null;
+                let minDistance = Infinity;
+
+                for (let apCode in unsafeWindow.geofs.mainAirportList) {
+                    let distance = findAirportDistance(apCode);
+
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        nearestAirport = {
+                            code: apCode,
+                            distance: distance
+                        };
+                    }
+                }
+
+                return nearestAirport;
+            }
+
+            function findAirportDistance(code) {
+                let aircraftPosition = {
+                    lat: unsafeWindow.geofs.aircraft.instance.lastLlaLocation[0],
+                    lon: unsafeWindow.geofs.aircraft.instance.lastLlaLocation[1],
+                };
+                let ap = unsafeWindow.geofs.mainAirportList[code];
+                let airportPosition = {
+                    lat: ap[0],
+                    lon: ap[1]
+                };
+
+                return haversine(
+                aircraftPosition.lat,
+                aircraftPosition.lon,
+                airportPosition.lat,
+                airportPosition.lon
+                );
+            }
+
+            function calculateBearing(lat1, lon1, lat2, lon2) {
+                const toRadians = (deg) => deg * (Math.PI / 180);
+                const toDegrees = (rad) => rad * (180 / Math.PI);
+
+                const dLon = toRadians(lon2 - lon1);
+                const y = Math.sin(dLon) * Math.cos(toRadians(lat2));
+                const x = Math.cos(toRadians(lat1)) * Math.sin(toRadians(lat2)) -
+                Math.sin(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.cos(dLon);
+                const bearing = toDegrees(Math.atan2(y, x));
+
+                // Normalize to 0-360 degrees
+                return (bearing + 360) % 360;
+            }
+
+            function getRelativeDirection(airportLat, airportLon, airplaneLat, airplaneLon) {
+                // Calculate the bearing from the airport to the airplane
+                const bearing = calculateBearing(airportLat, airportLon, airplaneLat, airplaneLon);
+
+                // Determine the direction based on the bearing
+                if (bearing >= 337.5 || bearing < 22.5) {
+                    return "north";
+                } else if (bearing >= 22.5 && bearing < 67.5) {
+                    return "northeast";
+                } else if (bearing >= 67.5 && bearing < 112.5) {
+                    return "east";
+                } else if (bearing >= 112.5 && bearing < 157.5) {
+                    return "southeast";
+                } else if (bearing >= 157.5 && bearing < 202.5) {
+                    return "south";
+                } else if (bearing >= 202.5 && bearing < 247.5) {
+                    return "southwest";
+                } else if (bearing >= 247.5 && bearing < 292.5) {
+                    return "west";
+                } else if (bearing >= 292.5 && bearing < 337.5) {
+                    return "northwest";
+                }
+            }
+
+            function initController(apCode) {
+                controllers[apCode] = controllers[apCode] || null;
+
+                if (controllers[apCode] == null) {
+                    let date = new Date().toISOString().split('T')[0];
+                    fetch('https://randomuser.me/api/?gender=male&nat=au,br,ca,ch,de,us,dk,fr,gb,in,mx,nl,no,nz,rs,tr,ua,us&seed='+apCode+'-'+date)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('HTTP error! status: '+response.status);
+                        }
+                        return response.text();
+                    }).then(resourceText => {
+                        let json = JSON.parse(resourceText)
+                        controllers[apCode] = json.results[0];
+                    });
+                }
+            }
+
+            function error(msg) {
+                vNotify.error({text:msg, title:'Error', visibleDuration: 10000});
+            }
+
+            function info(msg, title) {
+                title = title || 'Information';
+                vNotify.info({text:msg, title:title, visibleDuration: 10000});
+            }
+
+            function atcSpeak(text) {
+                let synth = window.speechSynthesis;
+                let voices = synth.getVoices();
+                let toSpeak = new SpeechSynthesisUtterance(text);
+                toSpeak.voice = voices[0];
+                synth.speak(toSpeak);
+            }
+
+            function atcGrowl(text, airport_code) {
+                vNotify.warning({text: text, title: airport_code+' ATC', visibleDuration: 20000});
+            }
+
+            function atcMessage(text, airport_code) {
+                atcGrowl(text, airport_code);
+                atcSpeak(text);
+            }
+
+            function pilotMessage(text) {
+                let user = unsafeWindow.geofs.userRecord;
+                let airplane = unsafeWindow.geofs.aircraft.instance.aircraftRecord;
+
+                let callsign = "Foo";
+                if (user.id != 0) {
+                    callsign = user.callsign;
+                }
+
+                vNotify.success({text: text, title: airplane.name+': '+callsign, visibleDuration: 10000});
+            }
+
+            function isOnGround() {
+                return unsafeWindow.geofs.animation.values.groundContact === 1;
+            }
+
+            function seaAltitude() {
+                return unsafeWindow.geofs.animation.values.altitude;
+            }
+
+            function groundAltitude() {
+                return Math.max(seaAltitude() - unsafeWindow.geofs.animation.values.groundElevationFeet - 50, 0);
+            }
+
+            function getPilotInfo(today) {
+                let user = unsafeWindow.geofs.userRecord;
+
+                let pilot = {
+                    callsign: 'Foo',
+                    name: 'not known',
+                    licensed_at: today
+                };
+
+                if (user.id != 0) {
+                    pilot = {
+                        callsign: user.callsign,
+                        name: user.firstname + ' ' + user.lastname,
+                        licensed_at: user.created
+                    };
+                }
+
+                return pilot;
+            }
+
+            // generate controller for the nearest airport for today
+            setInterval(function() {
+                let airport = findNearestAirport();
+                let airportMeta = airports[airport.code];
+
+                if (oldNearest !== airport.code) {
+                    let apName = airportMeta ? airportMeta.name+' ('+airport.code+')' : airport.code;
+                    info('You are now in range of '+apName+'. Set your radio frequency to <b>'+airport.code+'</b> to tune in with them');
+                    oldNearest = airport.code;
+                    initController(airport.code);
+                }
+            }, 500);
+
+            function callAtc(pilotMsg) {
+                let airport = {
+                    distance: findAirportDistance(tunedInAtc),
+                    code: tunedInAtc,
+                };
+
+                let date = new Date().toISOString().split('T')[0];
+                let time = unsafeWindow.geofs.animation.values.hours + ':' + unsafeWindow.geofs.animation.values.minutes;
+                let airportMeta = airports[airport.code];
+                let controller = controllers[airport.code];
+                let apName = airportMeta ? airportMeta.name + ' (' + airport.code + ')' : airport.code;
+                let pilot = getPilotInfo(date);
+
+                if (typeof controller === 'undefined') {
+                    radiostatic.play();
+                    info('Airport '+apName+' seems to be closed right now. Try again later...');
+                    initController(airport.code);
+                    return;
+                }
+
+                if (airport.distance > 50) {
+                    radiostatic.play();
+                    error('Frequency '+airport.code+' is out of range. You need to be at least 50 nautical miles away from the airport to contact it.');
+                    return;
+                }
+
+                let airportPosition = {
+                    lat: unsafeWindow.geofs.mainAirportList[airport.code][0],
+                    lon: unsafeWindow.geofs.mainAirportList[airport.code][1],
+                };
+
+                if (typeof context[airport.code] === "undefined") {
+                    let season = unsafeWindow.geofs.animation.values.season;
+                    let daynight = unsafeWindow.geofs.animation.values.night ? 'night' : 'day';
+                    if (unsafeWindow.geofs.isSnow || unsafeWindow.geofs.isSnowy) {
+                        daynight = 'snowy '+daynight;
+                    }
+
+                    let intro = 'You are '+controller.name.first+' '+controller.name.last+', a '+controller.dob.age+' years old '+controller.gender+' ATC controller on the '+apName+' for today. ' +
+                        'Your airport location is (lat: '+airportPosition.lat+', lon: '+airportPosition.lon+'). You are talking to pilot whose name is '+pilot.name+' callsign ('+pilot.callsign+') and they\'ve been piloting since '+pilot.licensed_at+'. ' +
+                        'You will be acting as ground, tower (if the plane is below or at 5000 ft) or approach or departure (if above 5000 ft), depending on whether the plane is on the ground, their distance from the airport, heading and previous context. ' +
+                        'If the aircraft is in the air, keep your communication short and concise, as a real ATC. If they\'re on the ground, your replies should still be short (1-2 sentence per reply), but you can ' +
+                        'use a more relaxed communication like making jokes, discussing weather, other traffic etc. If asked why so slow on replies, say you\'re busy, like the real ATC. '+
+                        'Today is '+date+', time is '+time+', a beautiful '+season+' '+daynight;
+
+                    context[airport.code] = [];
+                    context[airport.code].push({content: intro, role: 'system'});
+                }
+
+                // provide current update
+                let airplane = unsafeWindow.geofs.aircraft.instance.aircraftRecord;
+                let aircraftPosition = {
+                    lat: unsafeWindow.geofs.aircraft.instance.lastLlaLocation[0],
+                    lon: unsafeWindow.geofs.aircraft.instance.lastLlaLocation[1],
+                };
+
+                let onGround = isOnGround() ? 'on the ground' : 'in the air';
+                let distance;
+
+                if (airport.distance > 1) {
+                    let relativeDirection = getRelativeDirection(airportPosition.lat, airportPosition.lon, aircraftPosition.lat, aircraftPosition.lon);
+                    distance = airport.distance+' nautical miles '+relativeDirection+' from the airport';
+                } else if (isOnGround()) {
+                    distance = 'at the airport';
+                } else {
+                    distance = 'above the airport';
+                }
+
+                let movingSpeed;
+                if (isOnGround()) {
+                    if (unsafeWindow.geofs.animation.values.kias > 1) {
+                        movingSpeed = 'moving at '+unsafeWindow.geofs.animation.values.kias+' kts'
+                    } else {
+                        movingSpeed = 'stationary';
+                    }
+                } else {
+                    movingSpeed = 'flying at '+unsafeWindow.geofs.animation.values.kias+' kts, heading '+unsafeWindow.geofs.animation.values.heading360;
+                }
+
+                let address = pilot.callsign+', '+airport.code;
+                if (isOnGround()) {
+                    address += ' Ground';
+                } else if (seaAltitude() <= 5000) {
+                    address += ' Tower';
+                } else {
+                    address += ' Area Control';
+                }
+
+                if (airplane.name.toLowerCase().includes('cessna') || airplane.name.toLowerCase().includes('piper')) {
+                    address = airplane.name + ' ' + address;
+                }
+
+                let relativeWindDirection = unsafeWindow.geofs.animation.values.relativeWind;
+                let windDirection = (unsafeWindow.geofs.animation.values.heading360 + relativeWindDirection + 360) % 360;
+                let wind = unsafeWindow.geofs.animation.values.windSpeedLabel + ', direction '+ windDirection + ' degrees (or '+relativeWindDirection+' degrees relative to the heading of the aircraft)';
+
+                let currentUpdate = 'Date and time: '+date+' '+time+'. '+
+                    'The pilot is flying '+airplane.name+' and their position is '+onGround+' '+distance+'. The altitude of the aircraft is '+seaAltitude()+' feet above the sea level ('+groundAltitude()+' feet above ground). ' +
+                    'The plane is '+movingSpeed+'. Wind speed is '+wind+'. Air temperature is '+unsafeWindow.geofs.animation.values.airTemp+' degrees celsius. '+
+                    'You should address them with "'+address+'", followed by the message.';
+
+                // remove old currentUpdate, leaving only the last one
+                if (context[airport.code].length >= 4) {
+                    context[airport.code].splice(-3, 1);
+                }
+
+                context[airport.code].push({content: currentUpdate, role: 'system'});
+                context[airport.code].push({content: pilotMsg, role: 'user'});
+
+                pilotMessage(pilotMsg);
+
+                puter.ai.chat(context[airport.code]).then(function(resp) {
+                    context[airport.code].push(resp.message);
+                    atcMessage(resp.message.content, airport.code);
+                });
+            }
+
+        })();
+    };
+
     function adblock () {
         (() => {var adblockScript = document.createElement('script'); adblockScript.src="https://raw.githack.com/RadioactivePotato/GeoFS-Ad-Remover/main/GeoFS%20Ad%20Remover-0.1.user.js";document.body.appendChild(adblockScript);})()
     };
 
     function autoland () {
-       async function waitForCondition(t){return new Promise(i=>{let a=setInterval(()=>{t()&&(clearInterval(a),i())},100)})}async function waitForUI(){return waitForCondition(()=>"undefined"!=typeof ui)}async function waitForInstance(){return waitForCondition(()=>geofs.aircraft&&geofs.aircraft.instance)}async function waitForInstruments(){return waitForCondition(()=>instruments&&geofs.aircraft.instance.setup.instruments)}async function autospoilers(){await waitForUI(),await waitForInstance(),geofs.aircraft.instance.animationValue.spoilerArming=0;let t=()=>{geofs.aircraft.instance.groundContact||0!==controls.airbrakes.position||(geofs.aircraft.instance.animationValue.spoilerArming=0===geofs.aircraft.instance.animationValue.spoilerArming?1:0)},i=()=>{controls.airbrakes.target=0===controls.airbrakes.target?1:0,controls.setPartAnimationDelta(controls.airbrakes),geofs.aircraft.instance.animationValue.spoilerArming=0};controls.setters.setSpoilerArming={label:"Spoiler Arming",set:t},controls.setters.setAirbrakes={label:"Air Brakes",set:i},await waitForInstruments(),instruments.definitions.spoilers.overlay.overlays[3]={anchor:{x:0,y:0},size:{x:50,y:50},position:{x:0,y:0},animations:[{type:"show",value:"spoilerArming",when:[1]},{type:"hide",value:"spoilerArming",when:[0]}],class:"control-pad-dyn-label green-pad",text:"SPLR<br/>ARM",drawOrder:1},instruments.init(geofs.aircraft.instance.setup.instruments);let a=geofs.camera.currentMode,n=geofs.camera.currentFOV;window.geofs.camera.set(a),window.geofs.camera.setFOV(n),$(document).keydown(function(t){16!==t.which||t.ctrlKey||t.altKey||t.metaKey||(console.log("Toggled Arming Spoilers"),controls.setters.setSpoilerArming.set())}),setInterval(function(){1===geofs.aircraft.instance.animationValue.spoilerArming&&geofs.aircraft.instance.groundContact&&(0===controls.airbrakes.position&&controls.setters.setAirbrakes.set(),geofs.aircraft.instance.animationValue.spoilerArming=0,geofs.autopilot.setSpeed(0),setTimeout(()=>{geofs.autopilot.turnOff(),$(document).trigger("autothrottleOff")},200),setTimeout(()=>{controls.throttle=-9},200))},100),setInterval(function(){["3292","3054"].includes(geofs.aircraft.instance.id)&&void 0===geofs.aircraft.instance.setup.instruments.spoilers&&(geofs.aircraft.instance.setup.instruments.spoilers="",instruments.init(geofs.aircraft.instance.setup.instruments))},500)}autospoilers();
+        (() => {var autolandScript = document.createElement('script'); autolandScript.src="https://raw.githack.com/geofs-pilot/Joystick-supported-autoland/refs/heads/main/script.js";document.body.appendChild(autolandScript);})()
     };
 
     function athrottle () {
         (() => {var athrScript = document.createElement('script'); athrScript.src="https://raw.githack.com/meatbroc/geofs-autothrottle/main/userscript.js";document.body.appendChild(athrScript);})()
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "/") {
+                //console.log("control key pressed");
+                
+                if (geofs.autothrottle.on) {
+                    $(document).trigger("autothrottleOff");
+                } else if (!geofs.autothrottle.on) {
+                    $(document).trigger("autothrottleOn");
+                }
+            }
+        });
+
     };
 
     function camera () {
         !function(){"use strict";let e=[],t=0,a=null,n=null;function c(){cycling=!1,a&&clearInterval(a)}globalThis.cycling=!1,!function r(){let i=setInterval(()=>{geofs?.camera?.modes&&geofs?.aircraft?.instance&&(clearInterval(i),n=geofs.aircraft.instance.id,setInterval(()=>{if(geofs.aircraft&&geofs.aircraft.instance){let e=geofs.aircraft.instance.id;e!==n&&(n=e,console.log("Stopped cycling due to aircraft change"),c())}},1e3),document.addEventListener("keydown",function(n){"w"!==n.key.toLowerCase()||n.ctrlKey||n.altKey||n.metaKey||((cycling=!cycling)?(console.log("Camera cycling started."),!geofs.camera||!geofs.camera.modes||(a&&clearInterval(a),function a(){let n=[2,3,4,5];e=geofs.camera.modes.map((e,t)=>t).filter(e=>!n.includes(e));for(let c=e.length-1;c>0;c--){let r=Math.floor(Math.random()*(c+1));[e[c],e[r]]=[e[r],e[c]]}t=0}(),a=setInterval(()=>{!geofs.pause&&cycling&&e.length>0&&(geofs.camera.set(e[t]),console.log("Switched to camera:",e[t]),t=(t+1)%e.length)},3e4))):(c(),console.log("Camera cycling stopped.")))}),console.log("Script running. Press 'W' to toggle."))},500)}()}();    
     };
+
+    function charts () {
+        (() => {var chartScript = document.createElement('script'); chartScript.src="https://raw.githack.com/mansoorbarri/geofs-charts/refs/heads/main/main.js";document.body.appendChild(chartScript);})()
+    };
+
+    function chatFix() {
+        (() => {var fixScript = document.createElement('script'); fixScript.src="https://raw.githack.com/ZetaPossibly/GeoFS-Chat-Fix/refs/heads/main/fix_chat.js";document.body.appendChild(fixScript);})()
+    }
 
     function volume () {
         (() => {var volumeScript = document.createElement('script'); volumeScript.src="https://raw.githack.com/geofs-pilot/geofs-cockpit-volume/main/userscript.js";document.body.appendChild(volumeScript);})()
@@ -1571,11 +2258,13 @@ out skel qt;
     function tweaks () {
         const POPOUT_CHAT=!0;!function e(){"use strict";if(!window.jQuery)return setTimeout(e,1e3);{let t=$('<button class="mdl-button mdl-js-button mdl-button--icon" tabindex="0"><i class="material-icons">text_fields</i></button>')[0];document.querySelectorAll(".geofs-button-mute").forEach(e=>e.parentNode.appendChild(t));let o,n,a;t.onclick=function(){n=(a=document.querySelector(".geofs-chat-messages")).parentNode,(o=window.open("about:blank","_blank","height=580, width=680, popup=1")).document.body.append(a),o.document.head.append($("<title>GeoFS - Chat</title>")[0]),o.document.head.append($("<style>.geofs-chat-message{opacity:1!important;font-family:sans-serif;}</style>")[0]),o.onbeforeunload=()=>n.append(a)},window.onbeforeunload=()=>o&&o.close()}}();
     }
-
+    ai();
     adblock();
     autoland();
     athrottle();
     camera();
+    charts();
+    chatFix();
     volume();
     fpv();
     failuresAndFuel();
@@ -1583,13 +2272,32 @@ out skel qt;
     stats();
     opengines();
     pushback();
-    realism();
     dolly();
     slew();
     twlights();
     twsigns();
     tweaks();
     info();
+
+    //wait for jobs button to appear
+    let realismRun = false;
+    const jobsBtn = Array.from(document.querySelectorAll(".control-pad-label.transp-pad"))
+    .find(el => el.textContent.trim() === "JOBS");
+    if (jobsBtn && !realismRun) {
+        realism();
+        realismRun = true;
+    }
+    const jobsObserver = new MutationObserver(() => {
+        const jobsBtn = Array.from(document.querySelectorAll(".control-pad-label.transp-pad"))
+        .find(el => el.textContent.trim() === "JOBS");
+        if (jobsBtn && !realismRun) {
+            realism();
+            realismRun = true;
+            jobsObserver.disconnect();
+        }
+    });
+    jobsObserver.observe(document.body, { childList: true, subtree: true });
+
     //wait for liveryselector button to appear
     let scriptRun = false;
     const LSBtn = document.getElementById("liverybutton");
@@ -1606,6 +2314,7 @@ out skel qt;
         }
     });
     observer.observe(document.body, { childList: true, subtree: true });
+
     //wait for extras button to appear
     let scriptsRun = false;
     const extrasBtn = document.getElementById("extras-button");
@@ -1622,6 +2331,7 @@ out skel qt;
         }
     });
     extrasObserver.observe(document.body, { childList: true, subtree: true });
+
     //wait for gmenu button to appear, then cycle the display so that it doesn't open and close along with the option panel
     let cycled = false;
     const GmenuBtn = document.getElementById("gamenu");
@@ -1640,8 +2350,12 @@ out skel qt;
     gmenuObserver.observe(document.body, { childList: true, subtree: true });
 }
 
-
-menus();
-addonExecution();
-
-
+const waitForGeoFS = setInterval(() => {
+    if (typeof geofs !== "undefined" && geofs.aircraft && geofs.aircraft.instance) {
+        clearInterval(waitForGeoFS);
+        setTimeout(() => {
+            menus();
+            addonExecution();
+        }, 1000);
+    }
+}, 100);

@@ -1,5 +1,6 @@
 # GeoFS-All-in-one-Addon
-Born out of my obsession with having all the addons I could ever need in one place, this addon contains 25 addons, their instructions, and detailed flight procedures, compiled together. <br/>
+NOTE: A massive update has just been made, allowing the tampermonkey scripts to run as normal scripts without GM functions. Running the bookmarklet or main.js will have full functionality of the tampermonkey scripts. Also, the addon GeoFS-Chat-Fix has been added, AI ATC now has a toggle so that pressing D can either open the text or voice input, and pressing [/] now toggles autothrottle. Joystick support has also been added to autoland++. See instructions for further details.
+Born out of my obsession with having all the addons I could ever need in one place, this addon contains 26 addons, their instructions, and detailed flight procedures, compiled together. <br/>
  -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
 -If you would like the un-compressed version of one of the scripts, open an issue or ping me on discord (@geofs_pilot_09286) <br/>
 
@@ -14,30 +15,20 @@ Note: depending on the size of your screen, everything might not fit on the UI b
 ### Console
 #### Bookmarklet
 -Bookmark any page, left click on it, press Edit, and replace the URL with the contents of bookmarklet.js <br/>
--Once GeoFS is fully loaded, click on the bookmark to run the script. You will have to do this every time you open GeoFS. <br/>
+-Run the script **BEFORE** GeoFS loads. You will have to do this every time you open GeoFS. <br/>
 -No need to update, automatically runs latest version <br/>
--Missing some functionality for tampermonkey-only addons. <br/>
 #### Pasting into console
--Once GeoFS is fully loaded, press F12/Ctrl+shift+I/Ctrl+shift+J and go to the Console tab. <br/>
--Paste in the contents of main.js at the > symbol and hit Enter <br/>
+-Press F12/Ctrl+shift+I/Ctrl+shift+J and go to the Console tab. <br/>
+-Paste in the contents of main.js at the > symbol **BEFORE** GeoFS loads and hit Enter <br/>
 -You will have to do this every time you go to GeoFS. <br/>
--Missing some functionality for tampermonkey-only addons. <br/>
 ### Tampermonkey - recommended
--If you use this method, you don't have to install anything other than the userscript, and you get full functionality with all the addons. Also, it runs on its own whenever you go to GeoFS. <br/>
 -Install [Tampermonkey](https://www.tampermonkey.net/) <br/>
 -Click [here](https://github.com/geofs-pilot/GeoFS-All-in-one-Addon/raw/main/GeoFS-All-in-one-Addon.user.js) to install the script <br/>
 -No need to update, automatically runs latest version <br/>
 #### IMPORTANT NOTES: 
 1. For Tampermonkey to work, you will have to enable developer mode on the "Manage extensions" page. Also, enable User Scripts in the tampermonkey extension settings. For more info, take a look at Tampermonkey's [FAQ](https://www.tampermonkey.net/faq.php?version=5.3.3). <br/>
-2. When you visit GeoFS for the first time after installing the userscript, you will be directed to a page requesting permission to access a cross-origin resource. This is simply because the charts addon needs an external resource to work. Click "Always allow" and you're all set. <br/>
-3. When setting up the userscript, you can choose between 2 different versions of AI ATC. On the first line of code, after `let pushToTalk = `, you can set it to `'text'` (pressing D opens the text ATC box), or `'voice'` (pressing D allows you to transmit a voice messasge). 
-3. You will be prompted to log in to Puter the first time you use AI ATC. Just click 'Create New Account' and create an account. <br/>
-4. You may also have to relaunch the window if Tampermonkey doesn't work immediately. <br/>
-### Addons that need tampermonkey to work :
--[randomJobs](https://github.com/scitor/GeoFS/raw/master/randomJobs/randomJobs.user.js) <br/>
--[GeoFS-AI-ATC](https://github.com/avramovic/geofs-ai-atc/raw/master/GeoFS-AI-ATC.user.js) <br/>
--[AI ATC with PTT key (modified version of GeoFS-AI-ATC)](https://github.com/geofs-pilot/AI-ATC-PTT-modification/raw/main/PTT_AI_ATC.user.js) <br/>
--[Better-GeoFS-NAV-map](https://github.com/RadioactivePotato/Better-GeoFS-NAV-Map/tree/main)
+2. You will be prompted to log in to Puter the first time you use AI ATC. Just click 'Create New Account' and create an account. <br/>
+3. You may also have to relaunch the window if Tampermonkey doesn't work immediately. <br/>
 ## Addons included:
 Option menu with flight procedures <br/>
 GeoFS-AI-ATC <br/>
@@ -48,6 +39,7 @@ Better-GeoFS-NAV-Map <br/>
 GeoFS-Camera-cycling <br/>
 geofs-cockpit-volume <br/>
 geofs-charts <br/>
+GeoFS-Chat-Fix <br/>
 GeoFS-Extra-Vehicles <br/>
 GeoFS-Failures <br/>
 GeoFS-Flight-Path-Vector <br/>
@@ -83,6 +75,7 @@ https://github.com/meatbroc/geofs-autothrottle/tree/main <br/>
 https://github.com/RadioactivePotato/Better-GeoFS-NAV-Map/tree/main <br/>
 https://github.com/geofs-pilot/GeoFS-Camera-cycling/tree/main <br/>
 https://github.com/mansoorbarri/geofs-charts/tree/main <br/>
+https://github.com/ZetaPossibly/GeoFS-Chat-Fix/tree/main <br/>
 https://github.com/geofs-pilot/geofs-cockpit-volume/tree/main <br/>
 https://github.com/af267/GeoFS-Extra-Vehicles/tree/main <br/>
 https://github.com/tylerbmusic/GeoFS-Failures <br/>
