@@ -10,4 +10,4 @@
 // @grant        none
 // ==/UserScript==
 
-javascript:(() => {var addonScript = document.createElement('script'); addonScript.src="https://raw.githack.com/geofs-pilot/GeoFS-All-in-one-Addon/main/main.js";document.body.appendChild(addonScript);})()
+javascript:(() => {var addonScript = document.createElement('script'); addonScript.src="https://raw.githack.com/geofs-pilot/GeoFS-All-in-one-Addon/refs/heads/main/main.js";document.body.appendChild(addonScript);})()
