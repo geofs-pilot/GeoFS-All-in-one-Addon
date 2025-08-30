@@ -1,4 +1,3 @@
-let pushToTalk = 'text'; //Use this to set which version of the AI ATC addon you want. 'text' opens the text ATC box when the PTT key or headset icon is pressed, and 'voice' allows you to transmit a voice message when the PTT key or headset icon is pressed.
 
 //set up gm functions so that the scripts can work without tampermonkey
 if (typeof unsafeWindow === "undefined") {
