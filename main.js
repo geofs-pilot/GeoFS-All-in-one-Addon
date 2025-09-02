@@ -148,7 +148,7 @@ function jobs() {
         /* callsign text beside the icon */
         .flightno span {
         font-weight: bold !important;
-        font-size: 18px !important;
+        font-size: 17px !important;
         white-space: nowrap !important;
         line-height: 1 !important;        /* prevent extra vertical spacing */
         }
