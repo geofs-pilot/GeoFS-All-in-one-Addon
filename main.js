@@ -128,6 +128,54 @@ function jobs() {
             geofs.randomJobs.init(() => new MainWindow(geofs.randomJobs).init());
         })();
     })();
+        const style = document.createElement("style");
+        style.textContent = `/* flightno container: align bottom with row text */
+        .flightno {
+        display: inline-flex !important;
+        align-items: baseline !important; /* align text baseline with other columns */
+        gap: 0.5em !important;
+        font-size: 18px !important;       /* scale everything to match row text */
+        }
+
+        /* airline icon same size as text */
+        .flightno img {
+        width: 18px !important;
+        height: 18px !important;
+        object-fit: contain !important;
+        display: inline-block !important;
+        }
+
+        /* callsign text beside the icon */
+        .flightno span {
+        font-weight: bold !important;
+        font-size: 18px !important;
+        white-space: nowrap !important;
+        line-height: 1 !important;        /* prevent extra vertical spacing */
+        }
+
+        /* just in case some script injects airline name */
+        .flightno .airline-name {
+        display: none !important;
+        }
+        `;
+    //wait for jobs window to appear
+    let zIndexRun = false;
+    const jobsWindow = document.querySelector(".jobs-window");
+        if (jobsWindow && !zIndexRun) {
+            jobsWindow.style.zIndex = "99999"
+            document.head.appendChild(style);
+            zIndexRun = true;
+        }
+        const jobsWindowObserver = new MutationObserver(() => {
+            const jobsWindow = document.querySelector(".jobs-window");
+            if (jobsWindow && !zIndexRun) {
+                jobsWindow.style.zIndex = "99999"
+                document.head.appendChild(style);            
+                zIndexRun = true;
+                jobsWindowObserver.disconnect();
+            }
+        });
+        jobsWindowObserver.observe(document.body, { childList: true, subtree: true });
 };
 jobs();
 
