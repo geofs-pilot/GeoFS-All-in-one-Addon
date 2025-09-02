@@ -129,28 +129,14 @@ function jobs() {
         })();
     })();
         const style = document.createElement("style");
-        style.textContent = `/* flightno container: align bottom with row text */
-        .flightno {
-        display: inline-flex !important;
-        align-items: baseline !important; /* align text baseline with other columns */
-        gap: 0.5em !important;
-        font-size: 18px !important;       /* scale everything to match row text */
-        }
-
+        style.textContent = 
+        `
         /* airline icon same size as text */
         .flightno img {
         width: 18px !important;
         height: 18px !important;
         object-fit: contain !important;
         display: inline-block !important;
-        }
-
-        /* callsign text beside the icon */
-        .flightno span {
-        font-weight: bold !important;
-        font-size: 17px !important;
-        white-space: nowrap !important;
-        line-height: 1 !important;        /* prevent extra vertical spacing */
         }
 
         /* just in case some script injects airline name */
