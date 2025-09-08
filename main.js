@@ -1,4 +1,3 @@
-
 //set up gm functions so that the scripts can work without tampermonkey
 if (typeof unsafeWindow === "undefined") {
   window.unsafeWindow = window;
@@ -2388,7 +2387,7 @@ out skel qt;
     const gmenuObserver = new MutationObserver(() => {
         const GmenuBtn = document.getElementById("gamenu");
         if (GmenuBtn && !cycled) {
-                window.gmenu.menuDiv.style.display = "none";
+            window.gmenu.menuDiv.style.display = "none";
             cycled = true;
             gmenuObserver.disconnect();
         }
