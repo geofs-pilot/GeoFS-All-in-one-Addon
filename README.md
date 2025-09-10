@@ -61,6 +61,7 @@ uiTweaks <br/>
 -[Extra Maritime Structures](https://github.com/TotallyRealElonMusk/GeoFS-Extra-Maritime-Structures/blob/main/main.js) <br/>
 -[FMC route collection](http://sites.google.com/view/gpg-2-0/home?authuser=0) <br/>
 -https://skyvector.com/<br/>
+-https://www.aviationhunt.com/ <br/>
 -[Simbrief](https://dispatch.simbrief.com/home) <br/>
 -https://opennav.com/ <br/>
 -https://www.openaip.net/ <br/>
