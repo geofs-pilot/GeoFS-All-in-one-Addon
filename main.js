@@ -354,7 +354,9 @@ function menus() {
             Tilt downL: [↓]`,
 
 
-            'UI tweaks': `Adds a popout chat. Mouse wheel functionality was added to GeoFS natively.`
+            'UI tweaks': `Adds a popout chat. Mouse wheel functionality was added to GeoFS natively.
+            
+            `
         };
         
         function addAddon(name) {
@@ -864,7 +866,6 @@ function menus() {
             Analyze the reason for the go-around (e.g., unstable approach, obstruction on the runway, ATC instruction, etc.).
             Decide whether to attempt another landing, divert to an alternate airport, or hold for further instructions.
 
-
 `
         };
 
@@ -1087,7 +1088,6 @@ function menus() {
             - Limit maneuvers and avoid turbulence.
             3. Plan an emergency landing:
             - Declare an emergency and head to the nearest suitable airport.
-
 
 `
         };
