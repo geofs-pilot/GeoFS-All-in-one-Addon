@@ -3,7 +3,7 @@ Upcoming: another update that will add: Maritime Structures, Geofs Utilities, Ge
 
 NOTE: A massive update has just been made, allowing the tampermonkey scripts to run as normal scripts without GM functions. Running the bookmarklet or main.js will have full functionality of the tampermonkey scripts. Also, the addon GeoFS-Chat-Fix has been added, AI ATC now has a toggle so that pressing D can either open the text or voice input, and pressing [/] now toggles autothrottle. Joystick support has also been added to autoland++. See instructions for further details. <br/>
 
-Born out of my obsession with having all the addons I could ever need in one place, this addon contains 26 addons, their instructions, and detailed flight procedures, compiled together. <br/>
+Born out of my obsession with having all the addons I could ever need in one place, this addon contains 27 addons, their instructions, and detailed flight procedures, compiled together. <br/>
  -Several of the addons have received some kind of modification/update to ensure full functionality, and to make sure they can run well together <br/>
 -If you would like the un-compressed version of one of the scripts, open an issue or ping me on discord (@geofs_pilot_09286) <br/>
 
@@ -46,6 +46,7 @@ GeoFS-Chat-Fix <br/>
 GeoFS-Extra-Vehicles <br/>
 GeoFS-Failures <br/>
 GeoFS-Flight-Path-Vector <br/>
+GeoFS-flighradar <br/>
 GeoFS-Fuel <br/>
 GeoFS-GPWS-Callouts <br/>
 GeoFS-Information-Display <br/>
@@ -61,13 +62,13 @@ GeoFS-Taxiway-Lights <br/>
 GeoFS-Taxiway-Signs <br/>
 uiTweaks <br/>
 ## Other things to check out
--[Extra Maritime Structures](https://github.com/TotallyRealElonMusk/GeoFS-Extra-Maritime-Structures/blob/main/main.js) <br/>
+-[GeoFS Flightradar ATC screen] (https://geofs-flightradar.onrender.com) <br/>
 -[FMC route collection](http://sites.google.com/view/gpg-2-0/home?authuser=0) <br/>
 -https://skyvector.com/<br/>
--https://www.aviationhunt.com/ <br/>
 -[Simbrief](https://dispatch.simbrief.com/home) <br/>
 -https://opennav.com/ <br/>
 -https://www.openaip.net/ <br/>
+-https://www.aviationhunt.com/ <br/>
 -https://www.helisimmer.com/how-to-fly-helicopters
 ## Credits
 Some procedures were written with the help of ChatGPT. <br/>
@@ -84,6 +85,7 @@ https://github.com/geofs-pilot/geofs-cockpit-volume/tree/main <br/>
 https://github.com/af267/GeoFS-Extra-Vehicles/tree/main <br/>
 https://github.com/tylerbmusic/GeoFS-Failures <br/>
 https://github.com/tylerbmusic/GeoFS-Flight-Path-Vector <br/>
+https://github.com/geofs-pilot/GeoFS-flightradar <br/>
 https://github.com/geofs-pilot/GeoFS-Fuel <br/>
 https://github.com/tylerbmusic/GeoFS-GPWS-Callouts <br/>
 https://github.com/RadioactivePotato/GeoFS-Information-Display <br/>
