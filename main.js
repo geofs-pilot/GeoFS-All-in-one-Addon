@@ -80,7 +80,7 @@ if (typeof unsafeWindow === "undefined") {
 })();
 
 function nav () { //betternav must run before geofs loads in
-    (() => {var navScript = document.createElement('script'); navScript.src="https://raw.githack.com/RadioactivePotato/Better-GeoFS-NAV-Map/refs/heads/main/userscript.js";document.body.appendChild(navScript);})()
+    var navScript = document.createElement('script'); navScript.src="https://raw.githack.com/RadioactivePotato/Better-GeoFS-NAV-Map/refs/heads/main/userscript.js";document.body.appendChild(navScript);
 };
 nav();
 
@@ -261,8 +261,11 @@ function menus() {
             'Flight path vector': `Shows approximately where your flight path intersects the ground. Hidden by pressing [Insert]`,
 
 
-            'Fuel': `Simulates fuel consumption by calculating burn rate from throttle setting and fuel capacity from aircraft mass. To refuel, you must be on the ground, stationary, and have engines off`,
+            'GeoFS Flightradar': `Creates a window where you can enter your flight info, which gets sent to an ATC screen`,
 
+
+            'Fuel': `Simulates fuel consumption by calculating burn rate from throttle setting and fuel capacity from aircraft mass. To refuel, you must be on the ground, stationary, and have engines off`,
+            
 
             'GPWS': `Adds GPWS callouts (airliners)
             For the minimums to work, you need to type in the BAROMETRIC (MSL) minimum altitude/desision height (without the-½) as defined at the bottom of the IFR approach plate.
@@ -359,6 +362,7 @@ function menus() {
             `
         };
         
+        
         function addAddon(name) {
             const descriptionText = descriptions[name] || 'No description available.';
             const addonItem = document.createElement('ul');
@@ -377,7 +381,7 @@ function menus() {
 
             const description = document.createElement('li');
             description.className = 'geofs-list-item-description';
-            description.innerText = descriptionText;
+            description.innerHTML = descriptionText;
             description.style.display = 'none';
             description.style.lineHeight = '1.1';
             description.style.paddingRight = '15px';
@@ -414,6 +418,7 @@ function menus() {
         addAddon('Failures');
         addAddon('Flight path vector');
         addAddon('Fuel');
+        addAddon('GeoFS Flightradar');
         addAddon('GPWS');
         addAddon('Information display');
         addAddon('Jetbridge');
@@ -866,7 +871,7 @@ function menus() {
             Analyze the reason for the go-around (e.g., unstable approach, obstruction on the runway, ATC instruction, etc.).
             Decide whether to attempt another landing, divert to an alternate airport, or hold for further instructions.
 
-`
+            `
         };
 
 
@@ -886,7 +891,7 @@ function menus() {
 
             const description = document.createElement('li');
             description.className = 'geofs-list-item-description';
-            description.innerText = descriptionText;
+            description.innerHTML = descriptionText;
             description.style.display = 'none';
             description.style.lineHeight = '1.1';
             description.style.paddingRight = '15px';
@@ -1089,7 +1094,7 @@ function menus() {
             3. Plan an emergency landing:
             - Declare an emergency and head to the nearest suitable airport.
 
-`
+        `
         };
 
 
@@ -1109,7 +1114,7 @@ function menus() {
 
             const description = document.createElement('li');
             description.className = 'geofs-list-item-description';
-            description.innerText = descriptionText;
+            description.innerHTML = descriptionText;
             description.style.display = 'none';
             description.style.lineHeight = '1.1';
             description.style.paddingRight = '15px';
@@ -1145,10 +1150,99 @@ function menus() {
         geofsPreferencesPanel.appendChild(failureListItem);
     }
 
+    function createResources() {
+        const geofsPreferencesPanel = document.querySelector('.geofs-list.geofs-toggle-panel.geofs-preference-list');
 
+
+        const resourceListItem = document.createElement('li');
+        resourceListItem.className = 'geofs-list-collapsible-item';
+        resourceListItem.innerText = 'Resources';
+
+
+
+
+        const dropdownIcon = document.createElement('li');
+        dropdownIcon.className = 'geofs-collapsible-item::before';
+        dropdownIcon.style.marginRight = '5px';
+
+
+        resourceListItem.appendChild(dropdownIcon);
+
+
+        const resourceContent = document.createElement('div');
+
+
+        resourceContent.className = 'geofs-list';
+        resourceContent.style.display = 'none';
+
+
+        resourceListItem.appendChild(resourceContent);
+
+
+        resourceListItem.onclick = () => {
+            const isVisible = resourceContent.style.display === 'block';
+            resourceContent.style.display = isVisible ? 'none' : 'block';
+            dropdownIcon.style.transform = isVisible ? 'rotate(0deg)' : 'rotate(90deg)';
+        };
+
+
+
+
+            //RESOURCES GO HERE:
+        const descriptions = {
+            'Electrical': ``,
+        };
+
+
+        function addresource(name) {
+            const descriptionText = descriptions[name] || 'No description available.';
+            const resourceItem = document.createElement('ul');
+            resourceItem.className = 'no-hover geofs-list-collapsible-item geofs-hideForApp';
+            resourceItem.style.position = 'relative';
+            resourceItem.style.backgroundColor = 'rgba(255, 255, 255, 0.5)'
+            resourceItem.innerText = name;
+
+
+            const descDropdownIcon = document.createElement('li');
+            descDropdownIcon.className = 'geofs-collapsible-item::before';
+            descDropdownIcon.style.marginRight = '5px';
+
+
+            const description = document.createElement('li');
+            description.className = 'geofs-list-item-description';
+            description.innerHTML = descriptionText;
+            description.style.display = 'none';
+            description.style.lineHeight = '1.1';
+            description.style.paddingRight = '15px';
+
+
+
+
+            resourceItem.onclick = (event) => {
+                event.stopPropagation();
+                const descIsVisible = description.style.display === 'block';
+                description.style.display = descIsVisible ? 'none' : 'block';
+                descDropdownIcon.style.transform = descIsVisible ? 'rotate(0deg)' : 'rotate(90deg)';
+                const isVisible = resourceContent.style.display === 'block';
+                resourceContent.style.display = isVisible ? 'none' : 'block';
+                dropdownIcon.style.transform = isVisible ? 'rotate(0deg)' : 'rotate(90deg)';
+            };
+
+
+            resourceItem.appendChild(description);
+            resourceListItem.appendChild(resourceItem);
+            resourceListItem.appendChild(resourceContent);
+        }
+        //RESOURCE ITEMS HERE:
+        addresource('Electrical');
+       
+        geofsPreferencesPanel.appendChild(resourceListItem);
+    }
+    
     createAddonManager();
     createInstructions();
     createFailures();
+    createResources();
 };
 
 
@@ -1696,15 +1790,15 @@ function addonExecution () {
     };
 
     function adblock () {
-        (() => {var adblockScript = document.createElement('script'); adblockScript.src="https://raw.githack.com/RadioactivePotato/GeoFS-Ad-Remover/main/GeoFS%20Ad%20Remover-0.1.user.js";document.body.appendChild(adblockScript);})()
+        var adblockScript = document.createElement('script'); adblockScript.src="https://raw.githack.com/RadioactivePotato/GeoFS-Ad-Remover/main/GeoFS%20Ad%20Remover-0.1.user.js";document.body.appendChild(adblockScript);
     };
 
     function autoland () {
-        (() => {var autolandScript = document.createElement('script'); autolandScript.src="https://raw.githack.com/geofs-pilot/Joystick-supported-autoland/refs/heads/main/script.js";document.body.appendChild(autolandScript);})()
+        var autolandScript = document.createElement('script'); autolandScript.src="https://raw.githack.com/geofs-pilot/Joystick-supported-autoland/refs/heads/main/script.js";document.body.appendChild(autolandScript);
     };
 
     function athrottle () {
-        (() => {var athrScript = document.createElement('script'); athrScript.src="https://raw.githack.com/meatbroc/geofs-autothrottle/main/userscript.js";document.body.appendChild(athrScript);})()
+        var athrScript = document.createElement('script'); athrScript.src="https://raw.githack.com/meatbroc/geofs-autothrottle/main/userscript.js";document.body.appendChild(athrScript);
         document.addEventListener('keydown', (e) => {
             if (e.key === "/") {
                 //console.log("control key pressed");
@@ -1716,7 +1810,6 @@ function addonExecution () {
                 }
             }
         });
-
     };
 
     function camera () {
@@ -1724,457 +1817,35 @@ function addonExecution () {
     };
 
     function charts () {
-        (() => {var chartScript = document.createElement('script'); chartScript.src="https://raw.githack.com/mansoorbarri/geofs-charts/refs/heads/main/main.js";document.body.appendChild(chartScript);})()
+        var chartScript = document.createElement('script'); chartScript.src="https://raw.githack.com/mansoorbarri/geofs-charts/refs/heads/main/main.js";document.body.appendChild(chartScript);
     };
 
     function chatFix() {
-        (() => {var fixScript = document.createElement('script'); fixScript.src="https://raw.githack.com/ZetaPossibly/GeoFS-Chat-Fix/refs/heads/main/fix_chat.js";document.body.appendChild(fixScript);})()
+        var fixScript = document.createElement('script'); fixScript.src="https://raw.githack.com/ZetaPossibly/GeoFS-Chat-Fix/refs/heads/main/fix_chat.js";document.body.appendChild(fixScript);
     }
 
     function volume () {
-        (() => {var volumeScript = document.createElement('script'); volumeScript.src="https://raw.githack.com/geofs-pilot/geofs-cockpit-volume/main/userscript.js";document.body.appendChild(volumeScript);})()
+        var volumeScript = document.createElement('script'); volumeScript.src="https://raw.githack.com/geofs-pilot/geofs-cockpit-volume/main/userscript.js";document.body.appendChild(volumeScript);
     };
 
     function vehicles () {
-        (() => {var vehicleScript = document.createElement('script'); vehicleScript.src="https://raw.githack.com/af267/GeoFS-Extra-Vehicles/main/main.js";document.body.appendChild(vehicleScript);})()
+        var vehicleScript = document.createElement('script'); vehicleScript.src="https://raw.githack.com/af267/GeoFS-Extra-Vehicles/main/main.js";document.body.appendChild(vehicleScript);
     };
 
     function failuresAndFuel () {   		//Includes both fuel and failures
-        class Failure{constructor(){this.aId=window.geofs.aircraft.instance.id,this.enabled=!1,this.failures=[],this.mcasTime=0,this.fails={landingGear:{front:!1,left:!1,right:!1},fuelLeak:!1,flightCtrl:{ailerons:!1,elevators:!1,rudder:!1},electrical:!1,structural:!1,hydraulic:{flaps:!1,brakes:!1,spoilers:!1},pitotStatic:!1,pressurization:!1,engines:[],mcas:!1};for(var e=0;e<window.geofs.aircraft.instance.engines.length;e++)this.fails.engines.push({i:!1});this.chances={landingGear:{front:0,left:0,right:0},fuelLeak:0,flightCtrl:{ailerons:0,elevators:0,rudder:0},electrical:0,structural:0,hydraulic:{flaps:0,brakes:0,spoilers:0},pitotStatic:0,pressurization:0,engines:[],mcas:0};for(var t=0;t<window.geofs.aircraft.instance.engines.length;t++)this.chances.engines.push({v:0})}fail(e){for(var t=window.geofs.aircraft.instance.engines.length,i=0;i<t;i++)e=="engine"+i&&(alert("Engine "+(i+1)+" failed!"),window.geofs.aircraft.instance.engines[i].thrust=0,new window.geofs.fx.ParticleEmitter({off:0,anchor:window.geofs.aircraft.instance.engines[0].points.contrailAnchor||{worldPosition:window.geofs.aircraft.instance.engines[0].object3d.worldPosition},duration:1e10,rate:.03,life:1e4,easing:"easeOutQuart",startScale:.01,endScale:.2,randomizeStartScale:.01,randomizeEndScale:.15,startOpacity:1,endOpacity:.2,startRotation:"random",texture:"whitesmoke"}),setInterval(()=>{window.geofs.fx.setParticlesColor(new window.Cesium.Color(.1,.1,.1,1))},20));if(!e.includes("engine"))switch(e){case"fuelLeak":this.fails.fuelLeak||(alert("Fuel leak! About 2 minutes of fuel remaining at 50% throttle"),this.fails.fuelLeak=!0,globalThis.leakingFuel=!0);break;case"gearFront":if(!this.fails.landingGear.front){alert("Nose gear failure"),this.fails.landingGear.front=!0;var a=2;for(i=0;i<window.geofs.aircraft.instance.suspensions.length;i++)(window.geofs.aircraft.instance.suspensions[i].name.includes("front")||window.geofs.aircraft.instance.suspensions[i].name.includes("nose")||window.geofs.aircraft.instance.suspensions[i].name.includes("tail"))&&(a=i);this.failures.push(setInterval(()=>{window.geofs.aircraft.instance.suspensions[a].collisionPoints[0][2]=30},1e3))}break;case"gearLeft":if(!this.fails.landingGear.left){alert("Left gear failure"),this.fails.landingGear.left=!0;var n=0;for(i=0;i<window.geofs.aircraft.instance.suspensions.length;i++)(window.geofs.aircraft.instance.suspensions[i].name.includes("left")||window.geofs.aircraft.instance.suspensions[i].name.includes("l"))&&(n=i);this.failures.push(setInterval(()=>{window.geofs.aircraft.instance.suspensions[n].collisionPoints[0][2]=30},1e3))}break;case"gearRight":if(alert("Right gear failure"),!this.fails.landingGear.right){this.fails.landingGear.right=!0;var l=1;for(i=0;i<window.geofs.aircraft.instance.suspensions.length;i++)(window.geofs.aircraft.instance.suspensions[i].name.includes("right")||window.geofs.aircraft.instance.suspensions[i].name.includes("r_g"))&&(l=i);this.failures.push(setInterval(()=>{window.geofs.aircraft.instance.suspensions[l].collisionPoints[0][2]=30},1e3))}break;case"ailerons":alert("Flight control failure (ailerons)"),this.fails.flightCtrl.ailerons||(this.fails.flightCtrl.ailerons=!0,this.failures.push(setInterval(()=>{for(var e in window.geofs.aircraft.instance.airfoils)window.geofs.aircraft.instance.airfoils[e].name.toLowerCase().includes("aileron")&&(window.geofs.aircraft.instance.airfoils[e].object3d._scale=[0,0,0])},1e3)));break;case"elevators":alert("Flight control failure (elevators)"),this.fails.flightCtrl.elevators||(this.fails.flightCtrl.elevators=!0,this.failures.push(setInterval(()=>{for(var e in window.geofs.aircraft.instance.airfoils)window.geofs.aircraft.instance.airfoils[e].name.toLowerCase().includes("elevator")&&(window.geofs.aircraft.instance.airfoils[e].object3d._scale=[0,0,0])},1e3)));break;case"rudder":alert("Flight control failure (rudder)"),this.fails.flightCtrl.rudder||(this.fails.flightCtrl.rudder=!0,this.failures.push(setInterval(()=>{for(var e in window.geofs.aircraft.instance.airfoils)window.geofs.aircraft.instance.airfoils[e].name.toLowerCase().includes("rudder")&&(window.geofs.aircraft.instance.airfoils[e].object3d._scale=[0,0,0])},1e3)));break;case"electrical":this.fails.electrical||(alert("Electrical failure"),this.fails.electrical=!0,this.failures.push(setInterval(()=>{for(var e=1;e<=5;e++)window.geofs.aircraft.instance.cockpitSetup.parts[e].object3d._scale=[0,0,0];window.geofs.autopilot.turnOff(),window.instruments.hide()},1e3)));break;case"structural":this.fails.structural||(alert("Significant structural damage detected"),console.log("Boeing, am I right?"),this.fails.structural=!0,this.failures.push(setInterval(()=>{window.weather.definition.turbulences=3},1e3)));break;case"flaps":this.fails.hydraulic.flaps||(alert("Hydraulic failure (flaps)"),this.fails.hydraulic.flaps=!0,this.failures.push(setInterval(()=>{window.controls.flaps.target=Math.floor(.6822525475345469*(2*window.geofs.animation.values.flapsSteps)),window.controls.flaps.delta=20},1e3)));break;case"brakes":this.fails.hydraulic.brakes||(alert("Hydraulic failure (brakes)"),this.fails.hydraulic.brakes=!0,this.failures.push(setInterval(()=>{window.controls.brakes=0},500)));break;case"spoilers":this.fails.hydraulic.spoilers||(alert("Hydraulic failure (spoilers)"),this.fails.hydraulic.spoilers=!0,this.failures.push(setInterval(()=>{window.controls.airbrakes.target=.2,window.controls.airbrakes.delta=20},1e3)));break;case"pressurization":this.fails.pressurization||(alert("Cabin depressurization! Get at or below 9,000 ft MSL!"),this.fails.pressurization=!0,this.failures.push(setInterval(()=>{window.geofs.animation.values.altitude>9e3?window.weather.definition.turbulences=(window.geofs.animation.values.altitude-9e3)/5200:window.weather.definition.turbulences=0}),1e3));break;case"mcas":this.fails.mcas||(this.fails.mcas=!0,this.mcasTime=Date.now(),this.mcasRandT=Math.floor(1e4*Math.random()),this.mcasActive=!0,window.controls.elevatorTrimMin=-10,this.failures.push(setInterval(()=>{!window.geofs.autopilot.on&&0==window.controls.flaps.position&&this.fails.mcas&&(this.mcasActive&&Date.now()<=this.mcasTime+this.mcasRandT?window.controls.elevatorTrim>window.controls.elevatorTrimMin&&(window.controls.elevatorTrim-=window.controls.elevatorTrimStep/10):this.mcasActive?(this.mcasActive=!1,this.mcasTime+=this.mcasRandT,this.mcasRandT=Math.floor(1e4*Math.random())):!this.mcasActive&&Date.now()>=this.mcasTime+5e3&&(this.mcasActive=!0,this.mcasTime+=5e3,window.controls.elevatorTrim>window.controls.elevatorTrimMin&&(window.controls.elevatorTrim-=window.controls.elevatorTrimStep/10)))},40)))}}tick(){if(this.enabled&&!window.flight.recorder.playing&&!window.geofs.pause){for(var e in console.log("tick"),this.chances.landingGear)Math.random()<this.chances.landingGear[e]&&this.fail("gear"+(e[0].toUpperCase()+e.substr(1,e.length)));for(var t in this.chances)if("number"==typeof this.chances[t])Math.random()<this.chances[e]&&this.fail(t);else if("landingGear"!==t)for(var i in this.chances[t])Math.random()<this.chances[t][i]&&this.fail(i);setTimeout(()=>{this.tick()},6e4)}}reset(){for(var e in this.failures)clearInterval(this.failures[e]);this.enabled=!1}}function waitForEntities(){try{if(!1==window.geofs.cautiousWithTerrain){window.mainFailureFunction();return}}catch(e){console.log("Error in waitForEntities:",e)}setTimeout(()=>{waitForEntities()},1e3)}function runFuelSystem(){var e,t;function i(){let e=document.createElement("div");e.style.position="absolute",e.style.bottom="8px",e.style.right="108px",e.style.width="75px",e.style.height="17px",e.style.border="1px solid black",e.style.borderRadius="5px",e.style.backgroundColor="black",e.style.zIndex="1000";let t=document.createElement("div");return t.style.height="100%",t.style.width="100%",t.style.backgroundColor="green",t.style.borderRadius="5px",e.appendChild(t),document.querySelector(".geofs-ui-bottom").appendChild(e),{fuelBar:t,fuelBarContainer:e}}let a=null,n;setInterval(()=>{0===r.fuel&&(controls.throttle=0,window.geofs.aircraft.instance.stopEngine())},10);let l,s,r=(s=(l=window.geofs.aircraft.instance.definition.mass)<15e3?.25:.75,globalThis.initialFuel=l*s,{fuel:initialFuel,initialFuel}),u=function e(t){let i=document.createElement("button");return i.textContent="Refuel",i.style.position="absolute",i.style.bottom="5px",i.style.right="108px",i.style.padding="4px 8px",i.style.fontSize="14px",i.style.backgroundColor="yellow",i.style.border="1px solid black",i.style.borderRadius="5px",i.style.zIndex="1000",document.querySelector(".geofs-ui-bottom").appendChild(i),i.addEventListener("click",()=>{t.fuel=t.initialFuel,console.log("Plane refueled.")}),i}(r);e=r,n=setInterval(()=>{if(window.geofs.pause||window.flight.recorder.playing||document.hidden)return;let t=window.geofs.aircraft.instance.engines.reduce((e,t)=>e+(t.thrust||0),0),i=window.geofs.aircraft.instance.engines[0]?.afterBurnerThrust!==void 0,n=i&&Math.abs(window.geofs.animation.values.smoothThrottle)>.9,l=i?window.geofs.aircraft.instance.engines.reduce((e,t)=>e+(t.afterBurnerThrust||0),0):0,s=Math.abs(window.geofs.animation.values.smoothThrottle),r=n?l/150:t/150,u=3*r;if(globalThis.leakingFuel){if(null===a){a=e.fuel;let o=a/120*3600;globalThis.fuelLeakRate=Math.max(0,o-(r+.5*(u-r)))}}else globalThis.fuelLeakRate=0,a=null;let d=window.geofs.aircraft.instance.engine.on?r+s*(u-r):0;0==t&&(d=0),fuelBurnRate=d+globalThis.fuelLeakRate,console.log(globalThis.fuelLeakRate),e.fuel-=fuelBurnRate*(1/3600),e.fuel<0&&(e.fuel=0),globalThis.fuelPercentage=e.fuel/e.initialFuel*100,0===e.fuel&&(window.fuelBurnRate=0),console.log(`Fuel Burn Rate per Hour: ${fuelBurnRate.toFixed(6)}`),console.log(`Fuel Burned This Second: ${(fuelBurnRate/3600).toFixed(6)}`),console.log(`Fuel Remaining: ${e.fuel.toFixed(2)}`)},1e3);let o=window.geofs.aircraft.instance.aircraftRecord.id;setInterval(()=>{window.geofs.aircraft.instance.aircraftRecord.id!==o&&(u.remove(),o=window.geofs.aircraft.instance.aircraftRecord.id,clearInterval(n),runFuelSystem())},1e3),setInterval(()=>{let e=window.geofs.aircraft.instance.groundSpeed,t=window.geofs.aircraft.instance.groundContact,i=window.geofs.aircraft.instance.engine.on;flight.recorder.playing?u.style.display="none":u.style.display=e<1&&t&&!i?"block":"none"},100)}window.openFailuresMenu=function(){if(window.failuresMenu){if(window.failuresMenu.hidden=!window.failuresMenu.hidden,window.geofs.aircraft.instance.id!==window.aId)for(window.failure.reset(),window.failure=new Failure,e=`
-        <div style="position: fixed; width: 640px; height: 10px; background: lightgray; cursor: move;" id="dragPart"></div>
-        <p style="cursor: pointer;right: 0px;position: absolute;background: gray;height: fit-content;" onclick="window.failuresMenu.hidden=true;">X</p>
-    <p>Note: Some failures may require a manual refresh of the page.</p>
-    <button id="enBtn" onclick="(function(){window.failure.enabled=true; window.failure.tick(); document.getElementById('enBtn').hidden = true;})();">Enable</button>
-    <button onclick="window.failure.reset()">RESET ALL</button>
-        <h1>Landing Gear</h1>
-        <h2>Front</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" value="0" min="0" max="1" step="0.01" id="slide1" onchange="[document.getElementById('input1').value, window.failure.chances.landingGear.gearFront]=[document.getElementById('slide1').value, document.getElementById('slide1').value]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="input1" style="
-    width: 40px;
-">
-    <button onclick="failure.fail('gearFront')">FAIL</button>
-        <br>
-        <h2>Left</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideGearL" onchange="[document.getElementById('inputGearL').value, window.failure.chances.landingGear.left]=[document.getElementById('slideGearL').valueAsNumber, document.getElementById('slideGearL').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputGearL" style="
-    width: 40px;
-">
-
-
-        <button onclick="failure.fail('gearLeft')">FAIL</button>
-    <br>
-        <h2>Right</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-            <input type="range" min="0" max="1" step="0.01" id="slideGearR" onchange="[document.getElementById('inputGearR').value, window.failure.chances.landingGear.right]=[document.getElementById('slideGearR').valueAsNumber, document.getElementById('slideGearR').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputGearR" style="
-    width: 40px;
-">
-    <button onclick="failure.fail('gearRight')">FAIL</button>
-    <br>
-        <h1>Fuel Leak</h1>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideFuelLeak" onchange="[document.getElementById('inputFuelLeak').value, window.failure.chances.fuelLeak]=[document.getElementById('slideFuelLeak').valueAsNumber, document.getElementById('slideFuelLeak').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputFuelLeak" style="
-    width: 40px;
-">
-
-
-
-
-
-
-        <button onclick="failure.fail('fuelLeak')">FAIL</button>
-    <br>
-    <h1>Flight Control</h1>
-    <h2>Ailerons</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideFlightCtrl" onchange="[document.getElementById('inputFlightCtrl').value, window.failure.chances.flightCtrl.ailerons]=[document.getElementById('slideFlightCtrl').valueAsNumber, document.getElementById('slideFlightCtrl').valueAsNumber]" draggable="false" style="vertical-align: bottom;">
-    <input disabled="true;" id="inputFlightCtrl" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('ailerons')">FAIL</button><br>
-            <h2>Elevators</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideElevator" onchange="[document.getElementById('inputElevator').value, window.failure.chances.flightCtrl.elevator]=[document.getElementById('slideElevator').valueAsNumber, document.getElementById('slideElevator').valueAsNumber]" draggable="false" style="vertical-align: bottom;">
-    <input disabled="true;" id="inputElevator" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('elevators')">FAIL</button><br>
-        <h2>Rudder</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideRudder" onchange="[document.getElementById('inputRudder').value, window.failure.chances.flightCtrl.rudder]=[document.getElementById('slideRudder').valueAsNumber, document.getElementById('slideRudder').valueAsNumber]" draggable="false" style="vertical-align: bottom;">
-    <input disabled="true;" id="inputRudder" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('rudder')">FAIL</button><br>
-    <h1>Electrical</h1>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideElectrical" onchange="[document.getElementById('inputElectrical').value, window.failure.chances.electrical]=[document.getElementById('slideElectrical').valueAsNumber, document.getElementById('slideElectrical').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-
-
-        <input disabled="true;" id="inputElectrical" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('electrical')">FAIL</button>
-
-
-    <br>
-
-
-    <h1>Structural</h1>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideStructural" onchange="[document.getElementById('inputStructural').value, window.failure.chances.structural]=[document.getElementById('slideStructural').valueAsNumber, document.getElementById('slideStructural').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-
-
-        <input disabled="true;" id="inputStructural" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('structural')">FAIL</button>
-
-
-    <br>
-    <h1>Hydraulic</h1>
-<h2>Flaps</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideFlaps" onchange="[document.getElementById('inputFlaps').value, window.failure.chances.hydraulic.flaps]=[document.getElementById('slideFlaps').valueAsNumber, document.getElementById('slideFlaps').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-
-
-        <input disabled="true;" id="inputFlaps" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('flaps')">FAIL</button>
-<h2>Brakes</h2>
-    <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideBrakes" onchange="[document.getElementById('inputBrakes').value, window.failure.chances.hydraulic.brakes]=[document.getElementById('slideBrakes').valueAsNumber, document.getElementById('slideBrakes').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-
-
-        <input disabled="true;" id="inputBrakes" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('brakes')">FAIL</button>
-<h2>Spoilers</h2>
-    <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideSpoilers" onchange="[document.getElementById('inputSpoilers').value, window.failure.chances.hydraulic.spoilers]=[document.getElementById('slideSpoilers').valueAsNumber, document.getElementById('slideSpoilers').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputSpoilers" style="
-    width: 40px;
-">
-<button onclick="failure.fail('spoilers')">FAIL</button>
-    <h1>Cabin Pressurization</h1>
-    <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slidePressurization" onchange="[document.getElementById('inputPressurization').value, window.failure.chances.pressurization]=[document.getElementById('slidePressurization').valueAsNumber, document.getElementById('slidePressurization').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputPressurization" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('pressurization')">FAIL</button>
-        <h1>MCAS</h1>
-    <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideMCAS" onchange="[document.getElementById('inputMCAS').value, window.failure.chances.mcas]=[document.getElementById('slideMCAS').valueAsNumber, document.getElementById('slideMCAS').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputMCAS" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('mcas')">FAIL</button>
-        <h1>Engines</h1>
-        `,t=0;t<window.geofs.aircraft.instance.engines.length;t++)e+=`
-            <h2>Engine ${t+1}</h2>
-    <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideEngine${t}" onchange="document.getElementById('inputEngine${t}').value=document.getElementById('slideEngine${t}').valueAsNumber; window.failure.chances.engines[i] = document.getElementById('slideEngine${t}').valueAsNumber"; draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputEngine${t}" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('engine${t}')">FAIL</button>
-            `,window.failuresMenu.innerHTML=e}else{window.failure=new Failure,window.failuresMenu=document.createElement("div"),window.failuresMenu.style.position="fixed",window.failuresMenu.style.width="640px",window.failuresMenu.style.height="480px",window.failuresMenu.style.background="white",window.failuresMenu.style.display="block",window.failuresMenu.style.overflow="scroll",window.failuresMenu.style.zIndex="10000",window.failuresMenu.id="failMenu",window.failuresMenu.className="geofs-ui-left",document.body.appendChild(window.failuresMenu);for(var e=`
-        <div style="position: fixed; width: 640px; height: 10px; background: lightgray; cursor: move;" id="dragPart"></div>
-        <p style="cursor: pointer;right: 0px;position: absolute;background: gray;height: fit-content;" onclick="window.failuresMenu.hidden=true;">X</p>
-    <p>Note: Some failures may require a manual refresh of the page.</p>
-    <button id="enBtn" onclick="(function(){window.failure.enabled=true; window.failure.tick(); document.getElementById('enBtn').hidden = true;})();">Enable</button>
-    <button onclick="window.failure.reset()">RESET ALL</button>
-        <h1>Landing Gear</h1>
-        <h2>Front</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" value="0" min="0" max="1" step="0.01" id="slide1" onchange="[document.getElementById('input1').value, window.failure.chances.landingGear.gearFront]=[document.getElementById('slide1').value, document.getElementById('slide1').value]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="input1" style="
-    width: 40px;
-">
-    <button onclick="failure.fail('gearFront')">FAIL</button>
-        <br>
-        <h2>Left</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideGearL" onchange="[document.getElementById('inputGearL').value, window.failure.chances.landingGear.left]=[document.getElementById('slideGearL').valueAsNumber, document.getElementById('slideGearL').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputGearL" style="
-    width: 40px;
-">
-
-
-        <button onclick="failure.fail('gearLeft')">FAIL</button>
-    <br>
-        <h2>Right</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-            <input type="range" min="0" max="1" step="0.01" id="slideGearR" onchange="[document.getElementById('inputGearR').value, window.failure.chances.landingGear.right]=[document.getElementById('slideGearR').valueAsNumber, document.getElementById('slideGearR').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputGearR" style="
-    width: 40px;
-">
-    <button onclick="failure.fail('gearRight')">FAIL</button>
-    <br>
-        <h1>Fuel Leak</h1>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideFuelLeak" onchange="[document.getElementById('inputFuelLeak').value, window.failure.chances.fuelLeak]=[document.getElementById('slideFuelLeak').valueAsNumber, document.getElementById('slideFuelLeak').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputFuelLeak" style="
-    width: 40px;
-">
-
-
-
-
-
-
-        <button onclick="failure.fail('fuelLeak')">FAIL</button>
-    <br>
-    <h1>Flight Control</h1>
-    <h2>Ailerons</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideFlightCtrl" onchange="[document.getElementById('inputFlightCtrl').value, window.failure.chances.flightCtrl.ailerons]=[document.getElementById('slideFlightCtrl').valueAsNumber, document.getElementById('slideFlightCtrl').valueAsNumber]" draggable="false" style="vertical-align: bottom;">
-    <input disabled="true;" id="inputFlightCtrl" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('ailerons')">FAIL</button><br>
-            <h2>Elevators</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideElevator" onchange="[document.getElementById('inputElevator').value, window.failure.chances.flightCtrl.elevator]=[document.getElementById('slideElevator').valueAsNumber, document.getElementById('slideElevator').valueAsNumber]" draggable="false" style="vertical-align: bottom;">
-    <input disabled="true;" id="inputElevator" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('elevators')">FAIL</button><br>
-        <h2>Rudder</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideRudder" onchange="[document.getElementById('inputRudder').value, window.failure.chances.flightCtrl.rudder]=[document.getElementById('slideRudder').valueAsNumber, document.getElementById('slideRudder').valueAsNumber]" draggable="false" style="vertical-align: bottom;">
-    <input disabled="true;" id="inputRudder" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('rudder')">FAIL</button><br>
-    <h1>Electrical</h1>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideElectrical" onchange="[document.getElementById('inputElectrical').value, window.failure.chances.electrical]=[document.getElementById('slideElectrical').valueAsNumber, document.getElementById('slideElectrical').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-
-
-        <input disabled="true;" id="inputElectrical" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('electrical')">FAIL</button>
-
-
-    <br>
-
-
-    <h1>Structural</h1>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideStructural" onchange="[document.getElementById('inputStructural').value, window.failure.chances.structural]=[document.getElementById('slideStructural').valueAsNumber, document.getElementById('slideStructural').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-
-
-        <input disabled="true;" id="inputStructural" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('structural')">FAIL</button>
-
-
-    <br>
-    <h1>Hydraulic</h1>
-<h2>Flaps</h2>
-        <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideFlaps" onchange="[document.getElementById('inputFlaps').value, window.failure.chances.hydraulic.flaps]=[document.getElementById('slideFlaps').valueAsNumber, document.getElementById('slideFlaps').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-
-
-        <input disabled="true;" id="inputFlaps" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('flaps')">FAIL</button>
-<h2>Brakes</h2>
-    <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideBrakes" onchange="[document.getElementById('inputBrakes').value, window.failure.chances.hydraulic.brakes]=[document.getElementById('slideBrakes').valueAsNumber, document.getElementById('slideBrakes').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-
-
-        <input disabled="true;" id="inputBrakes" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('brakes')">FAIL</button>
-<h2>Spoilers</h2>
-    <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideSpoilers" onchange="[document.getElementById('inputSpoilers').value, window.failure.chances.hydraulic.spoilers]=[document.getElementById('slideSpoilers').valueAsNumber, document.getElementById('slideSpoilers').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputSpoilers" style="
-    width: 40px;
-">
-<button onclick="failure.fail('spoilers')">FAIL</button>
-    <h1>Cabin Pressurization</h1>
-    <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slidePressurization" onchange="[document.getElementById('inputPressurization').value, window.failure.chances.pressurization]=[document.getElementById('slidePressurization').valueAsNumber, document.getElementById('slidePressurization').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputPressurization" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('pressurization')">FAIL</button>
-        <h1>MCAS</h1>
-    <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideMCAS" onchange="[document.getElementById('inputMCAS').value, window.failure.chances.mcas]=[document.getElementById('slideMCAS').valueAsNumber, document.getElementById('slideMCAS').valueAsNumber]" draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputMCAS" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('mcas')">FAIL</button>
-        <h1>Engines</h1>
-        `,t=0;t<window.geofs.aircraft.instance.engines.length;t++){e+=`
-            <h2>Engine ${t+1}</h2>
-    <span style="
-    font-size: large;
-    vertical-align: top;
-">Chance per minute: </span>
-        <input type="range" min="0" max="1" step="0.01" id="slideEngine${t}" onchange="document.getElementById('inputEngine${t}').value=document.getElementById('slideEngine${t}').valueAsNumber; window.failure.chances.engines[i] = document.getElementById('slideEngine${t}').valueAsNumber"; draggable="false" style="
-    vertical-align: bottom;
-">
-        <input disabled="true;" id="inputEngine${t}" style="
-    width: 40px;
-">
-        <button onclick="failure.fail('engine${t}')">FAIL</button>
-            `,window.failuresMenu.innerHTML=e;let i=document.getElementById("failMenu"),a=document.getElementById("dragPart");a.addEventListener("mousedown",function(e){let t=e.clientX-i.getBoundingClientRect().left,a=e.clientY-i.getBoundingClientRect().top;function n(e){i.style.left=`${e.clientX-t}px`,i.style.top=`${e.clientY-a}px`}function l(){document.removeEventListener("mousemove",n),document.removeEventListener("mouseup",l)}document.addEventListener("mousemove",n),document.addEventListener("mouseup",l)})}}},window.mainFailureFunction=function(){"use strict";window.failBtn=document.createElement("div"),window.failBtn.style.position="fixed",window.failBtn.style.right="60px",window.failBtn.style.height="36px",window.failBtn.style.bottom="0px",window.failBtn.style.border="transparent",window.failBtn.style.background="rgb(255,0,0)",window.failBtn.style.color="white",window.failBtn.style.fontWeight="600",window.failBtn.style.fontSize="20px",window.failBtn.style.cursor="pointer",window.failBtn.style.zIndex="10000",document.body.appendChild(window.failBtn),window.failBtn.innerHTML='<button style="position: inherit; right: inherit; height: inherit; top: inherit; border: inherit; background: inherit; color: inherit; font-weight: inherit; fontSize: inherit; cursor: inherit;" onclick="window.openFailuresMenu()">FAIL</button>',setInterval(()=>{flight.recorder.playing?failBtn.style.display="none":failBtn.style.display="block"},100),console.log("Failures loaded.")},waitForEntities(),runFuelSystem();
+        var failScript = document.createElement('script'); failScript.src="https://raw.githack.com/geofs-pilot/failures-fuel/refs/heads/main/failures-fuel.js";document.body.appendChild(failScript);
     };
 
     function fpv () {
         function cF(a,t,i){return{x:a,y:t,z:i}}function waitForEntities(){try{if(geofs.api){window.DEGREES_TO_RAD=window.DEGREES_TO_RAD||.017453292519943295,window.RAD_TO_DEGREES=window.RAD_TO_DEGREES||57.29577951308232,main();return}}catch(a){console.log("Error in waitForEntities:",a)}setTimeout(waitForEntities,1e3)}function main(){let a;window.y=geofs.api.viewer.entities.add({position:Cesium.Cartesian3.fromDegrees(geofs.camera.lla[1],geofs.camera.lla[0],geofs.animation.values.groundElevationFeet/3.2808399),billboard:{image:"https://tylerbmusic.github.io/GPWS-files_geofs/FPV.png",scale:.03*(1/geofs.api.renderingSettings.resolutionScale)}}),geofs.api.renderingSettings.resolutionScale<=.6&&(window.y.billboard.image="https://tylerbmusic.github.io/GPWS-files_geofs/FPV_Lowres.png"),window.lastLoc=Cesium.Cartesian3.fromDegrees(geofs.camera.lla[1],geofs.camera.lla[0],geofs.camera.lla[2]),setInterval(function a(){if(geofs.animation.values&&!geofs.isPaused()){window.currLoc&&(window.lastLoc=window.currLoc),window.currLoc=Cesium.Cartesian3.fromDegrees(geofs.camera.lla[1],geofs.camera.lla[0],geofs.camera.lla[2]),window.deltaLoc=[window.currLoc.x-window.lastLoc.x,window.currLoc.y-window.lastLoc.y,window.currLoc.z-window.lastLoc.z];var t,i=void 0!==geofs.animation.values.altitude&&void 0!==geofs.animation.values.groundElevationFeet?Math.round(geofs.animation.values.altitude-geofs.animation.values.groundElevationFeet+3.2808399*geofs.aircraft.instance.collisionPoints[geofs.aircraft.instance.collisionPoints.length-2].worldPosition[2]):"N/A";t=geofs.animation.getValue("NAV1Direction")&&600!==geofs.animation.getValue("NAV1Distance")?"to"===geofs.animation.getValue("NAV1Direction")?(Math.atan(.3048*i/(geofs.animation.getValue("NAV1Distance")+600))*RAD_TO_DEGREES).toFixed(1):(Math.atan(.3048*i/Math.abs(geofs.animation.getValue("NAV1Distance")-600))*RAD_TO_DEGREES).toFixed(1):"N/A",geofs.aircraft.instance.groundContact||window.deltaLoc[0]+window.deltaLoc[1]+window.deltaLoc[2]==0||(window.y.position=cF(window.currLoc.x+window.howFar*window.deltaLoc[0],window.currLoc.y+window.howFar*window.deltaLoc[1],window.currLoc.z+window.howFar*window.deltaLoc[2]))}},geofs.debug.fps?1/Number(geofs.debug.fps)+5:100),a=!0,document.addEventListener("keydown",function(t){"Insert"===t.key&&(a=!a)}),setInterval(()=>{a?window.y.show=!geofs.aircraft.instance.groundContact:window.y.show=!1},100)}window.lastLoc,window.onload=setTimeout(waitForEntities,1e4),window.howFar=15;
     };
 
+    function flightradar () {
+        var frScript = document.createElement('script'); frScript.src="https://raw.githack.com/geofs-pilot/GeoFS-flightradar/refs/heads/patch-1/userscript.js";document.body.appendChild(frScript);
+    };
+
     function gpws () {
-        (() => {var gpwsScript = document.createElement('script'); gpwsScript.src="https://raw.githack.com/geofs-pilot/geofs-gpws-modified/main/gpws.js";document.body.appendChild(gpwsScript);})()
+        var gpwsScript = document.createElement('script'); gpwsScript.src="https://raw.githack.com/geofs-pilot/geofs-gpws-modified/main/gpws.js";document.body.appendChild(gpwsScript);
     };
 
     function info () {
@@ -2197,7 +1868,7 @@ function addonExecution () {
     };
 
     function jetbridge () {
-        (() => {var jetScript = document.createElement('script'); jetScript.src="https://raw.githack.com/Spice9/Geofs-Jetbridge/main/jetbridge-main.js";document.body.appendChild(jetScript);})()
+        var jetScript = document.createElement('script'); jetScript.src="https://raw.githack.com/Spice9/Geofs-Jetbridge/main/jetbridge-main.js";document.body.appendChild(jetScript);
     };
 
     function stats () {
@@ -2281,23 +1952,23 @@ out skel qt;
     };
 
     function realism () {
-        (() => {var realismScript = document.createElement('script'); realismScript.src="https://raw.githack.com/geofs-pilot/realism-pack-modded/main/main.js";document.body.appendChild(realismScript);realismScript.onload = (function(){realismGo()});})()
+        var realismScript = document.createElement('script'); realismScript.src="https://raw.githack.com/geofs-pilot/realism-pack-modded/main/main.js";document.body.appendChild(realismScript);realismScript.onload = (function(){realismGo()});
     };
     
     function dolly () {
-        (() => {var dollyScript = document.createElement('script'); dollyScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Sky-Dolly/main/userscript.js";document.body.appendChild(dollyScript);})()
+        var dollyScript = document.createElement('script'); dollyScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Sky-Dolly/main/userscript.js";document.body.appendChild(dollyScript);
             };
 
     function slew () {
-        (() => {var slewScript = document.createElement('script'); slewScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Slew-Mode/main/userscript.js";document.body.appendChild(slewScript);})()
+        var slewScript = document.createElement('script'); slewScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Slew-Mode/main/userscript.js";document.body.appendChild(slewScript);
             };
 
     function twlights () {
-        (() => {var twlScript = document.createElement('script'); twlScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Taxiway-Lights/main/userscript.js";document.body.appendChild(twlScript);})()
+        var twlScript = document.createElement('script'); twlScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Taxiway-Lights/main/userscript.js";document.body.appendChild(twlScript);
     };
 
     function twsigns() {
-        (() => {var twsScript = document.createElement('script'); twsScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Taxiway-Signs/main/userscript.js";document.body.appendChild(twsScript);})()
+        var twsScript = document.createElement('script'); twsScript.src="https://raw.githack.com/tylerbmusic/GeoFS-Taxiway-Signs/main/userscript.js";document.body.appendChild(twsScript);
     }
 
     function tweaks () {
@@ -2311,8 +1982,9 @@ out skel qt;
     charts();
     chatFix();
     volume();
-    fpv();
     failuresAndFuel();
+    fpv();
+    flightradar();
     gpws();
     stats();
     opengines();
@@ -2376,23 +2048,6 @@ out skel qt;
         }
     });
     extrasObserver.observe(document.body, { childList: true, subtree: true });
-
-    //wait for gmenu button to appear, then cycle the display so that it doesn't open and close along with the option panel
-    let cycled = false;
-    const GmenuBtn = document.getElementById("gamenu");
-    if (GmenuBtn && !cycled) {
-            window.gmenu.menuDiv.style.display = "none";
-        cycled = true;
-    }
-    const gmenuObserver = new MutationObserver(() => {
-        const GmenuBtn = document.getElementById("gamenu");
-        if (GmenuBtn && !cycled) {
-            window.gmenu.menuDiv.style.display = "none";
-            cycled = true;
-            gmenuObserver.disconnect();
-        }
-    });
-    gmenuObserver.observe(document.body, { childList: true, subtree: true });
 }
 
 const waitForGeoFS = setInterval(() => {
