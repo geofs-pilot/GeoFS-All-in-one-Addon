@@ -243,7 +243,7 @@ function menus() {
             'Cockpit volume': `Lowers the volume when in interior views in aircraft without dedicated cockpit sounds`,
 
             
-            'Maritime Structures': `This addon adds carriers and other maritime structures to the online flight simulator Geo-FS. It can be used via Tampermonkey, or simply pasted into the console.
+            'Extra Maritime Structures': `This addon adds carriers and other maritime structures to the online flight simulator Geo-FS. It can be used via Tampermonkey, or simply pasted into the console.
 
             How to use:
             Once you load into the game with the addon, you will see a tab appear at the bottom, named GEO-FS MARITIME STRUCTURES. When you click on it, a small tab on the left side of the window will appear.
