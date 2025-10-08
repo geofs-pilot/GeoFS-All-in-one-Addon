@@ -242,6 +242,17 @@ function menus() {
 
             'Cockpit volume': `Lowers the volume when in interior views in aircraft without dedicated cockpit sounds`,
 
+            
+            'Maritime Structures': `This addon adds carriers and other maritime structures to the online flight simulator Geo-FS. It can be used via Tampermonkey, or simply pasted into the console.
+
+            How to use:
+            Once you load into the game with the addon, you will see a tab appear at the bottom, named GEO-FS MARITIME STRUCTURES. When you click on it, a small tab on the left side of the window will appear.
+            Select your carrier, oil rig, or landing pad. You then have the options GET DIRECTION TO STRUCTURE - it will load a direct flight plan to the structure on your nav map -, SPAWN ON LOCATION - it will spawn you on the carrier -, SPAWN ON APPROACH - it will spawn you on final approach -, and OPEN OBJECT SETTINGS. This last one will open a new window with many options, as light toggle, elevators, and JBDs. Not all structures are implemented with this. I will need to add lights to the rigs and landing pads.
+            This addon also features catapults for the F-16, F-14, and E-2C Hawkeye. It is a modified version of Arikiam's catapult addon which he gratefully let me use. To use it, press Q to lower your (fictif) launch bar. A green LAUNCH BAR DOWN above your flaps indicator (bottom right of your window) will turn on to tell you it's down. Advance to the catapult. Positions are defined and precise for each aircraft and have an standard uncertainty of 4 meters and 5 degrees. Once in position, press / to lock the launch bar in the catapult. This time, a red READY TO LAUNCH will appear on the bottom right of your screen. You are now ready to launch. Press L to launch.
+            Enjoy!
+
+            Find the structure locations here! `,
+
 
             'Extra vehicles': `Extra vehicles in GeoFS presented by JXT`,
 
@@ -414,6 +425,7 @@ function menus() {
         addAddon('Charts');
         addAddon('Chat fix');
         addAddon('Cockpit volume');
+        addAddon('Extra Maritime Structures')
         addAddon('Extra vehicles');
         addAddon('Failures');
         addAddon('Flight path vector');
@@ -1828,6 +1840,10 @@ function addonExecution () {
         var volumeScript = document.createElement('script'); volumeScript.src="https://raw.githack.com/geofs-pilot/geofs-cockpit-volume/main/userscript.js";document.body.appendChild(volumeScript);
     };
 
+    function maritime () {
+        const maritimeScript = document.createElement('script');maritimeScript.type = 'module';maritimeScript.src = "https://raw.githack.com/CementAndRebar/GeoFS-Extra-Maritime-Structures/refs/heads/main/main.js";document.body.appendChild(maritimeScript);
+    };
+
     function vehicles () {
         var vehicleScript = document.createElement('script'); vehicleScript.src="https://raw.githack.com/af267/GeoFS-Extra-Vehicles/main/main.js";document.body.appendChild(vehicleScript);
     };
@@ -1982,6 +1998,7 @@ out skel qt;
     charts();
     chatFix();
     volume();
+    //maritime();
     failuresAndFuel();
     fpv();
     flightradar();

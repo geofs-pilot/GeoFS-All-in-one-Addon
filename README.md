@@ -40,13 +40,14 @@ Autoland++ <br/>
 geofs-autothrottle <br/>
 Better-GeoFS-NAV-Map <br/>
 GeoFS-Camera-cycling <br/>
-geofs-cockpit-volume <br/>
 geofs-charts <br/>
 GeoFS-Chat-Fix <br/>
+geofs-cockpit-volume <br/>
+GeoFS-Extra-Maritime-Structures <br/>
 GeoFS-Extra-Vehicles <br/>
 GeoFS-Failures <br/>
 GeoFS-Flight-Path-Vector <br/>
-GeoFS-flighradar <br/>
+GeoFS-flightradar <br/>
 GeoFS-Fuel <br/>
 GeoFS-GPWS-Callouts <br/>
 GeoFS-Information-Display <br/>
@@ -63,6 +64,7 @@ GeoFS-Taxiway-Signs <br/>
 uiTweaks <br/>
 ## Other things to check out
 -[GeoFS Flightradar ATC screen] (https://geofs-flightradar.onrender.com) <br/>
+-[Maritime structures location] (google.com/maps/d/u/0/viewer?ll=4.3868333146500404%2C0&z=2&mid=1WGPkTMEBwsjYf4WFaeR4O5DScqzu0Vg) <br/>
 -[FMC route collection](http://sites.google.com/view/gpg-2-0/home?authuser=0) <br/>
 -https://skyvector.com/<br/>
 -[Simbrief](https://dispatch.simbrief.com/home) <br/>
@@ -82,6 +84,7 @@ https://github.com/geofs-pilot/GeoFS-Camera-cycling/tree/main <br/>
 https://github.com/mansoorbarri/geofs-charts/tree/main <br/>
 https://github.com/ZetaPossibly/GeoFS-Chat-Fix/tree/main <br/>
 https://github.com/geofs-pilot/geofs-cockpit-volume/tree/main <br/>
+https://github.com/CementAndRebar/GeoFS-Extra-Maritime-Structures/tree/main <br/>
 https://github.com/af267/GeoFS-Extra-Vehicles/tree/main <br/>
 https://github.com/tylerbmusic/GeoFS-Failures <br/>
 https://github.com/tylerbmusic/GeoFS-Flight-Path-Vector <br/>
