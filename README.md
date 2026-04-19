@@ -1,7 +1,10 @@
 # GeoFS-All-in-one-Addon
 ## IMPORTANT STUFF!!
 ### Please read the README in its entirety to make sure you are installing the script correctly and to stay informed on updates and changes.
-Another note: I've disabled the camera cycling addon for now as its keybind interferes with the flightradar addon that many are using. It will be bound to a different key in the next update, but for now this temporarily fixes the conflict.
+
+GeoFS 4.0: There is currently no support for GeoFS 4.0 beta, and running this addon will cause it to crash. I won't be adding support until a stable production version of 4.0 comes out. In the meantime I also apologize for the long wait since I began the new update - school has been keeping me very busy this year <br/>
+
+Another note: I've disabled the camera cycling addon for now as its keybind interferes with the flightradar addon that many are using. It will be bound to a different key in the next update, but for now this temporarily fixes the conflict. <br/>
 
 Upcoming: another update that will add: Maritime Structures, Geofs Utilities, GeoFS Radio, GeoFS Flightradar, updates to overpowered engines to allow AP at high speeds, possibly a script that increases the steering angle, updated instructions panel, and a few bug fixes. However, please be patient as I don't have much time for development at the moment. <br/>
 
