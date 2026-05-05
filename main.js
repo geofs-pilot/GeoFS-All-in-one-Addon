@@ -248,15 +248,11 @@ function menus() {
             'Extra vehicles': `Extra vehicles in GeoFS presented by JXT`,
 
 
-            'Failures': `Adds the ability for systems to fail (you have to enable it first)
+            'Failure Simulator': `Adds the ability for systems to fail (you can fix it too)
             -Landing gear
-            -Fuel leak
-            -Flight control
-            -Electrical
-            -Structural
-            -Hydraulic
-            -Pressurization
-            -MCAS
+            -Flight controls
+            -Hydraulics & systems
+            -Advanced emergencies
             -Engines `,
 
 
